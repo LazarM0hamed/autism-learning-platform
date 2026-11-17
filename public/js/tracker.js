@@ -57,6 +57,8 @@
         if (path.includes('sounds')) return 'sounds';
         if (path.includes('circuit')) return 'circuit';
         if (path.includes('causality')) return 'causality';
+        if (path.includes('builder')) return 'builder';
+        if (path.includes('basket')) return 'basket';
         return null;
     }
 
@@ -397,7 +399,9 @@
             'labyrinth': { likes: 0, dislikes: 0 },
             'sounds': { likes: 0, dislikes: 0 },
             'circuit': { likes: 0, dislikes: 0 },
-            'causality': { likes: 0, dislikes: 0 }
+            'causality': { likes: 0, dislikes: 0 },
+            'builder': { likes: 0, dislikes: 0 },
+            'basket': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -738,7 +742,9 @@
             'labyrinth': '.activity-card.labyrinth',
             'sounds': '.activity-card.sounds',
             'circuit': '.activity-card.circuit',
-            'causality': '.activity-card.causality'
+            'causality': '.activity-card.causality',
+            'builder': '.activity-card.builder',
+            'basket': '.activity-card.basket'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -784,7 +790,9 @@
             'labyrinth': { likes: 0, dislikes: 0 },
             'sounds': { likes: 0, dislikes: 0 },
             'circuit': { likes: 0, dislikes: 0 },
-            'causality': { likes: 0, dislikes: 0 }
+            'causality': { likes: 0, dislikes: 0 },
+            'builder': { likes: 0, dislikes: 0 },
+            'basket': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -819,7 +827,9 @@
             'labyrinth': '.activity-card.labyrinth',
             'sounds': '.activity-card.sounds',
             'circuit': '.activity-card.circuit',
-            'causality': '.activity-card.causality'
+            'causality': '.activity-card.causality',
+            'builder': '.activity-card.builder',
+            'basket': '.activity-card.basket'
         };
 
         Object.keys(idMap).forEach(actId => {

@@ -87,6 +87,8 @@
         if (path.includes('sounds')) return 'sounds';
         if (path.includes('circuit')) return 'circuit';
         if (path.includes('causality')) return 'causality';
+        if (path.includes('builder')) return 'builder';
+        if (path.includes('basket')) return 'basket';
         return null;
     }
 
@@ -111,6 +113,14 @@
 
     function isCausalityPage() {
         return window.location.pathname.toLowerCase().includes('causality');
+    }
+
+    function isBuilderPage() {
+        return window.location.pathname.toLowerCase().includes('builder');
+    }
+
+    function isBasketPage() {
+        return window.location.pathname.toLowerCase().includes('basket');
     }
 
     // Size Profile Management
@@ -222,6 +232,12 @@
         } else if (isCausalityPage()) {
             // In causality, tactile cause buttons
             items = Array.from(document.querySelectorAll('#cause-controls .cause-btn, .cause-btn'));
+        } else if (isBuilderPage()) {
+            // In building logic, piece cards in tray
+            items = Array.from(document.querySelectorAll('#pieces-tray .piece-card, .piece-card'));
+        } else if (isBasketPage()) {
+            // In basket shape, floor balls on court
+            items = Array.from(document.querySelectorAll('.ball-launch-btn'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -237,6 +253,12 @@
             if (!items.length) {
                 items = Array.from(document.querySelectorAll('.cause-btn'));
             }
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('.piece-card'));
+            }
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('.ball-launch-btn'));
+            }
         }
 
         activeOptions = items;
@@ -244,6 +266,9 @@
         // In spelling or when > 4 options, remove any leftover badges
         if (isSpellingPage() || activeOptions.length > 4) {
             document.querySelectorAll('.alp-card-badge').forEach(badge => badge.remove());
+        } else if (isBasketPage()) {
+            // In basket shape, court balls are SVG elements with built-in native SVG badges.
+            // Do not append HTML <span> badges inside SVG elements.
         } else {
             // Idempotently attach or update controller badges (no blinking/recreating)
             const config = getResolvedBadgeConfig();
@@ -304,7 +329,9 @@
             const isCurrentlyFocused = el.classList.contains('is-controller-focused');
             if (shouldBeFocused && !isCurrentlyFocused) {
                 el.classList.add('is-controller-focused');
-                el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+                if (!isBasketPage()) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+                }
             } else if (!shouldBeFocused && isCurrentlyFocused) {
                 el.classList.remove('is-controller-focused');
             }
@@ -700,6 +727,8 @@
                         m.target?.classList?.contains('sound-card') ||
                         m.target?.classList?.contains('ball-choice-btn') ||
                         m.target?.classList?.contains('cause-btn') ||
+                        m.target?.classList?.contains('piece-card') ||
+                        m.target?.classList?.contains('ball-launch-btn') ||
                         m.target?.classList?.contains('settings-bar') ||
                         m.target?.id === 'alp-controller-hud') {
                         continue;
@@ -711,7 +740,9 @@
                             node.classList?.contains('letter-btn') ||
                             node.classList?.contains('sound-card') ||
                             node.classList?.contains('ball-choice-btn') ||
-                            node.classList?.contains('cause-btn')
+                            node.classList?.contains('cause-btn') ||
+                            node.classList?.contains('piece-card') ||
+                            node.classList?.contains('ball-launch-btn')
                         )) {
                             shouldRefresh = true;
                             break;
@@ -725,7 +756,9 @@
                             node.classList?.contains('letter-btn') ||
                             node.classList?.contains('sound-card') ||
                             node.classList?.contains('ball-choice-btn') ||
-                            node.classList?.contains('cause-btn')
+                            node.classList?.contains('cause-btn') ||
+                            node.classList?.contains('piece-card') ||
+                            node.classList?.contains('ball-launch-btn')
                         )) {
                             shouldRefresh = true;
                             break;

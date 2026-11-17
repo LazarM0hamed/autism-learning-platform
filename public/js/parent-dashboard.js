@@ -68,6 +68,14 @@
             icon: '⚡',
             name: { en: 'Cause & Effect', fr: 'Cause & Effet' }
         },
+        'builder': {
+            icon: '🏗️',
+            name: { en: 'Building Logic', fr: 'Logique de Construction' }
+        },
+        'basket': {
+            icon: '🏀',
+            name: { en: 'Basket Shape', fr: 'Basket des Formes' }
+        },
         'general': {
             icon: '🌟',
             name: { en: 'General Learning', fr: 'Apprentissages généraux' }

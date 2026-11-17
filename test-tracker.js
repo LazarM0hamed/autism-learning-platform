@@ -176,6 +176,10 @@ assert(fs.existsSync('public/circuit.html'), 'circuit.html must exist');
 assert(fs.existsSync('public/js/circuit-engine.js'), 'circuit-engine.js must exist');
 assert(fs.existsSync('public/causality.html'), 'causality.html must exist');
 assert(fs.existsSync('public/js/causality-engine.js'), 'causality-engine.js must exist');
+assert(fs.existsSync('public/builder.html'), 'builder.html must exist');
+assert(fs.existsSync('public/js/builder-engine.js'), 'builder-engine.js must exist');
+assert(fs.existsSync('public/basket.html'), 'basket.html must exist');
+assert(fs.existsSync('public/js/basket-engine.js'), 'basket-engine.js must exist');
 console.log('✓ All 20 authentic MP3 sound effects verified in public/assets/sounds/');
 
 // Verify Hub Header Bar & Parent Hub Link
@@ -184,24 +188,24 @@ assert(indexHtml.includes('id="alp-user-header-bar"'), 'index.html must include 
 assert(indexHtml.includes('id="alp-user-chip"'), 'index.html must include alp-user-chip');
 assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent.html link');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
-assert(likeBadgeCount === 15, `All 15 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+assert(likeBadgeCount === 17, `All 17 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
-assert(bookmarkBtnCount === 15, `All 15 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(bookmarkBtnCount === 17, `All 17 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
-console.log('✓ Parent Hub, 15 like badges, and 15 bookmark star buttons verified in index.html');
+console.log('✓ Parent Hub, 17 like badges, and 17 bookmark star buttons verified in index.html');
 
-// Verify In-Activity Feedback Widget embedded across all 15 activity pages
+// Verify In-Activity Feedback Widget embedded across all 17 activity pages
 const activityPages = [
     'game.html', 'colors.html', 'pattern.html', 'letters.html',
     'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
     'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
-    'sounds.html', 'circuit.html', 'causality.html'
+    'sounds.html', 'circuit.html', 'causality.html', 'builder.html', 'basket.html'
 ];
 activityPages.forEach(p => {
     const html = fs.readFileSync(`public/${p}`, 'utf8');
     assert(html.includes('id="alp-feedback-widget"'), `${p} must include embedded alp-feedback-widget`);
 });
-console.log('✓ In-activity feedback widget verified across all 15 activity pages');
+console.log('✓ In-activity feedback widget verified across all 17 activity pages');
 
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');
@@ -210,9 +214,13 @@ const causalityEngineJs = fs.readFileSync('public/js/causality-engine.js', 'utf8
 assert(causalityEngineJs.includes('Tout mélanger') && causalityEngineJs.includes('triggerCelebrationReward'), 'causality-engine.js must include Mix All mode and celebration reward');
 const causalityHtml = fs.readFileSync('public/causality.html', 'utf8');
 assert(causalityHtml.includes('celebration-canvas') && causalityHtml.includes('next-mission-btn'), 'causality.html must include celebration-canvas and next-mission-btn');
-console.log('✓ Sounds & Causality Mix All (Tout mélanger) and Fireworks celebration verified');
+const builderHtml = fs.readFileSync('public/builder.html', 'utf8');
+assert(builderHtml.includes('target-model-card') && builderHtml.includes('target-model-svg'), 'builder.html must include target-model-card blueprint');
+const builderEngineJs = fs.readFileSync('public/js/builder-engine.js', 'utf8');
+assert(builderEngineJs.includes('renderTargetModel') && builderEngineJs.includes('blue_cup'), 'builder-engine.js must include renderTargetModel and blue_cup');
+console.log('✓ Sounds & Causality Mix All, Fireworks celebration, and Builder visual target blueprint verified');
 
-console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, Circuit, and Causality verified');
+console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, Circuit, Causality, Builder, and Basket verified');
 
 // Clean teardown: preserve clean vierge storage state for deployment
 fs.writeFileSync('storage/feedback.json', JSON.stringify({ feedback: [] }, null, 2) + '\n');

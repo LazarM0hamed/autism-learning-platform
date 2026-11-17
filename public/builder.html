@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Logique de Construction - Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .builder-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+        }
+        .construction-frame {
+            width: 94%;
+            max-width: 520px;
+            background: #FFFDF9;
+            border: 4px solid #CBD5E0;
+            border-radius: 26px;
+            padding: 10px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+        }
+        .construction-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 18px;
+        }
+        .pieces-tray {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 4px;
+            max-width: 680px;
+            width: 100%;
+        }
+        .piece-card {
+            width: 150px;
+            background: #FFFFFF;
+            border: 4px solid #E2E8F0;
+            border-radius: 20px;
+            padding: 12px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            transition: transform 0.14s ease, border-color 0.2s ease, background-color 0.2s ease;
+            user-select: none;
+        }
+        .piece-card:active {
+            transform: scale(0.94);
+        }
+        .piece-card.correct {
+            border-color: #6BCB77;
+            background-color: #F0FFF4;
+        }
+        .piece-label {
+            margin-top: 6px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: #2D3748;
+            text-align: center;
+        }
+
+        /* Visual Target Model Blueprint */
+        .target-model-card {
+            width: 94%;
+            max-width: 520px;
+            background: #F0FDF4;
+            border: 3px solid #86EFAC;
+            border-radius: 20px;
+            padding: 8px 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .target-model-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .target-model-badge {
+            background: #15803D;
+            color: #FFFFFF;
+            font-size: 0.95rem;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 12px;
+            letter-spacing: 0.3px;
+        }
+        .target-model-svg {
+            width: 100%;
+            max-height: 110px;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            background: #FFFFFF;
+            border: 2px dashed #CBD5E0;
+        }
+    </style>
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        <h2 id="activity-title" class="category-badge">🏗️ Logique de Construction</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">0</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="builder-stage">
+        <!-- 3 Construction Modes -->
+        <nav class="routine-pills" aria-label="Select building mode">
+            <button class="routine-pill active" id="mode-bridge-btn">🌉 Le Pont</button>
+            <button class="routine-pill" id="mode-pyramid-btn">🥤 La Pyramide</button>
+            <button class="routine-pill" id="mode-tower-btn">🗼 La Tour (Grand → Petit)</button>
+        </nav>
+
+        <!-- Prompt Banner -->
+        <div class="prompt-container" style="margin: 2px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.35rem, 3.4vw, 1.95rem); margin: 0;">Répare le pont !</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <!-- Target Construction Model (Visual Blueprint) -->
+        <div class="target-model-card" id="target-model-card">
+            <div class="target-model-header">
+                <span class="target-model-badge" id="lbl-target-model">🎯 Modèle à construire :</span>
+            </div>
+            <svg class="target-model-svg" id="target-model-svg" viewBox="0 0 460 210" aria-label="Target construction model"></svg>
+        </div>
+
+        <!-- Animated Construction Scene -->
+        <div class="construction-frame">
+            <svg class="construction-svg" id="builder-svg" viewBox="0 0 460 300" aria-label="Construction scene"></svg>
+        </div>
+
+        <!-- Selectable Building Pieces -->
+        <section class="pieces-tray" id="pieces-tray" aria-label="Building block choices"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/builder-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

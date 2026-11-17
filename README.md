@@ -394,6 +394,29 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 16: 🏗️ Building Logic ("Logique de Construction")
+* **Route:** `/builder.html`
+* **Target Skills:** Spatial reasoning, part-to-whole perception, size seriation, fine-motor planning.
+* **3 Progressive Construction Challenges:**
+  1. 🌉 **Le Pont (The Bridge):** Complete missing geometric blocks over the river. Once completed, a car drives across the span and honks joyfully.
+  2. 🥤 **La Pyramide (The Pyramid):** Stack 6 stacking cups row-by-row from bottom (3) to middle (2) to peak (1), unlocking celebratory crown and floating stars.
+  3. 🗼 **La Tour (Grand → Petit / Size Tower):** Construct a balanced tower by identifying and selecting the largest remaining block first, ending with a little bird landing on the summit.
+* **Controller Support:** Native keyboard/gamepad navigation (`1` to `4` number keys or D-Pad navigation on `.piece-card`).
+
+---
+
+### Activity 17: 🏀 Basket Shape ("Basket des Formes")
+* **Route:** `/basket.html`
+* **Target Skills:** Geometric shape discrimination, receptive shape vocabulary, cause-and-effect physics engagement.
+* **Dynamic Morphing Hoop:** The basketball backboard hoop dynamically transforms into a Circle, Square, Triangle, Rectangle, Star, or Diamond.
+* **Parabolic Arc Physics:**
+  - **On Match:** Ball arcs across the court, swishes through the net with springy net deformation, golden stars, and procedural net swish audio.
+  - **On Mismatch:** Gentle rim bounce back down to starting position without harsh buzzers, repeating the target shape name.
+* **2 Difficulty Levels:** 🔷 4 Shapes vs. ⭐ 6 Shapes.
+* **Controller Support:** Native keyboard/gamepad navigation (`1` to `3` number keys or D-Pad navigation on `.ball-launch-btn`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.

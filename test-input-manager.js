@@ -168,7 +168,7 @@ if (window.AlpInputManager.getSizeProfile() !== 'xlarge') throw new Error('Size 
 if (document.body.getAttribute('data-size') !== 'xlarge') throw new Error('Body data-size should be xlarge');
 console.log('✓ Applied XL Giant visual size profile (+85%)');
 
-// Verify Sounds, Circuit & Causality controller support
+// Verify Sounds, Circuit, Causality, Builder & Basket controller support
 const inputManagerSrc = fs.readFileSync('public/js/input-manager.js', 'utf8');
 if (!inputManagerSrc.includes('isSoundsPage') || !inputManagerSrc.includes('sound-card')) {
     throw new Error('input-manager.js must support sounds.html (.sound-card)');
@@ -179,6 +179,12 @@ if (!inputManagerSrc.includes('isCircuitPage') || !inputManagerSrc.includes('bal
 if (!inputManagerSrc.includes('isCausalityPage') || !inputManagerSrc.includes('cause-btn')) {
     throw new Error('input-manager.js must support causality.html (.cause-btn)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn) & Cause & Effect (.cause-btn)');
+if (!inputManagerSrc.includes('isBuilderPage') || !inputManagerSrc.includes('piece-card')) {
+    throw new Error('input-manager.js must support builder.html (.piece-card)');
+}
+if (!inputManagerSrc.includes('isBasketPage') || !inputManagerSrc.includes('ball-launch-btn')) {
+    throw new Error('input-manager.js must support basket.html (.ball-launch-btn)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card) & Basket Shape (.ball-launch-btn)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');

@@ -50,7 +50,7 @@
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filter Activities">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">15</span>
+                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">17</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-fav-btn" role="tab" aria-selected="false">
                 ⭐ <span id="lbl-filter-fav">Mes Favoris</span> <span class="filter-count" id="count-fav">0</span>
@@ -284,6 +284,34 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <a href="builder.html" class="activity-card builder" data-activity="builder">
+            <button type="button" class="activity-bookmark-btn" data-activity="builder" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">🏗️</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-builder-title">Building Logic</span>
+                <span class="activity-card-desc" id="act-builder-desc">Fix bridges, stack pyramids & towers</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="builder">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
+
+        <a href="basket.html" class="activity-card basket" data-activity="basket">
+            <button type="button" class="activity-bookmark-btn" data-activity="basket" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">🏀</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-basket-title">Basket Shape</span>
+                <span class="activity-card-desc" id="act-basket-desc">Shoot shaped balls into morphing hoops</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="basket">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <script>
@@ -322,6 +350,10 @@
                 actCircuitDesc: "Drop and roll colored marble balls",
                 actCausalityTitle: "Cause & Effect",
                 actCausalityDesc: "Action and reaction physics lab",
+                actBuilderTitle: "Building Logic",
+                actBuilderDesc: "Fix bridges, stack pyramids & towers",
+                actBasketTitle: "Basket Shape",
+                actBasketDesc: "Shoot shaped balls into morphing hoops",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 brandTagline: "Sensory-adapted developmental learning",
@@ -363,6 +395,10 @@
                 actCircuitDesc: "Fais rouler les billes sur les rampes en bois",
                 actCausalityTitle: "Cause & Effet",
                 actCausalityDesc: "Laboratoire d'actions & réactions physiques",
+                actBuilderTitle: "Logique de Construction",
+                actBuilderDesc: "Répare le pont, empile pyramides & tours",
+                actBasketTitle: "Basket des Formes",
+                actBasketDesc: "Lance le bon ballon dans le panier",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 brandTagline: "Activités d'apprentissage adaptées & sensorielles",
@@ -458,6 +494,16 @@
             const causDesc = document.getElementById('act-causality-desc');
             if (causDesc) causDesc.innerText = t.actCausalityDesc;
 
+            const bldTitle = document.getElementById('act-builder-title');
+            if (bldTitle) bldTitle.innerText = t.actBuilderTitle;
+            const bldDesc = document.getElementById('act-builder-desc');
+            if (bldDesc) bldDesc.innerText = t.actBuilderDesc;
+
+            const bskTitle = document.getElementById('act-basket-title');
+            if (bskTitle) bskTitle.innerText = t.actBasketTitle;
+            const bskDesc = document.getElementById('act-basket-desc');
+            if (bskDesc) bskDesc.innerText = t.actBasketDesc;
+
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
@@ -474,10 +520,10 @@
 
     <!-- Version & Build Date Footer -->
     <footer class="app-version-footer">
-        <span class="version-tag" id="app-version-tag">🚀 v1.5.0 • Build: 2026-11-17 21:30 UTC</span>
+        <span class="version-tag" id="app-version-tag">🚀 v1.6.0 • Build: 2026-11-17 22:15 UTC</span>
     </footer>
 
-    <script src="js/tracker.js?v=1.5.0"></script>
-    <script src="js/input-manager.js?v=1.5.0"></script>
+    <script src="js/tracker.js?v=1.6.0"></script>
+    <script src="js/input-manager.js?v=1.6.0"></script>
 </body>
 </html>

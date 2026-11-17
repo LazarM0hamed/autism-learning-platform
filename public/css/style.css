@@ -642,6 +642,8 @@ main {
 .activity-card.sounds { border-left: 8px solid #38BDF8; }
 .activity-card.circuit { border-left: 8px solid #F59E0B; }
 .activity-card.causality { border-left: 8px solid #EAB308; }
+.activity-card.builder { border-left: 8px solid #F97316; }
+.activity-card.basket { border-left: 8px solid #EA580C; }
 
 .category-card.transport { border-bottom: 8px solid #93C5FD; }
 
@@ -930,7 +932,7 @@ main {
    ========================================================================== */
 
 /* High-Visibility Accessible Focus Ring */
-.is-controller-focused,
+.is-controller-focused:not(svg *):not(.ball-launch-btn),
 .option-card:focus-visible,
 .activity-card:focus-visible,
 .category-card:focus-visible,
@@ -980,6 +982,36 @@ main {
     padding: 3px 8px;
     font-size: 0.85rem;
     border-radius: 10px;
+}
+
+.piece-card.is-controller-focused {
+    outline: none !important;
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.55), 0 10px 24px rgba(0, 0, 0, 0.25) !important;
+    transform: translateY(-4px) scale(1.06) !important;
+    z-index: 10;
+}
+
+.piece-card .alp-card-badge {
+    top: -8px;
+    left: -8px;
+    padding: 3px 8px;
+    font-size: 0.85rem;
+    border-radius: 10px;
+}
+
+.ball-launch-btn,
+.ball-launch-btn.is-controller-focused,
+.ball-launch-btn:hover,
+.ball-launch-btn:focus {
+    transform: none !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.ball-launch-btn.is-controller-focused {
+    filter: drop-shadow(0 0 12px rgba(37, 99, 235, 0.95)) drop-shadow(0 0 22px rgba(37, 99, 235, 0.65)) brightness(1.12) !important;
 }
 
 .ball-choice-btn {
