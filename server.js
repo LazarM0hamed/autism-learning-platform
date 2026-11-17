@@ -119,6 +119,29 @@ app.get('/api/feedback/summary', (req, res) => {
     }
 });
 
+// Privacy-Safe Direct Email Feedback Relay
+app.post('/api/send-feedback', (req, res) => {
+    try {
+        const { role, feedbackType, message, replyTo, activityId, nickname } = req.body;
+        console.log(`[Feedback Relay] Received from ${role || 'User'} (${nickname || 'Learner'}): ${message}`);
+
+        if (message && message.trim()) {
+            storage.recordFeedback({
+                sessionId: null,
+                nickname: nickname || 'User',
+                activityId: activityId || 'general',
+                categoryId: 'all',
+                reaction: 'neutral',
+                comment: `[${feedbackType || 'Avis'} - ${role || 'Role'}] ${message.trim()}${replyTo ? ' | Contact: ' + replyTo : ''}`
+            });
+        }
+
+        res.json({ success: true, timestamp: new Date().toISOString() });
+    } catch (e) {
+        res.status(500).json({ success: false, error: e.message });
+    }
+});
+
 // 4. Parent Analytics & Recommendations API
 app.get('/api/parent/dashboard', (req, res) => {
     try {

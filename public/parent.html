@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Parent Dashboard & Progress Monitoring - Autism Learning Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="parent-body">
     <header class="game-header" style="max-width: 1050px;">
         <a href="index.html" class="nav-btn" id="home-btn">⬅️ Back to Games</a>
         <div class="header-controls">
+            <button type="button" class="feedback-contact-btn" id="open-contact-feedback-btn" title="Envoyer un avis ou une suggestion à l'équipe">
+                💬 <span id="btn-parent-feedback-text">Feedback</span>
+            </button>
             <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
                 <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
                 <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
@@ -20,9 +24,12 @@
     <main style="max-width: 1050px; width: 100%;">
         <!-- Header Banner -->
         <section class="parent-banner">
-            <div class="parent-banner-text">
-                <h1 class="parent-title" id="p-title">📊 Parent Dashboard & Child Progress</h1>
-                <p class="parent-subtitle" id="p-subtitle">Observe engagement, celebrate strengths, and guide learning at the child's natural pace.</p>
+            <div class="parent-banner-text" style="display: flex; align-items: center; gap: 16px;">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" class="brand-logo" width="56" height="56">
+                <div>
+                    <h1 class="parent-title" id="p-title" style="margin: 0;">📊 Parent Dashboard & Child Progress</h1>
+                    <p class="parent-subtitle" id="p-subtitle" style="margin: 4px 0 0 0;">Observe engagement, celebrate strengths, and guide learning at the child's natural pace.</p>
+                </div>
             </div>
 
             <!-- Profile Selector, Refresh & Data Backup -->

@@ -408,6 +408,19 @@ Accessible via the header button (`[ 📊 Espace Parents / Parent Dashboard ]`):
 - **Adaptive Recommendations:** Pedagogical suggestions categorized into Confidence Boosters, Consolidation, and Accommodations.
 - **Activity Breakdown Table:** Detailed rows per activity with visual accuracy progress bars, attempt ratios, response latency, and like/dislike counts.
 - **Observations Log:** Chronological record of notes entered by parents and therapists during sessions.
+- **Data Export & Import Backup:** Download full JSON snapshots of child metrics and restore progress onto other devices.
+
+---
+
+### Privacy-Safe Direct Feedback Delivery (Without Exposing Personal Email)
+Parents, educators, and therapists can submit feedback, game suggestions, and accessibility needs directly via the `[ 💬 Donner mon avis / Feedback ]` button:
+- **Zero Email Exposure:** Your email address is **never** written in code, HTML, or git commits.
+- **Cloudflare Edge Function (`functions/api/send-feedback.js`):** Receives feedback securely on the Cloudflare server edge and forwards it to your private inbox.
+- **1-Minute Setup in Cloudflare Pages:**
+  1. Go to your **Cloudflare Dashboard** -> **Workers & Pages** -> **autism-learning-platform** -> **Settings** -> **Environment variables**.
+  2. Add your secret key:
+     - Variable Name: `WEB3FORMS_ACCESS_KEY` (free instant key from [web3forms.com](https://web3forms.com)) or `RESEND_API_KEY` + `FEEDBACK_RECIPIENT_EMAIL`.
+  3. Every suggestion submitted by users arrives directly in your personal email inbox, while your identity and address remain completely hidden from the public repo and website!
 
 ### Adaptive Activity Selection & Progressive Difficulty
 Based on performance and feedback, the engine dynamically calculates learning recommendations and tags dashboard cards:

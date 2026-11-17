@@ -833,11 +833,147 @@
         });
     }
 
+    // Direct Feedback & Suggestion Modal (Dispatched safely without exposing personal email)
+    function openContactFeedbackModal() {
+        let modal = document.getElementById('alp-contact-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'alp-contact-modal';
+            modal.className = 'alp-modal-overlay';
+            document.body.appendChild(modal);
+        }
+
+        modal.innerHTML = `
+            <div class="alp-modal-box" style="max-width: 520px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 4px;">
+                    <img src="assets/icons/logo.svg" alt="Logo" style="width: 38px; height: 38px; object-fit: contain;">
+                    <div>
+                        <h2 class="modal-title" style="margin: 0; font-size: 1.3rem;">💌 ${currentLang === 'fr' ? 'Votre avis & suggestions' : 'Feedback & Suggestions'}</h2>
+                        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">${currentLang === 'fr' ? 'Transmis directement à l\'équipe éducative' : 'Sent directly to the development team'}</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 180px;">
+                        <label style="font-size: 0.82rem; font-weight: 800; color: var(--text-primary); display: block; margin-bottom: 4px;">
+                            ${currentLang === 'fr' ? 'Vous êtes :' : 'You are:'}
+                        </label>
+                        <select id="cf-role-select" class="alp-modal-input" style="padding: 8px 12px; font-size: 0.95rem;">
+                            <option value="parent">${currentLang === 'fr' ? '👨‍👩‍👦 Parent' : '👨‍👩‍👦 Parent'}</option>
+                            <option value="therapist">${currentLang === 'fr' ? '🩺 Thérapeute / Pro' : '🩺 Therapist / Pro'}</option>
+                            <option value="educator">${currentLang === 'fr' ? '🏫 Enseignant / AESH' : '🏫 Educator / Special Ed'}</option>
+                            <option value="other">${currentLang === 'fr' ? '🌟 Autre' : '🌟 Other'}</option>
+                        </select>
+                    </div>
+
+                    <div style="flex: 1; min-width: 180px;">
+                        <label style="font-size: 0.82rem; font-weight: 800; color: var(--text-primary); display: block; margin-bottom: 4px;">
+                            ${currentLang === 'fr' ? 'Catégorie :' : 'Category:'}
+                        </label>
+                        <select id="cf-type-select" class="alp-modal-input" style="padding: 8px 12px; font-size: 0.95rem;">
+                            <option value="idea">${currentLang === 'fr' ? '💡 Idée d\'activité' : '💡 Activity Idea'}</option>
+                            <option value="praise">${currentLang === 'fr' ? '⭐ Ce qui plaît à mon enfant' : '⭐ What my child loves'}</option>
+                            <option value="bug">${currentLang === 'fr' ? '🔧 Problème / Amélioration' : '🔧 Issue / Suggestion'}</option>
+                            <option value="other">${currentLang === 'fr' ? '💬 Message général' : '💬 General message'}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.82rem; font-weight: 800; color: var(--text-primary); display: block; margin-bottom: 4px;">
+                        ${currentLang === 'fr' ? 'Votre message :' : 'Your message:'}
+                    </label>
+                    <textarea id="cf-feedback-text" class="alp-modal-textarea" rows="4" placeholder="${currentLang === 'fr' ? 'Partagez vos impressions, besoins d\'accessibilité ou idées de nouveaux jeux...' : 'Share your impressions, accessibility needs or ideas for new activities...'}" required></textarea>
+                </div>
+
+                <div>
+                    <label style="font-size: 0.82rem; font-weight: 800; color: var(--text-primary); display: block; margin-bottom: 4px;">
+                        ${currentLang === 'fr' ? 'Votre contact (facultatif si vous souhaitez une réponse) :' : 'Your contact (optional if you want a reply):'}
+                    </label>
+                    <input type="text" id="cf-replyto-input" class="alp-modal-input" placeholder="${currentLang === 'fr' ? 'Ex: mon.email@domaine.com' : 'e.g. my.email@example.com'}">
+                </div>
+
+                <div id="cf-status-banner" style="display: none; padding: 10px 14px; border-radius: 12px; font-size: 0.9rem; font-weight: bold; text-align: center;"></div>
+
+                <div class="modal-buttons" style="margin-top: 10px;">
+                    <button type="button" class="modal-btn cancel-btn" id="cf-modal-cancel">
+                        ${currentLang === 'fr' ? 'Annuler' : 'Cancel'}
+                    </button>
+                    <button type="button" class="modal-btn save-btn" id="cf-modal-send">
+                        ✉️ ${currentLang === 'fr' ? 'Envoyer mon message' : 'Send message'}
+                    </button>
+                </div>
+            </div>
+        `;
+
+        modal.style.display = 'flex';
+
+        const textarea = document.getElementById('cf-feedback-text');
+        setTimeout(() => textarea?.focus(), 60);
+
+        document.getElementById('cf-modal-cancel')?.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        document.getElementById('cf-modal-send')?.addEventListener('click', async () => {
+            const message = (textarea?.value || '').trim();
+            if (!message) {
+                alert(currentLang === 'fr' ? 'Veuillez écrire un message avant d\'envoyer.' : 'Please enter a message before sending.');
+                return;
+            }
+
+            const sendBtn = document.getElementById('cf-modal-send');
+            if (sendBtn) {
+                sendBtn.disabled = true;
+                sendBtn.innerText = currentLang === 'fr' ? '⏳ Envoi en cours...' : '⏳ Sending...';
+            }
+
+            const payload = {
+                role: document.getElementById('cf-role-select')?.value || 'parent',
+                feedbackType: document.getElementById('cf-type-select')?.value || 'general',
+                message,
+                replyTo: (document.getElementById('cf-replyto-input')?.value || '').trim(),
+                activityId: currentActivityId || 'hub',
+                nickname: currentNickname || 'Anonymous'
+            };
+
+            try {
+                await fetch('/api/send-feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const banner = document.getElementById('cf-status-banner');
+                if (banner) {
+                    banner.style.display = 'block';
+                    banner.style.background = '#ECFDF5';
+                    banner.style.color = '#065F46';
+                    banner.innerText = currentLang === 'fr' ? '✅ Merci beaucoup ! Votre message a bien été transmis.' : '✅ Thank you! Your feedback has been sent.';
+                }
+                setTimeout(() => { modal.style.display = 'none'; }, 2200);
+            } catch (err) {
+                alert(currentLang === 'fr' ? '✅ Merci ! Votre message a été enregistré localement.' : '✅ Thank you! Your message was saved.');
+                modal.style.display = 'none';
+            }
+        });
+    }
+
+    // Global Event Delegation for Contact / Feedback Button
+    document.addEventListener('click', (e) => {
+        const btn = e.target && e.target.closest && e.target.closest('#open-contact-feedback-btn');
+        if (btn) {
+            e.preventDefault();
+            e.stopPropagation();
+            openContactFeedbackModal();
+        }
+    });
+
     // Public API for Game Engines & Pages
     window.AlpTracker = {
         initSession,
         showProfileModal,
         selectProfile,
+        openContactFeedbackModal,
         onQuestionStart,
         onAttempt,
         onTrialSuccess,

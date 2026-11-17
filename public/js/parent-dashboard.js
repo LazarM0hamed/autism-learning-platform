@@ -80,6 +80,7 @@
             refresh: "Refresh",
             exportBtn: "Export",
             importBtn: "Import",
+            btnFeedback: "Feedback",
             kpiTime: "Total Time Spent",
             kpiAccuracy: "Success Rate",
             kpiTrials: "Questions Completed",
@@ -111,6 +112,7 @@
             refresh: "Actualiser",
             exportBtn: "Exporter",
             importBtn: "Importer",
+            btnFeedback: "Donner mon avis",
             kpiTime: "Temps Total Passé",
             kpiAccuracy: "Taux de Réussite",
             kpiTrials: "Questions Réussies",
@@ -154,6 +156,9 @@
 
         const importLabel = document.getElementById('lbl-import');
         if (importLabel) importLabel.innerText = t.importBtn;
+
+        const fbBtnText = document.getElementById('btn-parent-feedback-text');
+        if (fbBtnText) fbBtnText.innerText = t.btnFeedback;
 
         document.getElementById('lbl-kpi-time').innerText = t.kpiTime;
         document.getElementById('lbl-kpi-accuracy').innerText = t.kpiAccuracy;
