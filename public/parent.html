@@ -25,11 +25,14 @@
                 <p class="parent-subtitle" id="p-subtitle">Observe engagement, celebrate strengths, and guide learning at the child's natural pace.</p>
             </div>
 
-            <!-- Profile Selector & Refresh -->
+            <!-- Profile Selector, Refresh & Data Backup -->
             <div class="parent-profile-picker">
                 <label for="p-profile-select" id="p-profile-label">Child Profile:</label>
                 <select id="p-profile-select" class="parent-select" aria-label="Select child profile"></select>
                 <button class="parent-refresh-btn" id="p-refresh-btn" title="Refresh analytics data">🔄 <span id="lbl-refresh">Refresh</span></button>
+                <button class="parent-refresh-btn" id="p-export-btn" title="Download backup of child analytics">📥 <span id="lbl-export">Export</span></button>
+                <button class="parent-refresh-btn" id="p-import-btn" title="Restore analytics from backup">📤 <span id="lbl-import">Import</span></button>
+                <input type="file" id="p-import-file" accept=".json" style="display: none;">
             </div>
         </section>
 

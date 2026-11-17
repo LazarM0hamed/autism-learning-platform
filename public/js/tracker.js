@@ -380,22 +380,22 @@
         const localSummary = JSON.parse(localStorage.getItem('alp_local_summary') || '{}');
         const localVotes = JSON.parse(localStorage.getItem('alp_local_votes') || '{}');
         const defaultLikes = {
-            'find_and_match': { likes: 14, dislikes: 0 },
-            'colors': { likes: 12, dislikes: 0 },
-            'pattern': { likes: 11, dislikes: 0 },
-            'letters_puzzle': { likes: 15, dislikes: 0 },
-            'coloring': { likes: 16, dislikes: 0 },
-            'spelling': { likes: 10, dislikes: 0 },
-            'spatial': { likes: 13, dislikes: 0 },
-            'math': { likes: 9, dislikes: 0 },
-            'comparisons': { likes: 12, dislikes: 0 },
-            'time': { likes: 8, dislikes: 0 },
-            'sequence': { likes: 11, dislikes: 0 },
-            'labyrinth': { likes: 12, dislikes: 0 },
-            'sounds': { likes: 13, dislikes: 0 },
-            'circuit': { likes: 17, dislikes: 0 }
+            'find_and_match': { likes: 0, dislikes: 0 },
+            'colors': { likes: 0, dislikes: 0 },
+            'pattern': { likes: 0, dislikes: 0 },
+            'letters_puzzle': { likes: 0, dislikes: 0 },
+            'coloring': { likes: 0, dislikes: 0 },
+            'spelling': { likes: 0, dislikes: 0 },
+            'spatial': { likes: 0, dislikes: 0 },
+            'math': { likes: 0, dislikes: 0 },
+            'comparisons': { likes: 0, dislikes: 0 },
+            'time': { likes: 0, dislikes: 0 },
+            'sequence': { likes: 0, dislikes: 0 },
+            'labyrinth': { likes: 0, dislikes: 0 },
+            'sounds': { likes: 0, dislikes: 0 },
+            'circuit': { likes: 0, dislikes: 0 }
         };
-        const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 12, dislikes: 0 };
+        const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
     }
 
@@ -625,20 +625,20 @@
         if (!isHubPage()) return;
 
         const defaultLikes = {
-            'find_and_match': { likes: 14, dislikes: 0 },
-            'colors': { likes: 12, dislikes: 0 },
-            'pattern': { likes: 11, dislikes: 0 },
-            'letters_puzzle': { likes: 15, dislikes: 0 },
-            'coloring': { likes: 16, dislikes: 0 },
-            'spelling': { likes: 10, dislikes: 0 },
-            'spatial': { likes: 13, dislikes: 0 },
-            'math': { likes: 9, dislikes: 0 },
-            'comparisons': { likes: 12, dislikes: 0 },
-            'time': { likes: 8, dislikes: 0 },
-            'sequence': { likes: 11, dislikes: 0 },
-            'labyrinth': { likes: 12, dislikes: 0 },
-            'sounds': { likes: 13, dislikes: 0 },
-            'circuit': { likes: 17, dislikes: 0 }
+            'find_and_match': { likes: 0, dislikes: 0 },
+            'colors': { likes: 0, dislikes: 0 },
+            'pattern': { likes: 0, dislikes: 0 },
+            'letters_puzzle': { likes: 0, dislikes: 0 },
+            'coloring': { likes: 0, dislikes: 0 },
+            'spelling': { likes: 0, dislikes: 0 },
+            'spatial': { likes: 0, dislikes: 0 },
+            'math': { likes: 0, dislikes: 0 },
+            'comparisons': { likes: 0, dislikes: 0 },
+            'time': { likes: 0, dislikes: 0 },
+            'sequence': { likes: 0, dislikes: 0 },
+            'labyrinth': { likes: 0, dislikes: 0 },
+            'sounds': { likes: 0, dislikes: 0 },
+            'circuit': { likes: 0, dislikes: 0 }
         };
 
         try {

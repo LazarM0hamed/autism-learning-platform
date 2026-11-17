@@ -76,8 +76,10 @@
             title: "📊 Parent Dashboard & Child Progress",
             subtitle: "Observe engagement, celebrate strengths, and guide learning at the child's natural pace.",
             profileLabel: "Child Profile:",
-            allChildren: "All Children (Consolidated)",
+            allChildren: "All Children (Overview)",
             refresh: "Refresh",
+            exportBtn: "Export",
+            importBtn: "Import",
             kpiTime: "Total Time Spent",
             kpiAccuracy: "Success Rate",
             kpiTrials: "Questions Completed",
@@ -107,6 +109,8 @@
             profileLabel: "Profil de l'enfant :",
             allChildren: "Tous les enfants (Vue globale)",
             refresh: "Actualiser",
+            exportBtn: "Exporter",
+            importBtn: "Importer",
             kpiTime: "Temps Total Passé",
             kpiAccuracy: "Taux de Réussite",
             kpiTrials: "Questions Réussies",
@@ -144,6 +148,12 @@
 
         const refreshLabel = document.getElementById('lbl-refresh');
         if (refreshLabel) refreshLabel.innerText = t.refresh;
+
+        const exportLabel = document.getElementById('lbl-export');
+        if (exportLabel) exportLabel.innerText = t.exportBtn;
+
+        const importLabel = document.getElementById('lbl-import');
+        if (importLabel) importLabel.innerText = t.importBtn;
 
         document.getElementById('lbl-kpi-time').innerText = t.kpiTime;
         document.getElementById('lbl-kpi-accuracy').innerText = t.kpiAccuracy;
@@ -449,10 +459,69 @@
         setInterval(loadDashboardData, 8000);
     }
 
+    function setupBackupControls() {
+        const exportBtn = document.getElementById('p-export-btn');
+        if (exportBtn) {
+            exportBtn.onclick = () => {
+                const backup = {
+                    version: '1.0',
+                    exportedAt: new Date().toISOString(),
+                    nickname: localStorage.getItem('alp_profile_nickname') || 'Ilyen',
+                    emoji: localStorage.getItem('alp_profile_emoji') || '🦊',
+                    summary: JSON.parse(localStorage.getItem('alp_local_summary') || '{}'),
+                    votes: JSON.parse(localStorage.getItem('alp_local_votes') || '{}'),
+                    events: JSON.parse(localStorage.getItem('alp_local_events') || '[]'),
+                    comments: JSON.parse(localStorage.getItem('alp_local_comments') || '[]')
+                };
+
+                const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `autism-platform-backup-${new Date().toISOString().slice(0, 10)}.json`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+            };
+        }
+
+        const importBtn = document.getElementById('p-import-btn');
+        const importFile = document.getElementById('p-import-file');
+        if (importBtn && importFile) {
+            importBtn.onclick = () => importFile.click();
+            importFile.onchange = (e) => {
+                const file = e.target.files && e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        if (data.nickname) localStorage.setItem('alp_profile_nickname', data.nickname);
+                        if (data.emoji) localStorage.setItem('alp_profile_emoji', data.emoji);
+                        if (data.summary) localStorage.setItem('alp_local_summary', JSON.stringify(data.summary));
+                        if (data.votes) localStorage.setItem('alp_local_votes', JSON.stringify(data.votes));
+                        if (data.events) localStorage.setItem('alp_local_events', JSON.stringify(data.events));
+                        if (data.comments) localStorage.setItem('alp_local_comments', JSON.stringify(data.comments));
+
+                        alert(currentLang === 'fr' ? '✅ Données restaurées avec succès !' : '✅ Data restored successfully!');
+                        loadProfiles().then(loadDashboardData);
+                    } catch (err) {
+                        alert(currentLang === 'fr' ? '❌ Fichier de sauvegarde invalide.' : '❌ Invalid backup file.');
+                    }
+                    importFile.value = '';
+                };
+                reader.readAsText(file);
+            };
+        }
+    }
+
     function init() {
         updateStaticText();
         setupLanguageSwitcher();
         setupRefreshControls();
+        setupBackupControls();
         loadProfiles().then(() => {
             loadDashboardData();
         });
