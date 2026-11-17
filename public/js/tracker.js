@@ -11,17 +11,11 @@
     const KEY_SESSION_ID = 'alp_session_id';
 
     // State
-    let currentNickname = localStorage.getItem(KEY_NICKNAME) || 'Champion';
-    let currentEmoji = localStorage.getItem(KEY_EMOJI) || '🦁';
+    let currentNickname = localStorage.getItem(KEY_NICKNAME) || '';
+    let currentEmoji = localStorage.getItem(KEY_EMOJI) || '👤';
     let currentDeviceId = localStorage.getItem(KEY_DEVICE_ID);
     let activeSessionId = sessionStorage.getItem(KEY_SESSION_ID) || null;
     let currentLang = localStorage.getItem('alp_lang') || 'en';
-
-    // Ensure default profile is persisted
-    if (!localStorage.getItem(KEY_NICKNAME)) {
-        localStorage.setItem(KEY_NICKNAME, currentNickname);
-        localStorage.setItem(KEY_EMOJI, currentEmoji);
-    }
 
     if (!currentDeviceId) {
         currentDeviceId = 'dev_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
@@ -523,7 +517,9 @@
 
     // Top Navigation Profile & Parent Dashboard Header Link
     function updateHeaderProfileUI() {
-        const nick = currentNickname || 'Champion';
+        const defaultName = currentLang === 'fr' ? 'Joueur' : 'Player';
+        const nick = currentNickname || defaultName;
+        const emoji = currentNickname ? currentEmoji : '👤';
         const isParent = isParentPage();
 
         let bar = document.getElementById('alp-user-header-bar');
@@ -534,9 +530,13 @@
             document.body.insertBefore(bar, document.body.firstChild);
         }
 
+        const switchHint = currentLang === 'fr'
+            ? (currentNickname ? 'Changer de joueur' : 'Choisir un prénom')
+            : (currentNickname ? 'Switch player' : 'Set child name');
+
         bar.innerHTML = `
-            <div class="user-chip" id="alp-user-chip" title="${currentLang === 'fr' ? 'Changer de joueur' : 'Switch player'}">
-                <span class="user-chip-emoji">${currentEmoji}</span>
+            <div class="user-chip" id="alp-user-chip" title="${switchHint}">
+                <span class="user-chip-emoji">${emoji}</span>
                 <span class="user-chip-name">${nick}</span>
                 <span class="user-chip-switch">⇄</span>
             </div>

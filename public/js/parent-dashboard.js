@@ -178,9 +178,12 @@
     }
 
     async function loadProfiles() {
-        let profiles = [
-            { nickname: 'Ilyen', emoji: '🦊' }
-        ];
+        let profiles = [];
+        const localNick = localStorage.getItem('alp_profile_nickname');
+        const localEmoji = localStorage.getItem('alp_profile_emoji') || '👤';
+        if (localNick) {
+            profiles.push({ nickname: localNick, emoji: localEmoji });
+        }
 
         try {
             const res = await fetch('/api/profiles');

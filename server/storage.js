@@ -16,17 +16,7 @@ function ensureStorage() {
         fs.mkdirSync(STORAGE_DIR, { recursive: true });
     }
     if (!fs.existsSync(PROFILES_FILE)) {
-        fs.writeFileSync(PROFILES_FILE, JSON.stringify({
-            profiles: [
-                {
-                    id: 'p_default',
-                    nickname: 'Champion',
-                    emoji: '🦁',
-                    createdAt: new Date().toISOString(),
-                    lastActiveAt: new Date().toISOString()
-                }
-            ]
-        }, null, 2));
+        fs.writeFileSync(PROFILES_FILE, JSON.stringify({ profiles: [] }, null, 2));
     }
     if (!fs.existsSync(SESSIONS_FILE)) {
         fs.writeFileSync(SESSIONS_FILE, JSON.stringify({ sessions: [] }, null, 2));

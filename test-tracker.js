@@ -208,12 +208,7 @@ console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, a
 // Clean teardown: preserve clean vierge storage state for deployment
 fs.writeFileSync('storage/feedback.json', JSON.stringify({ feedback: [] }, null, 2) + '\n');
 fs.writeFileSync('storage/sessions.json', JSON.stringify({ sessions: [] }, null, 2) + '\n');
-fs.writeFileSync('storage/profiles.json', JSON.stringify({
-    profiles: [
-        { id: 'p_default', nickname: 'Champion', emoji: '🦁', createdAt: '2026-11-17T00:00:00.000Z', lastActiveAt: '2026-11-17T00:00:00.000Z' },
-        { id: 'p_ilyen', nickname: 'Ilyen', emoji: '🦊', createdAt: '2026-11-17T00:00:00.000Z', lastActiveAt: '2026-11-17T00:00:00.000Z' }
-    ]
-}, null, 2) + '\n');
+fs.writeFileSync('storage/profiles.json', JSON.stringify({ profiles: [] }, null, 2) + '\n');
 console.log('✓ Clean vierge stats preserved in storage/');
 
 console.log('ALL STORAGE, SESSION & PARENT ANALYTICS TESTS PASSED!');
