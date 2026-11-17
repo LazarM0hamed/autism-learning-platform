@@ -1,0 +1,316 @@
+{
+  "title": {
+    "en": "Letter Inset Puzzle",
+    "fr": "Puzzle d'encastrement des lettres"
+  },
+  "boards": [
+    {
+      "id": "board_abc",
+      "name": { "en": "Letters A - B - C", "fr": "Lettres A - B - C" },
+      "letters": [
+        {
+          "letter": "A",
+          "color": "#EF4444",
+          "word": { "en": "Apple", "fr": "Avion" },
+          "phonics": { "en": "A as in Apple", "fr": "A comme Avion" },
+          "media": {
+            "en": { "image": "assets/photos/apple.svg" },
+            "fr": { "image": "assets/photos/plane.svg" }
+          }
+        },
+        {
+          "letter": "B",
+          "color": "#3B82F6",
+          "word": { "en": "Boat", "fr": "Bateau" },
+          "phonics": { "en": "B as in Boat", "fr": "B comme Bateau" },
+          "media": {
+            "en": { "image": "assets/photos/boat.svg" },
+            "fr": { "image": "assets/photos/boat.svg" }
+          }
+        },
+        {
+          "letter": "C",
+          "color": "#F59E0B",
+          "word": { "en": "Cat", "fr": "Chat" },
+          "phonics": { "en": "C as in Cat", "fr": "C comme Chat" },
+          "media": {
+            "en": { "image": "assets/photos/cat.svg" },
+            "fr": { "image": "assets/photos/cat.svg" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "board_def",
+      "name": { "en": "Letters D - E - F", "fr": "Lettres D - E - F" },
+      "letters": [
+        {
+          "letter": "D",
+          "color": "#10B981",
+          "word": { "en": "Dog", "fr": "Dauphin" },
+          "phonics": { "en": "D as in Dog", "fr": "D comme Dauphin" },
+          "media": {
+            "en": { "image": "assets/photos/dog.svg" },
+            "fr": { "emoji": "🐬" }
+          }
+        },
+        {
+          "letter": "E",
+          "color": "#8B5CF6",
+          "word": { "en": "Elephant", "fr": "Étoile" },
+          "phonics": { "en": "E as in Elephant", "fr": "E comme Étoile" },
+          "media": {
+            "en": { "emoji": "🐘" },
+            "fr": { "image": "assets/photos/star.svg" }
+          }
+        },
+        {
+          "letter": "F",
+          "color": "#EC4899",
+          "word": { "en": "Fish", "fr": "Fraise" },
+          "phonics": { "en": "F as in Fish", "fr": "F comme Fraise" },
+          "media": {
+            "en": { "image": "assets/photos/fish.svg" },
+            "fr": { "image": "assets/photos/strawberry.svg" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "board_ghi",
+      "name": { "en": "Letters G - H - I", "fr": "Lettres G - H - I" },
+      "letters": [
+        {
+          "letter": "G",
+          "color": "#A855F7",
+          "word": { "en": "Grapes", "fr": "Gâteau" },
+          "phonics": { "en": "G as in Grapes", "fr": "G comme Gâteau" },
+          "media": {
+            "en": { "image": "assets/photos/grapes.svg" },
+            "fr": { "emoji": "🎂" }
+          }
+        },
+        {
+          "letter": "H",
+          "color": "#06B6D4",
+          "word": { "en": "Hat", "fr": "Hélicoptère" },
+          "phonics": { "en": "H as in Hat", "fr": "H comme Hélicoptère" },
+          "media": {
+            "en": { "image": "assets/photos/hat.svg" },
+            "fr": { "emoji": "🚁" }
+          }
+        },
+        {
+          "letter": "I",
+          "color": "#14B8A6",
+          "word": { "en": "Island", "fr": "Île" },
+          "phonics": { "en": "I as in Island", "fr": "I comme Île" },
+          "media": {
+            "en": { "emoji": "🏝️" },
+            "fr": { "emoji": "🏝️" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "board_jkl",
+      "name": { "en": "Letters J - K - L", "fr": "Lettres J - K - L" },
+      "letters": [
+        {
+          "letter": "J",
+          "color": "#F97316",
+          "word": { "en": "Jacket", "fr": "Jupe" },
+          "phonics": { "en": "J as in Jacket", "fr": "J comme Jupe" },
+          "media": {
+            "en": { "image": "assets/photos/jacket.svg" },
+            "fr": { "emoji": "👗" }
+          }
+        },
+        {
+          "letter": "K",
+          "color": "#64748B",
+          "word": { "en": "Koala", "fr": "Kangourou" },
+          "phonics": { "en": "K as in Koala", "fr": "K comme Kangourou" },
+          "media": {
+            "en": { "emoji": "🐨" },
+            "fr": { "emoji": "🦘" }
+          }
+        },
+        {
+          "letter": "L",
+          "color": "#EAB308",
+          "word": { "en": "Lion", "fr": "Lapin" },
+          "phonics": { "en": "L as in Lion", "fr": "L comme Lapin" },
+          "media": {
+            "en": { "emoji": "🦁" },
+            "fr": { "image": "assets/photos/rabbit.svg" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "board_mno",
+      "name": { "en": "Letters M - N - O", "fr": "Lettres M - N - O" },
+      "letters": [
+        {
+          "letter": "M",
+          "color": "#3B82F6",
+          "word": { "en": "Moon", "fr": "Maison" },
+          "phonics": { "en": "M as in Moon", "fr": "M comme Maison" },
+          "media": {
+            "en": { "emoji": "🌙" },
+            "fr": { "emoji": "🏠" }
+          }
+        },
+        {
+          "letter": "N",
+          "color": "#38BDF8",
+          "word": { "en": "Night", "fr": "Nuage" },
+          "phonics": { "en": "N as in Night", "fr": "N comme Nuage" },
+          "media": {
+            "en": { "image": "assets/photos/time-night.svg" },
+            "fr": { "emoji": "☁️" }
+          }
+        },
+        {
+          "letter": "O",
+          "color": "#FB923C",
+          "word": { "en": "Orange", "fr": "Oiseau" },
+          "phonics": { "en": "O as in Orange", "fr": "O comme Oiseau" },
+          "media": {
+            "en": { "image": "assets/photos/orange.svg" },
+            "fr": { "image": "assets/photos/bird.svg" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "board_pqr",
+      "name": { "en": "Letters P - Q - R", "fr": "Lettres P - Q - R" },
+      "letters": [
+        {
+          "letter": "P",
+          "color": "#DC2626",
+          "word": { "en": "Pants", "fr": "Pomme" },
+          "phonics": { "en": "P as in Pants", "fr": "P comme Pomme" },
+          "media": {
+            "en": { "image": "assets/photos/pants.svg" },
+            "fr": { "image": "assets/photos/apple.svg" }
+          }
+        },
+        {
+          "letter": "Q",
+          "color": "#84CC16",
+          "word": { "en": "Queen", "fr": "Quatre" },
+          "phonics": { "en": "Q as in Queen", "fr": "Q comme Quatre" },
+          "media": {
+            "en": { "emoji": "👑" },
+            "fr": { "image": "assets/photos/number-4.svg" }
+          }
+        },
+        {
+          "letter": "R",
+          "color": "#EA580C",
+          "word": { "en": "Rabbit", "fr": "Renard" },
+          "phonics": { "en": "R as in Rabbit", "fr": "R comme Renard" },
+          "media": {
+            "en": { "image": "assets/photos/rabbit.svg" },
+            "fr": { "emoji": "🦊" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "board_stu",
+      "name": { "en": "Letters S - T - U", "fr": "Lettres S - T - U" },
+      "letters": [
+        {
+          "letter": "S",
+          "color": "#FBBF24",
+          "word": { "en": "Star", "fr": "Soleil" },
+          "phonics": { "en": "S as in Star", "fr": "S comme Soleil" },
+          "media": {
+            "en": { "image": "assets/photos/star.svg" },
+            "fr": { "emoji": "☀️" }
+          }
+        },
+        {
+          "letter": "T",
+          "color": "#6366F1",
+          "word": { "en": "Train", "fr": "Train" },
+          "phonics": { "en": "T as in Train", "fr": "T comme Train" },
+          "media": {
+            "en": { "image": "assets/photos/train.svg" },
+            "fr": { "image": "assets/photos/train.svg" }
+          }
+        },
+        {
+          "letter": "U",
+          "color": "#0EA5E9",
+          "word": { "en": "Umbrella", "fr": "Usine" },
+          "phonics": { "en": "U as in Umbrella", "fr": "U comme Usine" },
+          "media": {
+            "en": { "emoji": "☂️" },
+            "fr": { "emoji": "🏭" }
+          }
+        }
+      ]
+    },
+    {
+      "id": "board_vwxyz",
+      "name": { "en": "Letters V - W - X - Y - Z", "fr": "Lettres V - W - X - Y - Z" },
+      "letters": [
+        {
+          "letter": "V",
+          "color": "#10B981",
+          "word": { "en": "Violin", "fr": "Vélo" },
+          "phonics": { "en": "V as in Violin", "fr": "V comme Vélo" },
+          "media": {
+            "en": { "emoji": "🎻" },
+            "fr": { "image": "assets/photos/bike.svg" }
+          }
+        },
+        {
+          "letter": "W",
+          "color": "#D97706",
+          "word": { "en": "Watermelon", "fr": "Wagon" },
+          "phonics": { "en": "W as in Watermelon", "fr": "W comme Wagon" },
+          "media": {
+            "en": { "image": "assets/photos/watermelon.svg" },
+            "fr": { "emoji": "🚃" }
+          }
+        },
+        {
+          "letter": "X",
+          "color": "#EC4899",
+          "word": { "en": "Xylophone", "fr": "Xylophone" },
+          "phonics": { "en": "X as in Xylophone", "fr": "X comme Xylophone" },
+          "media": {
+            "en": { "emoji": "🎶" },
+            "fr": { "emoji": "🎶" }
+          }
+        },
+        {
+          "letter": "Y",
+          "color": "#2563EB",
+          "word": { "en": "Yacht", "fr": "Yacht" },
+          "phonics": { "en": "Y as in Yacht", "fr": "Y comme Yacht" },
+          "media": {
+            "en": { "emoji": "⛵" },
+            "fr": { "emoji": "⛵" }
+          }
+        },
+        {
+          "letter": "Z",
+          "color": "#475569",
+          "word": { "en": "Zebra", "fr": "Zèbre" },
+          "phonics": { "en": "Z as in Zebra", "fr": "Z comme Zèbre" },
+          "media": {
+            "en": { "emoji": "🦓" },
+            "fr": { "emoji": "🦓" }
+          }
+        }
+      ]
+    }
+  ]
+}

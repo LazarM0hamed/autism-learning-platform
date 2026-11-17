@@ -1,0 +1,16 @@
+{
+  "categoryName": {
+    "en": "Daily Routines",
+    "fr": "Routines du quotidien"
+  },
+  "categoryEmoji": "🦷",
+  "accentColor": "#C7CEEA",
+  "items": [
+    { "id": "brush-teeth", "label": { "en": "Brush Teeth", "fr": "Brosser les dents" }, "image": "assets/photos/brush-teeth.svg" },
+    { "id": "wash-hands", "label": { "en": "Wash Hands", "fr": "Laver les mains" }, "image": "assets/photos/wash-hands.svg" },
+    { "id": "shoes", "label": { "en": "Put on Shoes", "fr": "Mettre les chaussures" }, "image": "assets/photos/shoes.svg" },
+    { "id": "eat", "label": { "en": "Eat Meal", "fr": "Manger" }, "image": "assets/photos/eat.svg" },
+    { "id": "drink-water", "label": { "en": "Drink Water", "fr": "Boire de l'eau" }, "image": "assets/photos/drink-water.svg" },
+    { "id": "sleep", "label": { "en": "Bedtime", "fr": "Dormir" }, "image": "assets/photos/sleep.svg" }
+  ]
+}

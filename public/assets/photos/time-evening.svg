@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" width="100%" height="100%">
+  <!-- Room Wall: Warm Sunset Coral -->
+  <rect width="160" height="120" rx="20" fill="#FFF7ED"/>
+
+  <!-- Living Room Window showing Warm Sunset -->
+  <rect x="18" y="14" width="56" height="52" rx="6" fill="#FDBA74" stroke="#EA580C" stroke-width="2.5"/>
+  <rect x="22" y="18" width="48" height="44" rx="4" fill="#FB923C"/>
+  <line x1="46" y1="18" x2="46" y2="62" stroke="#EA580C" stroke-width="2"/>
+  <line x1="22" y1="40" x2="70" y2="40" stroke="#EA580C" stroke-width="2"/>
+  <!-- Sunset Sun sinking on horizon -->
+  <circle cx="46" cy="52" r="16" fill="#EA580C"/>
+  <circle cx="46" cy="52" r="11" fill="#FDE047"/>
+  <!-- Sunset cloud strips -->
+  <rect x="26" y="30" width="22" height="4" rx="2" fill="#FED7AA" opacity="0.8"/>
+  <rect x="42" y="38" width="24" height="4" rx="2" fill="#FED7AA" opacity="0.8"/>
+
+  <!-- Warm Reading Lamp -->
+  <path d="M12 74 L28 74 L24 62 L16 62 Z" fill="#FDE047" stroke="#D97706" stroke-width="1.5"/>
+  <line x1="20" y1="74" x2="20" y2="102" stroke="#78350F" stroke-width="2.5"/>
+  <rect x="14" y="100" width="12" height="4" rx="2" fill="#78350F"/>
+
+  <!-- Cozy Armchair -->
+  <rect x="76" y="58" width="62" height="48" rx="12" fill="#A78BFA"/>
+  <rect x="70" y="68" width="14" height="34" rx="6" fill="#8B5CF6"/>
+  <rect x="130" y="68" width="14" height="34" rx="6" fill="#8B5CF6"/>
+
+  <!-- Young Boy in Striped Pajamas Reading Book -->
+  <!-- Pajama Body -->
+  <rect x="90" y="52" width="28" height="26" rx="6" fill="#BAE6FD" stroke="#38BDF8" stroke-width="1.5"/>
+  <line x1="90" y1="60" x2="118" y2="60" stroke="#60A5FA" stroke-width="1.5"/>
+  <line x1="90" y1="68" x2="118" y2="68" stroke="#60A5FA" stroke-width="1.5"/>
+
+  <!-- Pajama Legs curled comfortably -->
+  <rect x="92" y="78" width="24" height="12" rx="4" fill="#BAE6FD" stroke="#38BDF8" stroke-width="1.5"/>
+  <ellipse cx="98" cy="91" rx="4" ry="3" fill="#FDBA74"/>
+  <ellipse cx="108" cy="91" rx="4" ry="3" fill="#FDBA74"/>
+
+  <!-- Head -->
+  <circle cx="104" cy="38" r="11" fill="#FDBA74"/>
+  <!-- Hair -->
+  <path d="M93 36 C93 26 115 26 115 36 C115 30 104 28 93 36 Z" fill="#78350F"/>
+  <!-- Calming Face Looking Down at Book -->
+  <circle cx="100" cy="39" r="1.5" fill="#1E293B"/>
+  <circle cx="108" cy="39" r="1.5" fill="#1E293B"/>
+  <path d="M101 43 Q104 46 107 43" stroke="#78350F" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Open Bedtime Storybook in Hands -->
+  <path d="M88 66 C96 64 102 67 104 69 C106 67 112 64 120 66 L120 84 C112 82 106 85 104 87 C102 85 96 82 88 84 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+  <!-- Hands holding book -->
+  <circle cx="89" cy="74" r="3.5" fill="#FDBA74"/>
+  <circle cx="119" cy="74" r="3.5" fill="#FDBA74"/>
+</svg>

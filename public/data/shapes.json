@@ -1,0 +1,15 @@
+{
+  "categoryName": {
+    "en": "Shapes",
+    "fr": "Formes"
+  },
+  "categoryEmoji": "🔺",
+  "accentColor": "#B5EAD7",
+  "items": [
+    { "id": "circle", "label": { "en": "Circle", "fr": "Cercle" }, "image": "assets/photos/circle.svg" },
+    { "id": "square", "label": { "en": "Square", "fr": "Carré" }, "image": "assets/photos/square.svg" },
+    { "id": "triangle", "label": { "en": "Triangle", "fr": "Triangle" }, "image": "assets/photos/triangle.svg" },
+    { "id": "star", "label": { "en": "Star", "fr": "Étoile" }, "image": "assets/photos/star.svg" },
+    { "id": "heart", "label": { "en": "Heart", "fr": "Cœur" }, "image": "assets/photos/heart.svg" }
+  ]
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Activity - Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Home</a>
+        <h2 id="category-title" class="category-badge">Loading...</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <main style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <!-- Category Filter Pills -->
+        <nav class="routine-pills" id="category-filter-pills" aria-label="Category Filters" style="margin-bottom: 12px;"></nav>
+
+        <div class="prompt-container">
+            <h1 class="prompt-text" id="prompt-label">Find the...</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <section class="options-grid" id="options-container" aria-label="Choice options"></section>
+    </main>
+
+    <footer class="settings-bar">
+        <span class="settings-label" id="choices-label">Choices:</span>
+        <button class="difficulty-pill" data-count="2" title="2 choices (ABA/Discrete Trial)">2</button>
+        <button class="difficulty-pill" data-count="3" title="3 choices">3</button>
+        <button class="difficulty-pill" data-count="4" title="4 choices">4</button>
+    </footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/game-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

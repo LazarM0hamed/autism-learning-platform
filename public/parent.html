@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Parent Dashboard & Progress Monitoring - Autism Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="parent-body">
+    <header class="game-header" style="max-width: 1050px;">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Back to Games</a>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+        </div>
+    </header>
+
+    <main style="max-width: 1050px; width: 100%;">
+        <!-- Header Banner -->
+        <section class="parent-banner">
+            <div class="parent-banner-text">
+                <h1 class="parent-title" id="p-title">📊 Parent Dashboard & Child Progress</h1>
+                <p class="parent-subtitle" id="p-subtitle">Observe engagement, celebrate strengths, and guide learning at the child's natural pace.</p>
+            </div>
+
+            <!-- Profile Selector & Refresh -->
+            <div class="parent-profile-picker">
+                <label for="p-profile-select" id="p-profile-label">Child Profile:</label>
+                <select id="p-profile-select" class="parent-select" aria-label="Select child profile"></select>
+                <button class="parent-refresh-btn" id="p-refresh-btn" title="Refresh analytics data">🔄 <span id="lbl-refresh">Refresh</span></button>
+            </div>
+        </section>
+
+        <!-- KPI Summary Cards -->
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <span class="kpi-icon">⏱️</span>
+                <div class="kpi-content">
+                    <span class="kpi-value" id="kpi-time">0 min</span>
+                    <span class="kpi-label" id="lbl-kpi-time">Total Time Spent</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-icon">🎯</span>
+                <div class="kpi-content">
+                    <span class="kpi-value" id="kpi-accuracy">0%</span>
+                    <span class="kpi-label" id="lbl-kpi-accuracy">Success Rate</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-icon">🔢</span>
+                <div class="kpi-content">
+                    <span class="kpi-value" id="kpi-trials">0</span>
+                    <span class="kpi-label" id="lbl-kpi-trials">Questions Completed</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <span class="kpi-icon">⚡</span>
+                <div class="kpi-content">
+                    <span class="kpi-value" id="kpi-latency">0s</span>
+                    <span class="kpi-label" id="lbl-kpi-latency">Avg Response Time</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Adaptive Recommendations -->
+        <section class="parent-section">
+            <h2 class="section-title" id="p-rec-title">💡 Adaptive Recommendations & Next Steps</h2>
+            <div class="rec-cards-container" id="rec-container">
+                <div class="loading-state">Loading recommendations...</div>
+            </div>
+        </section>
+
+        <!-- Activity Breakdown Table -->
+        <section class="parent-section">
+            <h2 class="section-title" id="p-breakdown-title">📈 Performance & Engagement by Activity</h2>
+            <div class="table-responsive">
+                <table class="analytics-table">
+                    <thead>
+                        <tr>
+                            <th id="th-activity">Activity</th>
+                            <th id="th-trials">Questions</th>
+                            <th id="th-accuracy">Accuracy</th>
+                            <th id="th-attempts">Avg Attempts</th>
+                            <th id="th-latency">Response Time</th>
+                            <th id="th-reactions">Feedback</th>
+                            <th id="th-status">Profile Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="analytics-tbody">
+                        <tr><td colspan="7" class="loading-state">Loading activity data...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Parent & Therapist Observations Log -->
+        <section class="parent-section">
+            <h2 class="section-title" id="p-notes-title">📝 Parent & Therapist Observations Log</h2>
+            <div class="notes-log-container" id="notes-container">
+                <div class="empty-notes" id="empty-notes-text">No notes recorded yet. You can add observations during play sessions using the 💬 Note button on any activity!</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/parent-dashboard.js"></script>
+</body>
+</html>

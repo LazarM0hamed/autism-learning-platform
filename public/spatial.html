@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Guide the Animal - Spatial Journey - Autism Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Home</a>
+        <span class="category-badge" id="category-title">🧭 Guide the Animal</span>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <main style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <!-- Mode Switcher: 2D Grid vs Stairs -->
+        <nav class="routine-pills" id="mode-pills" aria-label="Game Mode" style="margin-bottom: 8px;"></nav>
+
+        <!-- Scenario Filter Pills -->
+        <nav class="routine-pills" id="scenario-pills" aria-label="Scenarios" style="margin-bottom: 12px;"></nav>
+
+        <!-- Spoken Prompt -->
+        <div class="prompt-container">
+            <h1 class="prompt-text" id="prompt-label">Help the animal...</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <!-- The 4x4 Grid Board -->
+        <div class="spatial-board-container" id="grid-container">
+            <div class="spatial-grid" id="spatial-game-board" aria-label="Spatial Navigation Grid"></div>
+        </div>
+
+        <!-- The Ascending 5-Step Staircase -->
+        <div class="stairs-board" id="stairs-container" style="display: none;" aria-label="Ascending Staircase"></div>
+
+        <!-- Tactile D-Pad Controls (for Grid Mode) -->
+        <div class="spatial-dpad" id="grid-controls" role="group" aria-label="Directional Controls">
+            <button class="spatial-btn" id="btn-spatial-up" aria-label="Up" title="Move Up (ArrowUp / 2)">⬆️</button>
+            <button class="spatial-btn" id="btn-spatial-left" aria-label="Left" title="Move Left (ArrowLeft / 1)">⬅️</button>
+            <button class="spatial-btn" id="btn-spatial-down" aria-label="Down" title="Move Down (ArrowDown / 3)">⬇️</button>
+            <button class="spatial-btn" id="btn-spatial-right" aria-label="Right" title="Move Right (ArrowRight / 4)">➡️</button>
+        </div>
+
+        <!-- Tactile 2-Button Stairs Controls (for Stairs Mode) -->
+        <div class="stairs-controls" id="stairs-controls" style="display: none;" role="group" aria-label="Stairs Controls">
+            <button class="stairs-btn stairs-btn-up" id="btn-stairs-up" aria-label="Jump Up" title="Jump Up (ArrowUp / 2)">
+                <span class="btn-arrow">⬆️</span>
+                <span class="btn-text" id="lbl-stairs-up">MONTER (Haut)</span>
+            </button>
+            <button class="stairs-btn stairs-btn-down" id="btn-stairs-down" aria-label="Jump Down" title="Jump Down (ArrowDown / 3)">
+                <span class="btn-arrow">⬇️</span>
+                <span class="btn-text" id="lbl-stairs-down">DESCENDRE (Bas)</span>
+            </button>
+        </div>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/spatial-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

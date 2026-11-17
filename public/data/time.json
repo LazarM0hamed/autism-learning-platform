@@ -1,0 +1,117 @@
+{
+  "title": {
+    "en": "Time & Calendar",
+    "fr": "Le Temps & Les Moments"
+  },
+  "phases": [
+    {
+      "id": "morning",
+      "prompt": {
+        "en": "When do we wake up and eat breakfast?",
+        "fr": "Quand se réveille-t-on pour le petit déjeuner ?"
+      },
+      "target": {
+        "id": "morning",
+        "label": { "en": "Morning", "fr": "Le matin" },
+        "image": "assets/photos/time-morning.svg"
+      },
+      "distractors": [
+        { "id": "night", "label": { "en": "Night", "fr": "La nuit" }, "image": "assets/photos/time-night.svg" },
+        { "id": "afternoon", "label": { "en": "Afternoon", "fr": "L'après-midi" }, "image": "assets/photos/time-afternoon.svg" }
+      ]
+    },
+    {
+      "id": "afternoon",
+      "prompt": {
+        "en": "When is the sun bright and we play outside?",
+        "fr": "Quand le soleil brille-t-il pour jouer dehors ?"
+      },
+      "target": {
+        "id": "afternoon",
+        "label": { "en": "Afternoon", "fr": "L'après-midi" },
+        "image": "assets/photos/time-afternoon.svg"
+      },
+      "distractors": [
+        { "id": "morning", "label": { "en": "Morning", "fr": "Le matin" }, "image": "assets/photos/time-morning.svg" },
+        { "id": "night", "label": { "en": "Night", "fr": "La nuit" }, "image": "assets/photos/time-night.svg" }
+      ]
+    },
+    {
+      "id": "evening",
+      "prompt": {
+        "en": "When do we eat dinner as the sun sets?",
+        "fr": "Quand mange-t-on le dîner au coucher du soleil ?"
+      },
+      "target": {
+        "id": "evening",
+        "label": { "en": "Evening", "fr": "Le soir" },
+        "image": "assets/photos/time-evening.svg"
+      },
+      "distractors": [
+        { "id": "morning", "label": { "en": "Morning", "fr": "Le matin" }, "image": "assets/photos/time-morning.svg" },
+        { "id": "afternoon", "label": { "en": "Afternoon", "fr": "L'après-midi" }, "image": "assets/photos/time-afternoon.svg" }
+      ]
+    },
+    {
+      "id": "night",
+      "prompt": {
+        "en": "When do we sleep under the moon and stars?",
+        "fr": "Quand dort-on sous la lune et les étoiles ?"
+      },
+      "target": {
+        "id": "night",
+        "label": { "en": "Night", "fr": "La nuit" },
+        "image": "assets/photos/time-night.svg"
+      },
+      "distractors": [
+        { "id": "morning", "label": { "en": "Morning", "fr": "Le matin" }, "image": "assets/photos/time-morning.svg" },
+        { "id": "evening", "label": { "en": "Evening", "fr": "Le soir" }, "image": "assets/photos/time-evening.svg" }
+      ]
+    }
+  ],
+  "calendar": [
+    {
+      "id": "school-week",
+      "prompt": {
+        "en": "School days with backpack:",
+        "fr": "Les jours d'école avec le cartable :"
+      },
+      "target": {
+        "id": "week",
+        "label": { "en": "The Week (Mon–Fri)", "fr": "La semaine (Lun–Ven)" },
+        "image": "assets/photos/time-week.svg"
+      },
+      "distractor": {
+        "id": "weekend",
+        "label": { "en": "Weekend (Sat–Sun)", "fr": "Le weekend (Sam–Dim)" },
+        "image": "assets/photos/time-weekend.svg"
+      }
+    },
+    {
+      "id": "home-weekend",
+      "prompt": {
+        "en": "Rest at home and family time:",
+        "fr": "Repos à la maison et jeux en famille :"
+      },
+      "target": {
+        "id": "weekend",
+        "label": { "en": "Weekend (Sat–Sun)", "fr": "Le weekend (Sam–Dim)" },
+        "image": "assets/photos/time-weekend.svg"
+      },
+      "distractor": {
+        "id": "week",
+        "label": { "en": "The Week (Mon–Fri)", "fr": "La semaine (Lun–Ven)" },
+        "image": "assets/photos/time-week.svg"
+      }
+    }
+  ],
+  "daysOfWeek": [
+    { "id": "mon", "label": { "en": "Monday", "fr": "Lundi" }, "type": "week" },
+    { "id": "tue", "label": { "en": "Tuesday", "fr": "Mardi" }, "type": "week" },
+    { "id": "wed", "label": { "en": "Wednesday", "fr": "Mercredi" }, "type": "week" },
+    { "id": "thu", "label": { "en": "Thursday", "fr": "Jeudi" }, "type": "week" },
+    { "id": "fri", "label": { "en": "Friday", "fr": "Vendredi" }, "type": "week" },
+    { "id": "sat", "label": { "en": "Saturday", "fr": "Samedi" }, "type": "weekend" },
+    { "id": "sun", "label": { "en": "Sunday", "fr": "Dimanche" }, "type": "weekend" }
+  ]
+}

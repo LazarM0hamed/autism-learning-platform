@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Le temps & les moments - Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        <h2 id="activity-title" class="category-badge">☀️ Le temps & les moments</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <main style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <!-- 3 Concrete Learning Modes -->
+        <nav class="routine-pills" style="margin-bottom: 14px;" role="tablist" aria-label="Time Modes">
+            <button class="routine-pill active" id="mode-phases-btn">☀️ Moments du jour</button>
+            <button class="routine-pill" id="mode-days-btn">📅 Jours (Lundi–Dimanche)</button>
+            <button class="routine-pill" id="mode-order-btn">🚂 L'ordre de la semaine</button>
+        </nav>
+
+        <!-- Dynamic Visual Context Anchor (Day Arc or Week Strip) -->
+        <div id="visual-context-anchor" style="width: 100%; display: flex; justify-content: center;"></div>
+
+        <div class="prompt-container">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.4rem, 3.6vw, 2.1rem);">Quand est-ce qu'on...</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <!-- Choice Options -->
+        <section class="options-grid" id="options-container" aria-label="Time choices"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/time-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

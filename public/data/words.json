@@ -1,0 +1,43 @@
+{
+  "title": {
+    "en": "Spell the Word",
+    "fr": "Écris le mot"
+  },
+  "words": [
+    {
+      "id": "cat",
+      "image": "assets/photos/cat.svg",
+      "word": { "en": "CAT", "fr": "CHAT" }
+    },
+    {
+      "id": "dog",
+      "image": "assets/photos/dog.svg",
+      "word": { "en": "DOG", "fr": "CHIEN" }
+    },
+    {
+      "id": "fish",
+      "image": "assets/photos/fish.svg",
+      "word": { "en": "FISH", "fr": "POISSON" }
+    },
+    {
+      "id": "star",
+      "image": "assets/photos/star.svg",
+      "word": { "en": "STAR", "fr": "ETOILE" }
+    },
+    {
+      "id": "duck",
+      "image": "assets/photos/duck.svg",
+      "word": { "en": "DUCK", "fr": "CANARD" }
+    },
+    {
+      "id": "apple",
+      "image": "assets/photos/apple.svg",
+      "word": { "en": "APPLE", "fr": "POMME" }
+    },
+    {
+      "id": "hat",
+      "image": "assets/photos/hat.svg",
+      "word": { "en": "HAT", "fr": "CHAPEAU" }
+    }
+  ]
+}

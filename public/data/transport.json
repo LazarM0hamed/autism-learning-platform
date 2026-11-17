@@ -1,0 +1,16 @@
+{
+  "categoryName": {
+    "en": "Transport",
+    "fr": "Transports"
+  },
+  "categoryEmoji": "🚗",
+  "accentColor": "#93C5FD",
+  "items": [
+    { "id": "car", "label": { "en": "Car", "fr": "Voiture" }, "image": "assets/photos/car.svg" },
+    { "id": "bike", "label": { "en": "Bicycle", "fr": "Vélo" }, "image": "assets/photos/bike.svg" },
+    { "id": "plane", "label": { "en": "Airplane", "fr": "Avion" }, "image": "assets/photos/plane.svg" },
+    { "id": "boat", "label": { "en": "Boat", "fr": "Bateau" }, "image": "assets/photos/boat.svg" },
+    { "id": "bus", "label": { "en": "Bus", "fr": "Bus" }, "image": "assets/photos/bus.svg" },
+    { "id": "train", "label": { "en": "Train", "fr": "Train" }, "image": "assets/photos/train.svg" }
+  ]
+}

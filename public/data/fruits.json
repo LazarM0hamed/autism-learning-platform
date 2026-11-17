@@ -1,0 +1,16 @@
+{
+  "categoryName": {
+    "en": "Fruits",
+    "fr": "Fruits"
+  },
+  "categoryEmoji": "🍎",
+  "accentColor": "#FFB7B2",
+  "items": [
+    { "id": "apple", "label": { "en": "Apple", "fr": "Pomme" }, "image": "assets/photos/apple.svg" },
+    { "id": "banana", "label": { "en": "Banana", "fr": "Banane" }, "image": "assets/photos/banana.svg" },
+    { "id": "orange", "label": { "en": "Orange", "fr": "Orange" }, "image": "assets/photos/orange.svg" },
+    { "id": "strawberry", "label": { "en": "Strawberry", "fr": "Fraise" }, "image": "assets/photos/strawberry.svg" },
+    { "id": "grapes", "label": { "en": "Grapes", "fr": "Raisin" }, "image": "assets/photos/grapes.svg" },
+    { "id": "watermelon", "label": { "en": "Watermelon", "fr": "Pastèque" }, "image": "assets/photos/watermelon.svg" }
+  ]
+}

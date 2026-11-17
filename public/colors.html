@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Colors - Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Home</a>
+        <h2 id="activity-title" class="category-badge">🎨 Colors</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <main style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <div class="prompt-container">
+            <h1 class="prompt-text" id="prompt-label">Find the color: ...</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <!-- Color Options Grid -->
+        <section class="options-grid" id="options-container" aria-label="Color choices"></section>
+    </main>
+
+    <footer class="settings-bar">
+        <span class="settings-label" id="choices-label">Choices:</span>
+        <button class="difficulty-pill" data-count="2" title="2 choices">2</button>
+        <button class="difficulty-pill" data-count="3" title="3 choices">3</button>
+        <button class="difficulty-pill" data-count="4" title="4 choices">4</button>
+    </footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/colors-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

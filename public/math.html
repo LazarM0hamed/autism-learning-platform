@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Counting & Math - Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Home</a>
+        <h2 id="activity-title" class="category-badge">🔢 Counting & Math</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <main style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <!-- Mode Switcher: Count vs Addition -->
+        <nav class="routine-pills" style="margin-bottom: 12px;">
+            <button class="routine-pill active" id="mode-count-btn">🍎 Counting</button>
+            <button class="routine-pill" id="mode-add-btn">➕ Simple Addition</button>
+        </nav>
+
+        <div class="prompt-container">
+            <h1 class="prompt-text" id="prompt-label">How many?</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <!-- Visual Math Display -->
+        <section class="math-display" id="math-display" aria-label="Countable objects"></section>
+
+        <!-- Number Options -->
+        <section class="options-grid" id="options-container" aria-label="Number choices"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/math-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

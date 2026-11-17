@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Routine Steps - Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        <h2 id="activity-title" class="category-badge">🦷 Étapes du quotidien</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <main class="sequence-container" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <!-- Routine Category Switcher Pills -->
+        <nav class="routine-pills" id="routine-pills" aria-label="Select routine"></nav>
+
+        <!-- Scaffolding Difficulty Bar: 3 Steps vs All Steps -->
+        <div class="difficulty-bar" role="group" aria-label="Difficulty Mode">
+            <button class="diff-btn active" id="diff-easy-btn">⭐ 3 Étapes (D'abord / Ensuite / Enfin)</button>
+            <button class="diff-btn" id="diff-full-btn">🌟 Toutes les étapes</button>
+        </div>
+
+        <!-- Story Goal Banner: Destination & Meaning -->
+        <div class="story-goal-banner" id="story-goal-banner" aria-live="polite">
+            <span class="story-goal-icon" id="goal-icon">✨</span>
+            <p class="story-goal-text" id="goal-text">Mission : ...</p>
+        </div>
+
+        <div class="prompt-container" style="margin: 4px 0 14px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.45rem, 3.8vw, 2.1rem);">Quelle est l'étape 1 ?</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <!-- Ordered Timeline Slots with Arrows -->
+        <section class="timeline-slots" id="timeline-slots" aria-label="Routine timeline slots"></section>
+
+        <!-- Available Step Cards -->
+        <section class="options-grid" id="step-cards-container" aria-label="Step choices" style="margin-top: 8px;"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/sequence-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

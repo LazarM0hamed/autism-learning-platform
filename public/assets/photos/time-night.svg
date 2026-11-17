@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" width="100%" height="100%">
+  <!-- Room Wall: Soft Night Indigo -->
+  <rect width="160" height="120" rx="20" fill="#1E1B4B"/>
+
+  <!-- Bedroom Window showing Dark Sky with Moon & Stars -->
+  <rect x="18" y="14" width="56" height="52" rx="6" fill="#0F172A" stroke="#4338CA" stroke-width="2.5"/>
+  <rect x="22" y="18" width="48" height="44" rx="4" fill="#020617"/>
+  <line x1="46" y1="18" x2="46" y2="62" stroke="#4338CA" stroke-width="2"/>
+  <line x1="22" y1="40" x2="70" y2="40" stroke="#4338CA" stroke-width="2"/>
+
+  <!-- Crescent Moon -->
+  <path d="M48 24 C42 24 36 30 36 38 C36 46 42 52 50 52 C46 50 44 44 44 38 C44 32 46 26 48 24 Z" fill="#FDE047"/>
+  <!-- Twinkling Stars in Window -->
+  <circle cx="28" cy="26" r="1.5" fill="#FFFFFF"/>
+  <circle cx="62" cy="28" r="1.5" fill="#FFFFFF"/>
+  <circle cx="30" cy="48" r="1.5" fill="#FFFFFF"/>
+  <circle cx="64" cy="46" r="1" fill="#FFFFFF"/>
+
+  <!-- Night Stand with Tiny Star Nightlight -->
+  <rect x="12" y="74" width="22" height="24" rx="4" fill="#312E81"/>
+  <polygon points="23,76 24.5,80 29,80 25.5,83 27,87 23,84.5 19,87 20.5,83 17,80 21.5,80" fill="#FDE047" opacity="0.9"/>
+
+  <!-- Bed Structure -->
+  <rect x="68" y="66" width="82" height="40" rx="8" fill="#4338CA"/>
+  <rect x="64" y="52" width="10" height="54" rx="4" fill="#312E81"/>
+  <rect x="144" y="68" width="8" height="38" rx="4" fill="#312E81"/>
+  <!-- Soft White Pillow -->
+  <rect x="74" y="58" width="28" height="16" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5"/>
+  <!-- Cozy Dark Blue Star Blanket -->
+  <rect x="72" y="72" width="74" height="30" rx="6" fill="#2563EB"/>
+  <!-- Little stars on blanket -->
+  <circle cx="92" cy="84" r="1.5" fill="#FDE047" opacity="0.8"/>
+  <circle cx="116" cy="80" r="1.5" fill="#FDE047" opacity="0.8"/>
+  <circle cx="132" cy="88" r="1.5" fill="#FDE047" opacity="0.8"/>
+
+  <!-- Young Boy Sleeping Peacefully -->
+  <!-- Head on Pillow -->
+  <circle cx="92" cy="62" r="11" fill="#FDBA74"/>
+  <!-- Hair -->
+  <path d="M81 60 C81 50 103 50 103 60 C103 54 92 52 81 60 Z" fill="#78350F"/>
+  <!-- Sleeping Closed Eyes (curved eyelashes) -->
+  <path d="M87 64 Q89 66 91 64" stroke="#1E293B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M95 64 Q97 66 99 64" stroke="#1E293B" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Gentle Peaceful Smile -->
+  <path d="M91 68 Q93 70 95 68" stroke="#78350F" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Little Zzz floats above bed -->
+  <text x="110" y="44" font-family="'Arial Rounded MT Bold', sans-serif" font-size="12" font-weight="bold" fill="#A5B4FC" opacity="0.9">Z</text>
+  <text x="120" y="36" font-family="'Arial Rounded MT Bold', sans-serif" font-size="15" font-weight="bold" fill="#A5B4FC" opacity="0.7">Z</text>
+  <text x="132" y="26" font-family="'Arial Rounded MT Bold', sans-serif" font-size="18" font-weight="bold" fill="#A5B4FC" opacity="0.5">Z</text>
+</svg>

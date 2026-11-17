@@ -1,0 +1,452 @@
+{
+  "title": {
+    "en": "Opposites & Comparisons",
+    "fr": "Les Contraires & Comparaisons"
+  },
+  "pairs": [
+    {
+      "id": "big_small",
+      "title": { "en": "Big / Small", "fr": "Grand / Petit" },
+      "emoji": "🐘",
+      "examples": [
+        {
+          "items": [
+            { "id": "elephant", "name": { "en": "Elephant", "fr": "Éléphant" }, "trait": "big", "traitLabel": { "en": "Big", "fr": "Grand" }, "icon": "🐘", "visualClass": "size-big" },
+            { "id": "mouse", "name": { "en": "Mouse", "fr": "Souris" }, "trait": "small", "traitLabel": { "en": "Small", "fr": "Petit" }, "icon": "🐭", "visualClass": "size-small" }
+          ],
+          "questions": [
+            { "targetTrait": "big", "prompt": { "en": "Which one is BIG?", "fr": "Lequel est GRAND ?" }, "praise": { "en": "Yes! The elephant is big! 🐘", "fr": "Oui ! L'éléphant est très grand ! 🐘" } },
+            { "targetTrait": "small", "prompt": { "en": "Which one is SMALL?", "fr": "Lequel est PETIT ?" }, "praise": { "en": "Yes! The mouse is small! 🐭", "fr": "Oui ! La souris est toute petite ! 🐭" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "whale", "name": { "en": "Whale", "fr": "Baleine" }, "trait": "big", "traitLabel": { "en": "Big", "fr": "Grand" }, "icon": "🐋", "visualClass": "size-big" },
+            { "id": "ladybug", "name": { "en": "Ladybug", "fr": "Coccinelle" }, "trait": "small", "traitLabel": { "en": "Small", "fr": "Petit" }, "icon": "🐞", "visualClass": "size-small" }
+          ],
+          "questions": [
+            { "targetTrait": "big", "prompt": { "en": "Which one is BIG?", "fr": "Lequel est GRAND ?" }, "praise": { "en": "Yes! The whale is huge! 🐋", "fr": "Oui ! La baleine est immense ! 🐋" } },
+            { "targetTrait": "small", "prompt": { "en": "Which one is SMALL?", "fr": "Lequel est PETIT ?" }, "praise": { "en": "Yes! The ladybug is tiny! 🐞", "fr": "Oui ! La coccinelle est toute petite ! 🐞" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "watermelon", "name": { "en": "Watermelon", "fr": "Pastèque" }, "trait": "big", "traitLabel": { "en": "Big", "fr": "Grand" }, "icon": "🍉", "visualClass": "size-big" },
+            { "id": "cherry", "name": { "en": "Cherry", "fr": "Cerise" }, "trait": "small", "traitLabel": { "en": "Small", "fr": "Petit" }, "icon": "🍒", "visualClass": "size-small" }
+          ],
+          "questions": [
+            { "targetTrait": "big", "prompt": { "en": "Which fruit is BIG?", "fr": "Quel fruit est GROS ?" }, "praise": { "en": "Yes! The watermelon is big! 🍉", "fr": "Oui ! La pastèque est très grosse ! 🍉" } },
+            { "targetTrait": "small", "prompt": { "en": "Which fruit is SMALL?", "fr": "Quel fruit est PETIT ?" }, "praise": { "en": "Yes! The cherry is small! 🍒", "fr": "Oui ! La cerise est toute petite ! 🍒" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tall_short",
+      "title": { "en": "Tall / Short", "fr": "Haut / Bas" },
+      "emoji": "🦒",
+      "examples": [
+        {
+          "items": [
+            { "id": "giraffe", "name": { "en": "Giraffe", "fr": "Girafe" }, "trait": "tall", "traitLabel": { "en": "Tall", "fr": "Très haut" }, "icon": "🦒", "visualClass": "height-tall" },
+            { "id": "hedgehog", "name": { "en": "Hedgehog", "fr": "Hérisson" }, "trait": "short", "traitLabel": { "en": "Short", "fr": "Tout bas" }, "icon": "🦔", "visualClass": "height-short" }
+          ],
+          "questions": [
+            { "targetTrait": "tall", "prompt": { "en": "Which one is TALL?", "fr": "Lequel est TRÈS HAUT ?" }, "praise": { "en": "Great! The giraffe is very tall! 🦒", "fr": "Bravo ! La girafe a un long cou, elle est haute ! 🦒" } },
+            { "targetTrait": "short", "prompt": { "en": "Which one is SHORT?", "fr": "Lequel est TOUT BAS ?" }, "praise": { "en": "Super! The hedgehog is low to the ground! 🦔", "fr": "Super ! Le hérisson est tout bas par terre ! 🦔" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "pine_tree", "name": { "en": "Tall Tree", "fr": "Grand sapin" }, "trait": "tall", "traitLabel": { "en": "Tall", "fr": "Très haut" }, "icon": "🌲", "visualClass": "height-tall" },
+            { "id": "mushroom", "name": { "en": "Mushroom", "fr": "Champignon" }, "trait": "short", "traitLabel": { "en": "Short", "fr": "Tout bas" }, "icon": "🍄", "visualClass": "height-short" }
+          ],
+          "questions": [
+            { "targetTrait": "tall", "prompt": { "en": "Which one is TALL?", "fr": "Lequel est TRÈS HAUT ?" }, "praise": { "en": "Yes! The tree reaches high up! 🌲", "fr": "Oui ! Le sapin monte très haut ! 🌲" } },
+            { "targetTrait": "short", "prompt": { "en": "Which one is SHORT?", "fr": "Lequel est TOUT BAS ?" }, "praise": { "en": "Yes! The little mushroom is low on the ground! 🍄", "fr": "Oui ! Le petit champignon est tout bas ! 🍄" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "building", "name": { "en": "Tall Building", "fr": "Grand immeuble" }, "trait": "tall", "traitLabel": { "en": "Tall", "fr": "Très haut" }, "icon": "🏢", "visualClass": "height-tall" },
+            { "id": "tent", "name": { "en": "Low Tent", "fr": "Petite tente" }, "trait": "short", "traitLabel": { "en": "Short", "fr": "Tout bas" }, "icon": "⛺", "visualClass": "height-short" }
+          ],
+          "questions": [
+            { "targetTrait": "tall", "prompt": { "en": "Which one is TALL?", "fr": "Lequel est TRÈS HAUT ?" }, "praise": { "en": "Yes! The building has many floors! 🏢", "fr": "Oui ! L'immeuble est très haut ! 🏢" } },
+            { "targetTrait": "short", "prompt": { "en": "Which one is SHORT?", "fr": "Lequel est TOUT BAS ?" }, "praise": { "en": "Yes! The tent is low! ⛺", "fr": "Oui ! La tente est toute basse ! ⛺" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long_short",
+      "title": { "en": "Long / Short", "fr": "Long / Court" },
+      "emoji": "🚆",
+      "examples": [
+        {
+          "items": [
+            { "id": "train", "name": { "en": "Train", "fr": "Train" }, "trait": "long", "traitLabel": { "en": "Long", "fr": "Long" }, "icon": "🚆", "visualClass": "len-long" },
+            { "id": "car", "name": { "en": "Car", "fr": "Voiture" }, "trait": "short", "traitLabel": { "en": "Short", "fr": "Court" }, "icon": "🚗", "visualClass": "len-short" }
+          ],
+          "questions": [
+            { "targetTrait": "long", "prompt": { "en": "Which one is LONG?", "fr": "Lequel est LONG ?" }, "praise": { "en": "Yes! The train is very long! 🚆", "fr": "Oui ! Le train est très long ! 🚆" } },
+            { "targetTrait": "short", "prompt": { "en": "Which one is SHORT?", "fr": "Lequel est COURT ?" }, "praise": { "en": "Yes! The car is short! 🚗", "fr": "Oui ! La voiture est courte ! 🚗" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "snake", "name": { "en": "Snake", "fr": "Serpent" }, "trait": "long", "traitLabel": { "en": "Long", "fr": "Long" }, "icon": "🐍", "visualClass": "len-long" },
+            { "id": "caterpillar", "name": { "en": "Caterpillar", "fr": "Chenille" }, "trait": "short", "traitLabel": { "en": "Short", "fr": "Court" }, "icon": "🐛", "visualClass": "len-short" }
+          ],
+          "questions": [
+            { "targetTrait": "long", "prompt": { "en": "Which one is LONG?", "fr": "Lequel est LONG ?" }, "praise": { "en": "Yes! The snake is long! 🐍", "fr": "Oui ! Le serpent est tout long ! 🐍" } },
+            { "targetTrait": "short", "prompt": { "en": "Which one is SHORT?", "fr": "Lequel est COURT ?" }, "praise": { "en": "Yes! The caterpillar is short! 🐛", "fr": "Oui ! La petite chenille est courte ! 🐛" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "scarf", "name": { "en": "Long Scarf", "fr": "Longue écharpe" }, "trait": "long", "traitLabel": { "en": "Long", "fr": "Long" }, "icon": "🧣", "visualClass": "len-long" },
+            { "id": "sock", "name": { "en": "Short Sock", "fr": "Petite chaussette" }, "trait": "short", "traitLabel": { "en": "Short", "fr": "Court" }, "icon": "🧦", "visualClass": "len-short" }
+          ],
+          "questions": [
+            { "targetTrait": "long", "prompt": { "en": "Which one is LONG?", "fr": "Lequel est LONG ?" }, "praise": { "en": "Yes! The scarf wraps all around, it is long! 🧣", "fr": "Oui ! L'écharpe est très longue ! 🧣" } },
+            { "targetTrait": "short", "prompt": { "en": "Which one is SHORT?", "fr": "Lequel est COURT ?" }, "praise": { "en": "Yes! The sock is short! 🧦", "fr": "Oui ! La chaussette est courte ! 🧦" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heavy_light",
+      "title": { "en": "Heavy / Light", "fr": "Lourd / Léger" },
+      "emoji": "🪨",
+      "examples": [
+        {
+          "items": [
+            { "id": "rock", "name": { "en": "Big Rock", "fr": "Gros rocher" }, "trait": "heavy", "traitLabel": { "en": "Heavy", "fr": "Lourd" }, "icon": "🪨", "visualClass": "weight-heavy" },
+            { "id": "feather", "name": { "en": "Feather", "fr": "Plume" }, "trait": "light", "traitLabel": { "en": "Light", "fr": "Léger" }, "icon": "🪶", "visualClass": "weight-light" }
+          ],
+          "questions": [
+            { "targetTrait": "heavy", "prompt": { "en": "Which one is HEAVY?", "fr": "Lequel est LOURD ?" }, "praise": { "en": "Oof! The big rock is heavy! 🪨", "fr": "Ouf ! Le gros rocher est très lourd ! 🪨" } },
+            { "targetTrait": "light", "prompt": { "en": "Which one is LIGHT?", "fr": "Lequel est LÉGER ?" }, "praise": { "en": "Yes! The feather floats gently, it is light! 🪶", "fr": "Oui ! La plume vole doucement, elle est légère ! 🪶" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "bowling_ball", "name": { "en": "Bowling Ball", "fr": "Boule de bowling" }, "trait": "heavy", "traitLabel": { "en": "Heavy", "fr": "Lourd" }, "icon": "🎳", "visualClass": "weight-heavy" },
+            { "id": "bubble", "name": { "en": "Soap Bubble", "fr": "Bulle de savon" }, "trait": "light", "traitLabel": { "en": "Light", "fr": "Léger" }, "icon": "🫧", "visualClass": "weight-light" }
+          ],
+          "questions": [
+            { "targetTrait": "heavy", "prompt": { "en": "Which one is HEAVY?", "fr": "Lequel est LOURD ?" }, "praise": { "en": "Yes! The bowling ball is heavy! 🎳", "fr": "Oui ! La boule de bowling est lourde ! 🎳" } },
+            { "targetTrait": "light", "prompt": { "en": "Which one is LIGHT?", "fr": "Lequel est LÉGER ?" }, "praise": { "en": "Yes! The bubble floats in the air, it is light! 🫧", "fr": "Oui ! La bulle vole dans l'air, elle est légère ! 🫧" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "hippo", "name": { "en": "Hippo", "fr": "Hippopotame" }, "trait": "heavy", "traitLabel": { "en": "Heavy", "fr": "Lourd" }, "icon": "🦛", "visualClass": "weight-heavy" },
+            { "id": "butterfly", "name": { "en": "Butterfly", "fr": "Papillon" }, "trait": "light", "traitLabel": { "en": "Light", "fr": "Léger" }, "icon": "🦋", "visualClass": "weight-light" }
+          ],
+          "questions": [
+            { "targetTrait": "heavy", "prompt": { "en": "Which animal is HEAVY?", "fr": "Quel animal est LOURD ?" }, "praise": { "en": "Yes! The hippo is very heavy! 🦛", "fr": "Oui ! L'hippopotame est très lourd ! 🦛" } },
+            { "targetTrait": "light", "prompt": { "en": "Which animal is LIGHT?", "fr": "Quel animal est LÉGER ?" }, "praise": { "en": "Yes! The butterfly is super light! 🦋", "fr": "Oui ! Le papillon est tout léger ! 🦋" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hot_cold",
+      "title": { "en": "Hot / Cold", "fr": "Chaud / Froid" },
+      "emoji": "🔥",
+      "examples": [
+        {
+          "items": [
+            { "id": "soup", "name": { "en": "Hot Soup", "fr": "Soupe chaude" }, "trait": "hot", "traitLabel": { "en": "Hot", "fr": "Chaud" }, "icon": "🍲", "visualClass": "temp-hot" },
+            { "id": "ice_cream", "name": { "en": "Ice Cream", "fr": "Glace" }, "trait": "cold", "traitLabel": { "en": "Cold", "fr": "Froid" }, "icon": "🍦", "visualClass": "temp-cold" }
+          ],
+          "questions": [
+            { "targetTrait": "hot", "prompt": { "en": "Which one is HOT?", "fr": "Lequel est CHAUD ?" }, "praise": { "en": "Yes! The steaming soup is hot! 🍲", "fr": "Oui ! La soupe fume, elle est toute chaude ! 🍲" } },
+            { "targetTrait": "cold", "prompt": { "en": "Which one is COLD?", "fr": "Lequel est FROID ?" }, "praise": { "en": "Mmm! The ice cream is cold! 🍦", "fr": "Miam ! La glace est bien froide ! 🍦" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "sun", "name": { "en": "Hot Sun", "fr": "Soleil chaud" }, "trait": "hot", "traitLabel": { "en": "Hot", "fr": "Chaud" }, "icon": "☀️", "visualClass": "temp-hot" },
+            { "id": "snowman", "name": { "en": "Snowman", "fr": "Bonhomme de neige" }, "trait": "cold", "traitLabel": { "en": "Cold", "fr": "Froid" }, "icon": "⛄", "visualClass": "temp-cold" }
+          ],
+          "questions": [
+            { "targetTrait": "hot", "prompt": { "en": "Which one is HOT?", "fr": "Lequel est CHAUD ?" }, "praise": { "en": "Yes! The sun warms us up, it is hot! ☀️", "fr": "Oui ! Le soleil chauffe fort, il est chaud ! ☀️" } },
+            { "targetTrait": "cold", "prompt": { "en": "Which one is COLD?", "fr": "Lequel est FROID ?" }, "praise": { "en": "Brrr! Snow is very cold! ⛄", "fr": "Brrr ! La neige est toute froide ! ⛄" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "fire", "name": { "en": "Fire", "fr": "Feu" }, "trait": "hot", "traitLabel": { "en": "Hot", "fr": "Chaud" }, "icon": "🔥", "visualClass": "temp-hot" },
+            { "id": "ice_cube", "name": { "en": "Ice Cube", "fr": "Glaçon" }, "trait": "cold", "traitLabel": { "en": "Cold", "fr": "Froid" }, "icon": "🧊", "visualClass": "temp-cold" }
+          ],
+          "questions": [
+            { "targetTrait": "hot", "prompt": { "en": "Which one is HOT?", "fr": "Lequel est CHAUD ?" }, "praise": { "en": "Yes! Fire is very hot! 🔥", "fr": "Oui ! Le feu est très chaud ! 🔥" } },
+            { "targetTrait": "cold", "prompt": { "en": "Which one is COLD?", "fr": "Lequel est FROID ?" }, "praise": { "en": "Yes! The ice cube is freezing cold! 🧊", "fr": "Oui ! Le glaçon est tout froid ! 🧊" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fast_slow",
+      "title": { "en": "Fast / Slow", "fr": "Rapide / Lent" },
+      "emoji": "🏎️",
+      "examples": [
+        {
+          "items": [
+            { "id": "race_car", "name": { "en": "Race Car", "fr": "Voiture de course" }, "trait": "fast", "traitLabel": { "en": "Fast", "fr": "Rapide" }, "icon": "🏎️", "visualClass": "speed-fast" },
+            { "id": "turtle", "name": { "en": "Turtle", "fr": "Tortue" }, "trait": "slow", "traitLabel": { "en": "Slow", "fr": "Lent" }, "icon": "🐢", "visualClass": "speed-slow" }
+          ],
+          "questions": [
+            { "targetTrait": "fast", "prompt": { "en": "Which one is FAST?", "fr": "Lequel est RAPIDE ?" }, "praise": { "en": "Vroom! The race car is fast! 🏎️", "fr": "Vroum ! La voiture de course va très vite ! 🏎️" } },
+            { "targetTrait": "slow", "prompt": { "en": "Which one is SLOW?", "fr": "Lequel est LENT ?" }, "praise": { "en": "Step by step, the turtle is slow! 🐢", "fr": "Pas à pas, la tortue avance lentement ! 🐢" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "rocket", "name": { "en": "Rocket", "fr": "Fusée" }, "trait": "fast", "traitLabel": { "en": "Fast", "fr": "Rapide" }, "icon": "🚀", "visualClass": "speed-fast" },
+            { "id": "snail", "name": { "en": "Snail", "fr": "Escargot" }, "trait": "slow", "traitLabel": { "en": "Slow", "fr": "Lent" }, "icon": "🐌", "visualClass": "speed-slow" }
+          ],
+          "questions": [
+            { "targetTrait": "fast", "prompt": { "en": "Which one is FAST?", "fr": "Lequel est RAPIDE ?" }, "praise": { "en": "Zoom! The rocket flies super fast! 🚀", "fr": "Fiuuu ! La fusée vole très vite ! 🚀" } },
+            { "targetTrait": "slow", "prompt": { "en": "Which one is SLOW?", "fr": "Lequel est LENT ?" }, "praise": { "en": "Yes! The snail moves very slowly! 🐌", "fr": "Oui ! L'escargot avance tout doucement ! 🐌" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "airplane", "name": { "en": "Airplane", "fr": "Avion" }, "trait": "fast", "traitLabel": { "en": "Fast", "fr": "Rapide" }, "icon": "✈️", "visualClass": "speed-fast" },
+            { "id": "bicycle", "name": { "en": "Bicycle", "fr": "Vélo" }, "trait": "slow", "traitLabel": { "en": "Slow", "fr": "Lent" }, "icon": "🚲", "visualClass": "speed-slow" }
+          ],
+          "questions": [
+            { "targetTrait": "fast", "prompt": { "en": "Which one is FAST?", "fr": "Lequel est RAPIDE ?" }, "praise": { "en": "Yes! The airplane zooms across the sky! ✈️", "fr": "Oui ! L'avion va beaucoup plus vite ! ✈️" } },
+            { "targetTrait": "slow", "prompt": { "en": "Which one is SLOW?", "fr": "Lequel est LENT ?" }, "praise": { "en": "Yes! The bicycle goes slower than the plane! 🚲", "fr": "Oui ! Le vélo va plus lentement que l'avion ! 🚲" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "full_empty",
+      "title": { "en": "Full / Empty", "fr": "Plein / Vide" },
+      "emoji": "🍱",
+      "examples": [
+        {
+          "items": [
+            { "id": "full_meal", "name": { "en": "Full Lunchbox", "fr": "Boîte pleine" }, "trait": "full", "traitLabel": { "en": "Full", "fr": "Plein" }, "icon": "🍱", "visualClass": "fill-full" },
+            { "id": "empty_plate", "name": { "en": "Empty Plate", "fr": "Assiette vide" }, "trait": "empty", "traitLabel": { "en": "Empty", "fr": "Vide" }, "icon": "🍽️", "visualClass": "fill-empty" }
+          ],
+          "questions": [
+            { "targetTrait": "full", "prompt": { "en": "Which one is FULL?", "fr": "Lequel est PLEIN ?" }, "praise": { "en": "Yes! Full of yummy food! 🍱", "fr": "Oui ! La boîte est remplie de nourriture, elle est pleine ! 🍱" } },
+            { "targetTrait": "empty", "prompt": { "en": "Which one is EMPTY?", "fr": "Lequel est VIDE ?" }, "praise": { "en": "All eaten! The plate is empty! 🍽️", "fr": "Tout mangé ! L'assiette est vide ! 🍽️" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "full_battery", "name": { "en": "Full Battery", "fr": "Pile pleine" }, "trait": "full", "traitLabel": { "en": "Full", "fr": "Plein" }, "icon": "🔋", "visualClass": "fill-full" },
+            { "id": "empty_battery", "name": { "en": "Empty Battery", "fr": "Pile vide" }, "trait": "empty", "traitLabel": { "en": "Empty", "fr": "Vide" }, "icon": "🪫", "visualClass": "fill-empty" }
+          ],
+          "questions": [
+            { "targetTrait": "full", "prompt": { "en": "Which battery is FULL?", "fr": "Quelle pile est PLEINE ?" }, "praise": { "en": "Yes! Green and full of energy! 🔋", "fr": "Oui ! La pile verte est toute pleine ! 🔋" } },
+            { "targetTrait": "empty", "prompt": { "en": "Which battery is EMPTY?", "fr": "Quelle pile est VIDE ?" }, "praise": { "en": "Yes! Nothing left inside, it is empty! 🪫", "fr": "Oui ! Il n'y a plus d'énergie, elle est vide ! 🪫" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "full_popcorn", "name": { "en": "Full Popcorn", "fr": "Pot plein" }, "trait": "full", "traitLabel": { "en": "Full", "fr": "Plein" }, "icon": "🍿", "visualClass": "fill-full" },
+            { "id": "empty_bowl", "name": { "en": "Empty Bowl", "fr": "Bol vide" }, "trait": "empty", "traitLabel": { "en": "Empty", "fr": "Vide" }, "icon": "🥣", "visualClass": "fill-empty" }
+          ],
+          "questions": [
+            { "targetTrait": "full", "prompt": { "en": "Which one is FULL?", "fr": "Lequel est PLEIN ?" }, "praise": { "en": "Yes! Overflowing with popcorn! 🍿", "fr": "Oui ! Le pot est bien plein ! 🍿" } },
+            { "targetTrait": "empty", "prompt": { "en": "Which one is EMPTY?", "fr": "Lequel est VIDE ?" }, "praise": { "en": "Yes! Nothing inside the bowl, it is empty! 🥣", "fr": "Oui ! Il n'y a rien dans le bol, il est vide ! 🥣" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "more_less",
+      "title": { "en": "More / Less", "fr": "Beaucoup / Peu" },
+      "emoji": "🍎",
+      "examples": [
+        {
+          "items": [
+            { "id": "many_apples", "name": { "en": "Many Apples", "fr": "Beaucoup de pommes" }, "trait": "more", "traitLabel": { "en": "Many / More", "fr": "Beaucoup" }, "icon": "🍎🍎🍎🍎🍎", "visualClass": "qty-more" },
+            { "id": "one_apple", "name": { "en": "One Apple", "fr": "Une pomme" }, "trait": "less", "traitLabel": { "en": "Few / Less", "fr": "Un peu" }, "icon": "🍎", "visualClass": "qty-less" }
+          ],
+          "questions": [
+            { "targetTrait": "more", "prompt": { "en": "Where are there MORE apples?", "fr": "Où y a-t-il BEAUCOUP de pommes ?" }, "praise": { "en": "Great! Lots of apples here! 🍎", "fr": "Bravo ! Il y a tout plein de pommes ici ! 🍎" } },
+            { "targetTrait": "less", "prompt": { "en": "Where is there LESS / just one?", "fr": "Où y en a-t-il PEU / une seule ?" }, "praise": { "en": "Yes! Just one apple! 🍎", "fr": "Oui ! Il y a juste une seule pomme ! 🍎" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "many_stars", "name": { "en": "Many Stars", "fr": "Beaucoup d'étoiles" }, "trait": "more", "traitLabel": { "en": "Many / More", "fr": "Beaucoup" }, "icon": "⭐⭐⭐⭐⭐", "visualClass": "qty-more" },
+            { "id": "one_star", "name": { "en": "One Star", "fr": "Une étoile" }, "trait": "less", "traitLabel": { "en": "Few / Less", "fr": "Un peu" }, "icon": "⭐", "visualClass": "qty-less" }
+          ],
+          "questions": [
+            { "targetTrait": "more", "prompt": { "en": "Where are there MORE stars?", "fr": "Où y a-t-il BEAUCOUP d'étoiles ?" }, "praise": { "en": "Yes! A sky full of stars! ⭐", "fr": "Oui ! Il y a plein d'étoiles ici ! ⭐" } },
+            { "targetTrait": "less", "prompt": { "en": "Where is there LESS / just one?", "fr": "Où y en a-t-il PEU / une seule ?" }, "praise": { "en": "Yes! Just one single star! ⭐", "fr": "Oui ! Une seule petite étoile ! ⭐" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "many_fish", "name": { "en": "Many Fish", "fr": "Beaucoup de poissons" }, "trait": "more", "traitLabel": { "en": "Many / More", "fr": "Beaucoup" }, "icon": "🐟🐟🐟🐟🐟", "visualClass": "qty-more" },
+            { "id": "one_fish", "name": { "en": "One Fish", "fr": "Un poisson" }, "trait": "less", "traitLabel": { "en": "Few / Less", "fr": "Un peu" }, "icon": "🐟", "visualClass": "qty-less" }
+          ],
+          "questions": [
+            { "targetTrait": "more", "prompt": { "en": "Where are there MORE fish?", "fr": "Où y a-t-il BEAUCOUP de poissons ?" }, "praise": { "en": "Yes! A whole group of fish! 🐟", "fr": "Oui ! Il y a plein de poissons qui nagent ensemble ! 🐟" } },
+            { "targetTrait": "less", "prompt": { "en": "Where is there LESS / just one?", "fr": "Où y en a-t-il PEU / un seul ?" }, "praise": { "en": "Yes! Just one little fish! 🐟", "fr": "Oui ! Un seul petit poisson ! 🐟" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "high_low",
+      "title": { "en": "High / Low", "fr": "En haut / En bas" },
+      "emoji": "🎈",
+      "examples": [
+        {
+          "items": [
+            { "id": "plane_sky", "name": { "en": "Plane in the Sky", "fr": "Avion dans le ciel" }, "trait": "high", "traitLabel": { "en": "High up", "fr": "En haut" }, "icon": "✈️", "visualClass": "pos-high" },
+            { "id": "boat_sea", "name": { "en": "Boat on the Water", "fr": "Bateau sur l'eau" }, "trait": "low", "traitLabel": { "en": "Down low", "fr": "En bas" }, "icon": "⛵", "visualClass": "pos-low" }
+          ],
+          "questions": [
+            { "targetTrait": "high", "prompt": { "en": "Which one is HIGH in the sky?", "fr": "Lequel est EN HAUT dans le ciel ?" }, "praise": { "en": "Look up! The plane flies high! ✈️", "fr": "Regarde en l'air ! L'avion vole tout en haut ! ✈️" } },
+            { "targetTrait": "low", "prompt": { "en": "Which one is DOWN on the water?", "fr": "Lequel est EN BAS sur l'eau ?" }, "praise": { "en": "Yes! The boat is down on the sea! ⛵", "fr": "Oui ! Le bateau flotte en bas sur l'eau ! ⛵" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "sun_up", "name": { "en": "Sun in the Sky", "fr": "Soleil dans le ciel" }, "trait": "high", "traitLabel": { "en": "High up", "fr": "En haut" }, "icon": "☀️", "visualClass": "pos-high" },
+            { "id": "flower_down", "name": { "en": "Flower on the Ground", "fr": "Fleur par terre" }, "trait": "low", "traitLabel": { "en": "Down low", "fr": "En bas" }, "icon": "🌷", "visualClass": "pos-low" }
+          ],
+          "questions": [
+            { "targetTrait": "high", "prompt": { "en": "Which one is HIGH up?", "fr": "Lequel est EN HAUT ?" }, "praise": { "en": "Yes! The sun shines high above us! ☀️", "fr": "Oui ! Le soleil brille tout en haut ! ☀️" } },
+            { "targetTrait": "low", "prompt": { "en": "Which one is DOWN on the ground?", "fr": "Lequel est EN BAS par terre ?" }, "praise": { "en": "Yes! The flower grows down in the grass! 🌷", "fr": "Oui ! La fleur pousse en bas dans l'herbe ! 🌷" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "bird_up", "name": { "en": "Flying Bird", "fr": "Oiseau qui vole" }, "trait": "high", "traitLabel": { "en": "High up", "fr": "En haut" }, "icon": "🐦", "visualClass": "pos-high" },
+            { "id": "crab_down", "name": { "en": "Crab on the Sand", "fr": "Crabe sur le sable" }, "trait": "low", "traitLabel": { "en": "Down low", "fr": "En bas" }, "icon": "🦀", "visualClass": "pos-low" }
+          ],
+          "questions": [
+            { "targetTrait": "high", "prompt": { "en": "Which animal is HIGH in the air?", "fr": "Quel animal est EN HAUT dans l'air ?" }, "praise": { "en": "Yes! The bird flies high up! 🐦", "fr": "Oui ! L'oiseau vole tout en haut ! 🐦" } },
+            { "targetTrait": "low", "prompt": { "en": "Which animal is DOWN on the ground?", "fr": "Quel animal est EN BAS par terre ?" }, "praise": { "en": "Yes! The crab walks down on the sand! 🦀", "fr": "Oui ! Le crabe marche tout en bas ! 🦀" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "far_near",
+      "title": { "en": "Near / Far", "fr": "Près / Loin" },
+      "emoji": "🏡",
+      "examples": [
+        {
+          "items": [
+            { "id": "near_house", "name": { "en": "House Close By", "fr": "Maison tout près" }, "trait": "near", "traitLabel": { "en": "Near / Close", "fr": "Tout près" }, "icon": "🏡", "visualClass": "dist-near" },
+            { "id": "far_house", "name": { "en": "House Far Away", "fr": "Maison au loin" }, "trait": "far", "traitLabel": { "en": "Far away", "fr": "Loin" }, "icon": "🏠", "visualClass": "dist-far" }
+          ],
+          "questions": [
+            { "targetTrait": "near", "prompt": { "en": "Which house is NEAR / CLOSE?", "fr": "Quelle maison est TOUT PRÈS ?" }, "praise": { "en": "Yes! Right here in front of us! 🏡", "fr": "Oui ! Elle est juste devant nous, tout près ! 🏡" } },
+            { "targetTrait": "far", "prompt": { "en": "Which house is FAR away?", "fr": "Quelle maison est LOIN au fond ?" }, "praise": { "en": "Yes! Tiny and far away in the distance! 🏠", "fr": "Oui ! Elle est toute petite et loin au fond ! 🏠" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "near_dog", "name": { "en": "Dog Right Here", "fr": "Chien tout près" }, "trait": "near", "traitLabel": { "en": "Near / Close", "fr": "Tout près" }, "icon": "🐕", "visualClass": "dist-near" },
+            { "id": "far_dog", "name": { "en": "Dog Far Away", "fr": "Chien au loin" }, "trait": "far", "traitLabel": { "en": "Far away", "fr": "Loin" }, "icon": "🐕", "visualClass": "dist-far" }
+          ],
+          "questions": [
+            { "targetTrait": "near", "prompt": { "en": "Which dog is NEAR us?", "fr": "Quel chien est TOUT PRÈS de nous ?" }, "praise": { "en": "Yes! The dog is right beside us! 🐕", "fr": "Oui ! Le chien est juste à côté de nous ! 🐕" } },
+            { "targetTrait": "far", "prompt": { "en": "Which dog is FAR away?", "fr": "Quel chien est LOIN là-bas ?" }, "praise": { "en": "Yes! He is running far away! 🐕", "fr": "Oui ! Il court tout au loin là-bas ! 🐕" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "near_car", "name": { "en": "Car Close By", "fr": "Voiture tout près" }, "trait": "near", "traitLabel": { "en": "Near / Close", "fr": "Tout près" }, "icon": "🚗", "visualClass": "dist-near" },
+            { "id": "far_car", "name": { "en": "Car Far Away", "fr": "Voiture au loin" }, "trait": "far", "traitLabel": { "en": "Far away", "fr": "Loin" }, "icon": "🚗", "visualClass": "dist-far" }
+          ],
+          "questions": [
+            { "targetTrait": "near", "prompt": { "en": "Which car is NEAR?", "fr": "Quelle voiture est TOUT PRÈS ?" }, "praise": { "en": "Yes! Parked right next to us! 🚗", "fr": "Oui ! Elle est garée tout près ! 🚗" } },
+            { "targetTrait": "far", "prompt": { "en": "Which car is FAR away?", "fr": "Quelle voiture est LOIN ?" }, "praise": { "en": "Yes! Way down the road, far away! 🚗", "fr": "Oui ! Elle est loin au bout de la route ! 🚗" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thick_thin",
+      "title": { "en": "Thick / Thin", "fr": "Épais / Fin" },
+      "emoji": "📚",
+      "examples": [
+        {
+          "items": [
+            { "id": "thick_books", "name": { "en": "Thick Stack of Books", "fr": "Gros livres épais" }, "trait": "thick", "traitLabel": { "en": "Thick", "fr": "Épais" }, "icon": "📚", "visualClass": "thick-thick" },
+            { "id": "thin_paper", "name": { "en": "Thin Sheet of Paper", "fr": "Feuille de papier fine" }, "trait": "thin", "traitLabel": { "en": "Thin", "fr": "Fin" }, "icon": "📄", "visualClass": "thick-thin" }
+          ],
+          "questions": [
+            { "targetTrait": "thick", "prompt": { "en": "Which one is THICK?", "fr": "Lequel est ÉPAIS ?" }, "praise": { "en": "Yes! The stack of books is thick! 📚", "fr": "Oui ! Les gros livres sont très épais ! 📚" } },
+            { "targetTrait": "thin", "prompt": { "en": "Which one is THIN?", "fr": "Lequel est FIN ?" }, "praise": { "en": "Yes! A single sheet of paper is thin! 📄", "fr": "Oui ! Une feuille de papier est toute fine ! 📄" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "thick_burger", "name": { "en": "Thick Burger", "fr": "Gros sandwich épais" }, "trait": "thick", "traitLabel": { "en": "Thick", "fr": "Épais" }, "icon": "🍔", "visualClass": "thick-thick" },
+            { "id": "thin_pancake", "name": { "en": "Thin Crêpe", "fr": "Crêpe toute fine" }, "trait": "thin", "traitLabel": { "en": "Thin", "fr": "Fin" }, "icon": "🥞", "visualClass": "thick-thin" }
+          ],
+          "questions": [
+            { "targetTrait": "thick", "prompt": { "en": "Which food is THICK?", "fr": "Lequel est ÉPAIS ?" }, "praise": { "en": "Yes! That big burger is thick! 🍔", "fr": "Oui ! Le gros sandwich est bien épais ! 🍔" } },
+            { "targetTrait": "thin", "prompt": { "en": "Which food is THIN?", "fr": "Lequel est FIN ?" }, "praise": { "en": "Yes! The crêpe is flat and thin! 🥞", "fr": "Oui ! La crêpe est toute plate et fine ! 🥞" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "thick_trunk", "name": { "en": "Thick Tree Trunk", "fr": "Gros tronc d'arbre" }, "trait": "thick", "traitLabel": { "en": "Thick", "fr": "Épais" }, "icon": "🌳", "visualClass": "thick-thick" },
+            { "id": "thin_twig", "name": { "en": "Thin Twig", "fr": "Petite brindille fine" }, "trait": "thin", "traitLabel": { "en": "Thin", "fr": "Fin" }, "icon": "🌿", "visualClass": "thick-thin" }
+          ],
+          "questions": [
+            { "targetTrait": "thick", "prompt": { "en": "Which one is THICK?", "fr": "Lequel est ÉPAIS ?" }, "praise": { "en": "Yes! The tree has a thick trunk! 🌳", "fr": "Oui ! L'arbre a un gros tronc épais ! 🌳" } },
+            { "targetTrait": "thin", "prompt": { "en": "Which one is THIN?", "fr": "Lequel est FIN ?" }, "praise": { "en": "Yes! The little stem is thin! 🌿", "fr": "Oui ! La petite tige est toute fine ! 🌿" } }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wide_narrow",
+      "title": { "en": "Wide / Narrow", "fr": "Large / Étroit" },
+      "emoji": "🛣️",
+      "examples": [
+        {
+          "items": [
+            { "id": "wide_road", "name": { "en": "Wide Road", "fr": "Grande route large" }, "trait": "wide", "traitLabel": { "en": "Wide", "fr": "Large" }, "icon": "🛣️", "visualClass": "dim-wide" },
+            { "id": "narrow_steps", "name": { "en": "Narrow Footpath", "fr": "Petit passage étroit" }, "trait": "narrow", "traitLabel": { "en": "Narrow", "fr": "Étroit" }, "icon": "👣", "visualClass": "dim-narrow" }
+          ],
+          "questions": [
+            { "targetTrait": "wide", "prompt": { "en": "Which one is WIDE?", "fr": "Lequel est LARGE ?" }, "praise": { "en": "Yes! A wide road with plenty of space! 🛣️", "fr": "Oui ! La grande route est très large ! 🛣️" } },
+            { "targetTrait": "narrow", "prompt": { "en": "Which one is NARROW?", "fr": "Lequel est ÉTROIT ?" }, "praise": { "en": "Yes! A narrow path for walking! 👣", "fr": "Oui ! Le petit passage est tout étroit ! 👣" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "wide_bed", "name": { "en": "Wide Bed", "fr": "Grand lit large" }, "trait": "wide", "traitLabel": { "en": "Wide", "fr": "Large" }, "icon": "🛏️", "visualClass": "dim-wide" },
+            { "id": "narrow_chair", "name": { "en": "Narrow Chair", "fr": "Petite chaise étroite" }, "trait": "narrow", "traitLabel": { "en": "Narrow", "fr": "Étroit" }, "icon": "🪑", "visualClass": "dim-narrow" }
+          ],
+          "questions": [
+            { "targetTrait": "wide", "prompt": { "en": "Which one is WIDE?", "fr": "Lequel est LARGE ?" }, "praise": { "en": "Yes! The big bed is wide! 🛏️", "fr": "Oui ! Le grand lit est bien large ! 🛏️" } },
+            { "targetTrait": "narrow", "prompt": { "en": "Which one is NARROW?", "fr": "Lequel est ÉTROIT ?" }, "praise": { "en": "Yes! The chair is narrow, for one person! 🪑", "fr": "Oui ! La chaise est étroite, pour une seule personne ! 🪑" } }
+          ]
+        },
+        {
+          "items": [
+            { "id": "wide_bus", "name": { "en": "Wide Bus", "fr": "Gros bus large" }, "trait": "wide", "traitLabel": { "en": "Wide", "fr": "Large" }, "icon": "🚌", "visualClass": "dim-wide" },
+            { "id": "narrow_bike", "name": { "en": "Narrow Bicycle", "fr": "Vélo étroit" }, "trait": "narrow", "traitLabel": { "en": "Narrow", "fr": "Étroit" }, "icon": "🚲", "visualClass": "dim-narrow" }
+          ],
+          "questions": [
+            { "targetTrait": "wide", "prompt": { "en": "Which one is WIDE?", "fr": "Lequel est LARGE ?" }, "praise": { "en": "Yes! The bus is big and wide! 🚌", "fr": "Oui ! Le bus est grand et large ! 🚌" } },
+            { "targetTrait": "narrow", "prompt": { "en": "Which one is NARROW?", "fr": "Lequel est ÉTROIT ?" }, "praise": { "en": "Yes! The bicycle is thin and narrow! 🚲", "fr": "Oui ! Le vélo est tout étroit ! 🚲" } }
+          ]
+        }
+      ]
+    }
+  ]
+}

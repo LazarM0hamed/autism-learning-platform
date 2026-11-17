@@ -1,0 +1,15 @@
+{
+  "categoryName": {
+    "en": "Numbers",
+    "fr": "Nombres"
+  },
+  "categoryEmoji": "🔢",
+  "accentColor": "#B5EAD7",
+  "items": [
+    { "id": "1", "label": { "en": "Number 1", "fr": "Chiffre 1" }, "image": "assets/photos/number-1.svg" },
+    { "id": "2", "label": { "en": "Number 2", "fr": "Chiffre 2" }, "image": "assets/photos/number-2.svg" },
+    { "id": "3", "label": { "en": "Number 3", "fr": "Chiffre 3" }, "image": "assets/photos/number-3.svg" },
+    { "id": "4", "label": { "en": "Number 4", "fr": "Chiffre 4" }, "image": "assets/photos/number-4.svg" },
+    { "id": "5", "label": { "en": "Number 5", "fr": "Chiffre 5" }, "image": "assets/photos/number-5.svg" }
+  ]
+}

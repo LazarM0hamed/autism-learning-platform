@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Letter Inset Puzzle - Autism Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Home</a>
+        <span class="category-badge" id="category-title">🔤 Letters Puzzle</span>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <main style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+        <!-- Board Selector Pills -->
+        <nav class="routine-pills" id="board-pills" aria-label="Puzzle Boards" style="margin-bottom: 12px;"></nav>
+
+        <!-- Spoken Prompt -->
+        <div class="prompt-container">
+            <h1 class="prompt-text" id="prompt-label">Place the letter...</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <!-- Inset Puzzle Board (Recessed wooden cutout tray) -->
+        <section class="inset-puzzle-board" id="inset-puzzle-board" aria-label="Puzzle Inset Board"></section>
+
+        <!-- Available Puzzle Pieces Tray -->
+        <section class="options-grid" id="options-container" aria-label="Puzzle Pieces" style="margin-top: 16px;"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/letters-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

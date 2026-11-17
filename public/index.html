@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Learning Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+            <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+            <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <h1 class="main-title" id="dashboard-title">What should we play today?</h1>
+        <p class="subtitle" id="dashboard-subtitle">Select an activity to begin learning</p>
+    </header>
+
+    <!-- Structured Learning Activities -->
+    <h2 class="hub-section-title" id="sec-logic-title">🧩 Structured Learning Activities</h2>
+    <main class="activities-grid">
+        <!-- Row 1: Visual Discrimination & Logic -->
+        <a href="game.html" class="activity-card find">
+            <span class="activity-card-icon" aria-hidden="true">🔍</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-find-title">Find & Match</span>
+                <span class="activity-card-desc" id="act-find-desc">Identify everyday words, animals & objects</span>
+            </div>
+        </a>
+
+        <a href="colors.html" class="activity-card colors">
+            <span class="activity-card-icon" aria-hidden="true">🎨</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-colors-title">Colors</span>
+                <span class="activity-card-desc" id="act-colors-desc">Learn and identify colors</span>
+            </div>
+        </a>
+
+        <a href="pattern.html" class="activity-card pattern">
+            <span class="activity-card-icon" aria-hidden="true">🧩</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-pattern-title">Complete the Pattern</span>
+                <span class="activity-card-desc" id="act-pattern-desc">Logical sequences & visual patterns</span>
+            </div>
+        </a>
+
+        <!-- Letters, Colouring, Words & Spatial Pre-coding -->
+        <a href="letters.html" class="activity-card letters">
+            <span class="activity-card-icon" aria-hidden="true">🔤</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-letters-title">Letter Inset Puzzle</span>
+                <span class="activity-card-desc" id="act-letters-desc">Fit letters into matching wooden cutouts</span>
+            </div>
+        </a>
+
+        <a href="coloring.html" class="activity-card coloring">
+            <span class="activity-card-icon" aria-hidden="true">🖍️</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-coloring-title">Match & Colour</span>
+                <span class="activity-card-desc" id="act-coloring-desc">Reproduce colors on object outlines</span>
+            </div>
+        </a>
+
+        <a href="spelling.html" class="activity-card spelling">
+            <span class="activity-card-icon" aria-hidden="true">✍️</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-spelling-title">Spell the Word</span>
+                <span class="activity-card-desc" id="act-spelling-desc">Tap letters to write everyday words</span>
+            </div>
+        </a>
+
+        <a href="spatial.html" class="activity-card spatial">
+            <span class="activity-card-icon" aria-hidden="true">🧭</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-spatial-title">Guide the Animal</span>
+                <span class="activity-card-desc" id="act-spatial-desc">Navigate on the grid: Up, Down, Left, Right</span>
+            </div>
+        </a>
+
+        <!-- Math, Concept Comparisons & Temporal Orientation -->
+        <a href="math.html" class="activity-card math">
+            <span class="activity-card-icon" aria-hidden="true">🔢</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-math-title">Counting & Math</span>
+                <span class="activity-card-desc" id="act-math-desc">Count objects and solve visual sums</span>
+            </div>
+        </a>
+
+        <a href="comparisons.html" class="activity-card comparisons">
+            <span class="activity-card-icon" aria-hidden="true">⚖️</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-comparisons-title">Opposites & Comparisons</span>
+                <span class="activity-card-desc" id="act-comparisons-desc">Big/Small, Hot/Cold, Heavy/Light</span>
+            </div>
+        </a>
+
+        <a href="time.html" class="activity-card time">
+            <span class="activity-card-icon" aria-hidden="true">☀️</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-time-title">Time & Calendar</span>
+                <span class="activity-card-desc" id="act-time-desc">Morning, Night, Week & Weekend</span>
+            </div>
+        </a>
+
+        <!-- Daily Life Routines -->
+        <a href="sequence.html" class="activity-card sequence">
+            <span class="activity-card-icon" aria-hidden="true">🦷</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-sequence-title">Routine Steps</span>
+                <span class="activity-card-desc" id="act-sequence-desc">Put daily scenes in the right order</span>
+            </div>
+        </a>
+    </main>
+
+    <script>
+        const translations = {
+            en: {
+                title: "What should we play today?",
+                subtitle: "Select an activity to begin learning",
+                secLogic: "🧩 Structured Learning Activities",
+                actFindTitle: "Find & Match",
+                actFindDesc: "Identify words, animals & everyday objects",
+                actLettersTitle: "Letter Inset Puzzle",
+                actLettersDesc: "Fit letters into matching wooden cutouts",
+                actPatternTitle: "Complete the Pattern",
+                actPatternDesc: "Logical sequences & visual patterns",
+                actSpellingTitle: "Spell the Word",
+                actSpellingDesc: "Tap letters to write everyday words",
+                actSequenceTitle: "Routine Steps",
+                actSequenceDesc: "Put daily scenes in the right order",
+                actMathTitle: "Counting & Math",
+                actMathDesc: "Count objects and solve visual sums",
+                actSpatialTitle: "Guide the Animal",
+                actSpatialDesc: "Navigate on the grid: Up, Down, Left, Right",
+                actColorsTitle: "Colors",
+                actColorsDesc: "Learn and identify colors",
+                actTimeTitle: "Time & Calendar",
+                actTimeDesc: "Morning, Night, Week & Weekend",
+                actColoringTitle: "Match & Colour",
+                actColoringDesc: "Reproduce colors on object outlines",
+                actComparisonsTitle: "Opposites & Comparisons",
+                actComparisonsDesc: "Big/Small, Hot/Cold, Heavy/Light"
+            },
+            fr: {
+                title: "À quoi joue-t-on aujourd'hui ?",
+                subtitle: "Choisis une activité pour commencer",
+                secLogic: "🧩 Activités logiques",
+                actFindTitle: "Trouve l'image",
+                actFindDesc: "Identifier les mots, animaux et objets du quotidien",
+                actLettersTitle: "Puzzle des lettres",
+                actLettersDesc: "Encastre les lettres dans leurs empreintes",
+                actPatternTitle: "Complète la suite",
+                actPatternDesc: "Suites logiques et motifs visuels",
+                actSpellingTitle: "Écris le mot",
+                actSpellingDesc: "Touche les lettres pour composer les mots",
+                actSequenceTitle: "Étapes du quotidien",
+                actSequenceDesc: "Remets les scènes dans le bon ordre",
+                actMathTitle: "Compter & Petits Calculs",
+                actMathDesc: "Compte les objets et additions simples",
+                actSpatialTitle: "Guide l'animal",
+                actSpatialDesc: "Déplace les animaux : Haut, Bas, Gauche, Droite",
+                actColorsTitle: "Couleurs",
+                actColorsDesc: "Apprendre et reconnaître les couleurs",
+                actTimeTitle: "Le Temps & Les Moments",
+                actTimeDesc: "Matin, Nuit, Semaine & Weekend",
+                actColoringTitle: "Colorie le modèle",
+                actColoringDesc: "Reproduis les couleurs sur les contours",
+                actComparisonsTitle: "Les Contraires",
+                actComparisonsDesc: "Grand/Petit, Chaud/Froid, Lourd/Léger"
+            }
+        };
+
+        let currentLang = localStorage.getItem('alp_lang') || 'en';
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('alp_lang', lang);
+            document.documentElement.lang = lang;
+
+            const t = translations[lang] || translations.en;
+            document.getElementById('dashboard-title').innerText = t.title;
+            document.getElementById('dashboard-subtitle').innerText = t.subtitle;
+            document.getElementById('sec-logic-title').innerText = t.secLogic;
+
+            document.getElementById('act-find-title').innerText = t.actFindTitle;
+            document.getElementById('act-find-desc').innerText = t.actFindDesc;
+
+            document.getElementById('act-letters-title').innerText = t.actLettersTitle;
+            document.getElementById('act-letters-desc').innerText = t.actLettersDesc;
+
+            document.getElementById('act-pattern-title').innerText = t.actPatternTitle;
+            document.getElementById('act-pattern-desc').innerText = t.actPatternDesc;
+
+            document.getElementById('act-spelling-title').innerText = t.actSpellingTitle;
+            document.getElementById('act-spelling-desc').innerText = t.actSpellingDesc;
+
+            document.getElementById('act-sequence-title').innerText = t.actSequenceTitle;
+            document.getElementById('act-sequence-desc').innerText = t.actSequenceDesc;
+
+            document.getElementById('act-math-title').innerText = t.actMathTitle;
+            document.getElementById('act-math-desc').innerText = t.actMathDesc;
+
+            document.getElementById('act-spatial-title').innerText = t.actSpatialTitle;
+            document.getElementById('act-spatial-desc').innerText = t.actSpatialDesc;
+
+            document.getElementById('act-colors-title').innerText = t.actColorsTitle;
+            document.getElementById('act-colors-desc').innerText = t.actColorsDesc;
+
+            document.getElementById('act-time-title').innerText = t.actTimeTitle;
+            document.getElementById('act-time-desc').innerText = t.actTimeDesc;
+
+            const colTitle = document.getElementById('act-coloring-title');
+            if (colTitle) colTitle.innerText = t.actColoringTitle;
+            const colDesc = document.getElementById('act-coloring-desc');
+            if (colDesc) colDesc.innerText = t.actColoringDesc;
+
+            const compTitle = document.getElementById('act-comparisons-title');
+            if (compTitle) compTitle.innerText = t.actComparisonsTitle;
+            const compDesc = document.getElementById('act-comparisons-desc');
+            if (compDesc) compDesc.innerText = t.actComparisonsDesc;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.onclick = () => {
+                updateLanguage(btn.getAttribute('data-lang'));
+            };
+        });
+
+        updateLanguage(currentLang);
+    </script>
+    <script src="js/tracker.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

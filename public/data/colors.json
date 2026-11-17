@@ -1,0 +1,16 @@
+{
+  "categoryName": {
+    "en": "Colors",
+    "fr": "Couleurs"
+  },
+  "categoryEmoji": "🎨",
+  "accentColor": "#FDE047",
+  "items": [
+    { "id": "red", "label": { "en": "Red", "fr": "Rouge" }, "image": "assets/photos/color-red.svg" },
+    { "id": "blue", "label": { "en": "Blue", "fr": "Bleu" }, "image": "assets/photos/color-blue.svg" },
+    { "id": "yellow", "label": { "en": "Yellow", "fr": "Jaune" }, "image": "assets/photos/color-yellow.svg" },
+    { "id": "green", "label": { "en": "Green", "fr": "Vert" }, "image": "assets/photos/color-green.svg" },
+    { "id": "orange", "label": { "en": "Orange", "fr": "Orange" }, "image": "assets/photos/color-orange.svg" },
+    { "id": "purple", "label": { "en": "Purple", "fr": "Violet" }, "image": "assets/photos/color-purple.svg" }
+  ]
+}

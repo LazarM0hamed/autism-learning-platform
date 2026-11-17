@@ -1,0 +1,15 @@
+{
+  "categoryName": {
+    "en": "Clothes",
+    "fr": "Vêtements"
+  },
+  "categoryEmoji": "👕",
+  "accentColor": "#C7CEEA",
+  "items": [
+    { "id": "shirt", "label": { "en": "T-Shirt", "fr": "T-shirt" }, "image": "assets/photos/shirt.svg" },
+    { "id": "pants", "label": { "en": "Pants", "fr": "Pantalon" }, "image": "assets/photos/pants.svg" },
+    { "id": "socks", "label": { "en": "Socks", "fr": "Chaussettes" }, "image": "assets/photos/socks.svg" },
+    { "id": "hat", "label": { "en": "Hat", "fr": "Chapeau" }, "image": "assets/photos/hat.svg" },
+    { "id": "jacket", "label": { "en": "Jacket", "fr": "Veste" }, "image": "assets/photos/jacket.svg" }
+  ]
+}

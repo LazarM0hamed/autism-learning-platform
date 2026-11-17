@@ -1,0 +1,116 @@
+{
+  "title": {
+    "en": "Spatial Concepts",
+    "fr": "Repérage dans l'espace"
+  },
+  "challenges": [
+    {
+      "id": "on-under-1",
+      "concept": "on-under",
+      "prompt": {
+        "en": "Find: ON the table",
+        "fr": "Trouve : SUR la table"
+      },
+      "target": {
+        "id": "on",
+        "label": { "en": "On the table", "fr": "Sur la table" },
+        "image": "assets/photos/spatial-on.svg"
+      },
+      "distractor": {
+        "id": "under",
+        "label": { "en": "Under the table", "fr": "Sous la table" },
+        "image": "assets/photos/spatial-under.svg"
+      }
+    },
+    {
+      "id": "on-under-2",
+      "concept": "on-under",
+      "prompt": {
+        "en": "Find: UNDER the table",
+        "fr": "Trouve : SOUS la table"
+      },
+      "target": {
+        "id": "under",
+        "label": { "en": "Under the table", "fr": "Sous la table" },
+        "image": "assets/photos/spatial-under.svg"
+      },
+      "distractor": {
+        "id": "on",
+        "label": { "en": "On the table", "fr": "Sur la table" },
+        "image": "assets/photos/spatial-on.svg"
+      }
+    },
+    {
+      "id": "up-down-1",
+      "concept": "up-down",
+      "prompt": {
+        "en": "Find: UP in the air",
+        "fr": "Trouve : EN HAUT"
+      },
+      "target": {
+        "id": "up",
+        "label": { "en": "Up", "fr": "En haut" },
+        "image": "assets/photos/spatial-up.svg"
+      },
+      "distractor": {
+        "id": "down",
+        "label": { "en": "Down", "fr": "En bas" },
+        "image": "assets/photos/spatial-down.svg"
+      }
+    },
+    {
+      "id": "up-down-2",
+      "concept": "up-down",
+      "prompt": {
+        "en": "Find: DOWN on the ground",
+        "fr": "Trouve : EN BAS"
+      },
+      "target": {
+        "id": "down",
+        "label": { "en": "Down", "fr": "En bas" },
+        "image": "assets/photos/spatial-down.svg"
+      },
+      "distractor": {
+        "id": "up",
+        "label": { "en": "Up", "fr": "En haut" },
+        "image": "assets/photos/spatial-up.svg"
+      }
+    },
+    {
+      "id": "left-right-1",
+      "concept": "left-right",
+      "prompt": {
+        "en": "Find: LEFT arrow",
+        "fr": "Trouve : À GAUCHE"
+      },
+      "target": {
+        "id": "left",
+        "label": { "en": "Left", "fr": "À gauche" },
+        "image": "assets/photos/spatial-left.svg"
+      },
+      "distractor": {
+        "id": "right",
+        "label": { "en": "Right", "fr": "À droite" },
+        "image": "assets/photos/spatial-right.svg"
+      }
+    },
+    {
+      "id": "left-right-2",
+      "concept": "left-right",
+      "prompt": {
+        "en": "Find: RIGHT arrow",
+        "fr": "Trouve : À DROITE"
+      },
+      "target": {
+        "id": "right",
+        "label": { "en": "Right", "fr": "À droite" },
+        "image": "assets/photos/spatial-right.svg"
+      },
+      "distractor": {
+        "id": "left",
+        "label": { "en": "Left", "fr": "À gauche" },
+        "image": "assets/photos/spatial-left.svg"
+      }
+    }
+  ]
+}

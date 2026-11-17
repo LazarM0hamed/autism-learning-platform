@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="100%" height="100%">
+  <!-- Background -->
+  <rect width="120" height="120" rx="22" fill="#F0FDF4"/>
+
+  <!-- Toilet Tank & Bowl -->
+  <rect x="22" y="32" width="22" height="42" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2.5"/>
+  <rect x="26" y="28" width="14" height="6" rx="2" fill="#E2E8F0"/>
+  
+  <!-- Toilet Bowl Base -->
+  <path d="M40 56 C40 56 42 88 56 88 C70 88 74 56 74 56 Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2.5"/>
+  <ellipse cx="57" cy="56" rx="18" ry="7" fill="#E0F2FE" stroke="#94A3B8" stroke-width="2"/>
+  
+  <!-- Boy Sitting on Toilet -->
+  <!-- Body / Shirt -->
+  <rect x="42" y="38" width="22" height="24" rx="5" fill="#F97316"/>
+  <!-- Legs hanging forward calmly -->
+  <rect x="44" y="62" width="8" height="24" rx="4" fill="#FDBA74"/>
+  <rect x="54" y="62" width="8" height="24" rx="4" fill="#FDBA74"/>
+  <!-- Blue pants gathered comfortably at shins -->
+  <rect x="42" y="76" width="22" height="12" rx="4" fill="#3B82F6"/>
+  <!-- Feet -->
+  <ellipse cx="48" cy="88" rx="4" ry="3" fill="#475569"/>
+  <ellipse cx="58" cy="88" rx="4" ry="3" fill="#475569"/>
+
+  <!-- Head -->
+  <circle cx="53" cy="24" r="12" fill="#FDBA74"/>
+  <!-- Hair -->
+  <path d="M41 22 C41 12 65 12 65 22 C65 16 53 14 41 22 Z" fill="#78350F"/>
+  <!-- Eyes & Gentle Smile -->
+  <circle cx="49" cy="24" r="1.5" fill="#1E293B"/>
+  <circle cx="57" cy="24" r="1.5" fill="#1E293B"/>
+  <path d="M50 28 Q53 31 56 28" stroke="#78350F" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

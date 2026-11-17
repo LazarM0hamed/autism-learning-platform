@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Match & Colour - Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        <h2 id="activity-title" class="category-badge">🖍️ Colorie le modèle</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <main class="coloring-main-container">
+        <!-- Scaffolding Tier Pills -->
+        <nav class="routine-pills" id="tier-pills" aria-label="Difficulty Levels" style="margin-bottom: 12px;"></nav>
+
+        <!-- Spoken Prompt -->
+        <div class="prompt-container" style="margin: 4px 0 16px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.4rem, 3.6vw, 2.1rem);">Regarde les couleurs du modèle...</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <!-- 3-Row Layout Arena -->
+        <div class="coloring-board-container">
+            <!-- Row 1: Reference Models -->
+            <section class="coloring-row-section" aria-label="Reference Models">
+                <div class="coloring-row-label" id="lbl-row-models">👁️ Modèles de référence :</div>
+                <div class="coloring-row-grid coloring-models-row" id="models-container"></div>
+            </section>
+
+            <!-- Row 2: Objects to Colour -->
+            <section class="coloring-row-section" aria-label="Objects to Colour">
+                <div class="coloring-row-label" id="lbl-row-canvas">🎨 Dessins à colorier (touche pour choisir) :</div>
+                <div class="coloring-row-grid coloring-canvas-row" id="canvas-container"></div>
+            </section>
+
+            <!-- Row 3: Colour Palette -->
+            <section class="coloring-row-section" aria-label="Colour Palette">
+                <div class="coloring-row-label" id="lbl-row-palette">🖍️ Crayons de couleur :</div>
+                <div class="coloring-palette-row" id="palette-container"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/coloring-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

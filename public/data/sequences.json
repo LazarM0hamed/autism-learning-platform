@@ -1,0 +1,323 @@
+{
+  "title": {
+    "en": "Daily Routine Steps",
+    "fr": "Étapes du quotidien"
+  },
+  "routines": [
+    {
+      "id": "toilet",
+      "title": { "en": "Going to the Toilet", "fr": "Aller aux toilettes" },
+      "emoji": "🚽",
+      "goal": {
+        "en": "Goal: Go to the toilet and wash hands clean ✨",
+        "fr": "Mission : Aller aux toilettes et avoir les mains toutes propres ✨"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Go to bathroom", "fr": "Aller aux toilettes" },
+          "image": "assets/photos/toilet-door.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Sit on toilet", "fr": "S'asseoir sur les toilettes" },
+          "image": "assets/photos/toilet-sit.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Wipe with toilet paper", "fr": "S'essuyer avec le papier" },
+          "image": "assets/photos/toilet-paper.svg"
+        },
+        {
+          "stepNumber": 4,
+          "label": { "en": "Flush the toilet", "fr": "Tirer la chasse d'eau" },
+          "image": "assets/photos/toilet-flush.svg"
+        },
+        {
+          "stepNumber": 5,
+          "label": { "en": "Wash hands with soap", "fr": "Se laver les mains au savon" },
+          "image": "assets/photos/toilet-wash.svg"
+        }
+      ]
+    },
+    {
+      "id": "brush-teeth",
+      "title": { "en": "Brushing Teeth", "fr": "Se brosser les dents" },
+      "emoji": "🦷",
+      "goal": {
+        "en": "Goal: Clean and shiny teeth with a bright smile ✨",
+        "fr": "Mission : Avoir les dents propres et un beau sourire brillant ✨"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Put toothpaste on brush", "fr": "Mettre le dentifrice" },
+          "image": "assets/photos/step-toothpaste.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Brush all your teeth", "fr": "Bien brosser les dents" },
+          "image": "assets/photos/step-brushing.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Rinse mouth with water", "fr": "Rincer la bouche" },
+          "image": "assets/photos/step-rinse.svg"
+        },
+        {
+          "stepNumber": 4,
+          "label": { "en": "Clean and bright smile!", "fr": "Sourire propre et brillant !" },
+          "image": "assets/photos/step-smile.svg"
+        }
+      ]
+    },
+    {
+      "id": "get-dressed",
+      "title": { "en": "Getting Dressed", "fr": "S'habiller" },
+      "emoji": "👕",
+      "goal": {
+        "en": "Goal: Put on clean clothes and shoes to be ready 👕",
+        "fr": "Mission : S'habiller pour être prêt pour la journée 👕"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Put on pants", "fr": "Enfiler le pantalon" },
+          "image": "assets/photos/pants.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Put on shirt", "fr": "Mettre le t-shirt" },
+          "image": "assets/photos/shirt.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Put on socks", "fr": "Mettre les chaussettes" },
+          "image": "assets/photos/socks.svg"
+        },
+        {
+          "stepNumber": 4,
+          "label": { "en": "Put on shoes", "fr": "Mettre les chaussures" },
+          "image": "assets/photos/shoes.svg"
+        }
+      ]
+    },
+    {
+      "id": "wash-hands",
+      "title": { "en": "Washing Hands", "fr": "Se laver les mains" },
+      "emoji": "🫧",
+      "goal": {
+        "en": "Goal: Clean hands with gentle soap and water 🫧",
+        "fr": "Mission : Avoir les mains toutes propres avec du bon savon 🫧"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Apply soap and bubbles", "fr": "Prendre du savon" },
+          "image": "assets/photos/step-soap.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Scrub hands together", "fr": "Frotter les mains" },
+          "image": "assets/photos/step-wash.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Rinse clean with water", "fr": "Rincer à l'eau claire" },
+          "image": "assets/photos/step-rinse-hands.svg"
+        },
+        {
+          "stepNumber": 4,
+          "label": { "en": "Dry hands with towel", "fr": "Sécher avec la serviette" },
+          "image": "assets/photos/step-dry-towel.svg"
+        },
+        {
+          "stepNumber": 5,
+          "label": { "en": "Clean and happy hands!", "fr": "Mains toutes propres !" },
+          "image": "assets/photos/step-smile.svg"
+        }
+      ]
+    },
+    {
+      "id": "bedtime",
+      "title": { "en": "Bedtime Routine", "fr": "Se coucher" },
+      "emoji": "🌙",
+      "goal": {
+        "en": "Goal: Cozy pajamas, bedtime story and peaceful sleep 🌙",
+        "fr": "Mission : Mettre son pyjama, lire une histoire et bien dormir 🌙"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Put on cozy pajamas", "fr": "Mettre son pyjama" },
+          "image": "assets/photos/step-pajamas.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Brush teeth", "fr": "Se brosser les dents" },
+          "image": "assets/photos/step-brushing.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Read bedtime story", "fr": "Lire une histoire" },
+          "image": "assets/photos/step-bed-book.svg"
+        },
+        {
+          "stepNumber": 4,
+          "label": { "en": "Close eyes and sleep", "fr": "S'endormir calmement" },
+          "image": "assets/photos/sleep.svg"
+        }
+      ]
+    },
+    {
+      "id": "setting-table",
+      "title": { "en": "Setting the Table", "fr": "Mettre la table" },
+      "emoji": "🍽️",
+      "goal": {
+        "en": "Goal: Set placemat, plate, cup and fork ready to eat 🍽️",
+        "fr": "Mission : Préparer la table pour le bon repas 🍽️"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Put placemat on table", "fr": "Poser le set de table" },
+          "image": "assets/photos/step-placemat.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Put plate on placemat", "fr": "Poser l'assiette" },
+          "image": "assets/photos/step-sit-table.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Put cup and fork", "fr": "Mettre le verre et la fourchette" },
+          "image": "assets/photos/step-cup-fork.svg"
+        },
+        {
+          "stepNumber": 4,
+          "label": { "en": "Table is ready!", "fr": "La table est prête !" },
+          "image": "assets/photos/step-eat-plate.svg"
+        }
+      ]
+    },
+    {
+      "id": "going-outside",
+      "title": { "en": "Going Outside", "fr": "Sortir dehors" },
+      "emoji": "👟",
+      "goal": {
+        "en": "Goal: Shoes, warm coat and ready to explore outside 👟",
+        "fr": "Mission : Mettre ses chaussures, son manteau et sortir dehors 👟"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Put on shoes", "fr": "Enfiler ses chaussures" },
+          "image": "assets/photos/shoes.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Put on warm coat", "fr": "Mettre son manteau" },
+          "image": "assets/photos/step-coat.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Open door to go out", "fr": "Ouvrir la porte pour sortir" },
+          "image": "assets/photos/step-open-door.svg"
+        }
+      ]
+    },
+    {
+      "id": "eating-snack",
+      "title": { "en": "Eating a Snack", "fr": "Prendre le goûter" },
+      "emoji": "🍎",
+      "goal": {
+        "en": "Goal: Eat a delicious healthy fruit snack at the table 🍎",
+        "fr": "Mission : Prendre un délicieux goûter bien assis à table 🍎"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Wash hands", "fr": "Se laver les mains" },
+          "image": "assets/photos/step-wash.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Sit calmly at table", "fr": "S'asseoir à table" },
+          "image": "assets/photos/step-sit-table.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Eat delicious snack", "fr": "Manger son bon goûter" },
+          "image": "assets/photos/apple.svg"
+        },
+        {
+          "stepNumber": 4,
+          "label": { "en": "Wipe face and hands", "fr": "S'essuyer la bouche" },
+          "image": "assets/photos/step-wipe-mouth.svg"
+        }
+      ]
+    },
+    {
+      "id": "packing-bag",
+      "title": { "en": "Packing Backpack", "fr": "Préparer son sac" },
+      "emoji": "🎒",
+      "goal": {
+        "en": "Goal: Pack lunch and water bottle safely in backpack 🎒",
+        "fr": "Mission : Préparer son sac à dos avec son goûter et sa gourde 🎒"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Open backpack", "fr": "Ouvrir son sac à dos" },
+          "image": "assets/photos/step-backpack.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Put lunchbox inside", "fr": "Mettre la boîte à goûter" },
+          "image": "assets/photos/step-lunchbox.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Put water bottle inside", "fr": "Mettre la gourde d'eau" },
+          "image": "assets/photos/drink-water.svg"
+        },
+        {
+          "stepNumber": 4,
+          "label": { "en": "Zip backpack closed", "fr": "Fermer le sac à dos" },
+          "image": "assets/photos/step-backpack.svg"
+        }
+      ]
+    },
+    {
+      "id": "cleaning-up",
+      "title": { "en": "Cleaning Up Toys", "fr": "Ranger les jouets" },
+      "emoji": "🧸",
+      "goal": {
+        "en": "Goal: Put all toys in the toy box so room is tidy 🧸",
+        "fr": "Mission : Ranger les jouets dans le coffre pour une chambre rangée 🧸"
+      },
+      "steps": [
+        {
+          "stepNumber": 1,
+          "label": { "en": "Get toy box", "fr": "Prendre le coffre à jouets" },
+          "image": "assets/photos/step-toybox.svg"
+        },
+        {
+          "stepNumber": 2,
+          "label": { "en": "Pick up toys from floor", "fr": "Ramasser les jouets" },
+          "image": "assets/photos/step-toybox.svg"
+        },
+        {
+          "stepNumber": 3,
+          "label": { "en": "Put toys into box", "fr": "Mettre les jouets dedans" },
+          "image": "assets/photos/step-toybox.svg"
+        },
+        {
+          "stepNumber": 4,
+          "label": { "en": "Close box - Room is tidy!", "fr": "Fermer le coffre - C'est rangé !" },
+          "image": "assets/photos/step-close-box.svg"
+        }
+      ]
+    }
+  ]
+}

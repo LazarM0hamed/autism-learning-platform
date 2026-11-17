@@ -1,0 +1,83 @@
+{
+  "title": {
+    "en": "Complete the Pattern",
+    "fr": "Complète la suite logique"
+  },
+  "patterns": [
+    {
+      "id": "pat-fruits-ab",
+      "category": "fruits",
+      "sequence": [
+        { "id": "apple", "label": { "en": "Apple", "fr": "Pomme" }, "image": "assets/photos/apple.svg" },
+        { "id": "banana", "label": { "en": "Banana", "fr": "Banane" }, "image": "assets/photos/banana.svg" },
+        { "id": "apple", "label": { "en": "Apple", "fr": "Pomme" }, "image": "assets/photos/apple.svg" },
+        { "id": "banana", "label": { "en": "Banana", "fr": "Banane" }, "image": "assets/photos/banana.svg" }
+      ],
+      "target": { "id": "apple", "label": { "en": "Apple", "fr": "Pomme" }, "image": "assets/photos/apple.svg" },
+      "distractors": [
+        { "id": "banana", "label": { "en": "Banana", "fr": "Banane" }, "image": "assets/photos/banana.svg" },
+        { "id": "strawberry", "label": { "en": "Strawberry", "fr": "Fraise" }, "image": "assets/photos/strawberry.svg" }
+      ]
+    },
+    {
+      "id": "pat-shapes-ab",
+      "category": "shapes",
+      "sequence": [
+        { "id": "circle", "label": { "en": "Circle", "fr": "Cercle" }, "image": "assets/photos/circle.svg" },
+        { "id": "square", "label": { "en": "Square", "fr": "Carré" }, "image": "assets/photos/square.svg" },
+        { "id": "circle", "label": { "en": "Circle", "fr": "Cercle" }, "image": "assets/photos/circle.svg" },
+        { "id": "square", "label": { "en": "Square", "fr": "Carré" }, "image": "assets/photos/square.svg" }
+      ],
+      "target": { "id": "circle", "label": { "en": "Circle", "fr": "Cercle" }, "image": "assets/photos/circle.svg" },
+      "distractors": [
+        { "id": "triangle", "label": { "en": "Triangle", "fr": "Triangle" }, "image": "assets/photos/triangle.svg" },
+        { "id": "star", "label": { "en": "Star", "fr": "Étoile" }, "image": "assets/photos/star.svg" }
+      ]
+    },
+    {
+      "id": "pat-animals-ab",
+      "category": "animals",
+      "sequence": [
+        { "id": "cat", "label": { "en": "Cat", "fr": "Chat" }, "image": "assets/photos/cat.svg" },
+        { "id": "dog", "label": { "en": "Dog", "fr": "Chien" }, "image": "assets/photos/dog.svg" },
+        { "id": "cat", "label": { "en": "Cat", "fr": "Chat" }, "image": "assets/photos/cat.svg" },
+        { "id": "dog", "label": { "en": "Dog", "fr": "Chien" }, "image": "assets/photos/dog.svg" }
+      ],
+      "target": { "id": "cat", "label": { "en": "Cat", "fr": "Chat" }, "image": "assets/photos/cat.svg" },
+      "distractors": [
+        { "id": "bird", "label": { "en": "Bird", "fr": "Oiseau" }, "image": "assets/photos/bird.svg" },
+        { "id": "fish", "label": { "en": "Fish", "fr": "Poisson" }, "image": "assets/photos/fish.svg" }
+      ]
+    },
+    {
+      "id": "pat-numbers-asc",
+      "category": "numbers",
+      "sequence": [
+        { "id": "1", "label": { "en": "1", "fr": "1" }, "image": "assets/photos/number-1.svg" },
+        { "id": "2", "label": { "en": "2", "fr": "2" }, "image": "assets/photos/number-2.svg" },
+        { "id": "3", "label": { "en": "3", "fr": "3" }, "image": "assets/photos/number-3.svg" },
+        { "id": "4", "label": { "en": "4", "fr": "4" }, "image": "assets/photos/number-4.svg" }
+      ],
+      "target": { "id": "5", "label": { "en": "5", "fr": "5" }, "image": "assets/photos/number-5.svg" },
+      "distractors": [
+        { "id": "2", "label": { "en": "2", "fr": "2" }, "image": "assets/photos/number-2.svg" },
+        { "id": "3", "label": { "en": "3", "fr": "3" }, "image": "assets/photos/number-3.svg" }
+      ]
+    },
+    {
+      "id": "pat-shapes-hearts",
+      "category": "shapes",
+      "sequence": [
+        { "id": "heart", "label": { "en": "Heart", "fr": "Cœur" }, "image": "assets/photos/heart.svg" },
+        { "id": "star", "label": { "en": "Star", "fr": "Étoile" }, "image": "assets/photos/star.svg" },
+        { "id": "heart", "label": { "en": "Heart", "fr": "Cœur" }, "image": "assets/photos/heart.svg" },
+        { "id": "star", "label": { "en": "Star", "fr": "Étoile" }, "image": "assets/photos/star.svg" }
+      ],
+      "target": { "id": "heart", "label": { "en": "Heart", "fr": "Cœur" }, "image": "assets/photos/heart.svg" },
+      "distractors": [
+        { "id": "square", "label": { "en": "Square", "fr": "Carré" }, "image": "assets/photos/square.svg" },
+        { "id": "star", "label": { "en": "Star", "fr": "Étoile" }, "image": "assets/photos/star.svg" }
+      ]
+    }
+  ]
+}

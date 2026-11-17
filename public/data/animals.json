@@ -1,0 +1,16 @@
+{
+  "categoryName": {
+    "en": "Animals",
+    "fr": "Animaux"
+  },
+  "categoryEmoji": "🐶",
+  "accentColor": "#FFB7B2",
+  "items": [
+    { "id": "dog", "label": { "en": "Dog", "fr": "Chien" }, "image": "assets/photos/dog.svg" },
+    { "id": "cat", "label": { "en": "Cat", "fr": "Chat" }, "image": "assets/photos/cat.svg" },
+    { "id": "bird", "label": { "en": "Bird", "fr": "Oiseau" }, "image": "assets/photos/bird.svg" },
+    { "id": "fish", "label": { "en": "Fish", "fr": "Poisson" }, "image": "assets/photos/fish.svg" },
+    { "id": "rabbit", "label": { "en": "Rabbit", "fr": "Lapin" }, "image": "assets/photos/rabbit.svg" },
+    { "id": "duck", "label": { "en": "Duck", "fr": "Canard" }, "image": "assets/photos/duck.svg" }
+  ]
+}
