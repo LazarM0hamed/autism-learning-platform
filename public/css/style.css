@@ -1427,6 +1427,25 @@ body {
     color: #FFFFFF;
 }
 
+/* Version & Release Tag */
+.app-version-footer {
+    margin-top: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #64748B;
+    font-weight: 700;
+}
+
+.version-tag {
+    background: #FFFFFF;
+    border: 1.5px solid #CBD5E1;
+    padding: 6px 16px;
+    border-radius: 14px;
+    display: inline-block;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
 /* Avatar Picker inside Profile Modal */
 .avatar-picker-row {
     display: flex;
