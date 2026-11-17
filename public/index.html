@@ -50,7 +50,7 @@
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filter Activities">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">14</span>
+                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">15</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-fav-btn" role="tab" aria-selected="false">
                 ⭐ <span id="lbl-filter-fav">Mes Favoris</span> <span class="filter-count" id="count-fav">0</span>
@@ -270,6 +270,20 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <a href="causality.html" class="activity-card causality" data-activity="causality">
+            <button type="button" class="activity-bookmark-btn" data-activity="causality" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">⚡</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-causality-title">Cause & Effect</span>
+                <span class="activity-card-desc" id="act-causality-desc">Action and reaction physics lab</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="causality">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <script>
@@ -306,6 +320,8 @@
                 actSoundsDesc: "Animals, transport, nature & instruments",
                 actCircuitTitle: "Ball Circuit",
                 actCircuitDesc: "Drop and roll colored marble balls",
+                actCausalityTitle: "Cause & Effect",
+                actCausalityDesc: "Action and reaction physics lab",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 brandTagline: "Sensory-adapted developmental learning",
@@ -345,6 +361,8 @@
                 actSoundsDesc: "Animaux, transports, nature et instruments",
                 actCircuitTitle: "Circuit à billes",
                 actCircuitDesc: "Fais rouler les billes sur les rampes en bois",
+                actCausalityTitle: "Cause & Effet",
+                actCausalityDesc: "Laboratoire d'actions & réactions physiques",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 brandTagline: "Activités d'apprentissage adaptées & sensorielles",
@@ -435,6 +453,11 @@
             const crkDesc = document.getElementById('act-circuit-desc');
             if (crkDesc) crkDesc.innerText = t.actCircuitDesc;
 
+            const causTitle = document.getElementById('act-causality-title');
+            if (causTitle) causTitle.innerText = t.actCausalityTitle;
+            const causDesc = document.getElementById('act-causality-desc');
+            if (causDesc) causDesc.innerText = t.actCausalityDesc;
+
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
@@ -451,10 +474,10 @@
 
     <!-- Version & Build Date Footer -->
     <footer class="app-version-footer">
-        <span class="version-tag" id="app-version-tag">🚀 v1.4.0 • Build: 2026-11-17 16:30 UTC</span>
+        <span class="version-tag" id="app-version-tag">🚀 v1.5.0 • Build: 2026-11-17 21:30 UTC</span>
     </footer>
 
-    <script src="js/tracker.js?v=1.4.0"></script>
-    <script src="js/input-manager.js?v=1.4.0"></script>
+    <script src="js/tracker.js?v=1.5.0"></script>
+    <script src="js/input-manager.js?v=1.5.0"></script>
 </body>
 </html>

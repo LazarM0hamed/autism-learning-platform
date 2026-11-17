@@ -376,6 +376,24 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 15: ⚡ Cause & Effect Lab ("Cause & Effet")
+* **Route:** `/causality.html`
+* **Target Skills:** Intentional action and logical consequence, physical reasoning, receptive language following, motor intentionality.
+* **6 Interactive Physical Scenes:**
+  1. 🚪 **La Porte (The Door):** Green Open button slides doors open to reveal a friendly boy smiling inside; Red Close button closes the doors with status light feedback.
+  2. 🛗 **L'Ascenseur (The Elevator):** Up and Down buttons navigate the elevator cabin between 3 distinct building floors with realistic shaft animations and floor indicator lights.
+  3. 🐦 **L'Oiseau (The Bird Cage):** Open button swings the cage door open as the cute yellow bird flaps and flies out to the sunny window; Close button brings the bird gently back.
+  4. 🚰 **Le Robinet (The Water Tap):** Turn tap button rotates the faucet handle, pouring a clear water stream into the glass until full; Empty button clears the glass.
+  5. 🥛 **Le Verre Fragile (The Fragile Glass):** Drop button tips the glass over the table edge with quadratic gravity and rotation, breaking it into clean pieces with crystalline audio; New Glass button places a fresh intact glass.
+  6. 💡 **La Lumière (The Light Switch):** Switch On illuminates the bedroom with warm light cone rays on the teddy bear and day sky window; Switch Off sets a peaceful dark night atmosphere.
+* **2 Complementary Modes:**
+  - 🎮 **Mode Libre (Découvrir):** Child freely explores cause and effect by tapping any tactile action button at their own pace.
+  - 🎯 **Mode Mission (Défi):** Spoken and written prompts present intentional challenges (e.g. *"Ouvre la porte pour laisser entrer le garçon !"*).
+* **Live Cause ➔ Effect Equation Banner:** Prominent feedback strip (`[ 👆 Action ] ➡️ [ ✨ Résultat ]`) explaining the causal relationship in real time.
+* **Full Controller Support:** Native keyboard/gamepad navigation (`1` and `2` keys or D-Pad navigation on `.cause-btn`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.

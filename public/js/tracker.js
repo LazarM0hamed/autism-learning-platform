@@ -56,6 +56,7 @@
         if (path.includes('labyrinth')) return 'labyrinth';
         if (path.includes('sounds')) return 'sounds';
         if (path.includes('circuit')) return 'circuit';
+        if (path.includes('causality')) return 'causality';
         return null;
     }
 
@@ -395,7 +396,8 @@
             'sequence': { likes: 0, dislikes: 0 },
             'labyrinth': { likes: 0, dislikes: 0 },
             'sounds': { likes: 0, dislikes: 0 },
-            'circuit': { likes: 0, dislikes: 0 }
+            'circuit': { likes: 0, dislikes: 0 },
+            'causality': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -735,7 +737,8 @@
             'comparisons': '.activity-card.comparisons',
             'labyrinth': '.activity-card.labyrinth',
             'sounds': '.activity-card.sounds',
-            'circuit': '.activity-card.circuit'
+            'circuit': '.activity-card.circuit',
+            'causality': '.activity-card.causality'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -780,7 +783,8 @@
             'sequence': { likes: 0, dislikes: 0 },
             'labyrinth': { likes: 0, dislikes: 0 },
             'sounds': { likes: 0, dislikes: 0 },
-            'circuit': { likes: 0, dislikes: 0 }
+            'circuit': { likes: 0, dislikes: 0 },
+            'causality': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -814,7 +818,8 @@
             'comparisons': '.activity-card.comparisons',
             'labyrinth': '.activity-card.labyrinth',
             'sounds': '.activity-card.sounds',
-            'circuit': '.activity-card.circuit'
+            'circuit': '.activity-card.circuit',
+            'causality': '.activity-card.causality'
         };
 
         Object.keys(idMap).forEach(actId => {

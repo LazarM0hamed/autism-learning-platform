@@ -64,6 +64,10 @@
             icon: '🎢',
             name: { en: 'Ball Circuit', fr: 'Circuit à billes' }
         },
+        'causality': {
+            icon: '⚡',
+            name: { en: 'Cause & Effect', fr: 'Cause & Effet' }
+        },
         'general': {
             icon: '🌟',
             name: { en: 'General Learning', fr: 'Apprentissages généraux' }

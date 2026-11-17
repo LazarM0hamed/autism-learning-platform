@@ -86,6 +86,7 @@
         if (path.includes('labyrinth')) return 'labyrinth';
         if (path.includes('sounds')) return 'sounds';
         if (path.includes('circuit')) return 'circuit';
+        if (path.includes('causality')) return 'causality';
         return null;
     }
 
@@ -106,6 +107,10 @@
 
     function isCircuitPage() {
         return window.location.pathname.toLowerCase().includes('circuit');
+    }
+
+    function isCausalityPage() {
+        return window.location.pathname.toLowerCase().includes('causality');
     }
 
     // Size Profile Management
@@ -214,6 +219,9 @@
         } else if (isCircuitPage()) {
             // In circuit, colored balls in dispenser tray (excluding used)
             items = Array.from(document.querySelectorAll('#ball-tray .ball-choice-btn:not(.used), .ball-choice-btn:not(.used)'));
+        } else if (isCausalityPage()) {
+            // In causality, tactile cause buttons
+            items = Array.from(document.querySelectorAll('#cause-controls .cause-btn, .cause-btn'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -225,6 +233,9 @@
             }
             if (!items.length) {
                 items = Array.from(document.querySelectorAll('.ball-choice-btn:not(.used)'));
+            }
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('.cause-btn'));
             }
         }
 
@@ -688,6 +699,7 @@
                         m.target?.classList?.contains('letter-btn') ||
                         m.target?.classList?.contains('sound-card') ||
                         m.target?.classList?.contains('ball-choice-btn') ||
+                        m.target?.classList?.contains('cause-btn') ||
                         m.target?.classList?.contains('settings-bar') ||
                         m.target?.id === 'alp-controller-hud') {
                         continue;
@@ -698,7 +710,8 @@
                             node.classList?.contains('option-card') ||
                             node.classList?.contains('letter-btn') ||
                             node.classList?.contains('sound-card') ||
-                            node.classList?.contains('ball-choice-btn')
+                            node.classList?.contains('ball-choice-btn') ||
+                            node.classList?.contains('cause-btn')
                         )) {
                             shouldRefresh = true;
                             break;
@@ -711,7 +724,8 @@
                             node.classList?.contains('option-card') ||
                             node.classList?.contains('letter-btn') ||
                             node.classList?.contains('sound-card') ||
-                            node.classList?.contains('ball-choice-btn')
+                            node.classList?.contains('ball-choice-btn') ||
+                            node.classList?.contains('cause-btn')
                         )) {
                             shouldRefresh = true;
                             break;
