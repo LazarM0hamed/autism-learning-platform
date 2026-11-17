@@ -56,6 +56,14 @@
             icon: '🔮',
             name: { en: 'Ball Labyrinth', fr: 'Labyrinthe à billes' }
         },
+        'sounds': {
+            icon: '🔊',
+            name: { en: 'Identify Sounds', fr: 'Reconnaître les sons' }
+        },
+        'circuit': {
+            icon: '🎢',
+            name: { en: 'Ball Circuit', fr: 'Circuit à billes' }
+        },
         'general': {
             icon: '🌟',
             name: { en: 'General Learning', fr: 'Apprentissages généraux' }

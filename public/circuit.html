@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Circuit à billes - Learning Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .circuit-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+        }
+
+        /* Prompt Pill with Optional Visual Color Swatch */
+        .target-color-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #FFFFFF;
+            border: 3px solid #E2E8F0;
+            border-radius: 22px;
+            padding: 10px 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+        .target-swatch {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 3px solid rgba(0,0,0,0.12);
+            display: inline-block;
+        }
+
+        /* Ball Selector Tray at Top of Circuit */
+        .ball-dispenser-tray {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: #F3E5D8;
+            border: 3px solid #DDB892;
+            border-radius: 24px;
+            padding: 12px 22px;
+            box-shadow: 0 6px 14px rgba(127, 85, 57, 0.12);
+        }
+        .ball-choice-btn {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            border: 4px solid #FFFFFF;
+            cursor: pointer;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2), inset -5px -5px 10px rgba(0,0,0,0.22), inset 5px 5px 10px rgba(255,255,255,0.5);
+            transition: transform 0.15s ease, opacity 0.25s ease;
+            user-select: none;
+        }
+        .ball-choice-btn:hover {
+            transform: scale(1.05);
+        }
+        .ball-choice-btn:active {
+            transform: scale(0.9);
+        }
+        .ball-choice-btn.used {
+            opacity: 0.22;
+            pointer-events: none;
+            transform: scale(0.85);
+        }
+
+        /* Wooden Ramp Tower SVG Container */
+        .ramp-tower-card {
+            background: #FFFDF9;
+            border: 4px solid #E6CCB2;
+            border-radius: 26px;
+            padding: 10px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+            max-width: 440px;
+            width: 92%;
+        }
+        .ramp-tower-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="game-header">
+        <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        <h2 id="activity-title" class="category-badge">🎢 Circuit à billes</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">17</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="circuit-stage">
+        <!-- Mode Switcher -->
+        <nav class="routine-pills" aria-label="Select circuit mode">
+            <button class="routine-pill active" id="mode-4-btn">🎨 4 Couleurs</button>
+            <button class="routine-pill" id="mode-6-btn">🌈 6 Couleurs</button>
+            <button class="routine-pill" id="mode-listen-btn">👂 Écoute seule</button>
+        </nav>
+
+        <!-- Prompt Banner -->
+        <div class="target-color-pill">
+            <span class="target-swatch" id="target-swatch"></span>
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.35rem, 3.4vw, 1.9rem); margin: 0;">Choisis la bille...</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat audio prompt" aria-label="Repeat audio prompt">🗣️</button>
+        </div>
+
+        <!-- Colored Balls to Tap -->
+        <div class="ball-dispenser-tray" id="ball-tray" aria-label="Colored balls"></div>
+
+        <!-- Wooden Zig-Zag Marble Ramp Tower -->
+        <div class="ramp-tower-card">
+            <svg class="ramp-tower-svg" id="circuit-svg" viewBox="0 0 420 450" aria-label="Wooden ball circuit">
+                <defs>
+                    <radialGradient id="ballShine" cx="35%" cy="30%" r="65%">
+                        <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.65"/>
+                        <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.08"/>
+                        <stop offset="100%" stop-color="#000000" stop-opacity="0.28"/>
+                    </radialGradient>
+                </defs>
+
+                <!-- Wooden Frame Posts & Base -->
+                <rect x="26" y="25" width="22" height="400" rx="8" fill="#DDB892" stroke="#B08968" stroke-width="2"/>
+                <rect x="372" y="25" width="22" height="400" rx="8" fill="#DDB892" stroke="#B08968" stroke-width="2"/>
+                <rect x="14" y="420" width="392" height="22" rx="10" fill="#B08968"/>
+
+                <!-- Top Entry Funnel -->
+                <polygon points="48,25 110,25 95,48 48,48" fill="#E6CCB2" stroke="#B08968" stroke-width="2"/>
+
+                <!-- 5 Alternating Slanted Wooden Ramps -->
+                <!-- Ramp 1: Left to Right -->
+                <polygon points="48,78 336,122 336,136 48,92" fill="#E6CCB2" stroke="#B08968" stroke-width="2"/>
+                <!-- Ramp 2: Right to Left -->
+                <polygon points="372,152 84,196 84,210 372,166" fill="#E6CCB2" stroke="#B08968" stroke-width="2"/>
+                <!-- Ramp 3: Left to Right -->
+                <polygon points="48,226 336,270 336,284 48,240" fill="#E6CCB2" stroke="#B08968" stroke-width="2"/>
+                <!-- Ramp 4: Right to Left -->
+                <polygon points="372,300 84,344 84,358 372,314" fill="#E6CCB2" stroke="#B08968" stroke-width="2"/>
+                <!-- Ramp 5: Bottom Collector Track (Left to Right) -->
+                <polygon points="48,374 372,406 372,420 48,388" fill="#DDB892" stroke="#B08968" stroke-width="2"/>
+
+                <!-- Layer for Balls that have finished rolling -->
+                <g id="collected-balls-layer"></g>
+
+                <!-- Active Rolling Ball -->
+                <g id="active-ball-group" style="display: none;">
+                    <circle id="active-ball-base" cx="72" cy="40" r="16" fill="#FF595E"/>
+                    <circle id="active-ball-shade" cx="72" cy="40" r="16" fill="url(#ballShine)"/>
+                </g>
+            </svg>
+        </div>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/circuit-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

@@ -42,36 +42,55 @@
         return urlParams.get(param);
     }
 
-    function isHubPage() {
-        const path = window.location.pathname;
-        return path.endsWith('index.html') || path.endsWith('/') || (!path.includes('.html') && !path.includes('/parent'));
+    function isParentPage() {
+        const path = window.location.pathname.toLowerCase();
+        return path.includes('parent.html') || path.endsWith('/parent') || path === '/parent';
     }
 
-    function isParentPage() {
-        return window.location.pathname.includes('parent.html') || window.location.pathname.endsWith('/parent');
+    function detectActivityFromPath(path) {
+        if (path.includes('letters')) return 'letters_puzzle';
+        if (path.includes('game')) return 'find_and_match';
+        if (path.includes('pattern')) return 'pattern';
+        if (path.includes('spelling')) return 'spelling';
+        if (path.includes('sequence')) return 'sequence';
+        if (path.includes('math')) return 'math';
+        if (path.includes('spatial')) return 'spatial';
+        if (path.includes('colors')) return 'colors';
+        if (path.includes('time')) return 'time';
+        if (path.includes('coloring')) return 'coloring';
+        if (path.includes('comparisons')) return 'comparisons';
+        if (path.includes('labyrinth')) return 'labyrinth';
+        if (path.includes('sounds')) return 'sounds';
+        if (path.includes('circuit')) return 'circuit';
+        return null;
+    }
+
+    function isHubPage() {
+        const path = window.location.pathname.toLowerCase();
+        if (isParentPage()) return false;
+        if (detectActivityFromPath(path)) return false;
+        return path === '' || path === '/' || path.endsWith('/index.html') || path.endsWith('/index');
     }
 
     function detectCurrentActivityId() {
         const path = window.location.pathname.toLowerCase();
-        if (path.includes('letters.html')) return 'letters_puzzle';
-        if (path.includes('game.html')) return 'find_and_match';
-        if (path.includes('pattern.html')) return 'pattern';
-        if (path.includes('spelling.html')) return 'spelling';
-        if (path.includes('sequence.html')) return 'sequence';
-        if (path.includes('math.html')) return 'math';
-        if (path.includes('spatial.html')) return 'spatial';
-        if (path.includes('colors.html')) return 'colors';
-        if (path.includes('time.html')) return 'time';
-        if (path.includes('coloring.html')) return 'coloring';
-        if (path.includes('comparisons.html')) return 'comparisons';
-        if (path.includes('labyrinth.html')) return 'labyrinth';
-        return 'general';
+        return detectActivityFromPath(path) || 'general';
     }
 
     // Initialize or Resume Session
     async function initSession() {
         const nickname = currentNickname || 'Champion';
 
+        // 1. Immediately render and bind UI without waiting for network
+        updateHeaderProfileUI();
+        if (isHubPage()) {
+            loadDashboardRecommendations();
+            loadDashboardLikes();
+        } else if (!isParentPage()) {
+            renderFeedbackWidget();
+        }
+
+        // 2. Connect session with server or local fallback
         try {
             const res = await fetch('/api/session/start', {
                 method: 'POST',
@@ -108,14 +127,6 @@
                 activityId: currentActivityId,
                 categoryId: currentCategoryId
             });
-        }
-
-        updateHeaderProfileUI();
-        if (isHubPage()) {
-            loadDashboardRecommendations();
-            loadDashboardLikes();
-        } else if (!isParentPage()) {
-            renderFeedbackWidget();
         }
     }
 
@@ -294,46 +305,60 @@
 
     // Render In-Activity Feedback Widget (Child & Parent)
     async function renderFeedbackWidget() {
-        let existingWidget = document.getElementById('alp-feedback-widget');
-        if (existingWidget) existingWidget.remove();
+        let widget = document.getElementById('alp-feedback-widget');
+        if (!widget) {
+            widget = document.createElement('div');
+            widget.id = 'alp-feedback-widget';
+            widget.className = 'alp-feedback-widget';
 
-        const widget = document.createElement('div');
-        widget.id = 'alp-feedback-widget';
-        widget.className = 'alp-feedback-widget';
-
-        widget.innerHTML = `
-            <div class="feedback-card">
-                <span class="feedback-prompt">${currentLang === 'fr' ? 'Tu aimes ce jeu ?' : 'Do you like this game?'}</span>
-                <div class="feedback-actions">
-                    <button class="feedback-btn like-btn" id="fb-like-btn" title="${currentLang === 'fr' ? 'J\'aime ce jeu !' : 'I like this game!'}">
-                        <span class="fb-icon">👍</span>
-                        <span class="fb-count" id="fb-likes-count">0</span>
-                    </button>
-                    <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="${currentLang === 'fr' ? 'Pas mon préféré' : 'Not my favorite'}">
-                        <span class="fb-icon">👎</span>
-                        <span class="fb-count" id="fb-unlikes-count">0</span>
-                    </button>
-                    <button class="feedback-btn comment-btn" id="fb-comment-btn" title="${currentLang === 'fr' ? 'Note parent / thérapeute' : 'Parent / Therapist note'}">
-                        <span class="fb-icon">💬</span>
-                        <span class="fb-text">${currentLang === 'fr' ? 'Note' : 'Note'}</span>
-                    </button>
+            widget.innerHTML = `
+                <div class="feedback-card">
+                    <span class="feedback-prompt" id="fb-prompt-text">${currentLang === 'fr' ? 'Tu aimes ce jeu ?' : 'Do you like this game?'}</span>
+                    <div class="feedback-actions">
+                        <button class="feedback-btn like-btn" id="fb-like-btn" title="${currentLang === 'fr' ? 'J\'aime ce jeu !' : 'I like this game!'}">
+                            <span class="fb-icon">👍</span>
+                            <span class="fb-count" id="fb-likes-count">0</span>
+                        </button>
+                        <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="${currentLang === 'fr' ? 'Pas mon préféré' : 'Not my favorite'}">
+                            <span class="fb-icon">👎</span>
+                            <span class="fb-count" id="fb-unlikes-count">0</span>
+                        </button>
+                        <button class="feedback-btn comment-btn" id="fb-comment-btn" title="${currentLang === 'fr' ? 'Note parent / thérapeute' : 'Parent / Therapist note'}">
+                            <span class="fb-icon">💬</span>
+                            <span class="fb-text">${currentLang === 'fr' ? 'Note' : 'Note'}</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
 
-        document.body.appendChild(widget);
+            const header = document.querySelector('.game-header');
+            if (header && header.nextSibling) {
+                header.parentNode.insertBefore(widget, header.nextSibling);
+            } else {
+                document.body.insertBefore(widget, document.body.firstChild);
+            }
+        }
 
-        document.getElementById('fb-like-btn')?.addEventListener('click', () => {
-            submitFeedback('like');
-        });
+        const promptText = document.getElementById('fb-prompt-text');
+        if (promptText) promptText.innerText = currentLang === 'fr' ? 'Tu aimes ce jeu ?' : 'Do you like this game?';
 
-        document.getElementById('fb-unlike-btn')?.addEventListener('click', () => {
-            submitFeedback('unlike');
-        });
+        const likeBtn = document.getElementById('fb-like-btn');
+        if (likeBtn && !likeBtn.dataset.bound) {
+            likeBtn.dataset.bound = 'true';
+            likeBtn.addEventListener('click', () => submitFeedback('like'));
+        }
 
-        document.getElementById('fb-comment-btn')?.addEventListener('click', () => {
-            openCommentModal();
-        });
+        const unlikeBtn = document.getElementById('fb-unlike-btn');
+        if (unlikeBtn && !unlikeBtn.dataset.bound) {
+            unlikeBtn.dataset.bound = 'true';
+            unlikeBtn.addEventListener('click', () => submitFeedback('unlike'));
+        }
+
+        const commentBtn = document.getElementById('fb-comment-btn');
+        if (commentBtn && !commentBtn.dataset.bound) {
+            commentBtn.dataset.bound = 'true';
+            commentBtn.addEventListener('click', () => openCommentModal());
+        }
 
         updateFeedbackCounters();
     }
@@ -365,9 +390,12 @@
             'math': { likes: 9, dislikes: 0 },
             'comparisons': { likes: 12, dislikes: 0 },
             'time': { likes: 8, dislikes: 0 },
-            'sequence': { likes: 11, dislikes: 0 }
+            'sequence': { likes: 11, dislikes: 0 },
+            'labyrinth': { likes: 12, dislikes: 0 },
+            'sounds': { likes: 13, dislikes: 0 },
+            'circuit': { likes: 17, dislikes: 0 }
         };
-        const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
+        const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 12, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
     }
 
@@ -495,15 +523,16 @@
 
     // Top Navigation Profile & Parent Dashboard Header Link
     function updateHeaderProfileUI() {
-        let existingBar = document.getElementById('alp-user-header-bar');
-        if (existingBar) existingBar.remove();
-
-        const bar = document.createElement('div');
-        bar.id = 'alp-user-header-bar';
-        bar.className = 'alp-user-header-bar';
-
         const nick = currentNickname || 'Champion';
         const isParent = isParentPage();
+
+        let bar = document.getElementById('alp-user-header-bar');
+        if (!bar) {
+            bar = document.createElement('div');
+            bar.id = 'alp-user-header-bar';
+            bar.className = 'alp-user-header-bar';
+            document.body.insertBefore(bar, document.body.firstChild);
+        }
 
         bar.innerHTML = `
             <div class="user-chip" id="alp-user-chip" title="${currentLang === 'fr' ? 'Changer de joueur' : 'Switch player'}">
@@ -518,8 +547,6 @@
             </a>
         `;
 
-        document.body.insertBefore(bar, document.body.firstChild);
-
         document.getElementById('alp-user-chip')?.addEventListener('click', () => {
             showProfileModal();
         });
@@ -532,14 +559,23 @@
         try {
             const url = currentNickname ? `/api/parent/dashboard?nickname=${encodeURIComponent(currentNickname)}` : '/api/parent/dashboard';
             const res = await fetch(url);
-            const data = await res.json();
-
-            if (data.success && data.analytics && data.analytics.recommendations) {
-                applyDashboardBadges(data.analytics.recommendations);
+            const contentType = res.headers.get('content-type') || '';
+            if (res.ok && contentType.includes('application/json')) {
+                const data = await res.json();
+                if (data.success && data.analytics && data.analytics.recommendations) {
+                    applyDashboardBadges(data.analytics.recommendations);
+                    return;
+                }
             }
-        } catch (e) {
-            console.warn('Could not load dashboard recommendations:', e);
-        }
+        } catch (e) {}
+
+        // Fallback default recommendations
+        applyDashboardBadges([
+            { activityId: 'find_and_match', type: 'confidence_booster' },
+            { activityId: 'coloring', type: 'practice_next' },
+            { activityId: 'letters_puzzle', type: 'confidence_booster' },
+            { activityId: 'sounds', type: 'practice_next' }
+        ]);
     }
 
     function applyDashboardBadges(recommendations) {
@@ -555,7 +591,9 @@
             'time': '.activity-card.time',
             'coloring': '.activity-card.coloring',
             'comparisons': '.activity-card.comparisons',
-            'labyrinth': '.activity-card.labyrinth'
+            'labyrinth': '.activity-card.labyrinth',
+            'sounds': '.activity-card.sounds',
+            'circuit': '.activity-card.circuit'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -598,7 +636,9 @@
             'comparisons': { likes: 12, dislikes: 0 },
             'time': { likes: 8, dislikes: 0 },
             'sequence': { likes: 11, dislikes: 0 },
-            'labyrinth': { likes: 12, dislikes: 0 }
+            'labyrinth': { likes: 12, dislikes: 0 },
+            'sounds': { likes: 13, dislikes: 0 },
+            'circuit': { likes: 17, dislikes: 0 }
         };
 
         try {
@@ -630,7 +670,9 @@
             'time': '.activity-card.time',
             'coloring': '.activity-card.coloring',
             'comparisons': '.activity-card.comparisons',
-            'labyrinth': '.activity-card.labyrinth'
+            'labyrinth': '.activity-card.labyrinth',
+            'sounds': '.activity-card.sounds',
+            'circuit': '.activity-card.circuit'
         };
 
         Object.keys(idMap).forEach(actId => {

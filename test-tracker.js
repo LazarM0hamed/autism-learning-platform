@@ -166,6 +166,43 @@ assert(fs.existsSync('public/coloring.html'), 'coloring.html must exist');
 assert(fs.existsSync('public/comparisons.html'), 'comparisons.html must exist');
 assert(fs.existsSync('public/labyrinth.html'), 'labyrinth.html must exist');
 assert(fs.existsSync('public/js/labyrinth-engine.js'), 'labyrinth-engine.js must exist');
-console.log('✓ Colour Matching, Comparison Concepts, and Ball Labyrinth datasets & routes verified');
+assert(fs.existsSync('public/sounds.html'), 'sounds.html must exist');
+assert(fs.existsSync('public/js/sounds-engine.js'), 'sounds-engine.js must exist');
+const expectedSounds = ['dog', 'cat', 'cow', 'bird', 'duck', 'sheep', 'train', 'moto', 'car', 'plane', 'boat', 'firetruck', 'sea', 'wind', 'storm', 'rain', 'piano', 'drum', 'guitar', 'trumpet'];
+expectedSounds.forEach(s => {
+    assert(fs.existsSync(`public/assets/sounds/${s}.mp3`), `Sound file ${s}.mp3 must exist`);
+});
+assert(fs.existsSync('public/circuit.html'), 'circuit.html must exist');
+assert(fs.existsSync('public/js/circuit-engine.js'), 'circuit-engine.js must exist');
+console.log('✓ All 20 authentic MP3 sound effects verified in public/assets/sounds/');
+
+// Verify Hub Header Bar & Parent Hub Link
+const indexHtml = fs.readFileSync('public/index.html', 'utf8');
+assert(indexHtml.includes('id="alp-user-header-bar"'), 'index.html must include alp-user-header-bar');
+assert(indexHtml.includes('id="alp-user-chip"'), 'index.html must include alp-user-chip');
+assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent.html link');
+const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
+assert(likeBadgeCount === 14, `All 14 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+console.log('✓ Parent Hub, Profile Switcher header, and 14 like badges anchored in index.html');
+
+// Verify In-Activity Feedback Widget embedded across all 14 activity pages
+const activityPages = [
+    'game.html', 'colors.html', 'pattern.html', 'letters.html',
+    'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
+    'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
+    'sounds.html', 'circuit.html'
+];
+activityPages.forEach(p => {
+    const html = fs.readFileSync(`public/${p}`, 'utf8');
+    assert(html.includes('id="alp-feedback-widget"'), `${p} must include embedded alp-feedback-widget`);
+});
+console.log('✓ In-activity feedback widget verified across all 14 activity pages');
+
+// Verify Sounds Mix All Mode
+const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');
+assert(soundsEngineJs.includes("id: 'all'") && soundsEngineJs.includes('Tout mélanger'), 'sounds-engine.js must include Mix All (Tout mélanger) category');
+console.log('✓ Sounds Mix All (Tout mélanger) category verified');
+
+console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, and Circuit verified');
 
 console.log('ALL STORAGE, SESSION & PARENT ANALYTICS TESTS PASSED!');

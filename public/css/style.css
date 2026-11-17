@@ -1188,51 +1188,76 @@ body {
 
 /* In-Activity Feedback Widget */
 .alp-feedback-widget {
-    position: fixed;
-    top: 14px;
-    right: 14px;
-    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: var(--options-grid-max-w, 860px);
+    margin: 4px 0 16px 0;
+    z-index: 20;
 }
 
 .feedback-card {
     background: #FFFFFF;
     border: 2px solid #E2E8F0;
-    border-radius: 20px;
-    padding: 6px 12px;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
-    display: flex;
+    border-radius: 22px;
+    padding: 6px 16px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .feedback-prompt {
-    font-size: 0.85rem;
-    font-weight: bold;
-    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--text-primary);
 }
 
 .feedback-actions {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
 }
 
 .feedback-btn {
-    border: none;
+    border: 1px solid #E2E8F0;
     background: #F8FAFC;
-    border-radius: 12px;
-    padding: 4px 10px;
+    border-radius: 14px;
+    padding: 5px 12px;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: bold;
+    font-size: 0.88rem;
+    font-weight: 800;
     color: var(--text-primary);
-    transition: background 0.15s ease, transform 0.1s ease;
+    transition: all 0.15s ease;
+    user-select: none;
 }
 
 .feedback-btn:hover {
+    background: #E2E8F0;
+    border-color: #CBD5E1;
+}
+
+.feedback-btn:active {
+    transform: scale(0.92);
+}
+
+.feedback-btn.like-btn.active {
+    background: #ECFDF5;
+    border-color: #10B981;
+    color: #065F46;
+}
+
+.feedback-btn.unlike-btn.active {
+    background: #FEF2F2;
+    border-color: #EF4444;
+    color: #991B1B;
+}
     background: #E2E8F0;
 }
 
@@ -1707,32 +1732,44 @@ body {
 /* YouTube-style Activity Likes Badge on Dashboard */
 .activity-card {
     position: relative;
+    padding-bottom: 30px !important;
 }
 
 .activity-likes-badge {
     position: absolute;
-    bottom: 12px;
-    right: 14px;
-    background: #F1F5F9;
-    border: 1px solid #E2E8F0;
-    padding: 3px 9px;
-    border-radius: 12px;
-    font-size: 0.82rem;
+    bottom: 8px;
+    right: 12px;
+    background: #F8FAFC;
+    border: 1.5px solid #CBD5E1;
+    padding: 3px 10px;
+    border-radius: 14px;
+    font-size: 0.85rem;
     font-weight: 800;
-    color: #475569;
+    color: #1E293B;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    gap: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
     z-index: 2;
+    pointer-events: none;
 }
 
 .activity-card:hover .activity-likes-badge {
     background: #ECFDF5;
-    border-color: #A7F3D0;
+    border-color: #10B981;
     color: #065F46;
     transform: translateY(-1px);
+}
+
+.activity-likes-badge .like-thumb {
+    font-size: 0.9rem;
+}
+
+.activity-likes-badge .like-number {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: inherit;
 }
 
 .parent-refresh-btn {

@@ -345,6 +345,37 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 13: 🔊 Sound Identification ("Reconnaître les sons")
+* **Route:** `/sounds.html`
+* **Target Skills:** Auditory discrimination, receptive association, sound-to-image mapping, attention.
+* **4 Sound Categories:**
+  - 🐾 **Animals (*Animaux*):** Dog bark, Cat meow, Cow moo, Bird chirp, Duck quack, Sheep bleat.
+  - 🚗 **Transport (*Transports*):** Train whistle, Motorbike engine, Car horn, Airplane jet, Boat horn, Firetruck siren.
+  - 🌿 **Nature (*Nature*):** Ocean waves, Wind gust, Thunderstorm, Rain.
+  - 🎸 **Instruments (*Instruments*):** Piano chord, Drum roll, Guitar strum, Trumpet fanfare.
+* **Hybrid Audio Engine:**
+  - Automatically loads and plays `.mp3` files from `assets/sounds/` if available.
+  - Features an integrated **Web Audio API procedural sound synthesizer** capable of generating authentic sound effects on the fly with zero external audio assets or network latency.
+* **Tactile Replay & Feedback:**
+  - Prominent hero replay button (`[ 🔉 Écouter le son ]`) with audio wave pulsing animation.
+  - Errorless support: tapping a non-target card replays the sound gently without negative error alarms.
+
+---
+
+### Activity 14: 🎢 Wooden Ball Circuit / Marble Run ("Circuit à billes")
+* **Route:** `/circuit.html`
+* **Target Skills:** Color recognition, auditory phonics, fine-motor coordination, cause-and-effect tracking.
+* **Inspired by Classic Wooden Zig-Zag Ramp Towers:**
+  - **5 Alternating Slanted Ramps:** A vector wooden ramp tower with top entry funnel and bottom collection track.
+  - **Physics-Like Zig-Zag Animation:** When the requested ball color is tapped, the marble drops into the funnel, rolls across all 5 ramps, and stacks neatly at the bottom collector track.
+  - **Realistic Wooden Click-Clack Audio:** Procedural Web Audio synthesis produces authentic wooden clatter and pitch shifts at each ramp drop.
+* **3 Progressive Modes:**
+  1. 🎨 **4 Couleurs:** 4 foundational colors with visual prompt swatch.
+  2. 🌈 **6 Couleurs:** Full rainbow set (Red, Blue, Yellow, Green, Orange, Purple).
+  3. 👂 **Écoute seule (Listening Mode):** Hides the visual color swatch in the prompt to focus purely on auditory color name recognition and phonics.
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.
