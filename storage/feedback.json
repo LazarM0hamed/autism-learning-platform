@@ -759,6 +759,66 @@
       "reaction": "like",
       "comment": "",
       "createdAt": "2026-11-17T10:16:25.078Z"
+    },
+    {
+      "id": "note_1794913119605",
+      "sessionId": "sess_1794913119591_beuvl7",
+      "nickname": "Kid_1794913119588",
+      "activityId": "find_and_match",
+      "categoryId": "all",
+      "reaction": "like",
+      "comment": "Loves the dog and cat illustrations!",
+      "createdAt": "2026-11-17T10:58:39.605Z"
+    },
+    {
+      "id": "vote_1794913119605",
+      "sessionId": "sess_1794913119591_beuvl7",
+      "nickname": "Kid_1794913119588",
+      "activityId": "find_and_match",
+      "categoryId": "all",
+      "reaction": "like",
+      "comment": "",
+      "createdAt": "2026-11-17T10:58:39.605Z"
+    },
+    {
+      "id": "vote_1794913119606",
+      "sessionId": "sess_1794913119591_beuvl7",
+      "nickname": "SecondKid_1794913119605",
+      "activityId": "find_and_match",
+      "categoryId": "all",
+      "reaction": "like",
+      "comment": "",
+      "createdAt": "2026-11-17T10:58:39.606Z"
+    },
+    {
+      "id": "note_1794915413019",
+      "sessionId": "sess_1794915413005_bhe4qx",
+      "nickname": "Kid_1794915413002",
+      "activityId": "find_and_match",
+      "categoryId": "all",
+      "reaction": "like",
+      "comment": "Loves the dog and cat illustrations!",
+      "createdAt": "2026-11-17T11:36:53.019Z"
+    },
+    {
+      "id": "vote_1794915413019",
+      "sessionId": "sess_1794915413005_bhe4qx",
+      "nickname": "Kid_1794915413002",
+      "activityId": "find_and_match",
+      "categoryId": "all",
+      "reaction": "like",
+      "comment": "",
+      "createdAt": "2026-11-17T11:36:53.019Z"
+    },
+    {
+      "id": "vote_1794915413021",
+      "sessionId": "sess_1794915413005_bhe4qx",
+      "nickname": "SecondKid_1794915413019",
+      "activityId": "find_and_match",
+      "categoryId": "all",
+      "reaction": "like",
+      "comment": "",
+      "createdAt": "2026-11-17T11:36:53.021Z"
     }
   ]
 }

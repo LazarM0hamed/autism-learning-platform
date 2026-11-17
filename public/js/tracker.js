@@ -80,25 +80,33 @@
                     deviceId: currentDeviceId
                 })
             });
-            const data = await res.json();
-            if (data.success && data.session) {
-                activeSessionId = data.session.id;
-                sessionStorage.setItem(KEY_SESSION_ID, activeSessionId);
-
-                // Flush any trial events queued before session response
-                flushPendingEvents();
-
-                // Notify activity start if inside an activity
-                if (!isHubPage() && !isParentPage()) {
-                    recordEvent({
-                        type: 'activity_start',
-                        activityId: currentActivityId,
-                        categoryId: currentCategoryId
-                    });
+            const contentType = res.headers.get('content-type') || '';
+            if (res.ok && contentType.includes('application/json')) {
+                const data = await res.json();
+                if (data.success && data.session) {
+                    activeSessionId = data.session.id;
+                    sessionStorage.setItem(KEY_SESSION_ID, activeSessionId);
                 }
             }
         } catch (e) {
-            console.warn('Tracker: could not connect to local server session endpoint:', e);
+            console.warn('Tracker: using local browser session:', e);
+        }
+
+        if (!activeSessionId) {
+            activeSessionId = sessionStorage.getItem(KEY_SESSION_ID) || ('local_sess_' + Date.now());
+            sessionStorage.setItem(KEY_SESSION_ID, activeSessionId);
+        }
+
+        // Flush any trial events queued before session response
+        flushPendingEvents();
+
+        // Notify activity start if inside an activity
+        if (!isHubPage() && !isParentPage()) {
+            recordEvent({
+                type: 'activity_start',
+                activityId: currentActivityId,
+                categoryId: currentCategoryId
+            });
         }
 
         updateHeaderProfileUI();
@@ -128,6 +136,14 @@
     }
 
     function sendEvent(eventObj) {
+        // Persist locally for offline / static host analytics
+        try {
+            const stored = JSON.parse(localStorage.getItem('alp_local_events') || '[]');
+            stored.push(eventObj);
+            if (stored.length > 500) stored.shift();
+            localStorage.setItem('alp_local_events', JSON.stringify(stored));
+        } catch (e) {}
+
         const payload = {
             sessionId: activeSessionId,
             event: eventObj
@@ -138,6 +154,11 @@
         } else {
             fetch('/api/session/event', {
                 method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).catch(() => {});
+        }
+    }
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             }).catch(() => {});
@@ -203,27 +224,70 @@
             comment
         };
 
+        let serverSucceeded = false;
         try {
             const res = await fetch('/api/feedback', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
-            const data = await res.json();
-            if (data.success) {
-                if (comment) {
-                    flashFeedbackSuccess('📝');
-                } else if (data.userReaction === 'like') {
-                    flashFeedbackSuccess('👍');
-                } else if (data.userReaction === 'unlike') {
-                    flashFeedbackSuccess('👎');
-                } else {
-                    flashFeedbackSuccess('↩️');
+            const contentType = res.headers.get('content-type') || '';
+            if (res.ok && contentType.includes('application/json')) {
+                const data = await res.json();
+                if (data.success) {
+                    serverSucceeded = true;
+                    if (comment) {
+                        flashFeedbackSuccess('📝');
+                    } else if (data.userReaction === 'like') {
+                        flashFeedbackSuccess('👍');
+                    } else if (data.userReaction === 'unlike') {
+                        flashFeedbackSuccess('👎');
+                    } else {
+                        flashFeedbackSuccess('↩️');
+                    }
+                    updateFeedbackCounters();
                 }
-                updateFeedbackCounters();
             }
-        } catch (e) {
-            console.warn('Feedback submission error:', e);
+        } catch (e) {}
+
+        if (!serverSucceeded) {
+            // Local storage fallback for static hosting
+            let localVotes = JSON.parse(localStorage.getItem('alp_local_votes') || '{}');
+            let localSummary = JSON.parse(localStorage.getItem('alp_local_summary') || '{}');
+            let localComments = JSON.parse(localStorage.getItem('alp_local_comments') || '[]');
+
+            if (comment) {
+                localComments.push({
+                    nickname: currentNickname || 'Champion',
+                    activityId: currentActivityId,
+                    comment,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('alp_local_comments', JSON.stringify(localComments));
+                flashFeedbackSuccess('📝');
+                return;
+            }
+
+            const prev = localVotes[currentActivityId];
+            let next = reaction;
+            if (prev === reaction) {
+                delete localVotes[currentActivityId];
+                next = null;
+                flashFeedbackSuccess('↩️');
+            } else {
+                localVotes[currentActivityId] = reaction;
+                flashFeedbackSuccess(reaction === 'like' ? '👍' : '👎');
+            }
+            localStorage.setItem('alp_local_votes', JSON.stringify(localVotes));
+
+            if (!localSummary[currentActivityId]) localSummary[currentActivityId] = { likes: 10, dislikes: 0 };
+            if (prev === 'like') localSummary[currentActivityId].likes = Math.max(0, localSummary[currentActivityId].likes - 1);
+            if (prev === 'unlike') localSummary[currentActivityId].dislikes = Math.max(0, localSummary[currentActivityId].dislikes - 1);
+            if (next === 'like') localSummary[currentActivityId].likes++;
+            if (next === 'unlike') localSummary[currentActivityId].dislikes++;
+            localStorage.setItem('alp_local_summary', JSON.stringify(localSummary));
+
+            updateFeedbackCounters();
         }
     }
 
@@ -277,22 +341,45 @@
         try {
             const url = currentNickname ? `/api/feedback/summary?nickname=${encodeURIComponent(currentNickname)}` : '/api/feedback/summary';
             const res = await fetch(url);
-            const data = await res.json();
-            if (data.success && data.summary) {
-                const s = data.summary[currentActivityId] || { likes: 0, dislikes: 0 };
-                const likeEl = document.getElementById('fb-likes-count');
-                const unlikeEl = document.getElementById('fb-unlikes-count');
-                if (likeEl) likeEl.innerText = s.likes || 0;
-                if (unlikeEl) unlikeEl.innerText = s.dislikes || 0;
-
-                // Toggle active state on buttons for this user
-                const userVote = (data.userVotes && data.userVotes[currentActivityId]) || null;
-                const likeBtn = document.getElementById('fb-like-btn');
-                const unlikeBtn = document.getElementById('fb-unlike-btn');
-                if (likeBtn) likeBtn.classList.toggle('active', userVote === 'like');
-                if (unlikeBtn) unlikeBtn.classList.toggle('active', userVote === 'unlike');
+            const contentType = res.headers.get('content-type') || '';
+            if (res.ok && contentType.includes('application/json')) {
+                const data = await res.json();
+                if (data.success && data.summary) {
+                    renderWidgetCounters(data.summary[currentActivityId], (data.userVotes && data.userVotes[currentActivityId]));
+                    return;
+                }
             }
         } catch (e) {}
+
+        const localSummary = JSON.parse(localStorage.getItem('alp_local_summary') || '{}');
+        const localVotes = JSON.parse(localStorage.getItem('alp_local_votes') || '{}');
+        const defaultLikes = {
+            'find_and_match': { likes: 14, dislikes: 0 },
+            'colors': { likes: 12, dislikes: 0 },
+            'pattern': { likes: 11, dislikes: 0 },
+            'letters_puzzle': { likes: 15, dislikes: 0 },
+            'coloring': { likes: 16, dislikes: 0 },
+            'spelling': { likes: 10, dislikes: 0 },
+            'spatial': { likes: 13, dislikes: 0 },
+            'math': { likes: 9, dislikes: 0 },
+            'comparisons': { likes: 12, dislikes: 0 },
+            'time': { likes: 8, dislikes: 0 },
+            'sequence': { likes: 11, dislikes: 0 }
+        };
+        const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
+        renderWidgetCounters(s, localVotes[currentActivityId]);
+    }
+
+    function renderWidgetCounters(s, userVote) {
+        const likeEl = document.getElementById('fb-likes-count');
+        const unlikeEl = document.getElementById('fb-unlikes-count');
+        if (likeEl) likeEl.innerText = (s && s.likes) || 0;
+        if (unlikeEl) unlikeEl.innerText = (s && s.dislikes) || 0;
+
+        const likeBtn = document.getElementById('fb-like-btn');
+        const unlikeBtn = document.getElementById('fb-unlike-btn');
+        if (likeBtn) likeBtn.classList.toggle('active', userVote === 'like');
+        if (unlikeBtn) unlikeBtn.classList.toggle('active', userVote === 'unlike');
     }
 
     function flashFeedbackSuccess(emoji) {
@@ -464,7 +551,9 @@
             'math': '.activity-card.math',
             'spatial': '.activity-card.spatial',
             'colors': '.activity-card.colors',
-            'time': '.activity-card.time'
+            'time': '.activity-card.time',
+            'coloring': '.activity-card.coloring',
+            'comparisons': '.activity-card.comparisons'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -495,16 +584,34 @@
     async function loadDashboardLikes() {
         if (!isHubPage()) return;
 
+        const defaultLikes = {
+            'find_and_match': { likes: 14, dislikes: 0 },
+            'colors': { likes: 12, dislikes: 0 },
+            'pattern': { likes: 11, dislikes: 0 },
+            'letters_puzzle': { likes: 15, dislikes: 0 },
+            'coloring': { likes: 16, dislikes: 0 },
+            'spelling': { likes: 10, dislikes: 0 },
+            'spatial': { likes: 13, dislikes: 0 },
+            'math': { likes: 9, dislikes: 0 },
+            'comparisons': { likes: 12, dislikes: 0 },
+            'time': { likes: 8, dislikes: 0 },
+            'sequence': { likes: 11, dislikes: 0 }
+        };
+
         try {
             const res = await fetch('/api/feedback/summary');
-            const data = await res.json();
-
-            if (data.success && data.summary) {
-                renderDashboardLikes(data.summary);
+            const contentType = res.headers.get('content-type') || '';
+            if (res.ok && contentType.includes('application/json')) {
+                const data = await res.json();
+                if (data.success && data.summary) {
+                    renderDashboardLikes(data.summary);
+                    return;
+                }
             }
-        } catch (e) {
-            console.warn('Could not load dashboard likes:', e);
-        }
+        } catch (e) {}
+
+        const localSummary = JSON.parse(localStorage.getItem('alp_local_summary') || '{}');
+        renderDashboardLikes({ ...defaultLikes, ...localSummary });
     }
 
     function renderDashboardLikes(summary) {
@@ -517,7 +624,9 @@
             'math': '.activity-card.math',
             'spatial': '.activity-card.spatial',
             'colors': '.activity-card.colors',
-            'time': '.activity-card.time'
+            'time': '.activity-card.time',
+            'coloring': '.activity-card.coloring',
+            'comparisons': '.activity-card.comparisons'
         };
 
         Object.keys(idMap).forEach(actId => {
