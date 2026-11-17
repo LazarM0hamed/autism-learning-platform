@@ -76,6 +76,10 @@
             icon: '🏀',
             name: { en: 'Basket Shape', fr: 'Basket des Formes' }
         },
+        'music': {
+            icon: '🎵',
+            name: { en: 'Music Partition', fr: 'Partition Musicale' }
+        },
         'general': {
             icon: '🌟',
             name: { en: 'General Learning', fr: 'Apprentissages généraux' }

@@ -226,6 +226,33 @@ main {
     transform: scale(0.95);
 }
 
+/* Header Left Branded Group with Infinity Harmony Logo */
+.header-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.18s ease;
+}
+
+.header-logo-link:hover .header-infinity-logo {
+    transform: rotate(6deg) scale(1.1);
+}
+
+.header-infinity-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 10px;
+    filter: drop-shadow(0 3px 6px rgba(77, 150, 255, 0.24));
+    transition: transform 0.18s ease;
+}
+
 .top-bar {
     width: 100%;
     max-width: 900px;
@@ -644,6 +671,7 @@ main {
 .activity-card.causality { border-left: 8px solid #EAB308; }
 .activity-card.builder { border-left: 8px solid #F97316; }
 .activity-card.basket { border-left: 8px solid #EA580C; }
+.activity-card.music { border-left: 8px solid #EC4899; }
 
 .category-card.transport { border-bottom: 8px solid #93C5FD; }
 
@@ -1012,6 +1040,13 @@ main {
 
 .ball-launch-btn.is-controller-focused {
     filter: drop-shadow(0 0 12px rgba(37, 99, 235, 0.95)) drop-shadow(0 0 22px rgba(37, 99, 235, 0.65)) brightness(1.12) !important;
+}
+
+.key-block-btn.is-controller-focused {
+    outline: none !important;
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.55), 0 12px 24px rgba(0, 0, 0, 0.28) !important;
+    transform: translateY(-6px) scale(1.08) !important;
+    z-index: 10;
 }
 
 .ball-choice-btn {

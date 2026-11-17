@@ -50,7 +50,7 @@
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filter Activities">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">17</span>
+                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">18</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-fav-btn" role="tab" aria-selected="false">
                 ⭐ <span id="lbl-filter-fav">Mes Favoris</span> <span class="filter-count" id="count-fav">0</span>
@@ -312,6 +312,20 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <a href="music.html" class="activity-card music" data-activity="music">
+            <button type="button" class="activity-bookmark-btn" data-activity="music" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">🎵</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-music-title">Music Partition</span>
+                <span class="activity-card-desc" id="act-music-desc">Play famous nursery rhyme melodies</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="music">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <script>
@@ -354,6 +368,8 @@
                 actBuilderDesc: "Fix bridges, stack pyramids & towers",
                 actBasketTitle: "Basket Shape",
                 actBasketDesc: "Shoot shaped balls into morphing hoops",
+                actMusicTitle: "Music Partition",
+                actMusicDesc: "Play famous nursery rhyme melodies",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 brandTagline: "Sensory-adapted developmental learning",
@@ -399,6 +415,8 @@
                 actBuilderDesc: "Répare le pont, empile pyramides & tours",
                 actBasketTitle: "Basket des Formes",
                 actBasketDesc: "Lance le bon ballon dans le panier",
+                actMusicTitle: "Partition Musicale",
+                actMusicDesc: "Joue les mélodies des comptines célèbres",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 brandTagline: "Activités d'apprentissage adaptées & sensorielles",
@@ -504,6 +522,11 @@
             const bskDesc = document.getElementById('act-basket-desc');
             if (bskDesc) bskDesc.innerText = t.actBasketDesc;
 
+            const mscTitle = document.getElementById('act-music-title');
+            if (mscTitle) mscTitle.innerText = t.actMusicTitle;
+            const mscDesc = document.getElementById('act-music-desc');
+            if (mscDesc) mscDesc.innerText = t.actMusicDesc;
+
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
@@ -520,10 +543,10 @@
 
     <!-- Version & Build Date Footer -->
     <footer class="app-version-footer">
-        <span class="version-tag" id="app-version-tag">🚀 v1.6.0 • Build: 2026-11-17 22:15 UTC</span>
+        <span class="version-tag" id="app-version-tag">🚀 v1.7.0 • Build: 2026-11-17 22:45 UTC</span>
     </footer>
 
-    <script src="js/tracker.js?v=1.6.0"></script>
-    <script src="js/input-manager.js?v=1.6.0"></script>
+    <script src="js/tracker.js?v=1.7.0"></script>
+    <script src="js/input-manager.js?v=1.7.0"></script>
 </body>
 </html>

@@ -59,6 +59,7 @@
         if (path.includes('causality')) return 'causality';
         if (path.includes('builder')) return 'builder';
         if (path.includes('basket')) return 'basket';
+        if (path.includes('music')) return 'music';
         return null;
     }
 
@@ -401,7 +402,8 @@
             'circuit': { likes: 0, dislikes: 0 },
             'causality': { likes: 0, dislikes: 0 },
             'builder': { likes: 0, dislikes: 0 },
-            'basket': { likes: 0, dislikes: 0 }
+            'basket': { likes: 0, dislikes: 0 },
+            'music': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -744,7 +746,8 @@
             'circuit': '.activity-card.circuit',
             'causality': '.activity-card.causality',
             'builder': '.activity-card.builder',
-            'basket': '.activity-card.basket'
+            'basket': '.activity-card.basket',
+            'music': '.activity-card.music'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -792,7 +795,8 @@
             'circuit': { likes: 0, dislikes: 0 },
             'causality': { likes: 0, dislikes: 0 },
             'builder': { likes: 0, dislikes: 0 },
-            'basket': { likes: 0, dislikes: 0 }
+            'basket': { likes: 0, dislikes: 0 },
+            'music': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -829,7 +833,8 @@
             'circuit': '.activity-card.circuit',
             'causality': '.activity-card.causality',
             'builder': '.activity-card.builder',
-            'basket': '.activity-card.basket'
+            'basket': '.activity-card.basket',
+            'music': '.activity-card.music'
         };
 
         Object.keys(idMap).forEach(actId => {

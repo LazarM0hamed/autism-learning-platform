@@ -89,6 +89,7 @@
         if (path.includes('causality')) return 'causality';
         if (path.includes('builder')) return 'builder';
         if (path.includes('basket')) return 'basket';
+        if (path.includes('music')) return 'music';
         return null;
     }
 
@@ -121,6 +122,10 @@
 
     function isBasketPage() {
         return window.location.pathname.toLowerCase().includes('basket');
+    }
+
+    function isMusicPage() {
+        return window.location.pathname.toLowerCase().includes('music');
     }
 
     // Size Profile Management
@@ -238,6 +243,9 @@
         } else if (isBasketPage()) {
             // In basket shape, floor balls on court
             items = Array.from(document.querySelectorAll('.ball-launch-btn'));
+        } else if (isMusicPage()) {
+            // In music partition, note blocks Do to Si
+            items = Array.from(document.querySelectorAll('#keyboard-tray .key-block-btn, .key-block-btn'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -258,6 +266,9 @@
             }
             if (!items.length) {
                 items = Array.from(document.querySelectorAll('.ball-launch-btn'));
+            }
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('.key-block-btn'));
             }
         }
 
@@ -729,6 +740,7 @@
                         m.target?.classList?.contains('cause-btn') ||
                         m.target?.classList?.contains('piece-card') ||
                         m.target?.classList?.contains('ball-launch-btn') ||
+                        m.target?.classList?.contains('key-block-btn') ||
                         m.target?.classList?.contains('settings-bar') ||
                         m.target?.id === 'alp-controller-hud') {
                         continue;
@@ -742,7 +754,8 @@
                             node.classList?.contains('ball-choice-btn') ||
                             node.classList?.contains('cause-btn') ||
                             node.classList?.contains('piece-card') ||
-                            node.classList?.contains('ball-launch-btn')
+                            node.classList?.contains('ball-launch-btn') ||
+                            node.classList?.contains('key-block-btn')
                         )) {
                             shouldRefresh = true;
                             break;
@@ -758,7 +771,8 @@
                             node.classList?.contains('ball-choice-btn') ||
                             node.classList?.contains('cause-btn') ||
                             node.classList?.contains('piece-card') ||
-                            node.classList?.contains('ball-launch-btn')
+                            node.classList?.contains('ball-launch-btn') ||
+                            node.classList?.contains('key-block-btn')
                         )) {
                             shouldRefresh = true;
                             break;

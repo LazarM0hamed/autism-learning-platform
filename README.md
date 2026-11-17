@@ -417,6 +417,23 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 18: 🎵 Music Partition ("Partition Musicale")
+* **Route:** `/music.html`
+* **Target Skills:** Auditory-visual correspondence, musical memory, melodic pattern copying, color-pitch association.
+* **1-to-1 Column Alignment:** Player row sits directly below the model row so children can match notes column-by-column.
+* **Animated Marimba Demo Playback:** Model notes bounce and light up in sync with warm marimba/piano tones on round start or tap.
+* **5 French Comptines:**
+  1. 🔔 *Frère Jacques*
+  2. 🌙 *Au clair de la lune*
+  3. 🎭 *Ainsi font, font, font*
+  4. ⭐ *Ah ! vous dirai-je, maman* (*Twinkle Little Star*)
+  5. 🎶 *J'ai du bon tabac*
+* **3 Length Levels:** ⭐ 3 Notes, ⭐⭐ 5 Notes, ⭐⭐⭐ 8 Notes.
+* **Dancing Melody Reward:** Completing the partition triggers an animated stage where the comptine character dances in time with a full 11-to-14-note extract of the song.
+* **Controller Support:** Native keyboard/gamepad navigation (`1` to `7` number keys for Do to Si or D-Pad navigation on `.key-block-btn`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.

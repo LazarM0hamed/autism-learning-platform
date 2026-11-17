@@ -185,6 +185,9 @@ if (!inputManagerSrc.includes('isBuilderPage') || !inputManagerSrc.includes('pie
 if (!inputManagerSrc.includes('isBasketPage') || !inputManagerSrc.includes('ball-launch-btn')) {
     throw new Error('input-manager.js must support basket.html (.ball-launch-btn)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card) & Basket Shape (.ball-launch-btn)');
+if (!inputManagerSrc.includes('isMusicPage') || !inputManagerSrc.includes('key-block-btn')) {
+    throw new Error('input-manager.js must support music.html (.key-block-btn)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn) & Music Partition (.key-block-btn)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');
