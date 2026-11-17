@@ -183,7 +183,10 @@ assert(indexHtml.includes('id="alp-user-chip"'), 'index.html must include alp-us
 assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent.html link');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
 assert(likeBadgeCount === 14, `All 14 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
-console.log('✓ Parent Hub, Profile Switcher header, and 14 like badges anchored in index.html');
+const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
+assert(bookmarkBtnCount === 14, `All 14 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
+console.log('✓ Parent Hub, 14 like badges, and 14 bookmark star buttons verified in index.html');
 
 // Verify In-Activity Feedback Widget embedded across all 14 activity pages
 const activityPages = [

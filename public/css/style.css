@@ -1999,6 +1999,125 @@ body {
     color: inherit;
 }
 
+/* Hub Activity Bookmarking & Filter Bar */
+.hub-filter-bar {
+    width: 100%;
+    max-width: var(--options-grid-max-w, 900px);
+    display: flex;
+    justify-content: center;
+    margin: 4px 0 16px 0;
+}
+
+.hub-filter-pills {
+    background: #FFFFFF;
+    border: 2px solid #E2E8F0;
+    border-radius: 24px;
+    padding: 4px;
+    display: inline-flex;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+}
+
+.hub-filter-pill {
+    border: none;
+    background: transparent;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.hub-filter-pill:hover {
+    color: var(--text-primary);
+    background: #F8FAFC;
+}
+
+.hub-filter-pill.active {
+    background: #4D96FF;
+    color: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(77, 150, 255, 0.3);
+}
+
+.hub-filter-pill .filter-count {
+    background: rgba(0, 0, 0, 0.08);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.hub-filter-pill.active .filter-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: #FFFFFF;
+}
+
+/* Tactile Bookmark Star Button on Cards */
+.activity-bookmark-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    background: rgba(255, 255, 255, 0.85);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: #CBD5E1;
+    z-index: 10;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.activity-bookmark-btn:hover {
+    background: #FFFFFF;
+    color: #F59E0B;
+    transform: scale(1.18);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.activity-bookmark-btn:active {
+    transform: scale(0.92);
+}
+
+.activity-bookmark-btn.is-bookmarked {
+    color: #F59E0B;
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25);
+}
+
+.activity-bookmark-btn.is-bookmarked .bookmark-star {
+    filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.3));
+}
+
+/* Empty Favorites State */
+.empty-favorites-hint {
+    background: #FFFBEB;
+    border: 2px dashed #FCD34D;
+    border-radius: 20px;
+    padding: 24px 20px;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 12px auto 24px auto;
+    color: #92400E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
 .parent-refresh-btn {
     background: #EFF6FF;
     border: 1px solid #BFDBFE;

@@ -80,6 +80,8 @@
         if (isHubPage()) {
             loadDashboardRecommendations();
             loadDashboardLikes();
+            updateBookmarksUI();
+            setupFilterBar();
 
             // First-time visit auto-prompt on hub
             const stored = localStorage.getItem(KEY_NICKNAME);
@@ -968,12 +970,121 @@
         }
     });
 
+    // Bookmarking & Favorites Management (Persisted per Child Profile)
+    function getBookmarksKey() {
+        const nick = (currentNickname || 'default').trim().toLowerCase();
+        return `alp_bookmarks_${nick}`;
+    }
+
+    function getBookmarkedActivities() {
+        return JSON.parse(localStorage.getItem(getBookmarksKey()) || '[]');
+    }
+
+    function toggleBookmarkActivity(activityId) {
+        let list = getBookmarkedActivities();
+        const exists = list.includes(activityId);
+        if (exists) {
+            list = list.filter(id => id !== activityId);
+        } else {
+            list.push(activityId);
+        }
+        localStorage.setItem(getBookmarksKey(), JSON.stringify(list));
+        updateBookmarksUI();
+        return !exists;
+    }
+
+    function updateBookmarksUI() {
+        const bookmarks = getBookmarkedActivities();
+        const activeFilter = localStorage.getItem('alp_hub_active_filter') || 'all';
+
+        const favCountBadge = document.getElementById('count-fav');
+        if (favCountBadge) favCountBadge.innerText = bookmarks.length;
+
+        document.querySelectorAll('.activity-bookmark-btn').forEach(btn => {
+            const actId = btn.getAttribute('data-activity');
+            const isFav = bookmarks.includes(actId);
+            btn.classList.toggle('is-bookmarked', isFav);
+            btn.title = isFav ? (currentLang === 'fr' ? 'Retirer des favoris' : 'Remove from favorites') : (currentLang === 'fr' ? 'Ajouter aux favoris' : 'Add to favorites');
+            const star = btn.querySelector('.bookmark-star');
+            if (star) star.innerText = isFav ? '⭐' : '☆';
+        });
+
+        // Filter cards if on hub page
+        if (isHubPage()) {
+            const cards = document.querySelectorAll('.activities-grid .activity-card');
+            let visibleCount = 0;
+            cards.forEach(card => {
+                const actId = card.getAttribute('data-activity');
+                if (activeFilter === 'fav') {
+                    const isVisible = bookmarks.includes(actId);
+                    card.style.display = isVisible ? 'flex' : 'none';
+                    if (isVisible) visibleCount++;
+                } else {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                }
+            });
+
+            const emptyHint = document.getElementById('empty-favorites-hint');
+            if (emptyHint) {
+                emptyHint.style.display = (activeFilter === 'fav' && visibleCount === 0) ? 'flex' : 'none';
+            }
+
+            const allBtn = document.getElementById('filter-all-btn');
+            const favBtn = document.getElementById('filter-fav-btn');
+            if (allBtn) {
+                allBtn.classList.toggle('active', activeFilter === 'all');
+                allBtn.setAttribute('aria-selected', String(activeFilter === 'all'));
+            }
+            if (favBtn) {
+                favBtn.classList.toggle('active', activeFilter === 'fav');
+                favBtn.setAttribute('aria-selected', String(activeFilter === 'fav'));
+            }
+        }
+    }
+
+    function setupFilterBar() {
+        const allBtn = document.getElementById('filter-all-btn');
+        const favBtn = document.getElementById('filter-fav-btn');
+
+        if (allBtn && !allBtn.dataset.bound) {
+            allBtn.dataset.bound = 'true';
+            allBtn.onclick = () => {
+                localStorage.setItem('alp_hub_active_filter', 'all');
+                updateBookmarksUI();
+            };
+        }
+        if (favBtn && !favBtn.dataset.bound) {
+            favBtn.dataset.bound = 'true';
+            favBtn.onclick = () => {
+                localStorage.setItem('alp_hub_active_filter', 'fav');
+                updateBookmarksUI();
+            };
+        }
+    }
+
+    // Global Event Delegation for Activity Bookmark Stars
+    document.addEventListener('click', (e) => {
+        const starBtn = e.target && e.target.closest && e.target.closest('.activity-bookmark-btn');
+        if (starBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const actId = starBtn.getAttribute('data-activity');
+            if (actId) {
+                toggleBookmarkActivity(actId);
+            }
+        }
+    });
+
     // Public API for Game Engines & Pages
     window.AlpTracker = {
         initSession,
         showProfileModal,
         selectProfile,
         openContactFeedbackModal,
+        toggleBookmark: toggleBookmarkActivity,
+        getBookmarks: getBookmarkedActivities,
+        updateBookmarks: updateBookmarksUI,
         onQuestionStart,
         onAttempt,
         onTrialSuccess,

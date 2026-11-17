@@ -46,11 +46,34 @@
         <p class="subtitle" id="dashboard-subtitle">Select an activity to begin learning</p>
     </header>
 
+    <!-- Activity Filter Bar (All vs Bookmarked Favorites) -->
+    <div class="hub-filter-bar">
+        <div class="hub-filter-pills" role="tablist" aria-label="Filter Activities">
+            <button type="button" class="hub-filter-pill active" id="filter-all-btn" role="tab" aria-selected="true">
+                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">14</span>
+            </button>
+            <button type="button" class="hub-filter-pill" id="filter-fav-btn" role="tab" aria-selected="false">
+                ⭐ <span id="lbl-filter-fav">Mes Favoris</span> <span class="filter-count" id="count-fav">0</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Empty Favorites State Banner -->
+    <div class="empty-favorites-hint" id="empty-favorites-hint" style="display: none;">
+        <span style="font-size: 2rem;">⭐</span>
+        <p style="margin: 0; font-weight: 800; font-size: 1.05rem;" id="lbl-empty-fav">
+            Touche l'étoile ⭐ sur tes jeux préférés pour les retrouver ici en accès rapide !
+        </p>
+    </div>
+
     <!-- Structured Learning Activities -->
     <h2 class="hub-section-title" id="sec-logic-title">🧩 Structured Learning Activities</h2>
     <main class="activities-grid">
         <!-- Row 1: Visual Discrimination & Logic -->
-        <a href="game.html" class="activity-card find">
+        <a href="game.html" class="activity-card find" data-activity="find_and_match">
+            <button type="button" class="activity-bookmark-btn" data-activity="find_and_match" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🔍</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-find-title">Find & Match</span>
@@ -61,7 +84,10 @@
             </div>
         </a>
 
-        <a href="colors.html" class="activity-card colors">
+        <a href="colors.html" class="activity-card colors" data-activity="colors">
+            <button type="button" class="activity-bookmark-btn" data-activity="colors" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🎨</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-colors-title">Colors</span>
@@ -72,7 +98,10 @@
             </div>
         </a>
 
-        <a href="pattern.html" class="activity-card pattern">
+        <a href="pattern.html" class="activity-card pattern" data-activity="pattern">
+            <button type="button" class="activity-bookmark-btn" data-activity="pattern" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🧩</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-pattern-title">Complete the Pattern</span>
@@ -84,7 +113,10 @@
         </a>
 
         <!-- Letters, Colouring, Words & Spatial Pre-coding -->
-        <a href="letters.html" class="activity-card letters">
+        <a href="letters.html" class="activity-card letters" data-activity="letters_puzzle">
+            <button type="button" class="activity-bookmark-btn" data-activity="letters_puzzle" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🔤</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-letters-title">Letter Inset Puzzle</span>
@@ -95,7 +127,10 @@
             </div>
         </a>
 
-        <a href="coloring.html" class="activity-card coloring">
+        <a href="coloring.html" class="activity-card coloring" data-activity="coloring">
+            <button type="button" class="activity-bookmark-btn" data-activity="coloring" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🖍️</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-coloring-title">Match & Colour</span>
@@ -106,7 +141,10 @@
             </div>
         </a>
 
-        <a href="spelling.html" class="activity-card spelling">
+        <a href="spelling.html" class="activity-card spelling" data-activity="spelling">
+            <button type="button" class="activity-bookmark-btn" data-activity="spelling" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">✍️</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-spelling-title">Spell the Word</span>
@@ -117,7 +155,10 @@
             </div>
         </a>
 
-        <a href="spatial.html" class="activity-card spatial">
+        <a href="spatial.html" class="activity-card spatial" data-activity="spatial">
+            <button type="button" class="activity-bookmark-btn" data-activity="spatial" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🧭</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-spatial-title">Guide the Animal</span>
@@ -129,7 +170,10 @@
         </a>
 
         <!-- Math, Concept Comparisons & Temporal Orientation -->
-        <a href="math.html" class="activity-card math">
+        <a href="math.html" class="activity-card math" data-activity="math">
+            <button type="button" class="activity-bookmark-btn" data-activity="math" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🔢</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-math-title">Counting & Math</span>
@@ -140,7 +184,10 @@
             </div>
         </a>
 
-        <a href="comparisons.html" class="activity-card comparisons">
+        <a href="comparisons.html" class="activity-card comparisons" data-activity="comparisons">
+            <button type="button" class="activity-bookmark-btn" data-activity="comparisons" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">⚖️</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-comparisons-title">Opposites & Comparisons</span>
@@ -151,7 +198,10 @@
             </div>
         </a>
 
-        <a href="time.html" class="activity-card time">
+        <a href="time.html" class="activity-card time" data-activity="time">
+            <button type="button" class="activity-bookmark-btn" data-activity="time" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">☀️</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-time-title">Time & Calendar</span>
@@ -163,7 +213,10 @@
         </a>
 
         <!-- Daily Life Routines -->
-        <a href="sequence.html" class="activity-card sequence">
+        <a href="sequence.html" class="activity-card sequence" data-activity="sequence">
+            <button type="button" class="activity-bookmark-btn" data-activity="sequence" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🦷</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-sequence-title">Routine Steps</span>
@@ -175,7 +228,10 @@
         </a>
 
         <!-- Motor Planning & Maze -->
-        <a href="labyrinth.html" class="activity-card labyrinth">
+        <a href="labyrinth.html" class="activity-card labyrinth" data-activity="labyrinth">
+            <button type="button" class="activity-bookmark-btn" data-activity="labyrinth" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🔮</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-labyrinth-title">Ball Labyrinth</span>
@@ -187,7 +243,10 @@
         </a>
 
         <!-- Auditory Discrimination & Marble Run -->
-        <a href="sounds.html" class="activity-card sounds">
+        <a href="sounds.html" class="activity-card sounds" data-activity="sounds">
+            <button type="button" class="activity-bookmark-btn" data-activity="sounds" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🔊</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-sounds-title">Identify Sounds</span>
@@ -198,7 +257,10 @@
             </div>
         </a>
 
-        <a href="circuit.html" class="activity-card circuit">
+        <a href="circuit.html" class="activity-card circuit" data-activity="circuit">
+            <button type="button" class="activity-bookmark-btn" data-activity="circuit" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
             <span class="activity-card-icon" aria-hidden="true">🎢</span>
             <div class="activity-card-text">
                 <span class="activity-card-title" id="act-circuit-title">Ball Circuit</span>
@@ -246,7 +308,10 @@
                 actCircuitDesc: "Drop and roll colored marble balls",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
-                brandTagline: "Sensory-adapted developmental learning"
+                brandTagline: "Sensory-adapted developmental learning",
+                lblFilterAll: "All Activities",
+                lblFilterFav: "My Favorites",
+                lblEmptyFav: "Tap the star ⭐ on your favorite activities to pin them here for fast access!"
             },
             fr: {
                 title: "À quoi joue-t-on aujourd'hui ?",
@@ -282,7 +347,10 @@
                 actCircuitDesc: "Fais rouler les billes sur les rampes en bois",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
-                brandTagline: "Activités d'apprentissage adaptées & sensorielles"
+                brandTagline: "Activités d'apprentissage adaptées & sensorielles",
+                lblFilterAll: "Toutes les activités",
+                lblFilterFav: "Mes Favoris",
+                lblEmptyFav: "Touche l'étoile ⭐ sur tes jeux préférés pour les retrouver ici en accès rapide !"
             }
         };
 
@@ -302,6 +370,15 @@
 
             const taglineEl = document.getElementById('dashboard-tagline');
             if (taglineEl) taglineEl.innerText = t.brandTagline;
+
+            const filterAllEl = document.getElementById('lbl-filter-all');
+            if (filterAllEl) filterAllEl.innerText = t.lblFilterAll;
+
+            const filterFavEl = document.getElementById('lbl-filter-fav');
+            if (filterFavEl) filterFavEl.innerText = t.lblFilterFav;
+
+            const emptyFavEl = document.getElementById('lbl-empty-fav');
+            if (emptyFavEl) emptyFavEl.innerText = t.lblEmptyFav;
             document.getElementById('dashboard-title').innerText = t.title;
             document.getElementById('dashboard-subtitle').innerText = t.subtitle;
             document.getElementById('sec-logic-title').innerText = t.secLogic;
