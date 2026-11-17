@@ -52,6 +52,10 @@
             icon: '⚖️',
             name: { en: 'Opposites & Comparisons', fr: 'Les Contraires' }
         },
+        'labyrinth': {
+            icon: '🔮',
+            name: { en: 'Ball Labyrinth', fr: 'Labyrinthe à billes' }
+        },
         'general': {
             icon: '🌟',
             name: { en: 'General Learning', fr: 'Apprentissages généraux' }

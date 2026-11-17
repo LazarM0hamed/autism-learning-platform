@@ -325,6 +325,26 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 12: 🔮 Ball Labyrinth ("Labyrinthe à billes")
+* **Route:** `/labyrinth.html`
+* **Target Skills:** Visual-spatial planning, detour reasoning, motor inhibition, cause-and-effect steering.
+* **Inspired by Classic Wooden Magnetic Ball Mazes:**
+  - **Solid Black Wall Cells (`#2B2D42`):** Physical barriers placed throughout the grid that block direct paths, requiring the child to navigate detours around corners.
+  - **Multiple Balls & Matching Target Pockets:** Each board contains 2 to 4 colored (or numbered) marble balls that must each be guided into their matching target pocket.
+  - **Tap-to-Switch Control:** One ball is actively controlled at a time (highlighted with a glowing yellow beacon ring). Tapping any marble ball or top status chip switches steering focus instantly—just like moving a magnetic wand.
+  - **Non-Punitive Navigation:** Pressing into a wall, board edge, or another ball simply keeps the marble in place with a soft step tone and zero harsh error buzzers.
+* **Progressive Levels:**
+  1. **Niveau 1 (2 Billes):** Red and Blue balls with a central dividing wall.
+  2. **Niveau 2 (Détours):** 3 balls (Red, Orange, Green) with corner obstacles.
+  3. **Niveau 3 (4 Couleurs):** 4 balls (Red, Blue, Green, Purple) in a 6x6 maze.
+  4. **Niveau 4 (Chiffres 1-2-3-4):** Numbered balls matching numbered target pockets (1, 2, 3, 4).
+* **Controls & Speech:**
+  - Tactile on-screen D-Pad or standard keyboard arrows (`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight` / `1`–`4`).
+  - Spoken directional voice on each step (*"Haut"*, *"Bas"*, *"Gauche"*, *"Droite"* / *"Up"*, *"Down"*, *"Left"*, *"Right"*).
+  - Harmonic major chord celebration on level completion.
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.

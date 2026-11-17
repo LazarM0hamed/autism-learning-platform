@@ -164,6 +164,8 @@ comparisonsData.pairs.forEach(p => {
 });
 assert(fs.existsSync('public/coloring.html'), 'coloring.html must exist');
 assert(fs.existsSync('public/comparisons.html'), 'comparisons.html must exist');
-console.log('✓ Colour Matching and Comparison Concepts datasets & routes verified');
+assert(fs.existsSync('public/labyrinth.html'), 'labyrinth.html must exist');
+assert(fs.existsSync('public/js/labyrinth-engine.js'), 'labyrinth-engine.js must exist');
+console.log('✓ Colour Matching, Comparison Concepts, and Ball Labyrinth datasets & routes verified');
 
 console.log('ALL STORAGE, SESSION & PARENT ANALYTICS TESTS PASSED!');

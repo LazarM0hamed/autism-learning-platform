@@ -64,6 +64,7 @@
         if (path.includes('time.html')) return 'time';
         if (path.includes('coloring.html')) return 'coloring';
         if (path.includes('comparisons.html')) return 'comparisons';
+        if (path.includes('labyrinth.html')) return 'labyrinth';
         return 'general';
     }
 
@@ -553,7 +554,8 @@
             'colors': '.activity-card.colors',
             'time': '.activity-card.time',
             'coloring': '.activity-card.coloring',
-            'comparisons': '.activity-card.comparisons'
+            'comparisons': '.activity-card.comparisons',
+            'labyrinth': '.activity-card.labyrinth'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -595,7 +597,8 @@
             'math': { likes: 9, dislikes: 0 },
             'comparisons': { likes: 12, dislikes: 0 },
             'time': { likes: 8, dislikes: 0 },
-            'sequence': { likes: 11, dislikes: 0 }
+            'sequence': { likes: 11, dislikes: 0 },
+            'labyrinth': { likes: 12, dislikes: 0 }
         };
 
         try {
@@ -626,7 +629,8 @@
             'colors': '.activity-card.colors',
             'time': '.activity-card.time',
             'coloring': '.activity-card.coloring',
-            'comparisons': '.activity-card.comparisons'
+            'comparisons': '.activity-card.comparisons',
+            'labyrinth': '.activity-card.labyrinth'
         };
 
         Object.keys(idMap).forEach(actId => {

@@ -115,6 +115,15 @@
                 <span class="activity-card-desc" id="act-sequence-desc">Put daily scenes in the right order</span>
             </div>
         </a>
+
+        <!-- Motor Planning & Maze -->
+        <a href="labyrinth.html" class="activity-card labyrinth">
+            <span class="activity-card-icon" aria-hidden="true">🔮</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-labyrinth-title">Ball Labyrinth</span>
+                <span class="activity-card-desc" id="act-labyrinth-desc">Guide colored balls through the wooden maze</span>
+            </div>
+        </a>
     </main>
 
     <script>
@@ -144,7 +153,9 @@
                 actColoringTitle: "Match & Colour",
                 actColoringDesc: "Reproduce colors on object outlines",
                 actComparisonsTitle: "Opposites & Comparisons",
-                actComparisonsDesc: "Big/Small, Hot/Cold, Heavy/Light"
+                actComparisonsDesc: "Big/Small, Hot/Cold, Heavy/Light",
+                actLabyrinthTitle: "Ball Labyrinth",
+                actLabyrinthDesc: "Guide colored balls through the wooden maze"
             },
             fr: {
                 title: "À quoi joue-t-on aujourd'hui ?",
@@ -171,7 +182,9 @@
                 actColoringTitle: "Colorie le modèle",
                 actColoringDesc: "Reproduis les couleurs sur les contours",
                 actComparisonsTitle: "Les Contraires",
-                actComparisonsDesc: "Grand/Petit, Chaud/Froid, Lourd/Léger"
+                actComparisonsDesc: "Grand/Petit, Chaud/Froid, Lourd/Léger",
+                actLabyrinthTitle: "Labyrinthe à billes",
+                actLabyrinthDesc: "Guide les billes dans le labyrinthe en bois"
             }
         };
 
@@ -223,6 +236,11 @@
             if (compTitle) compTitle.innerText = t.actComparisonsTitle;
             const compDesc = document.getElementById('act-comparisons-desc');
             if (compDesc) compDesc.innerText = t.actComparisonsDesc;
+
+            const labTitle = document.getElementById('act-labyrinth-title');
+            if (labTitle) labTitle.innerText = t.actLabyrinthTitle;
+            const labDesc = document.getElementById('act-labyrinth-desc');
+            if (labDesc) labDesc.innerText = t.actLabyrinthDesc;
 
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
