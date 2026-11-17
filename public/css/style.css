@@ -1427,6 +1427,43 @@ body {
     color: #FFFFFF;
 }
 
+/* Avatar Picker inside Profile Modal */
+.avatar-picker-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 4px 0;
+}
+
+.avatar-opt-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid #E2E8F0;
+    background: #F8FAFC;
+    font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.12s ease, border-color 0.15s ease, background 0.15s ease;
+    user-select: none;
+}
+
+.avatar-opt-btn:hover {
+    transform: scale(1.1);
+    background: #EFF6FF;
+    border-color: #3B82F6;
+}
+
+.avatar-opt-btn.active {
+    border-color: #3B82F6;
+    background: #DBEAFE;
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
 /* Adaptive Recommendation Badges on Dashboard */
 .alp-rec-badge {
     position: absolute;

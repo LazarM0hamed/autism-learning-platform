@@ -80,6 +80,12 @@
         if (isHubPage()) {
             loadDashboardRecommendations();
             loadDashboardLikes();
+
+            // First-time visit auto-prompt on hub
+            if (!localStorage.getItem(KEY_NICKNAME) && !sessionStorage.getItem('alp_prompted_profile')) {
+                sessionStorage.setItem('alp_prompted_profile', 'true');
+                setTimeout(showProfileModal, 350);
+            }
         } else if (!isParentPage()) {
             renderFeedbackWidget();
         }
@@ -448,41 +454,55 @@
     }
 
     // Profile Selection & Nickname Prompt Modal
-    async function showProfileModal() {
+    function showProfileModal() {
         let modal = document.getElementById('alp-profile-modal');
         if (modal) modal.remove();
 
-        let profiles = [];
-        try {
-            const res = await fetch('/api/profiles');
-            const data = await res.json();
-            if (data.success && data.profiles) profiles = data.profiles;
-        } catch (e) {}
+        const AVATARS = ['🦊', '🦁', '🐼', '🐰', '🐶', '🐱', '🚀', '🦄', '🐻', '🦖'];
+        let chosenEmoji = currentEmoji !== '👤' ? currentEmoji : '🦊';
+
+        let profiles = JSON.parse(localStorage.getItem('alp_local_profiles') || '[]');
+        if (!profiles.length && currentNickname) {
+            profiles.push({ nickname: currentNickname, emoji: chosenEmoji });
+        }
 
         modal = document.createElement('div');
         modal.id = 'alp-profile-modal';
         modal.className = 'alp-modal-overlay';
 
         const profilePills = profiles.map(p => `
-            <button class="profile-quick-pill" data-nickname="${p.nickname}" data-emoji="${p.emoji || '🌟'}">
-                <span class="profile-pill-emoji">${p.emoji || '🌟'}</span>
+            <button type="button" class="profile-quick-pill" data-nickname="${p.nickname}" data-emoji="${p.emoji || '🦊'}">
+                <span class="profile-pill-emoji">${p.emoji || '🦊'}</span>
                 <span class="profile-pill-name">${p.nickname}</span>
+            </button>
+        `).join('');
+
+        const avatarButtons = AVATARS.map(a => `
+            <button type="button" class="avatar-opt-btn ${a === chosenEmoji ? 'active' : ''}" data-emoji="${a}" title="${a}">
+                ${a}
             </button>
         `).join('');
 
         modal.innerHTML = `
             <div class="alp-modal-box">
-                <h2 class="modal-title">👋 ${currentLang === 'fr' ? 'Qui joue aujourd\'hui ?' : 'Who is playing today?'}</h2>
-                <p class="modal-subtitle">${currentLang === 'fr' ? 'Choisis un profil existant ou écris ton prénom :' : 'Pick an existing profile or enter your name:'}</p>
+                <h2 class="modal-title">👋 ${currentLang === 'fr' ? 'Profil de l\'enfant' : 'Child Profile'}</h2>
+                <p class="modal-subtitle">${currentLang === 'fr' ? 'Écris ton prénom et choisis ton avatar préféré :' : 'Enter your name and pick your favorite avatar:'}</p>
 
                 ${profiles.length ? `<div class="profile-quick-list">${profilePills}</div>` : ''}
 
                 <div class="profile-input-group">
-                    <input type="text" id="alp-nickname-input" class="alp-modal-input" placeholder="${currentLang === 'fr' ? 'Prénom ou surnom (ex: Ilyen)' : 'Name or nickname (e.g. Ilyen)'}" maxlength="24" value="${currentNickname || ''}" autofocus>
+                    <input type="text" id="alp-nickname-input" class="alp-modal-input" placeholder="${currentLang === 'fr' ? 'Prénom (ex: Ilyen, Lucas, Sarah...)' : 'Name (e.g. Ilyen, Leo, Emma...)'}" maxlength="24" value="${currentNickname || ''}" autocomplete="off">
+                </div>
+
+                <div class="avatar-picker-row" id="modal-avatar-picker">
+                    ${avatarButtons}
                 </div>
 
                 <div class="modal-buttons">
-                    <button class="modal-btn save-btn" id="modal-profile-start">
+                    <button type="button" class="modal-btn cancel-btn" id="modal-profile-cancel">
+                        ${currentLang === 'fr' ? 'Annuler' : 'Cancel'}
+                    </button>
+                    <button type="button" class="modal-btn save-btn" id="modal-profile-start">
                         🚀 ${currentLang === 'fr' ? 'C\'est parti !' : 'Let\'s Play!'}
                     </button>
                 </div>
@@ -491,26 +511,70 @@
 
         document.body.appendChild(modal);
 
+        const input = document.getElementById('alp-nickname-input');
+        setTimeout(() => {
+            input?.focus();
+            if (input && input.value) input.select();
+        }, 60);
+
+        // Avatar option selection
+        modal.querySelectorAll('.avatar-opt-btn').forEach(btn => {
+            btn.onclick = () => {
+                modal.querySelectorAll('.avatar-opt-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                chosenEmoji = btn.getAttribute('data-emoji') || '🦊';
+            };
+        });
+
+        // Quick select existing profile
         modal.querySelectorAll('.profile-quick-pill').forEach(btn => {
             btn.onclick = () => {
-                selectProfile(btn.getAttribute('data-nickname'), btn.getAttribute('data-emoji'));
+                const nick = btn.getAttribute('data-nickname');
+                const emo = btn.getAttribute('data-emoji');
+                selectProfile(nick, emo);
                 modal.remove();
             };
         });
 
-        document.getElementById('modal-profile-start')?.addEventListener('click', () => {
-            const input = document.getElementById('alp-nickname-input');
-            const nick = (input?.value || '').trim() || 'Champion';
-            selectProfile(nick, '🌟');
+        const saveAction = () => {
+            const rawNick = (input?.value || '').trim();
+            const nick = rawNick || (currentLang === 'fr' ? 'Ilyen' : 'Champion');
+            selectProfile(nick, chosenEmoji);
             modal.remove();
+        };
+
+        input?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                saveAction();
+            }
         });
+
+        document.getElementById('modal-profile-start')?.addEventListener('click', saveAction);
+        document.getElementById('modal-profile-cancel')?.addEventListener('click', () => modal.remove());
     }
 
-    function selectProfile(nickname, emoji = '🌟') {
+    function selectProfile(nickname, emoji = '🦊') {
         currentNickname = nickname;
         currentEmoji = emoji;
         localStorage.setItem(KEY_NICKNAME, currentNickname);
         localStorage.setItem(KEY_EMOJI, currentEmoji);
+
+        // Save into local profiles array for multi-child households
+        const localProfiles = JSON.parse(localStorage.getItem('alp_local_profiles') || '[]');
+        if (!localProfiles.some(p => p.nickname.toLowerCase() === nickname.toLowerCase())) {
+            localProfiles.push({ nickname, emoji, createdAt: new Date().toISOString() });
+            localStorage.setItem('alp_local_profiles', JSON.stringify(localProfiles));
+        }
+
+        // Background server sync if available
+        try {
+            fetch('/api/profile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nickname, emoji })
+            }).catch(() => {});
+        } catch (e) {}
 
         initSession();
     }
