@@ -672,6 +672,8 @@ main {
 .activity-card.builder { border-left: 8px solid #F97316; }
 .activity-card.basket { border-left: 8px solid #EA580C; }
 .activity-card.music { border-left: 8px solid #EC4899; }
+.activity-card.classification { border-left: 8px solid #06B6D4; }
+.activity-card.hide_and_seek { border-left: 8px solid #84CC16; }
 
 .category-card.transport { border-bottom: 8px solid #93C5FD; }
 
@@ -1046,6 +1048,30 @@ main {
     outline: none !important;
     box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.55), 0 12px 24px rgba(0, 0, 0, 0.28) !important;
     transform: translateY(-6px) scale(1.08) !important;
+    z-index: 10;
+}
+
+.sort-basket.is-controller-focused {
+    outline: none !important;
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.55), 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+    transform: translateY(-4px) scale(1.04) !important;
+    z-index: 10;
+}
+
+.sort-basket .alp-card-badge {
+    top: -8px;
+    left: -8px;
+    padding: 3px 8px;
+    font-size: 0.85rem;
+    border-radius: 10px;
+}
+
+.search-cell.is-controller-focused {
+    outline: none !important;
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.55), 0 8px 18px rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-4px) scale(1.1) !important;
     z-index: 10;
 }
 

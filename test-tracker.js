@@ -182,6 +182,10 @@ assert(fs.existsSync('public/basket.html'), 'basket.html must exist');
 assert(fs.existsSync('public/js/basket-engine.js'), 'basket-engine.js must exist');
 assert(fs.existsSync('public/music.html'), 'music.html must exist');
 assert(fs.existsSync('public/js/music-engine.js'), 'music-engine.js must exist');
+assert(fs.existsSync('public/classification.html'), 'classification.html must exist');
+assert(fs.existsSync('public/js/classification-engine.js'), 'classification-engine.js must exist');
+assert(fs.existsSync('public/hide-and-seek.html'), 'hide-and-seek.html must exist');
+assert(fs.existsSync('public/js/hide-and-seek-engine.js'), 'hide-and-seek-engine.js must exist');
 console.log('✓ All 20 authentic MP3 sound effects verified in public/assets/sounds/');
 
 // Verify Hub Header Bar & Parent Hub Link
@@ -190,19 +194,19 @@ assert(indexHtml.includes('id="alp-user-header-bar"'), 'index.html must include 
 assert(indexHtml.includes('id="alp-user-chip"'), 'index.html must include alp-user-chip');
 assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent.html link');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
-assert(likeBadgeCount === 18, `All 18 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+assert(likeBadgeCount === 20, `All 20 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
-assert(bookmarkBtnCount === 18, `All 18 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(bookmarkBtnCount === 20, `All 20 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
-console.log('✓ Parent Hub, 18 like badges, and 18 bookmark star buttons verified in index.html');
+console.log('✓ Parent Hub, 20 like badges, and 20 bookmark star buttons verified in index.html');
 
-// Verify In-Activity Feedback Widget embedded across all 18 activity pages
+// Verify In-Activity Feedback Widget embedded across all 20 activity pages
 const activityPages = [
     'game.html', 'colors.html', 'pattern.html', 'letters.html',
     'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
     'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
     'sounds.html', 'circuit.html', 'causality.html', 'builder.html', 'basket.html',
-    'music.html'
+    'music.html', 'classification.html', 'hide-and-seek.html'
 ];
 activityPages.forEach(p => {
     const html = fs.readFileSync(`public/${p}`, 'utf8');
@@ -210,7 +214,7 @@ activityPages.forEach(p => {
     assert(html.includes('favicon.svg'), `${p} must include favicon.svg`);
     assert(html.includes('assets/icons/logo.svg'), `${p} must include Infinity Harmony logo.svg`);
 });
-console.log('✓ In-activity feedback widget, favicon, and Infinity Harmony logo verified across all 18 activity pages');
+console.log('✓ In-activity feedback widget, favicon, and Infinity Harmony logo verified across all 20 activity pages');
 
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');
@@ -225,7 +229,7 @@ const builderEngineJs = fs.readFileSync('public/js/builder-engine.js', 'utf8');
 assert(builderEngineJs.includes('renderTargetModel') && builderEngineJs.includes('blue_cup'), 'builder-engine.js must include renderTargetModel and blue_cup');
 console.log('✓ Sounds & Causality Mix All, Fireworks celebration, and Builder visual target blueprint verified');
 
-console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, Circuit, Causality, Builder, Basket, and Music verified');
+console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, Circuit, Causality, Builder, Basket, Music, Classification, and Hide-and-Seek verified');
 
 // Clean teardown: preserve clean vierge storage state for deployment
 fs.writeFileSync('storage/feedback.json', JSON.stringify({ feedback: [] }, null, 2) + '\n');

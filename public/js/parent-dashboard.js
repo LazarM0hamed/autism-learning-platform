@@ -80,6 +80,14 @@
             icon: '🎵',
             name: { en: 'Music Partition', fr: 'Partition Musicale' }
         },
+        'classification': {
+            icon: '🗂️',
+            name: { en: 'Classification & Sorting', fr: 'Classification & Tri' }
+        },
+        'hide_and_seek': {
+            icon: '🔍',
+            name: { en: 'Hide & Seek', fr: 'Cache-Cache Visuel' }
+        },
         'general': {
             icon: '🌟',
             name: { en: 'General Learning', fr: 'Apprentissages généraux' }

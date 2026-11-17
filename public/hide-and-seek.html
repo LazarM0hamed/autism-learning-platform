@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <title>Cache-Cache Visuel - Learning Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .has-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+        }
+
+        /* Grid Size Switcher */
+        .size-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .size-btn {
+            background: #EDF2F7;
+            border: 2px solid transparent;
+            border-radius: 14px;
+            padding: 7px 16px;
+            font-size: 0.98rem;
+            font-weight: bold;
+            color: #4A5568;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .size-btn.active {
+            background: #FFD93D;
+            border-color: #ECC94B;
+            color: #2D3748;
+            transform: scale(1.04);
+        }
+
+        /* Target Spotlight Banner */
+        .target-finder-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: #FFFFFF;
+            border: 4px solid #4299E1;
+            border-radius: 22px;
+            padding: 10px 24px;
+            box-shadow: 0 6px 16px rgba(66, 153, 225, 0.14);
+        }
+        .target-preview-box {
+            width: 68px;
+            height: 68px;
+            border-radius: 16px;
+            background: #EBF8FF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.1rem;
+            font-weight: bold;
+            color: #2B6CB0;
+        }
+
+        /* Search Grid Board */
+        .search-board-frame {
+            background: #FFFDF9;
+            border: 4px solid #CBD5E0;
+            border-radius: 24px;
+            padding: 14px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+        }
+        .search-grid {
+            display: grid;
+            gap: 10px;
+        }
+        .search-cell {
+            width: 76px;
+            height: 76px;
+            background: #FFFFFF;
+            border: 3px solid #E2E8F0;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2D3748;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+            transition: transform 0.16s ease, opacity 0.25s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+        .search-cell:active {
+            transform: scale(0.92);
+        }
+        /* Non-matching tapped cells softly dim to help visual focus */
+        .search-cell.checked-miss {
+            opacity: 0.35;
+            background: #F7FAFC;
+            transform: scale(0.94);
+        }
+        /* Found Target Celebration */
+        .search-cell.found-winner {
+            border-color: #6BCB77;
+            background: #F0FFF4;
+            transform: scale(1.16);
+            box-shadow: 0 0 0 6px rgba(107, 203, 119, 0.35), 0 10px 20px rgba(0, 0, 0, 0.14);
+            z-index: 4;
+        }
+
+        @media (max-width: 540px) {
+            .search-cell { width: 60px; height: 60px; font-size: 2.35rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="game-header">
+        <div class="header-left">
+            <a href="index.html" class="header-logo-link" title="Autism Learning Platform">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" class="header-infinity-logo" width="42" height="42">
+            </a>
+            <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        </div>
+        <h2 id="activity-title" class="category-badge">🔍 Cache-Cache Visuel</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">0</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="has-stage">
+        <!-- Theme Pills -->
+        <nav class="routine-pills" id="has-pills" aria-label="Select hide and seek theme"></nav>
+
+        <!-- Grid Density Selector -->
+        <div class="size-bar">
+            <button class="size-btn active" data-cols="3" data-rows="3" id="grid-3x3-btn">⭐ Grille 3×3 (9)</button>
+            <button class="size-btn" data-cols="4" data-rows="4" id="grid-4x4-btn">⭐⭐ Grille 4×4 (16)</button>
+            <button class="size-btn" data-cols="5" data-rows="4" id="grid-5x4-btn">⭐⭐⭐ Grille 5×4 (20)</button>
+        </div>
+
+        <!-- Target Character/Object Spotlight -->
+        <div class="target-finder-banner">
+            <div class="target-preview-box" id="target-preview">🦊</div>
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.3rem, 3.3vw, 1.9rem); margin: 0;">Trouve : Le Renard</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat voice prompt" aria-label="Repeat voice prompt">🗣️</button>
+        </div>
+
+        <!-- Search Grid -->
+        <div class="search-board-frame">
+            <div class="search-grid" id="search-grid" role="grid" aria-label="Hide and seek grid"></div>
+        </div>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/hide-and-seek-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

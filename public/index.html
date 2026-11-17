@@ -50,7 +50,7 @@
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filter Activities">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">18</span>
+                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">20</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-fav-btn" role="tab" aria-selected="false">
                 ⭐ <span id="lbl-filter-fav">Mes Favoris</span> <span class="filter-count" id="count-fav">0</span>
@@ -326,6 +326,34 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <a href="classification.html" class="activity-card classification" data-activity="classification">
+            <button type="button" class="activity-bookmark-btn" data-activity="classification" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">🗂️</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-classification-title">Classification & Sorting</span>
+                <span class="activity-card-desc" id="act-classification-desc">Sort items into their matching baskets</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="classification">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
+
+        <a href="hide-and-seek.html" class="activity-card hide_and_seek" data-activity="hide_and_seek">
+            <button type="button" class="activity-bookmark-btn" data-activity="hide_and_seek" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">🔍</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-hide_and_seek-title">Hide & Seek</span>
+                <span class="activity-card-desc" id="act-hide_and_seek-desc">Spot the hidden target among visual distractors</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="hide_and_seek">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <script>
@@ -370,6 +398,10 @@
                 actBasketDesc: "Shoot shaped balls into morphing hoops",
                 actMusicTitle: "Music Partition",
                 actMusicDesc: "Play famous nursery rhyme melodies",
+                actClassificationTitle: "Classification & Sorting",
+                actClassificationDesc: "Sort items into their matching baskets",
+                actHideAndSeekTitle: "Hide & Seek",
+                actHideAndSeekDesc: "Spot the hidden target among visual distractors",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 brandTagline: "Sensory-adapted developmental learning",
@@ -417,6 +449,10 @@
                 actBasketDesc: "Lance le bon ballon dans le panier",
                 actMusicTitle: "Partition Musicale",
                 actMusicDesc: "Joue les mélodies des comptines célèbres",
+                actClassificationTitle: "Classification & Tri",
+                actClassificationDesc: "Range chaque élément dans son panier",
+                actHideAndSeekTitle: "Cache-Cache Visuel",
+                actHideAndSeekDesc: "Trouve la cible cachée parmi les intrus",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 brandTagline: "Activités d'apprentissage adaptées & sensorielles",
@@ -527,6 +563,16 @@
             const mscDesc = document.getElementById('act-music-desc');
             if (mscDesc) mscDesc.innerText = t.actMusicDesc;
 
+            const clsTitle = document.getElementById('act-classification-title');
+            if (clsTitle) clsTitle.innerText = t.actClassificationTitle;
+            const clsDesc = document.getElementById('act-classification-desc');
+            if (clsDesc) clsDesc.innerText = t.actClassificationDesc;
+
+            const hasTitle = document.getElementById('act-hide_and_seek-title');
+            if (hasTitle) hasTitle.innerText = t.actHideAndSeekTitle;
+            const hasDesc = document.getElementById('act-hide_and_seek-desc');
+            if (hasDesc) hasDesc.innerText = t.actHideAndSeekDesc;
+
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
@@ -543,10 +589,10 @@
 
     <!-- Version & Build Date Footer -->
     <footer class="app-version-footer">
-        <span class="version-tag" id="app-version-tag">🚀 v1.7.0 • Build: 2026-11-17 22:45 UTC</span>
+        <span class="version-tag" id="app-version-tag">🚀 v1.8.0 • Build: 2026-11-17 23:15 UTC</span>
     </footer>
 
-    <script src="js/tracker.js?v=1.7.0"></script>
-    <script src="js/input-manager.js?v=1.7.0"></script>
+    <script src="js/tracker.js?v=1.8.0"></script>
+    <script src="js/input-manager.js?v=1.8.0"></script>
 </body>
 </html>

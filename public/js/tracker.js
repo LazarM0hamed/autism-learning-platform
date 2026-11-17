@@ -60,6 +60,8 @@
         if (path.includes('builder')) return 'builder';
         if (path.includes('basket')) return 'basket';
         if (path.includes('music')) return 'music';
+        if (path.includes('classification')) return 'classification';
+        if (path.includes('hide-and-seek') || path.includes('hide_and_seek')) return 'hide_and_seek';
         return null;
     }
 
@@ -403,7 +405,9 @@
             'causality': { likes: 0, dislikes: 0 },
             'builder': { likes: 0, dislikes: 0 },
             'basket': { likes: 0, dislikes: 0 },
-            'music': { likes: 0, dislikes: 0 }
+            'music': { likes: 0, dislikes: 0 },
+            'classification': { likes: 0, dislikes: 0 },
+            'hide_and_seek': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -747,7 +751,9 @@
             'causality': '.activity-card.causality',
             'builder': '.activity-card.builder',
             'basket': '.activity-card.basket',
-            'music': '.activity-card.music'
+            'music': '.activity-card.music',
+            'classification': '.activity-card.classification',
+            'hide_and_seek': '.activity-card.hide_and_seek'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -796,7 +802,9 @@
             'causality': { likes: 0, dislikes: 0 },
             'builder': { likes: 0, dislikes: 0 },
             'basket': { likes: 0, dislikes: 0 },
-            'music': { likes: 0, dislikes: 0 }
+            'music': { likes: 0, dislikes: 0 },
+            'classification': { likes: 0, dislikes: 0 },
+            'hide_and_seek': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -834,7 +842,9 @@
             'causality': '.activity-card.causality',
             'builder': '.activity-card.builder',
             'basket': '.activity-card.basket',
-            'music': '.activity-card.music'
+            'music': '.activity-card.music',
+            'classification': '.activity-card.classification',
+            'hide_and_seek': '.activity-card.hide_and_seek'
         };
 
         Object.keys(idMap).forEach(actId => {

@@ -90,6 +90,8 @@
         if (path.includes('builder')) return 'builder';
         if (path.includes('basket')) return 'basket';
         if (path.includes('music')) return 'music';
+        if (path.includes('classification')) return 'classification';
+        if (path.includes('hide-and-seek') || path.includes('hide_and_seek')) return 'hide_and_seek';
         return null;
     }
 
@@ -126,6 +128,14 @@
 
     function isMusicPage() {
         return window.location.pathname.toLowerCase().includes('music');
+    }
+
+    function isClassificationPage() {
+        return window.location.pathname.toLowerCase().includes('classification');
+    }
+
+    function isHideAndSeekPage() {
+        return window.location.pathname.toLowerCase().includes('hide-and-seek');
     }
 
     // Size Profile Management
@@ -246,6 +256,12 @@
         } else if (isMusicPage()) {
             // In music partition, note blocks Do to Si
             items = Array.from(document.querySelectorAll('#keyboard-tray .key-block-btn, .key-block-btn'));
+        } else if (isClassificationPage()) {
+            // In classification & sorting, two destination baskets
+            items = Array.from(document.querySelectorAll('#baskets-row .sort-basket, .sort-basket'));
+        } else if (isHideAndSeekPage()) {
+            // In hide and seek, search grid cells
+            items = Array.from(document.querySelectorAll('#search-grid .search-cell, .search-cell'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -269,6 +285,12 @@
             }
             if (!items.length) {
                 items = Array.from(document.querySelectorAll('.key-block-btn'));
+            }
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('.sort-basket'));
+            }
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('.search-cell'));
             }
         }
 
@@ -369,19 +391,63 @@
         updateFocusVisuals();
     }
 
-    // Move Focus across grid rows
+    // Dynamically detect column count of active grid
+    function detectGridColumns() {
+        if (!activeOptions.length) return 1;
+        if (activeOptions.length === 1) return 1;
+
+        // 1. Try DOM layout detection via getBoundingClientRect
+        const r0 = typeof activeOptions[0].getBoundingClientRect === 'function' ? activeOptions[0].getBoundingClientRect() : null;
+        const r1 = typeof activeOptions[1].getBoundingClientRect === 'function' ? activeOptions[1].getBoundingClientRect() : null;
+
+        if (r0 && r1 && (r0.width > 0 || r0.height > 0 || r0.top !== r1.top)) {
+            const firstTop = Math.round(r0.top);
+            let cols = 0;
+            for (let i = 0; i < activeOptions.length; i++) {
+                const rect = activeOptions[i].getBoundingClientRect();
+                const top = Math.round(rect.top);
+                if (Math.abs(top - firstTop) <= 8) {
+                    cols++;
+                } else {
+                    break;
+                }
+            }
+            if (cols > 0) return cols;
+        }
+
+        // 2. Check CSS grid-template-columns inline style (e.g. hide-and-seek.html)
+        const gridParent = activeOptions[0].parentElement;
+        if (gridParent && gridParent.style && gridParent.style.gridTemplateColumns) {
+            const match = String(gridParent.style.gridTemplateColumns).match(/repeat\((\d+)/);
+            if (match) return parseInt(match[1], 10);
+        }
+
+        // 3. Fallback for standard 2-column or 1-column responsive cards
+        return (typeof window !== 'undefined' && window.innerWidth > 700) ? 2 : 1;
+    }
+
+    // Move Focus across grid rows (Down / Up)
     function moveFocusGrid(rowDelta) {
         if (!activeOptions.length) return;
-        const cols = window.innerWidth > 700 ? 2 : 1;
-        const targetIndex = focusedIndex + (rowDelta * cols);
-        if (targetIndex >= 0 && targetIndex < activeOptions.length) {
-            focusedIndex = targetIndex;
+        const cols = detectGridColumns();
+        const total = activeOptions.length;
+        let targetIndex = focusedIndex + (rowDelta * cols);
+
+        if (targetIndex >= total) {
+            // Wrap to top row at same column
+            targetIndex = focusedIndex % cols;
         } else if (targetIndex < 0) {
-            focusedIndex = 0;
-        } else {
-            focusedIndex = activeOptions.length - 1;
+            // Wrap to bottom row at same column
+            const lastRowStart = Math.floor((total - 1) / cols) * cols;
+            let candidate = lastRowStart + (focusedIndex % cols);
+            if (candidate >= total) candidate -= cols;
+            targetIndex = candidate;
         }
-        updateFocusVisuals();
+
+        if (targetIndex >= 0 && targetIndex < total) {
+            focusedIndex = targetIndex;
+            updateFocusVisuals();
+        }
     }
 
     // Direct Jump to a specific option index
@@ -741,6 +807,8 @@
                         m.target?.classList?.contains('piece-card') ||
                         m.target?.classList?.contains('ball-launch-btn') ||
                         m.target?.classList?.contains('key-block-btn') ||
+                        m.target?.classList?.contains('sort-basket') ||
+                        m.target?.classList?.contains('search-cell') ||
                         m.target?.classList?.contains('settings-bar') ||
                         m.target?.id === 'alp-controller-hud') {
                         continue;
@@ -755,7 +823,9 @@
                             node.classList?.contains('cause-btn') ||
                             node.classList?.contains('piece-card') ||
                             node.classList?.contains('ball-launch-btn') ||
-                            node.classList?.contains('key-block-btn')
+                            node.classList?.contains('key-block-btn') ||
+                            node.classList?.contains('sort-basket') ||
+                            node.classList?.contains('search-cell')
                         )) {
                             shouldRefresh = true;
                             break;
@@ -772,7 +842,9 @@
                             node.classList?.contains('cause-btn') ||
                             node.classList?.contains('piece-card') ||
                             node.classList?.contains('ball-launch-btn') ||
-                            node.classList?.contains('key-block-btn')
+                            node.classList?.contains('key-block-btn') ||
+                            node.classList?.contains('sort-basket') ||
+                            node.classList?.contains('search-cell')
                         )) {
                             shouldRefresh = true;
                             break;
@@ -817,6 +889,8 @@
         refresh: refreshInteractiveElements,
         setSizeProfile: applySizeProfile,
         getSizeProfile: () => sizeProfile,
+        getFocusedIndex: () => focusedIndex,
+        detectGridColumns,
         setNavMode: (mode) => {
             navMode = mode;
             localStorage.setItem(STORAGE_KEY_NAV_MODE, mode);
@@ -831,6 +905,7 @@
         },
         moveFocus,
         moveFocusGrid,
+        jumpFocus,
         triggerButton: (idx) => handlePrimaryButton(idx),
         validate: handleValidate,
         escape: handleEscape

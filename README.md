@@ -434,6 +434,39 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 19: 🗂️ Classification & Sorting ("Classification & Tri")
+* **Route:** `/classification.html`
+* **Target Skills:** Categorization, semantic association, visual comparison, task completion endurance.
+* **Tap-to-Sort Mechanic:** One item appears in a central spotlight card; the child taps the matching destination basket below.
+* **Fly-In Physics & Visible Collection:** Each correct tap animates the card shrinking and flying into the basket, building a visible collection of badges inside the category.
+* **6 Themes:**
+  1. 🎨 *Couleurs* (Red/Blue, Yellow/Green)
+  2. 🍎 *Fruits / 🥕 Légumes*
+  3. 🔤 *Lettres / 🔢 Chiffres*
+  4. 🐾 *Animaux / 🐝 Insectes*
+  5. 🦅 *Vole / 🐟 Nage* (Ciel vs. Eau)
+  6. 🌸 *Fleurs / 🪨 Cailloux*
+* **Controller Support:** Native keyboard/gamepad navigation (`1` for Left Basket, `2` for Right Basket, or D-Pad navigation on `.sort-basket`).
+
+---
+
+### Activity 20: 🔍 Visual Hide & Seek ("Cache-Cache Visuel")
+* **Route:** `/hide-and-seek.html`
+* **Target Skills:** Visual discrimination, figure-ground perception, visual scanning, sustained attention.
+* **Visual Similarity Distractors:** Distractors intentionally share color palettes, silhouettes, or semantic domains with the target to train discerning visual focus.
+* **Calm Error Elimination:** Non-matching tapped cells gently dim without buzzers, turning trial-and-error into structured visual elimination.
+* **3 Progressive Densities:** ⭐ 3×3 Grid (9 cells), ⭐⭐ 4×4 Grid (16 cells), ⭐⭐⭐ 5×4 Grid (20 cells).
+* **6 Thematic Hunt Suites:**
+  1. 🦊 *Animaux proches* (Fox, Dog, Cat, Bear, Lion, Tiger / Green reptiles)
+  2. 🍎 *Objets rouges* (Apple, Tomato, Strawberry, Cherries, Watermelon, Rose)
+  3. 🐝 *Petites bêtes* (Bee, Ladybug, Butterfly, Caterpillar, Ant, Beetle)
+  4. 🚒 *Transports* (Fire Truck, Car, Taxi, Bus, Van, Tractor)
+  5. 🥳 *Visages* (Party, Smile, Sunglasses, Star-eyes, Surprised)
+  6. 🔤 *Lettres & Chiffres* (B, D, P, R, 8 / 6, 9, 0, 5, 3)
+* **Controller Support:** Native keyboard/gamepad navigation (`1`–`9` keys or D-Pad navigation on `.search-cell`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.

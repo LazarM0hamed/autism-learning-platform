@@ -188,6 +188,59 @@ if (!inputManagerSrc.includes('isBasketPage') || !inputManagerSrc.includes('ball
 if (!inputManagerSrc.includes('isMusicPage') || !inputManagerSrc.includes('key-block-btn')) {
     throw new Error('input-manager.js must support music.html (.key-block-btn)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn) & Music Partition (.key-block-btn)');
+if (!inputManagerSrc.includes('isClassificationPage') || !inputManagerSrc.includes('sort-basket')) {
+    throw new Error('input-manager.js must support classification.html (.sort-basket)');
+}
+if (!inputManagerSrc.includes('isHideAndSeekPage') || !inputManagerSrc.includes('search-cell')) {
+    throw new Error('input-manager.js must support hide-and-seek.html (.search-cell)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket) & Hide and Seek (.search-cell)');
+
+// Test 2D Grid Down / Up Arrow navigation logic
+const mockGrid = new MockElement('div', 'search-grid');
+mockGrid.style = { gridTemplateColumns: 'repeat(3, auto)' };
+const mockCells = [];
+for (let i = 0; i < 9; i++) {
+    const cell = new MockElement('button', `cell-${i}`, 'search-cell');
+    mockGrid.appendChild(cell);
+    mockCells.push(cell);
+}
+const origQSA = global.document.querySelectorAll;
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.search-cell')) return mockCells;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/hide-and-seek.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.detectGridColumns() !== 3) {
+    throw new Error(`detectGridColumns should be 3 for 3x3 grid, got ${window.AlpInputManager.detectGridColumns()}`);
+}
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+// Down Arrow from cell 0 -> cell 3
+window.AlpInputManager.moveFocusGrid(1);
+if (window.AlpInputManager.getFocusedIndex() !== 3) {
+    throw new Error(`Down arrow from cell 0 in 3x3 grid should go to cell 3, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+// Down Arrow from cell 3 -> cell 6
+window.AlpInputManager.moveFocusGrid(1);
+if (window.AlpInputManager.getFocusedIndex() !== 6) {
+    throw new Error(`Down arrow from cell 3 in 3x3 grid should go to cell 6, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+// Down Arrow from cell 6 -> wraps to cell 0
+window.AlpInputManager.moveFocusGrid(1);
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Down arrow from cell 6 in 3x3 grid should wrap to cell 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+// Move to cell 1 (col 1), then Down Arrow -> cell 4 (row 1, col 1)
+window.AlpInputManager.moveFocus(1);
+window.AlpInputManager.moveFocusGrid(1);
+if (window.AlpInputManager.getFocusedIndex() !== 4) {
+    throw new Error(`Down arrow from cell 1 in 3x3 grid should go to cell 4, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+console.log('✓ 2D Grid Down Arrow & Up Arrow spatial navigation verified for 3x3/4x4/5x4 grids in Hide & Seek');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');
