@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "node test-input-manager.js && node test-tracker.js",
+    "build": "node test-input-manager.js && node test-tracker.js",
     "start": "node server.js"
   },
   "keywords": [],
