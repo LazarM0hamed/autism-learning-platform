@@ -178,10 +178,10 @@
     }
 
     async function loadProfiles() {
-        let profiles = [];
+        let profiles = JSON.parse(localStorage.getItem('alp_profiles_list') || localStorage.getItem('alp_local_profiles') || '[]');
         const localNick = localStorage.getItem('alp_profile_nickname');
         const localEmoji = localStorage.getItem('alp_profile_emoji') || '👤';
-        if (localNick) {
+        if (localNick && !profiles.some(p => p.nickname.toLowerCase() === localNick.toLowerCase())) {
             profiles.push({ nickname: localNick, emoji: localEmoji });
         }
 
@@ -471,6 +471,7 @@
                     exportedAt: new Date().toISOString(),
                     nickname: localStorage.getItem('alp_profile_nickname') || 'Ilyen',
                     emoji: localStorage.getItem('alp_profile_emoji') || '🦊',
+                    profiles: JSON.parse(localStorage.getItem('alp_profiles_list') || '[]'),
                     summary: JSON.parse(localStorage.getItem('alp_local_summary') || '{}'),
                     votes: JSON.parse(localStorage.getItem('alp_local_votes') || '{}'),
                     events: JSON.parse(localStorage.getItem('alp_local_events') || '[]'),
@@ -503,6 +504,7 @@
                         const data = JSON.parse(event.target.result);
                         if (data.nickname) localStorage.setItem('alp_profile_nickname', data.nickname);
                         if (data.emoji) localStorage.setItem('alp_profile_emoji', data.emoji);
+                        if (data.profiles) localStorage.setItem('alp_profiles_list', JSON.stringify(data.profiles));
                         if (data.summary) localStorage.setItem('alp_local_summary', JSON.stringify(data.summary));
                         if (data.votes) localStorage.setItem('alp_local_votes', JSON.stringify(data.votes));
                         if (data.events) localStorage.setItem('alp_local_events', JSON.stringify(data.events));

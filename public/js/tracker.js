@@ -82,8 +82,13 @@
             loadDashboardLikes();
 
             // First-time visit auto-prompt on hub
-            if (!localStorage.getItem(KEY_NICKNAME) && !sessionStorage.getItem('alp_prompted_profile')) {
+            const stored = localStorage.getItem(KEY_NICKNAME);
+            if ((!stored || stored === 'Champion') && !sessionStorage.getItem('alp_prompted_profile')) {
                 sessionStorage.setItem('alp_prompted_profile', 'true');
+                if (stored === 'Champion') {
+                    localStorage.removeItem(KEY_NICKNAME);
+                    localStorage.removeItem(KEY_EMOJI);
+                }
                 setTimeout(showProfileModal, 350);
             }
         } else if (!isParentPage()) {
@@ -166,11 +171,6 @@
         } else {
             fetch('/api/session/event', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).catch(() => {});
-        }
-    }
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             }).catch(() => {});
@@ -453,94 +453,129 @@
         });
     }
 
-    // Profile Selection & Nickname Prompt Modal
+    // Canonical Multi-Child Profile Switcher & Modal
     function showProfileModal() {
         let modal = document.getElementById('alp-profile-modal');
-        if (modal) modal.remove();
-
-        const AVATARS = ['🦊', '🦁', '🐼', '🐰', '🐶', '🐱', '🚀', '🦄', '🐻', '🦖'];
-        let chosenEmoji = currentEmoji !== '👤' ? currentEmoji : '🦊';
-
-        let profiles = JSON.parse(localStorage.getItem('alp_local_profiles') || '[]');
-        if (!profiles.length && currentNickname) {
-            profiles.push({ nickname: currentNickname, emoji: chosenEmoji });
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'alp-profile-modal';
+            modal.className = 'alp-modal-overlay';
+            document.body.appendChild(modal);
         }
 
-        modal = document.createElement('div');
-        modal.id = 'alp-profile-modal';
-        modal.className = 'alp-modal-overlay';
+        const AVATARS = ['🦊', '🦁', '🐼', '🐰', '🐶', '🐱', '🚀', '🦄', '🐻', '🦖'];
+        let chosenAvatar = currentEmoji !== '👤' ? currentEmoji : '🦊';
 
-        const profilePills = profiles.map(p => `
-            <button type="button" class="profile-quick-pill" data-nickname="${p.nickname}" data-emoji="${p.emoji || '🦊'}">
-                <span class="profile-pill-emoji">${p.emoji || '🦊'}</span>
-                <span class="profile-pill-name">${p.nickname}</span>
-            </button>
-        `).join('');
+        const profiles = JSON.parse(localStorage.getItem('alp_profiles_list') || localStorage.getItem('alp_local_profiles') || '[]');
+        const activeNick = localStorage.getItem(KEY_NICKNAME) || '';
 
-        const avatarButtons = AVATARS.map(a => `
-            <button type="button" class="avatar-opt-btn ${a === chosenEmoji ? 'active' : ''}" data-emoji="${a}" title="${a}">
+        const childrenCardsHtml = profiles.length > 0 ? `
+            <div class="modal-children-section" style="margin-bottom: 12px;">
+                <p style="font-weight: 800; font-size: 0.95rem; margin: 0 0 8px 0; color: var(--text-primary);">
+                    ${currentLang === 'fr' ? 'Enfants enregistrés (touche pour changer) :' : 'Registered children (tap to switch):'}
+                </p>
+                <div class="child-profiles-grid">
+                    ${profiles.map(p => {
+                        const isActive = p.nickname.toLowerCase() === activeNick.toLowerCase();
+                        return `
+                            <div class="child-profile-card ${isActive ? 'active' : ''}" data-nick="${p.nickname}" data-emoji="${p.emoji || '🦊'}">
+                                <span class="child-card-emoji">${p.emoji || '🦊'}</span>
+                                <span class="child-card-name">${p.nickname}</span>
+                                ${isActive ? '<span class="child-card-badge">✓</span>' : ''}
+                                <button type="button" class="child-card-delete" title="${currentLang === 'fr' ? 'Supprimer ce profil' : 'Delete profile'}" data-del="${p.nickname}">✕</button>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        ` : '';
+
+        const avatarButtonsHtml = AVATARS.map(a => `
+            <button type="button" class="avatar-opt-btn ${a === chosenAvatar ? 'active' : ''}" data-emoji="${a}" title="${a}">
                 ${a}
             </button>
         `).join('');
 
         modal.innerHTML = `
             <div class="alp-modal-box">
-                <h2 class="modal-title">👋 ${currentLang === 'fr' ? 'Profil de l\'enfant' : 'Child Profile'}</h2>
-                <p class="modal-subtitle">${currentLang === 'fr' ? 'Écris ton prénom et choisis ton avatar préféré :' : 'Enter your name and pick your favorite avatar:'}</p>
+                <h2 class="modal-title">👋 ${currentLang === 'fr' ? 'Qui joue aujourd\'hui ?' : 'Who is playing today?'}</h2>
+                <p class="modal-subtitle">${currentLang === 'fr' ? 'Choisis un enfant ou ajoute un nouveau profil :' : 'Pick a child or add a new profile:'}</p>
 
-                ${profiles.length ? `<div class="profile-quick-list">${profilePills}</div>` : ''}
+                ${childrenCardsHtml}
 
-                <div class="profile-input-group">
-                    <input type="text" id="alp-nickname-input" class="alp-modal-input" placeholder="${currentLang === 'fr' ? 'Prénom (ex: Ilyen, Lucas, Sarah...)' : 'Name (e.g. Ilyen, Leo, Emma...)'}" maxlength="24" value="${currentNickname || ''}" autocomplete="off">
-                </div>
+                <div class="profile-add-section" style="${profiles.length ? 'border-top: 1px solid #E2E8F0; padding-top: 12px;' : ''}">
+                    <p style="font-weight: 800; font-size: 0.95rem; margin: 0 0 8px 0; color: var(--text-primary);">
+                        ${currentLang === 'fr' ? '➕ Ajouter un enfant :' : '➕ Add a child:'}
+                    </p>
+                    <div class="profile-input-group">
+                        <input type="text" id="alp-nickname-input" class="alp-modal-input" placeholder="${currentLang === 'fr' ? 'Prénom (ex: Ilyen, Sarah, Lucas...)' : 'Name (e.g. Ilyen, Sarah, Leo...)'}" maxlength="24" autocomplete="off">
+                    </div>
 
-                <div class="avatar-picker-row" id="modal-avatar-picker">
-                    ${avatarButtons}
+                    <div class="avatar-picker-row" id="modal-avatar-picker" style="margin-top: 8px;">
+                        ${avatarButtonsHtml}
+                    </div>
                 </div>
 
                 <div class="modal-buttons">
                     <button type="button" class="modal-btn cancel-btn" id="modal-profile-cancel">
-                        ${currentLang === 'fr' ? 'Annuler' : 'Cancel'}
+                        ${currentLang === 'fr' ? 'Fermer' : 'Close'}
                     </button>
                     <button type="button" class="modal-btn save-btn" id="modal-profile-start">
-                        🚀 ${currentLang === 'fr' ? 'C\'est parti !' : 'Let\'s Play!'}
+                        🚀 ${currentLang === 'fr' ? 'Ajouter & Jouer' : 'Add & Play'}
                     </button>
                 </div>
             </div>
         `;
 
-        document.body.appendChild(modal);
+        modal.style.display = 'flex';
 
-        const input = document.getElementById('alp-nickname-input');
-        setTimeout(() => {
-            input?.focus();
-            if (input && input.value) input.select();
-        }, 60);
+        // Bind switch to child cards
+        modal.querySelectorAll('.child-profile-card').forEach(card => {
+            card.onclick = (e) => {
+                if (e.target.classList.contains('child-card-delete')) return;
+                const nick = card.getAttribute('data-nick');
+                const emo = card.getAttribute('data-emoji');
+                selectProfile(nick, emo);
+                modal.style.display = 'none';
+            };
+        });
 
-        // Avatar option selection
+        // Bind delete buttons
+        modal.querySelectorAll('.child-card-delete').forEach(delBtn => {
+            delBtn.onclick = (e) => {
+                e.stopPropagation();
+                const delNick = delBtn.getAttribute('data-del');
+                const conf = confirm(currentLang === 'fr' ? `Supprimer le profil de ${delNick} ?` : `Delete profile for ${delNick}?`);
+                if (conf) {
+                    deleteProfile(delNick);
+                    showProfileModal();
+                }
+            };
+        });
+
+        // Bind avatar selection
         modal.querySelectorAll('.avatar-opt-btn').forEach(btn => {
             btn.onclick = () => {
                 modal.querySelectorAll('.avatar-opt-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                chosenEmoji = btn.getAttribute('data-emoji') || '🦊';
+                chosenAvatar = btn.getAttribute('data-emoji') || '🦊';
             };
         });
 
-        // Quick select existing profile
-        modal.querySelectorAll('.profile-quick-pill').forEach(btn => {
-            btn.onclick = () => {
-                const nick = btn.getAttribute('data-nickname');
-                const emo = btn.getAttribute('data-emoji');
-                selectProfile(nick, emo);
-                modal.remove();
-            };
-        });
+        const input = document.getElementById('alp-nickname-input');
+        setTimeout(() => input?.focus(), 60);
 
         const saveAction = () => {
             const rawNick = (input?.value || '').trim();
-            const nick = rawNick || (currentLang === 'fr' ? 'Ilyen' : 'Champion');
-            selectProfile(nick, chosenEmoji);
-            modal.remove();
+            if (rawNick) {
+                selectProfile(rawNick, chosenAvatar);
+                modal.style.display = 'none';
+            } else if (profiles.length > 0) {
+                modal.style.display = 'none';
+            } else {
+                selectProfile(currentLang === 'fr' ? 'Joueur' : 'Player', chosenAvatar);
+                modal.style.display = 'none';
+            }
         };
 
         input?.addEventListener('keydown', (e) => {
@@ -551,7 +586,28 @@
         });
 
         document.getElementById('modal-profile-start')?.addEventListener('click', saveAction);
-        document.getElementById('modal-profile-cancel')?.addEventListener('click', () => modal.remove());
+        document.getElementById('modal-profile-cancel')?.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
+    function deleteProfile(nickname) {
+        let profiles = JSON.parse(localStorage.getItem('alp_profiles_list') || localStorage.getItem('alp_local_profiles') || '[]');
+        profiles = profiles.filter(p => p.nickname.toLowerCase() !== nickname.toLowerCase());
+        localStorage.setItem('alp_profiles_list', JSON.stringify(profiles));
+        localStorage.setItem('alp_local_profiles', JSON.stringify(profiles));
+
+        if (currentNickname && currentNickname.toLowerCase() === nickname.toLowerCase()) {
+            if (profiles.length > 0) {
+                selectProfile(profiles[0].nickname, profiles[0].emoji || '🦊');
+            } else {
+                currentNickname = '';
+                currentEmoji = '👤';
+                localStorage.removeItem(KEY_NICKNAME);
+                localStorage.removeItem(KEY_EMOJI);
+                updateHeaderProfileUI();
+            }
+        }
     }
 
     function selectProfile(nickname, emoji = '🦊') {
@@ -561,11 +617,15 @@
         localStorage.setItem(KEY_EMOJI, currentEmoji);
 
         // Save into local profiles array for multi-child households
-        const localProfiles = JSON.parse(localStorage.getItem('alp_local_profiles') || '[]');
-        if (!localProfiles.some(p => p.nickname.toLowerCase() === nickname.toLowerCase())) {
+        const localProfiles = JSON.parse(localStorage.getItem('alp_profiles_list') || localStorage.getItem('alp_local_profiles') || '[]');
+        const idx = localProfiles.findIndex(p => p.nickname.toLowerCase() === nickname.toLowerCase());
+        if (idx >= 0) {
+            localProfiles[idx].emoji = emoji;
+        } else {
             localProfiles.push({ nickname, emoji, createdAt: new Date().toISOString() });
-            localStorage.setItem('alp_local_profiles', JSON.stringify(localProfiles));
         }
+        localStorage.setItem('alp_profiles_list', JSON.stringify(localProfiles));
+        localStorage.setItem('alp_local_profiles', JSON.stringify(localProfiles));
 
         // Background server sync if available
         try {
@@ -576,6 +636,7 @@
             }).catch(() => {});
         } catch (e) {}
 
+        updateHeaderProfileUI();
         initSession();
     }
 
@@ -599,11 +660,11 @@
             : (currentNickname ? 'Switch player' : 'Set child name');
 
         bar.innerHTML = `
-            <div class="user-chip" id="alp-user-chip" title="${switchHint}">
+            <button type="button" class="user-chip" id="alp-user-chip" title="${switchHint}">
                 <span class="user-chip-emoji">${emoji}</span>
                 <span class="user-chip-name">${nick}</span>
                 <span class="user-chip-switch">⇄</span>
-            </div>
+            </button>
 
             <a href="${isParent ? 'index.html' : 'parent.html'}" class="parent-hub-link" title="${currentLang === 'fr' ? 'Espace Parents & Statistiques' : 'Parent Dashboard & Analytics'}">
                 <span class="parent-link-icon">${isParent ? '🎮' : '📊'}</span>
@@ -611,10 +672,25 @@
             </a>
         `;
 
-        document.getElementById('alp-user-chip')?.addEventListener('click', () => {
-            showProfileModal();
-        });
+        const chip = document.getElementById('alp-user-chip');
+        if (chip) {
+            chip.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                showProfileModal();
+            };
+        }
     }
+
+    // Global Event Delegation for Player Chip across all pages
+    document.addEventListener('click', (e) => {
+        const chip = e.target && e.target.closest && e.target.closest('#alp-user-chip');
+        if (chip) {
+            e.preventDefault();
+            e.stopPropagation();
+            showProfileModal();
+        }
+    });
 
     // Adaptive Recommendations for Hub Dashboard
     async function loadDashboardRecommendations() {
@@ -761,11 +837,12 @@
     window.AlpTracker = {
         initSession,
         showProfileModal,
+        selectProfile,
         onQuestionStart,
         onAttempt,
         onTrialSuccess,
         submitFeedback,
-        getNickname: () => currentNickname || 'Champion',
+        getNickname: () => currentNickname || (currentLang === 'fr' ? 'Joueur' : 'Player'),
         getSessionId: () => activeSessionId,
         refreshRecommendations: loadDashboardRecommendations,
         refreshLikes: loadDashboardLikes

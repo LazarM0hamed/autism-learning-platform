@@ -71,13 +71,41 @@
         return BADGE_CONFIGS[overlayMode] || BADGE_CONFIGS.numbers;
     }
 
+    function detectActivityFromPath(path) {
+        if (path.includes('letters')) return 'letters_puzzle';
+        if (path.includes('game')) return 'find_and_match';
+        if (path.includes('pattern')) return 'pattern';
+        if (path.includes('spelling')) return 'spelling';
+        if (path.includes('sequence')) return 'sequence';
+        if (path.includes('math')) return 'math';
+        if (path.includes('spatial')) return 'spatial';
+        if (path.includes('colors')) return 'colors';
+        if (path.includes('time')) return 'time';
+        if (path.includes('coloring')) return 'coloring';
+        if (path.includes('comparisons')) return 'comparisons';
+        if (path.includes('labyrinth')) return 'labyrinth';
+        if (path.includes('sounds')) return 'sounds';
+        if (path.includes('circuit')) return 'circuit';
+        return null;
+    }
+
     function isHubPage() {
-        const path = window.location.pathname;
-        return path.endsWith('index.html') || path.endsWith('/') || !path.includes('.html');
+        const path = window.location.pathname.toLowerCase();
+        if (path.includes('parent.html') || path.endsWith('/parent')) return false;
+        if (detectActivityFromPath(path)) return false;
+        return path === '' || path === '/' || path.endsWith('/index.html') || path.endsWith('/index');
     }
 
     function isSpellingPage() {
-        return window.location.pathname.toLowerCase().includes('spelling.html');
+        return window.location.pathname.toLowerCase().includes('spelling');
+    }
+
+    function isSoundsPage() {
+        return window.location.pathname.toLowerCase().includes('sounds');
+    }
+
+    function isCircuitPage() {
+        return window.location.pathname.toLowerCase().includes('circuit');
     }
 
     // Size Profile Management
@@ -180,11 +208,23 @@
         if (isSpellingPage()) {
             // In spelling, only available unused letter buttons
             items = Array.from(document.querySelectorAll('#letter-tray .letter-btn:not(.used)'));
+        } else if (isSoundsPage()) {
+            // In sounds, tactile sound cards
+            items = Array.from(document.querySelectorAll('.sound-choices-grid .sound-card, .sound-card'));
+        } else if (isCircuitPage()) {
+            // In circuit, colored balls in dispenser tray (excluding used)
+            items = Array.from(document.querySelectorAll('#ball-tray .ball-choice-btn:not(.used), .ball-choice-btn:not(.used)'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
             if (!items.length) {
                 items = Array.from(document.querySelectorAll('#step-cards-container .option-card'));
+            }
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('.sound-card'));
+            }
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('.ball-choice-btn:not(.used)'));
             }
         }
 
@@ -361,6 +401,10 @@
         const speakBtn = document.getElementById('speak-prompt-btn');
         if (speakBtn) {
             speakBtn.click();
+        }
+        const replayFxBtn = document.getElementById('replay-fx-btn');
+        if (replayFxBtn) {
+            replayFxBtn.click();
         }
     }
 
@@ -642,13 +686,20 @@
                     // Ignore mutations happening inside cards, letters, HUD, or settings bar
                     if (m.target?.classList?.contains('option-card') ||
                         m.target?.classList?.contains('letter-btn') ||
+                        m.target?.classList?.contains('sound-card') ||
+                        m.target?.classList?.contains('ball-choice-btn') ||
                         m.target?.classList?.contains('settings-bar') ||
                         m.target?.id === 'alp-controller-hud') {
                         continue;
                     }
 
                     for (const node of m.addedNodes) {
-                        if (node.nodeType === 1 && (node.classList?.contains('option-card') || node.classList?.contains('letter-btn'))) {
+                        if (node.nodeType === 1 && (
+                            node.classList?.contains('option-card') ||
+                            node.classList?.contains('letter-btn') ||
+                            node.classList?.contains('sound-card') ||
+                            node.classList?.contains('ball-choice-btn')
+                        )) {
                             shouldRefresh = true;
                             break;
                         }
@@ -656,15 +707,20 @@
                     if (shouldRefresh) break;
 
                     for (const node of m.removedNodes) {
-                        if (node.nodeType === 1 && (node.classList?.contains('option-card') || node.classList?.contains('letter-btn'))) {
+                        if (node.nodeType === 1 && (
+                            node.classList?.contains('option-card') ||
+                            node.classList?.contains('letter-btn') ||
+                            node.classList?.contains('sound-card') ||
+                            node.classList?.contains('ball-choice-btn')
+                        )) {
                             shouldRefresh = true;
                             break;
                         }
                     }
                     if (shouldRefresh) break;
                 } else if (m.type === 'attributes' && m.attributeName === 'class') {
-                    // Only react when a letter button becomes 'used' in spelling
-                    if (m.target?.classList?.contains('letter-btn') && m.target?.classList?.contains('used')) {
+                    // React when a letter button or ball button becomes 'used'
+                    if ((m.target?.classList?.contains('letter-btn') || m.target?.classList?.contains('ball-choice-btn')) && m.target?.classList?.contains('used')) {
                         shouldRefresh = true;
                         break;
                     }

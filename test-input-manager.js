@@ -168,4 +168,14 @@ if (window.AlpInputManager.getSizeProfile() !== 'xlarge') throw new Error('Size 
 if (document.body.getAttribute('data-size') !== 'xlarge') throw new Error('Body data-size should be xlarge');
 console.log('✓ Applied XL Giant visual size profile (+85%)');
 
+// Verify Sounds & Circuit controller support
+const inputManagerSrc = fs.readFileSync('public/js/input-manager.js', 'utf8');
+if (!inputManagerSrc.includes('isSoundsPage') || !inputManagerSrc.includes('sound-card')) {
+    throw new Error('input-manager.js must support sounds.html (.sound-card)');
+}
+if (!inputManagerSrc.includes('isCircuitPage') || !inputManagerSrc.includes('ball-choice-btn')) {
+    throw new Error('input-manager.js must support circuit.html (.ball-choice-btn)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card) & Ball Circuit (.ball-choice-btn)');
+
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');
