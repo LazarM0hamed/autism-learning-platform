@@ -186,6 +186,11 @@ assert(fs.existsSync('public/classification.html'), 'classification.html must ex
 assert(fs.existsSync('public/js/classification-engine.js'), 'classification-engine.js must exist');
 assert(fs.existsSync('public/hide-and-seek.html'), 'hide-and-seek.html must exist');
 assert(fs.existsSync('public/js/hide-and-seek-engine.js'), 'hide-and-seek-engine.js must exist');
+assert(fs.existsSync('public/manifest.json'), 'manifest.json must exist');
+assert(fs.existsSync('public/apple-touch-icon.png'), 'apple-touch-icon.png must exist');
+assert(fs.existsSync('public/apple-touch-icon-180x180.png'), 'apple-touch-icon-180x180.png must exist');
+assert(fs.existsSync('public/assets/icons/pwa-192x192.png'), 'pwa-192x192.png must exist');
+assert(fs.existsSync('public/assets/icons/pwa-512x512.png'), 'pwa-512x512.png must exist');
 console.log('✓ All 20 authentic MP3 sound effects verified in public/assets/sounds/');
 
 // Verify Hub Header Bar & Parent Hub Link
@@ -193,12 +198,14 @@ const indexHtml = fs.readFileSync('public/index.html', 'utf8');
 assert(indexHtml.includes('id="alp-user-header-bar"'), 'index.html must include alp-user-header-bar');
 assert(indexHtml.includes('id="alp-user-chip"'), 'index.html must include alp-user-chip');
 assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent.html link');
+assert(indexHtml.includes('apple-touch-icon.png'), 'index.html must include apple-touch-icon.png');
+assert(indexHtml.includes('manifest.json'), 'index.html must include manifest.json');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
 assert(likeBadgeCount === 20, `All 20 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
 assert(bookmarkBtnCount === 20, `All 20 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
-console.log('✓ Parent Hub, 20 like badges, and 20 bookmark star buttons verified in index.html');
+console.log('✓ Parent Hub, PWA icons, 20 like badges, and 20 bookmark star buttons verified in index.html');
 
 // Verify In-Activity Feedback Widget embedded across all 20 activity pages
 const activityPages = [
@@ -213,8 +220,10 @@ activityPages.forEach(p => {
     assert(html.includes('id="alp-feedback-widget"'), `${p} must include embedded alp-feedback-widget`);
     assert(html.includes('favicon.svg'), `${p} must include favicon.svg`);
     assert(html.includes('assets/icons/logo.svg'), `${p} must include Infinity Harmony logo.svg`);
+    assert(html.includes('apple-touch-icon.png'), `${p} must include apple-touch-icon.png`);
+    assert(html.includes('manifest.json'), `${p} must include manifest.json`);
 });
-console.log('✓ In-activity feedback widget, favicon, and Infinity Harmony logo verified across all 20 activity pages');
+console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 20 activity pages');
 
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');
