@@ -186,6 +186,8 @@ assert(fs.existsSync('public/classification.html'), 'classification.html must ex
 assert(fs.existsSync('public/js/classification-engine.js'), 'classification-engine.js must exist');
 assert(fs.existsSync('public/hide-and-seek.html'), 'hide-and-seek.html must exist');
 assert(fs.existsSync('public/js/hide-and-seek-engine.js'), 'hide-and-seek-engine.js must exist');
+assert(fs.existsSync('public/lines.html'), 'lines.html must exist');
+assert(fs.existsSync('public/js/lines-engine.js'), 'lines-engine.js must exist');
 assert(fs.existsSync('public/manifest.json'), 'manifest.json must exist');
 assert(fs.existsSync('public/apple-touch-icon.png'), 'apple-touch-icon.png must exist');
 assert(fs.existsSync('public/apple-touch-icon-180x180.png'), 'apple-touch-icon-180x180.png must exist');
@@ -201,19 +203,19 @@ assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent
 assert(indexHtml.includes('apple-touch-icon.png'), 'index.html must include apple-touch-icon.png');
 assert(indexHtml.includes('manifest.json'), 'index.html must include manifest.json');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
-assert(likeBadgeCount === 20, `All 20 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+assert(likeBadgeCount === 21, `All 21 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
-assert(bookmarkBtnCount === 20, `All 20 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(bookmarkBtnCount === 21, `All 21 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
-console.log('✓ Parent Hub, PWA icons, 20 like badges, and 20 bookmark star buttons verified in index.html');
+console.log('✓ Parent Hub, PWA icons, 21 like badges, and 21 bookmark star buttons verified in index.html');
 
-// Verify In-Activity Feedback Widget embedded across all 20 activity pages
+// Verify In-Activity Feedback Widget embedded across all 21 activity pages
 const activityPages = [
     'game.html', 'colors.html', 'pattern.html', 'letters.html',
     'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
     'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
     'sounds.html', 'circuit.html', 'causality.html', 'builder.html', 'basket.html',
-    'music.html', 'classification.html', 'hide-and-seek.html'
+    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html'
 ];
 activityPages.forEach(p => {
     const html = fs.readFileSync(`public/${p}`, 'utf8');
@@ -223,7 +225,7 @@ activityPages.forEach(p => {
     assert(html.includes('apple-touch-icon.png'), `${p} must include apple-touch-icon.png`);
     assert(html.includes('manifest.json'), `${p} must include manifest.json`);
 });
-console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 20 activity pages');
+console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 21 activity pages');
 
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');

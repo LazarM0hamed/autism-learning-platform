@@ -55,7 +55,7 @@
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filter Activities">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">20</span>
+                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">21</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-fav-btn" role="tab" aria-selected="false">
                 ⭐ <span id="lbl-filter-fav">Mes Favoris</span> <span class="filter-count" id="count-fav">0</span>
@@ -359,6 +359,20 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <a href="lines.html" class="activity-card lines" data-activity="lines">
+            <button type="button" class="activity-bookmark-btn" data-activity="lines" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">〰️</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-lines-title">Magic Lines</span>
+                <span class="activity-card-desc" id="act-lines-desc">Assemble motifs to link points and guide characters</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="lines">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <script>
@@ -407,6 +421,8 @@
                 actClassificationDesc: "Sort items into their matching baskets",
                 actHideAndSeekTitle: "Hide & Seek",
                 actHideAndSeekDesc: "Spot the hidden target among visual distractors",
+                actLinesTitle: "Magic Lines",
+                actLinesDesc: "Assemble motifs to link points and guide characters",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 brandTagline: "Sensory-adapted developmental learning",
@@ -458,6 +474,8 @@
                 actClassificationDesc: "Range chaque élément dans son panier",
                 actHideAndSeekTitle: "Cache-Cache Visuel",
                 actHideAndSeekDesc: "Trouve la cible cachée parmi les intrus",
+                actLinesTitle: "Lignes Magiques",
+                actLinesDesc: "Assemble les motifs pour relier les points et guider les personnages",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 brandTagline: "Activités d'apprentissage adaptées & sensorielles",
@@ -578,6 +596,11 @@
             const hasDesc = document.getElementById('act-hide_and_seek-desc');
             if (hasDesc) hasDesc.innerText = t.actHideAndSeekDesc;
 
+            const linesTitle = document.getElementById('act-lines-title');
+            if (linesTitle) linesTitle.innerText = t.actLinesTitle;
+            const linesDesc = document.getElementById('act-lines-desc');
+            if (linesDesc) linesDesc.innerText = t.actLinesDesc;
+
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
@@ -594,10 +617,10 @@
 
     <!-- Version & Build Date Footer -->
     <footer class="app-version-footer">
-        <span class="version-tag" id="app-version-tag">🚀 v1.8.0 • Build: 2026-11-17 23:15 UTC</span>
+        <span class="version-tag" id="app-version-tag">🚀 v1.9.0 • Build: 2026-11-18 11:30 UTC</span>
     </footer>
 
-    <script src="js/tracker.js?v=1.8.0"></script>
-    <script src="js/input-manager.js?v=1.8.0"></script>
+    <script src="js/tracker.js?v=1.9.0"></script>
+    <script src="js/input-manager.js?v=1.9.0"></script>
 </body>
 </html>

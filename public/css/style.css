@@ -674,6 +674,7 @@ main {
 .activity-card.music { border-left: 8px solid #EC4899; }
 .activity-card.classification { border-left: 8px solid #06B6D4; }
 .activity-card.hide_and_seek { border-left: 8px solid #84CC16; }
+.activity-card.lines { border-left: 8px solid #8B5CF6; }
 
 .category-card.transport { border-bottom: 8px solid #93C5FD; }
 
@@ -1072,6 +1073,14 @@ main {
     border-color: #2563EB !important;
     box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.55), 0 8px 18px rgba(0, 0, 0, 0.15) !important;
     transform: translateY(-4px) scale(1.1) !important;
+    z-index: 10;
+}
+
+.motif-card.is-controller-focused {
+    outline: none !important;
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.55), 0 10px 24px rgba(0, 0, 0, 0.16) !important;
+    transform: translateY(-4px) scale(1.05) !important;
     z-index: 10;
 }
 

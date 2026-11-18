@@ -88,6 +88,10 @@
             icon: '🔍',
             name: { en: 'Hide & Seek', fr: 'Cache-Cache Visuel' }
         },
+        'lines': {
+            icon: '〰️',
+            name: { en: 'Magic Lines', fr: 'Lignes Magiques' }
+        },
         'general': {
             icon: '🌟',
             name: { en: 'General Learning', fr: 'Apprentissages généraux' }

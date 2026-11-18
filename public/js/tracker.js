@@ -62,6 +62,7 @@
         if (path.includes('music')) return 'music';
         if (path.includes('classification')) return 'classification';
         if (path.includes('hide-and-seek') || path.includes('hide_and_seek')) return 'hide_and_seek';
+        if (path.includes('lines')) return 'lines';
         return null;
     }
 
@@ -407,7 +408,8 @@
             'basket': { likes: 0, dislikes: 0 },
             'music': { likes: 0, dislikes: 0 },
             'classification': { likes: 0, dislikes: 0 },
-            'hide_and_seek': { likes: 0, dislikes: 0 }
+            'hide_and_seek': { likes: 0, dislikes: 0 },
+            'lines': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -753,7 +755,8 @@
             'basket': '.activity-card.basket',
             'music': '.activity-card.music',
             'classification': '.activity-card.classification',
-            'hide_and_seek': '.activity-card.hide_and_seek'
+            'hide_and_seek': '.activity-card.hide_and_seek',
+            'lines': '.activity-card.lines'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -804,7 +807,8 @@
             'basket': { likes: 0, dislikes: 0 },
             'music': { likes: 0, dislikes: 0 },
             'classification': { likes: 0, dislikes: 0 },
-            'hide_and_seek': { likes: 0, dislikes: 0 }
+            'hide_and_seek': { likes: 0, dislikes: 0 },
+            'lines': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -844,7 +848,8 @@
             'basket': '.activity-card.basket',
             'music': '.activity-card.music',
             'classification': '.activity-card.classification',
-            'hide_and_seek': '.activity-card.hide_and_seek'
+            'hide_and_seek': '.activity-card.hide_and_seek',
+            'lines': '.activity-card.lines'
         };
 
         Object.keys(idMap).forEach(actId => {

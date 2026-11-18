@@ -467,6 +467,22 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 21: 〰️ Magic Lines ("Lignes Magiques")
+* **Route:** `/lines.html`
+* **Target Skills:** Pre-writing graphomotor skill development, visual-motor integration, trajectory planning, line contour recognition (horizontal, vertical, zigzag, sinusoidal waves, castle crenels).
+* **1-to-1 Blueprint Model:** Top blueprint card displays Point A, Point B, and the complete continuous model line.
+* **Interactive Segment Assembly:** Children pick matching segment motifs from the selection tray to lock into progressive dashed slots between Point A and Point B.
+* **Trajectory Travel Physics & Star Trail Reward:** Upon completing the line, the character (car, boat, rabbit, rocket, knight) smoothly animates along the exact mathematical curve from start to destination, emitting a sparkling particle star trail accompanied by melodic Web Audio tone sweeps and victory chimes.
+* **5 Concrete Storytelling Trajectories:**
+  1. ➖ *Horizontale* (🚗 La voiture rejoint la maison)
+  2. 🌊 *Vagues / Sinusoïdale* (⛵ Le bateau navigue vers l'île)
+  3. ⚡ *Zigzag* (🐰 Le lapin sautille vers la carotte)
+  4. 丨 *Verticale* (🚀 La fusée décolle vers l'étoile)
+  5. 🏰 *Créneaux / Ponts* (🏰 Le chevalier marche vers la couronne)
+* **Controller Support:** Native keyboard/gamepad navigation (`1`–`3` keys or D-Pad navigation on `.motif-card`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.

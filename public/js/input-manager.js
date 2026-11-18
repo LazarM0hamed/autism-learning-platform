@@ -92,6 +92,7 @@
         if (path.includes('music')) return 'music';
         if (path.includes('classification')) return 'classification';
         if (path.includes('hide-and-seek') || path.includes('hide_and_seek')) return 'hide_and_seek';
+        if (path.includes('lines')) return 'lines';
         return null;
     }
 
@@ -136,6 +137,10 @@
 
     function isHideAndSeekPage() {
         return window.location.pathname.toLowerCase().includes('hide-and-seek');
+    }
+
+    function isLinesPage() {
+        return window.location.pathname.toLowerCase().includes('lines');
     }
 
     // Size Profile Management
@@ -262,6 +267,9 @@
         } else if (isHideAndSeekPage()) {
             // In hide and seek, search grid cells
             items = Array.from(document.querySelectorAll('#search-grid .search-cell, .search-cell'));
+        } else if (isLinesPage()) {
+            // In magic lines, motif cards in selection tray
+            items = Array.from(document.querySelectorAll('#motifs-tray .motif-card, .motif-card'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -825,7 +833,8 @@
                             node.classList?.contains('ball-launch-btn') ||
                             node.classList?.contains('key-block-btn') ||
                             node.classList?.contains('sort-basket') ||
-                            node.classList?.contains('search-cell')
+                            node.classList?.contains('search-cell') ||
+                            node.classList?.contains('motif-card')
                         )) {
                             shouldRefresh = true;
                             break;
@@ -844,7 +853,8 @@
                             node.classList?.contains('ball-launch-btn') ||
                             node.classList?.contains('key-block-btn') ||
                             node.classList?.contains('sort-basket') ||
-                            node.classList?.contains('search-cell')
+                            node.classList?.contains('search-cell') ||
+                            node.classList?.contains('motif-card')
                         )) {
                             shouldRefresh = true;
                             break;

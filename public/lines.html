@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Autism Platform">
+    <meta name="theme-color" content="#F8FAFC">
+    <title>Lignes Magiques - Learning Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .lines-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+        }
+
+        /* Target Model Blueprint Card */
+        .target-model-card {
+            width: 94%;
+            max-width: 580px;
+            background: #F5F3FF;
+            border: 3px solid #DDD6FE;
+            border-radius: 20px;
+            padding: 8px 14px;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .target-model-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .target-model-badge {
+            background: #7C3AED;
+            color: #FFFFFF;
+            font-size: 0.95rem;
+            font-weight: 800;
+            padding: 4px 14px;
+            border-radius: 12px;
+            letter-spacing: 0.3px;
+        }
+        .target-model-svg {
+            width: 100%;
+            max-height: 105px;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            background: #FFFFFF;
+            border: 2px dashed #CBD5E0;
+        }
+
+        /* Interactive Assembly Stage Frame */
+        .assembly-frame {
+            width: 94%;
+            max-width: 580px;
+            background: #FFFDF9;
+            border: 4px solid #CBD5E0;
+            border-radius: 26px;
+            padding: 8px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+        }
+        .assembly-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 18px;
+        }
+
+        /* Motif Choices Tray */
+        .motifs-tray {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 680px;
+            width: 94%;
+            margin-top: 4px;
+        }
+        .motif-card {
+            width: 155px;
+            background: #FFFFFF;
+            border: 4px solid #E2E8F0;
+            border-radius: 22px;
+            padding: 12px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            transition: transform 0.14s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            user-select: none;
+        }
+        .motif-card:active {
+            transform: scale(0.94);
+        }
+        .motif-card.correct {
+            border-color: #6BCB77;
+            background-color: #F0FFF4;
+        }
+        .motif-preview-svg {
+            width: 110px;
+            height: 60px;
+            display: block;
+        }
+        .motif-label {
+            margin-top: 6px;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #2D3748;
+            text-align: center;
+        }
+
+        /* Next Challenge Skip Button */
+        .lines-next-btn {
+            background: #F3E8FF !important;
+            color: #7C3AED !important;
+            border: 2px solid #DDD6FE !important;
+            border-radius: 50% !important;
+            width: 48px !important;
+            height: 48px !important;
+            font-size: 1.35rem !important;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.12s ease, background 0.15s ease;
+        }
+        .lines-next-btn:hover {
+            transform: scale(1.08);
+            background: #E9D5FF !important;
+        }
+        .lines-next-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <header class="game-header">
+        <div class="header-left">
+            <a href="index.html" class="header-logo-link" title="Autism Learning Platform">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" class="header-infinity-logo" width="42" height="42">
+            </a>
+            <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        </div>
+        <h2 id="activity-title" class="category-badge">〰️ Lignes Magiques</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">0</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="lines-stage">
+        <!-- Line Family Selector Pills -->
+        <nav class="routine-pills" id="lines-pills" aria-label="Select line motif family"></nav>
+
+        <!-- Prompt Banner -->
+        <div class="prompt-container" style="margin: 2px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.3rem, 3.3vw, 1.9rem); margin: 0;">Relie les deux points !</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat voice prompt" aria-label="Repeat voice prompt">🗣️</button>
+            <button id="next-challenge-btn" class="speak-prompt-btn lines-next-btn" title="Défi suivant" aria-label="Défi suivant">➡️</button>
+        </div>
+
+        <!-- Target Construction Model (Visual Blueprint) -->
+        <div class="target-model-card" id="target-model-card">
+            <div class="target-model-header">
+                <span class="target-model-badge" id="lbl-target-model">🎯 Modèle de ligne :</span>
+            </div>
+            <svg class="target-model-svg" id="target-model-svg" viewBox="0 0 460 110" aria-label="Target line model"></svg>
+        </div>
+
+        <!-- Interactive Line Assembly Stage -->
+        <div class="assembly-frame">
+            <svg class="assembly-svg" id="assembly-svg" viewBox="0 0 460 220" aria-label="Interactive line assembly track"></svg>
+        </div>
+
+        <!-- Selectable Line Segment Motifs -->
+        <section class="motifs-tray" id="motifs-tray" aria-label="Line segment motif choices"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/lines-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>
