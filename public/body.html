@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Autism Platform">
+    <meta name="theme-color" content="#F8FAFC">
+    <title>Le Corps Humain - Learning Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .body-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 10px;
+            padding-bottom: 24px;
+        }
+
+        /* Dual Game Mode Switcher */
+        .body-mode-container {
+            display: inline-flex;
+            background: #EDE9FE;
+            border: 2px solid #DDD6FE;
+            border-radius: 20px;
+            padding: 4px;
+            gap: 6px;
+            margin-top: 2px;
+        }
+        .mode-pill {
+            background: transparent;
+            border: none;
+            border-radius: 16px;
+            padding: 6px 16px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #6D28D9;
+            cursor: pointer;
+            transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+            user-select: none;
+        }
+        .mode-pill.active {
+            background: #7C3AED;
+            color: #FFFFFF;
+            box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+        }
+        .mode-pill:active {
+            transform: scale(0.96);
+        }
+
+        /* Anatomy Character Frame */
+        .anatomy-frame {
+            width: 94%;
+            max-width: 440px;
+            background: #FFFDF9;
+            border: 4px solid #E2E8F0;
+            border-radius: 28px;
+            padding: 8px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: max-width 0.25s ease;
+        }
+        .anatomy-svg {
+            width: 100%;
+            max-height: 420px;
+            height: auto;
+            display: block;
+            border-radius: 20px;
+            user-select: none;
+            transition: max-height 0.25s ease;
+        }
+
+        body[data-size="normal"] .anatomy-frame { max-width: 440px; }
+        body[data-size="normal"] .anatomy-svg { max-height: 420px; }
+        body[data-size="large"] .anatomy-frame { max-width: 620px; }
+        body[data-size="large"] .anatomy-svg { max-height: 580px; }
+        body[data-size="xlarge"] .anatomy-frame { max-width: 820px; }
+        body[data-size="xlarge"] .anatomy-svg { max-height: 740px; }
+
+        /* Target Pulsing Beacons */
+        .body-hotspot {
+            cursor: pointer;
+            transition: fill 0.2s ease, stroke-width 0.2s ease, r 0.2s ease;
+        }
+        .body-hotspot:hover {
+            fill: rgba(236, 72, 153, 0.35) !important;
+            stroke-width: 4 !important;
+        }
+        .body-hotspot.active-target {
+            animation: hotspot-pulse 1.4s infinite ease-in-out;
+        }
+        @keyframes hotspot-pulse {
+            0% {
+                r: 28;
+                stroke-opacity: 0.9;
+                stroke-width: 4;
+            }
+            50% {
+                r: 38;
+                stroke-opacity: 0.4;
+                stroke-width: 8;
+            }
+            100% {
+                r: 28;
+                stroke-opacity: 0.9;
+                stroke-width: 4;
+            }
+        }
+
+        /* Choice Cards Tray */
+        .body-choices-tray {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 600px;
+            width: 94%;
+            margin-top: 4px;
+        }
+        .body-choice-btn {
+            flex: 1 1 130px;
+            max-width: 175px;
+            background: #FFFFFF;
+            border: 3.5px solid #E2E8F0;
+            border-radius: 20px;
+            padding: 12px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 14px rgba(0, 0, 0, 0.04);
+            transition: transform 0.12s ease, border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+            user-select: none;
+        }
+        .body-choice-btn:active {
+            transform: scale(0.95);
+        }
+        .body-choice-btn.correct {
+            border-color: #10B981 !important;
+            background-color: #ECFDF5 !important;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.2);
+            transform: scale(1.04);
+        }
+        .body-choice-btn.incorrect {
+            border-color: #EF4444 !important;
+            background-color: #FEF2F2 !important;
+            animation: shake-head 0.35s ease;
+        }
+        @keyframes shake-head {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .choice-emoji {
+            font-size: 2.1rem;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .choice-label {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #1E293B;
+            text-align: center;
+        }
+
+        /* Skip Next Challenge Button */
+        .lines-next-btn {
+            background: #F3E8FF !important;
+            color: #7C3AED !important;
+            border: 2px solid #DDD6FE !important;
+            border-radius: 50% !important;
+            width: 48px !important;
+            height: 48px !important;
+            font-size: 1.35rem !important;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.12s ease, background 0.15s ease;
+        }
+        .lines-next-btn:hover {
+            transform: scale(1.08);
+            background: #E9D5FF !important;
+        }
+        .lines-next-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Fullscreen Sensory Celebration Canvas */
+        .celebration-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="celebration-canvas" class="celebration-canvas"></canvas>
+
+    <header class="game-header">
+        <div class="header-left">
+            <a href="index.html" class="header-logo-link" title="Autism Learning Platform">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" class="header-infinity-logo" width="42" height="42">
+            </a>
+            <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        </div>
+        <h2 id="activity-title" class="category-badge">🦋 Le Corps Humain</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">0</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="body-stage">
+        <!-- Body Category Selector Pills -->
+        <nav class="routine-pills" id="body-pills" aria-label="Select body part category"></nav>
+
+        <!-- Dual Mode Switcher -->
+        <div class="body-mode-container" role="radiogroup" aria-label="Select game mode">
+            <button type="button" class="mode-pill active" id="mode-name-btn" data-mode="name">
+                🏷️ <span id="lbl-mode-name">Nommer la partie</span>
+            </button>
+            <button type="button" class="mode-pill" id="mode-touch-btn" data-mode="touch">
+                🎯 <span id="lbl-mode-touch">Pose le papillon</span>
+            </button>
+        </div>
+
+        <!-- Visual Size Switcher (Normal -> Grande -> XL) -->
+        <div class="size-pill-group" id="body-size-pills" role="radiogroup" aria-label="Select visual size" style="display: inline-flex; align-items: center; gap: 8px; margin-top: 1px;">
+            <span class="settings-label" id="lbl-body-size" style="font-weight: 800; color: #64748B; font-size: 0.9rem;">Taille :</span>
+            <button type="button" class="size-pill active" data-size="normal">Normal</button>
+            <button type="button" class="size-pill" data-size="large">Grande (+40%)</button>
+            <button type="button" class="size-pill" data-size="xlarge">XL (+85%)</button>
+        </div>
+
+        <!-- Prompt Banner -->
+        <div class="prompt-container" style="margin: 2px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.25rem, 3.2vw, 1.85rem); margin: 0;">Où s'est posé le papillon ?</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat voice prompt" aria-label="Repeat voice prompt">🗣️</button>
+            <button id="next-challenge-btn" class="speak-prompt-btn lines-next-btn" title="Défi suivant" aria-label="Défi suivant">➡️</button>
+        </div>
+
+        <!-- Interactive Anatomy Stage with SVG Child Character & Magic Butterfly -->
+        <div class="anatomy-frame">
+            <svg class="anatomy-svg" id="anatomy-svg" viewBox="0 0 400 520" aria-label="Interactive body diagram"></svg>
+        </div>
+
+        <!-- Selectable Body Part Choice Cards (Mode A) -->
+        <section class="body-choices-tray" id="body-choices-tray" aria-label="Body part choices"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/body-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

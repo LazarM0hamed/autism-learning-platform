@@ -143,6 +143,10 @@
         return window.location.pathname.toLowerCase().includes('lines');
     }
 
+    function isBodyPage() {
+        return window.location.pathname.toLowerCase().includes('body');
+    }
+
     // Size Profile Management
     function applySizeProfile(size) {
         sizeProfile = size;
@@ -270,6 +274,12 @@
         } else if (isLinesPage()) {
             // In magic lines, motif cards in selection tray
             items = Array.from(document.querySelectorAll('#motifs-tray .motif-card, .motif-card'));
+        } else if (isBodyPage()) {
+            // In body parts, choice buttons or hotspots
+            items = Array.from(document.querySelectorAll('#body-choices-tray .body-choice-btn, .body-choice-btn'));
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('.body-hotspot'));
+            }
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));

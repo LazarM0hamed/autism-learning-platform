@@ -197,7 +197,10 @@ if (!inputManagerSrc.includes('isHideAndSeekPage') || !inputManagerSrc.includes(
 if (!inputManagerSrc.includes('isLinesPage') || !inputManagerSrc.includes('motif-card')) {
     throw new Error('input-manager.js must support lines.html (.motif-card)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell) & Magic Lines (.motif-card)');
+if (!inputManagerSrc.includes('isBodyPage') || !inputManagerSrc.includes('body-choice-btn')) {
+    throw new Error('input-manager.js must support body.html (.body-choice-btn)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card) & Body Parts (.body-choice-btn)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');

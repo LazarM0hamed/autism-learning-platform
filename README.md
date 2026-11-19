@@ -483,6 +483,22 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 22: 🦋 Body Parts ("Le Corps Humain")
+* **Route:** `/body.html`
+* **Target Skills:** Body schema awareness, receptive & expressive anatomical vocabulary, fine-motor spatial pointing, self-concept development.
+* **The Magic Butterfly 🦋 Companion:** An animated glowing butterfly with fluttering wings and rainbow stardust flight trails that guides the child across anatomical targets.
+* **Dual Game Modes:**
+  1. 🏷️ *Nommer la partie (Name It)*: The butterfly lands softly on a body part; the target pulses with a warm beacon and the child selects the matching body part from picture+text choice cards.
+  2. 🎯 *Pose le papillon (Touch & Fly)*: The audio prompt asks the child to land the butterfly on a specific body part; the child taps the character's body hotspot, and the butterfly swoops dynamically across the screen to land on their touch!
+* **3 Anatomical Tiers + Mix All:**
+  - 😊 *Le Visage (Face)*: Eyes, Nose, Mouth, Ears, Hair, Head.
+  - 💪 *Haut du corps (Upper Body)*: Shoulders, Arms, Hands, Belly/Tummy.
+  - 🦵 *Bas du corps (Lower Body)*: Legs, Knees, Feet.
+* **Milestone Butterfly Meadow Reward:** Every 5 completed items triggers a sensory celebration with a swarm of colorful dancing butterflies, floral confetti, and celebratory fanfare chimes.
+* **Controller Support:** Native keyboard/gamepad navigation (`1`–`4` keys or D-Pad navigation on `.body-choice-btn` and `.body-hotspot`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.

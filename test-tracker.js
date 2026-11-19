@@ -5,6 +5,11 @@ const fs = require('fs');
 
 console.log('Testing Storage & Analytics Architecture...');
 
+// Clean baseline for idempotent test runs
+fs.writeFileSync('storage/feedback.json', JSON.stringify({ feedback: [] }, null, 2) + '\n');
+fs.writeFileSync('storage/sessions.json', JSON.stringify({ sessions: [] }, null, 2) + '\n');
+fs.writeFileSync('storage/profiles.json', JSON.stringify({ profiles: [] }, null, 2) + '\n');
+
 const testNick = `Kid_${Date.now()}`;
 
 // 1. Profile Management
@@ -230,19 +235,19 @@ assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent
 assert(indexHtml.includes('apple-touch-icon.png'), 'index.html must include apple-touch-icon.png');
 assert(indexHtml.includes('manifest.json'), 'index.html must include manifest.json');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
-assert(likeBadgeCount === 21, `All 21 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+assert(likeBadgeCount === 22, `All 22 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
-assert(bookmarkBtnCount === 21, `All 21 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(bookmarkBtnCount === 22, `All 22 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
-console.log('✓ Parent Hub, PWA icons, 21 like badges, and 21 bookmark star buttons verified in index.html');
+console.log('✓ Parent Hub, PWA icons, 22 like badges, and 22 bookmark star buttons verified in index.html');
 
-// Verify In-Activity Feedback Widget embedded across all 21 activity pages
+// Verify In-Activity Feedback Widget embedded across all 22 activity pages
 const activityPages = [
     'game.html', 'colors.html', 'pattern.html', 'letters.html',
     'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
     'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
     'sounds.html', 'circuit.html', 'causality.html', 'builder.html', 'basket.html',
-    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html'
+    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html'
 ];
 activityPages.forEach(p => {
     const html = fs.readFileSync(`public/${p}`, 'utf8');
@@ -252,7 +257,23 @@ activityPages.forEach(p => {
     assert(html.includes('apple-touch-icon.png'), `${p} must include apple-touch-icon.png`);
     assert(html.includes('manifest.json'), `${p} must include manifest.json`);
 });
-console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 21 activity pages');
+console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 22 activity pages');
+
+// Verify Body Parts Dataset & Engine
+const bodyJson = JSON.parse(fs.readFileSync('public/data/body.json', 'utf8'));
+assert(bodyJson.parts && bodyJson.parts.length >= 12, 'body.json must contain at least 12 body parts');
+bodyJson.parts.forEach(p => {
+    assert(p.id && p.name && p.name.fr && p.name.en, `Part ${p.id} must have bilingual name`);
+    assert(p.coords && typeof p.coords.x === 'number' && typeof p.coords.y === 'number', `Part ${p.id} must have numeric coords`);
+});
+const bodyHtml = fs.readFileSync('public/body.html', 'utf8');
+assert(bodyHtml.includes('id="anatomy-svg"'), 'body.html must include anatomy-svg');
+assert(bodyHtml.includes('id="mode-name-btn"') && bodyHtml.includes('id="mode-touch-btn"'), 'body.html must include dual mode buttons');
+assert(bodyHtml.includes('id="body-choices-tray"'), 'body.html must include body-choices-tray');
+const bodyEngineJs = fs.readFileSync('public/js/body-engine.js', 'utf8');
+assert(bodyEngineJs.includes('flyButterflyTo'), 'body-engine.js must include flyButterflyTo physics');
+assert(bodyEngineJs.includes('triggerMilestoneCelebration'), 'body-engine.js must include triggerMilestoneCelebration reward');
+console.log('✓ Body Parts dataset, dual mode HTML, and butterfly engine verified');
 
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');

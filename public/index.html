@@ -55,7 +55,7 @@
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filter Activities">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">21</span>
+                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">22</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-fav-btn" role="tab" aria-selected="false">
                 ⭐ <span id="lbl-filter-fav">Mes Favoris</span> <span class="filter-count" id="count-fav">0</span>
@@ -373,6 +373,21 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <!-- Activity 22: Body Parts -->
+        <a href="body.html" class="activity-card body" data-activity="body">
+            <button type="button" class="activity-bookmark-btn" data-activity="body" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">🦋</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-body-title">Body Parts</span>
+                <span class="activity-card-desc" id="act-body-desc">Name and touch body parts with the magic butterfly</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="body">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <script>
@@ -423,6 +438,8 @@
                 actHideAndSeekDesc: "Spot the hidden target among visual distractors",
                 actLinesTitle: "Magic Lines",
                 actLinesDesc: "Assemble motifs to link points and guide characters",
+                actBodyTitle: "Body Parts",
+                actBodyDesc: "Name and touch body parts with the magic butterfly",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 brandTagline: "Sensory-adapted developmental learning",
@@ -477,6 +494,8 @@
                 actHideAndSeekDesc: "Trouve la cible cachée parmi les intrus",
                 actLinesTitle: "Lignes Magiques",
                 actLinesDesc: "Assemble les motifs pour relier les points et guider les personnages",
+                actBodyTitle: "Le Corps Humain",
+                actBodyDesc: "Nomme et pointe les parties du corps avec le papillon",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 brandTagline: "Activités d'apprentissage adaptées & sensorielles",
@@ -605,6 +624,11 @@
             if (linesTitle) linesTitle.innerText = t.actLinesTitle;
             const linesDesc = document.getElementById('act-lines-desc');
             if (linesDesc) linesDesc.innerText = t.actLinesDesc;
+
+            const bodyTitle = document.getElementById('act-body-title');
+            if (bodyTitle) bodyTitle.innerText = t.actBodyTitle;
+            const bodyDesc = document.getElementById('act-body-desc');
+            if (bodyDesc) bodyDesc.innerText = t.actBodyDesc;
 
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);

@@ -63,6 +63,7 @@
         if (path.includes('classification')) return 'classification';
         if (path.includes('hide-and-seek') || path.includes('hide_and_seek')) return 'hide_and_seek';
         if (path.includes('lines')) return 'lines';
+        if (path.includes('body')) return 'body';
         return null;
     }
 
@@ -418,7 +419,8 @@
             'music': { likes: 0, dislikes: 0 },
             'classification': { likes: 0, dislikes: 0 },
             'hide_and_seek': { likes: 0, dislikes: 0 },
-            'lines': { likes: 0, dislikes: 0 }
+            'lines': { likes: 0, dislikes: 0 },
+            'body': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -765,7 +767,8 @@
             'music': '.activity-card.music',
             'classification': '.activity-card.classification',
             'hide_and_seek': '.activity-card.hide_and_seek',
-            'lines': '.activity-card.lines'
+            'lines': '.activity-card.lines',
+            'body': '.activity-card.body'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -817,7 +820,8 @@
             'music': { likes: 0, dislikes: 0 },
             'classification': { likes: 0, dislikes: 0 },
             'hide_and_seek': { likes: 0, dislikes: 0 },
-            'lines': { likes: 0, dislikes: 0 }
+            'lines': { likes: 0, dislikes: 0 },
+            'body': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -894,7 +898,8 @@
             'music': '.activity-card.music',
             'classification': '.activity-card.classification',
             'hide_and_seek': '.activity-card.hide_and_seek',
-            'lines': '.activity-card.lines'
+            'lines': '.activity-card.lines',
+            'body': '.activity-card.body'
         };
 
         Object.keys(idMap).forEach(actId => {

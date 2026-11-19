@@ -1,0 +1,138 @@
+{
+  "title": {
+    "fr": "Le Corps Humain & Les Parties du Corps",
+    "en": "Human Body & Body Parts"
+  },
+  "categories": [
+    { "id": "all", "label": { "fr": "🌟 Tout mélanger", "en": "🌟 Mix All" } },
+    { "id": "face", "label": { "fr": "😊 Le Visage", "en": "😊 The Face" } },
+    { "id": "upper", "label": { "fr": "💪 Haut du corps", "en": "💪 Upper Body" } },
+    { "id": "lower", "label": { "fr": "🦵 Bas du corps", "en": "🦵 Lower Body" } }
+  ],
+  "parts": [
+    {
+      "id": "head",
+      "name": { "fr": "La tête", "en": "Head" },
+      "emoji": "👦",
+      "category": "face",
+      "coords": { "x": 200, "y": 78, "r": 34 },
+      "hint": { "fr": "Tout en haut du corps !", "en": "At the very top of your body!" },
+      "praise": { "fr": "Bravo ! C'est la tête ! 👦", "en": "Awesome! That's the head! 👦" }
+    },
+    {
+      "id": "hair",
+      "name": { "fr": "Les cheveux", "en": "Hair" },
+      "emoji": "💇",
+      "category": "face",
+      "coords": { "x": 200, "y": 48, "r": 24 },
+      "hint": { "fr": "Sur le dessus de la tête !", "en": "On top of the head!" },
+      "praise": { "fr": "Bravo ! Ce sont les cheveux ! 💇", "en": "Awesome! That's the hair! 💇" }
+    },
+    {
+      "id": "eyes",
+      "name": { "fr": "Les yeux", "en": "Eyes" },
+      "emoji": "👁️",
+      "category": "face",
+      "coords": { "x": 200, "y": 94, "r": 24 },
+      "hint": { "fr": "Pour regarder le monde !", "en": "To look at the world!" },
+      "praise": { "fr": "Super ! Ce sont les yeux ! 👁️", "en": "Great! Those are the eyes! 👁️" }
+    },
+    {
+      "id": "ears",
+      "name": { "fr": "Les oreilles", "en": "Ears" },
+      "emoji": "👂",
+      "category": "face",
+      "coords": { "x": 148, "y": 100, "r": 22 },
+      "altCoords": { "x": 252, "y": 100, "r": 22 },
+      "hint": { "fr": "Pour écouter la musique !", "en": "To listen to music!" },
+      "praise": { "fr": "Bravo ! Ce sont les oreilles ! 👂", "en": "Awesome! Those are the ears! 👂" }
+    },
+    {
+      "id": "nose",
+      "name": { "fr": "Le nez", "en": "Nose" },
+      "emoji": "👃",
+      "category": "face",
+      "coords": { "x": 200, "y": 110, "r": 20 },
+      "hint": { "fr": "Au milieu du visage pour sentir !", "en": "In the center of the face to smell!" },
+      "praise": { "fr": "Oui ! C'est le nez ! 👃", "en": "Yes! That's the nose! 👃" }
+    },
+    {
+      "id": "mouth",
+      "name": { "fr": "La bouche", "en": "Mouth" },
+      "emoji": "👄",
+      "category": "face",
+      "coords": { "x": 200, "y": 128, "r": 22 },
+      "hint": { "fr": "Pour parler et sourire !", "en": "To speak and smile!" },
+      "praise": { "fr": "Très bien ! C'est la bouche ! 👄", "en": "Very good! That's the mouth! 👄" }
+    },
+    {
+      "id": "shoulders",
+      "name": { "fr": "Les épaules", "en": "Shoulders" },
+      "emoji": "🥋",
+      "category": "upper",
+      "coords": { "x": 138, "y": 178, "r": 24 },
+      "altCoords": { "x": 262, "y": 178, "r": 24 },
+      "hint": { "fr": "En haut des bras, de chaque côté du cou !", "en": "At the top of the arms, on each side of the neck!" },
+      "praise": { "fr": "Génial ! Ce sont les épaules ! 🥋", "en": "Great! Those are the shoulders! 🥋" }
+    },
+    {
+      "id": "arms",
+      "name": { "fr": "Les bras", "en": "Arms" },
+      "emoji": "💪",
+      "category": "upper",
+      "coords": { "x": 118, "y": 228, "r": 24 },
+      "altCoords": { "x": 282, "y": 228, "r": 24 },
+      "hint": { "fr": "Pour faire de gros câlins !", "en": "To give big warm hugs!" },
+      "praise": { "fr": "Bravo ! Ce sont les bras ! 💪", "en": "Awesome! Those are the arms! 💪" }
+    },
+    {
+      "id": "hands",
+      "name": { "fr": "Les mains", "en": "Hands" },
+      "emoji": "✋",
+      "category": "upper",
+      "coords": { "x": 88, "y": 298, "r": 24 },
+      "altCoords": { "x": 312, "y": 298, "r": 24 },
+      "hint": { "fr": "Pour toucher et applaudir !", "en": "To touch and clap!" },
+      "praise": { "fr": "Parfait ! Ce sont les mains ! ✋", "en": "Perfect! Those are the hands! ✋" }
+    },
+    {
+      "id": "belly",
+      "name": { "fr": "Le ventre", "en": "Belly" },
+      "emoji": "👕",
+      "category": "upper",
+      "coords": { "x": 200, "y": 238, "r": 26 },
+      "hint": { "fr": "Tout doux au milieu du corps !", "en": "Soft in the center of the body!" },
+      "praise": { "fr": "Bravo ! C'est le ventre ! 👕", "en": "Awesome! That's the belly! 👕" }
+    },
+    {
+      "id": "legs",
+      "name": { "fr": "Les jambes", "en": "Legs" },
+      "emoji": "🦵",
+      "category": "lower",
+      "coords": { "x": 165, "y": 358, "r": 26 },
+      "altCoords": { "x": 235, "y": 358, "r": 26 },
+      "hint": { "fr": "Pour courir et sauter !", "en": "To run and jump!" },
+      "praise": { "fr": "Oui ! Ce sont les jambes ! 🦵", "en": "Yes! Those are the legs! 🦵" }
+    },
+    {
+      "id": "knees",
+      "name": { "fr": "Les genoux", "en": "Knees" },
+      "emoji": "🦿",
+      "category": "lower",
+      "coords": { "x": 165, "y": 398, "r": 22 },
+      "altCoords": { "x": 235, "y": 398, "r": 22 },
+      "hint": { "fr": "Pour plier les jambes !", "en": "To bend your legs!" },
+      "praise": { "fr": "Bravo ! Ce sont les genoux ! 🦿", "en": "Awesome! Those are the knees! 🦿" }
+    },
+    {
+      "id": "feet",
+      "name": { "fr": "Les pieds", "en": "Feet" },
+      "emoji": "🦶",
+      "category": "lower",
+      "coords": { "x": 155, "y": 472, "r": 26 },
+      "altCoords": { "x": 245, "y": 472, "r": 26 },
+      "hint": { "fr": "Tout en bas pour marcher !", "en": "At the very bottom to walk!" },
+      "praise": { "fr": "Super ! Ce sont les pieds ! 🦶", "en": "Super! Those are the feet! 🦶" }
+    }
+  ]
+}
