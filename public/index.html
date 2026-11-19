@@ -29,13 +29,17 @@
     </div>
 
     <div class="top-bar">
+        <button type="button" class="header-story-btn" id="open-about-btn" title="Notre Histoire & Motivation">
+            💙 <span id="btn-about-text">Notre Histoire</span>
+        </button>
+
         <button type="button" class="feedback-contact-btn" id="open-contact-feedback-btn" title="Envoyer un avis ou une suggestion à l'équipe">
             💬 <span id="btn-feedback-text">Donner mon avis</span>
         </button>
 
         <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
             <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
-            <button class="lang-btn" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
         </div>
     </div>
 
@@ -51,15 +55,48 @@
         <p class="subtitle" id="dashboard-subtitle">Select an activity to begin learning</p>
     </header>
 
-    <!-- Activity Filter Bar (All vs Bookmarked Favorites) -->
+    <!-- Hub Search Bar -->
+    <div class="hub-search-container">
+        <div class="hub-search-box">
+            <span class="hub-search-icon" aria-hidden="true">🔍</span>
+            <input type="search" id="hub-search-input" class="hub-search-input"
+                   placeholder="Rechercher une activité..." aria-label="Rechercher une activité" autocomplete="off">
+            <button type="button" id="hub-search-clear" class="hub-search-clear-btn" aria-label="Effacer la recherche" style="display: none;">✕</button>
+        </div>
+        <span class="hub-results-count" id="hub-results-count">23 activités</span>
+    </div>
+
+    <!-- Activity Filter Bar (Categories & Bookmarked Favorites) -->
     <div class="hub-filter-bar">
-        <div class="hub-filter-pills" role="tablist" aria-label="Filter Activities">
-            <button type="button" class="hub-filter-pill active" id="filter-all-btn" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes les activités</span> <span class="filter-count" id="count-all">22</span>
+        <div class="hub-filter-pills" role="tablist" aria-label="Filtrer par catégorie">
+            <button type="button" class="hub-filter-pill active" id="filter-all-btn" data-category="all" role="tab" aria-selected="true">
+                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">23</span>
             </button>
-            <button type="button" class="hub-filter-pill" id="filter-fav-btn" role="tab" aria-selected="false">
+            <button type="button" class="hub-filter-pill" id="filter-lang-btn" data-category="language" role="tab" aria-selected="false">
+                🗣️ <span id="lbl-filter-lang">Langage</span> <span class="filter-count">7</span>
+            </button>
+            <button type="button" class="hub-filter-pill" id="filter-logic-btn" data-category="logic" role="tab" aria-selected="false">
+                🧩 <span id="lbl-filter-logic">Logique</span> <span class="filter-count">4</span>
+            </button>
+            <button type="button" class="hub-filter-pill" id="filter-math-btn" data-category="math" role="tab" aria-selected="false">
+                🔢 <span id="lbl-filter-math">Maths & Espace</span> <span class="filter-count">4</span>
+            </button>
+            <button type="button" class="hub-filter-pill" id="filter-sensory-btn" data-category="sensory" role="tab" aria-selected="false">
+                🎨 <span id="lbl-filter-sensory">Éveil & Sons</span> <span class="filter-count">8</span>
+            </button>
+            <button type="button" class="hub-filter-pill" id="filter-fav-btn" data-category="fav" role="tab" aria-selected="false">
                 ⭐ <span id="lbl-filter-fav">Mes Favoris</span> <span class="filter-count" id="count-fav">0</span>
             </button>
+        </div>
+    </div>
+
+    <!-- Target Age Group Filter Bar (3-6 years & future expansion) -->
+    <div class="hub-age-bar">
+        <span class="hub-age-label" id="lbl-age-filter">Âge :</span>
+        <div class="hub-age-chips" role="radiogroup" aria-label="Filtrer par tranche d'âge">
+            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(23)</span></button>
+            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(23)</span></button>
+            <button type="button" class="hub-age-chip disabled" data-age="6-10" id="age-610-btn" title="Nouveaux jeux 6-10 ans à venir !" style="opacity: 0.65; cursor: not-allowed;">🎒 <span id="lbl-age-610">6–10 ans</span> <span class="age-count" style="font-size: 0.75rem; opacity: 0.85;">(Bientôt)</span></button>
         </div>
     </div>
 
@@ -71,11 +108,21 @@
         </p>
     </div>
 
+    <!-- Empty Search State Banner -->
+    <div class="empty-search-hint" id="empty-search-hint" style="display: none;">
+        <span style="font-size: 2.2rem;">🔍</span>
+        <p style="margin: 0; font-weight: 800; font-size: 1.1rem; color: #1E293B;" id="lbl-empty-search">
+            Aucune activité ne correspond à votre recherche.
+        </p>
+        <button type="button" class="hub-reset-btn" id="hub-reset-btn">Réinitialiser les filtres</button>
+    </div>
+
     <!-- Structured Learning Activities -->
     <h2 class="hub-section-title" id="sec-logic-title">🧩 Structured Learning Activities</h2>
     <main class="activities-grid">
-        <!-- Row 1: Visual Discrimination & Logic -->
-        <a href="game.html" class="activity-card find" data-activity="find_and_match">
+        <!-- Activity 1: Find & Match -->
+        <a href="game.html" class="activity-card find" data-activity="find_and_match" data-category="language" data-age="3-6" data-age-sub="3-4" data-keywords="trouve image mots animaux objets quotidien find match words animals vocabulary visual">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="find_and_match" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -89,7 +136,9 @@
             </div>
         </a>
 
-        <a href="colors.html" class="activity-card colors" data-activity="colors">
+        <!-- Activity 2: Colors -->
+        <a href="colors.html" class="activity-card colors" data-activity="colors" data-category="sensory" data-age="3-6" data-age-sub="3-4" data-keywords="couleurs rouge bleu jaune vert colors red blue yellow green eveil sensory">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="colors" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -103,7 +152,9 @@
             </div>
         </a>
 
-        <a href="pattern.html" class="activity-card pattern" data-activity="pattern">
+        <!-- Activity 3: Pattern -->
+        <a href="pattern.html" class="activity-card pattern" data-activity="pattern" data-category="logic" data-age="3-6" data-age-sub="4-6" data-keywords="complete suite motif logique sequence pattern logic reasoning visual">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="pattern" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -117,8 +168,9 @@
             </div>
         </a>
 
-        <!-- Letters, Colouring, Words & Spatial Pre-coding -->
-        <a href="letters.html" class="activity-card letters" data-activity="letters_puzzle">
+        <!-- Activity 4: Letters Puzzle -->
+        <a href="letters.html" class="activity-card letters" data-activity="letters_puzzle" data-category="language" data-age="3-6" data-age-sub="3-5" data-keywords="puzzle lettres alphabet encastrement letters abc cutouts reading">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="letters_puzzle" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -132,7 +184,9 @@
             </div>
         </a>
 
-        <a href="coloring.html" class="activity-card coloring" data-activity="coloring">
+        <!-- Activity 5: Coloring -->
+        <a href="coloring.html" class="activity-card coloring" data-activity="coloring" data-category="sensory" data-age="3-6" data-age-sub="3-5" data-keywords="coloriage magique couleur contour dessin art coloring match paint reproduction">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="coloring" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -146,7 +200,9 @@
             </div>
         </a>
 
-        <a href="spelling.html" class="activity-card spelling" data-activity="spelling">
+        <!-- Activity 6: Spelling -->
+        <a href="spelling.html" class="activity-card spelling" data-activity="spelling" data-category="language" data-age="3-6" data-age-sub="4-6" data-keywords="ecris mot lettres orthographe compose spell word letters phonics writing vocabulary">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="spelling" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -160,7 +216,9 @@
             </div>
         </a>
 
-        <a href="spatial.html" class="activity-card spatial" data-activity="spatial">
+        <!-- Activity 7: Spatial Pre-coding -->
+        <a href="spatial.html" class="activity-card spatial" data-activity="spatial" data-category="math" data-age="3-6" data-age-sub="4-6" data-keywords="guide animal reperage spatial fleches haut bas gauche droite grid navigation arrows coding space">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="spatial" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -174,8 +232,9 @@
             </div>
         </a>
 
-        <!-- Math, Concept Comparisons & Temporal Orientation -->
-        <a href="math.html" class="activity-card math" data-activity="math">
+        <!-- Activity 8: Counting & Math -->
+        <a href="math.html" class="activity-card math" data-activity="math" data-category="math" data-age="3-6" data-age-sub="4-6" data-keywords="compter petits calculs chiffres additions quantites count numbers visual sums mathematics">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="math" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -189,7 +248,9 @@
             </div>
         </a>
 
-        <a href="comparisons.html" class="activity-card comparisons" data-activity="comparisons">
+        <!-- Activity 9: Comparisons -->
+        <a href="comparisons.html" class="activity-card comparisons" data-activity="comparisons" data-category="language" data-age="3-6" data-age-sub="3-5" data-keywords="contraires comparaisons grand petit chaud froid lourd leger opposites big small hot cold heavy light language vocabulaire">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="comparisons" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -203,7 +264,9 @@
             </div>
         </a>
 
-        <a href="time.html" class="activity-card time" data-activity="time">
+        <!-- Activity 10: Time & Calendar -->
+        <a href="time.html" class="activity-card time" data-activity="time" data-category="sensory" data-age="3-6" data-age-sub="4-6" data-keywords="temps calendrier matin soir nuit semaine weekend time morning night routines calendar eveil moments">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="time" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -217,8 +280,9 @@
             </div>
         </a>
 
-        <!-- Daily Life Routines -->
-        <a href="sequence.html" class="activity-card sequence" data-activity="sequence">
+        <!-- Activity 11: Routine Sequence -->
+        <a href="sequence.html" class="activity-card sequence" data-activity="sequence" data-category="logic" data-age="3-6" data-age-sub="4-6" data-keywords="etapes quotidien ordre chronologique routines sequence scenes temporal daily order">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="sequence" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -232,8 +296,9 @@
             </div>
         </a>
 
-        <!-- Motor Planning & Maze -->
-        <a href="labyrinth.html" class="activity-card labyrinth" data-activity="labyrinth">
+        <!-- Activity 12: Ball Labyrinth -->
+        <a href="labyrinth.html" class="activity-card labyrinth" data-activity="labyrinth" data-category="math" data-age="3-6" data-age-sub="3-5" data-keywords="labyrinthe billes bois motricite maze ball wooden marble coordination espace math">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="labyrinth" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -247,8 +312,9 @@
             </div>
         </a>
 
-        <!-- Auditory Discrimination & Marble Run -->
-        <a href="sounds.html" class="activity-card sounds" data-activity="sounds">
+        <!-- Activity 13: Identify Sounds -->
+        <a href="sounds.html" class="activity-card sounds" data-activity="sounds" data-category="language" data-age="3-6" data-age-sub="3-4" data-keywords="reconnaitre sons animaux instruments vehicules nature sounds audio listening hearing">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="sounds" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -262,7 +328,9 @@
             </div>
         </a>
 
-        <a href="circuit.html" class="activity-card circuit" data-activity="circuit">
+        <!-- Activity 14: Ball Circuit -->
+        <a href="circuit.html" class="activity-card circuit" data-activity="circuit" data-category="sensory" data-age="3-6" data-age-sub="3-5" data-keywords="circuit billes rampes toboggan marble ball drop roll tracks coordination eveil sons">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="circuit" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -276,7 +344,9 @@
             </div>
         </a>
 
-        <a href="causality.html" class="activity-card causality" data-activity="causality">
+        <!-- Activity 15: Cause & Effect -->
+        <a href="causality.html" class="activity-card causality" data-activity="causality" data-category="sensory" data-age="3-6" data-age-sub="3-5" data-keywords="cause effet physique action reaction dominos feux artifice bulles bubbles fireworks domino sensory">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="causality" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -290,7 +360,9 @@
             </div>
         </a>
 
-        <a href="builder.html" class="activity-card builder" data-activity="builder">
+        <!-- Activity 16: Building Logic -->
+        <a href="builder.html" class="activity-card builder" data-activity="builder" data-category="sensory" data-age="3-6" data-age-sub="4-6" data-keywords="construction logique ponts pyramides tours assemblage building blocks bridges towers architecture eveil">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="builder" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -304,7 +376,9 @@
             </div>
         </a>
 
-        <a href="basket.html" class="activity-card basket" data-activity="basket">
+        <!-- Activity 17: Basket Shape -->
+        <a href="basket.html" class="activity-card basket" data-activity="basket" data-category="logic" data-age="3-6" data-age-sub="3-5" data-keywords="basket formes geometriques cercle carre triangle etoile shoot shape hoops geometry logic logique">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="basket" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -318,7 +392,9 @@
             </div>
         </a>
 
-        <a href="music.html" class="activity-card music" data-activity="music">
+        <!-- Activity 18: Music Partition -->
+        <a href="music.html" class="activity-card music" data-activity="music" data-category="sensory" data-age="3-6" data-age-sub="3-6" data-keywords="musique partition comptines notes do re mi piano marimba music melody nursery rhymes sensory">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="music" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -332,7 +408,9 @@
             </div>
         </a>
 
-        <a href="classification.html" class="activity-card classification" data-activity="classification">
+        <!-- Activity 19: Classification & Sorting -->
+        <a href="classification.html" class="activity-card classification" data-activity="classification" data-category="logic" data-age="3-6" data-age-sub="3-5" data-keywords="tri categories classification paniers trier tri sorting baskets items logic">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="classification" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -346,7 +424,9 @@
             </div>
         </a>
 
-        <a href="hide-and-seek.html" class="activity-card hide_and_seek" data-activity="hide_and_seek">
+        <!-- Activity 20: Hide & Seek -->
+        <a href="hide-and-seek.html" class="activity-card hide_and_seek" data-activity="hide_and_seek" data-category="sensory" data-age="3-6" data-age-sub="3-5" data-keywords="cache cache visuel intrus observation grille spot hidden target visual search eveil">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="hide_and_seek" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -360,7 +440,9 @@
             </div>
         </a>
 
-        <a href="lines.html" class="activity-card lines" data-activity="lines">
+        <!-- Activity 21: Magic Lines -->
+        <a href="lines.html" class="activity-card lines" data-activity="lines" data-category="math" data-age="3-6" data-age-sub="4-6" data-keywords="lignes magiques graphisme trace points assembler motifs pre-ecriture magic lines writing drawing math espace">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="lines" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -375,7 +457,8 @@
         </a>
 
         <!-- Activity 22: Body Parts -->
-        <a href="body.html" class="activity-card body" data-activity="body">
+        <a href="body.html" class="activity-card body" data-activity="body" data-category="language" data-age="3-6" data-age-sub="3-5" data-keywords="corps humain parties anatomie papillon visage tete yeux nez bouche bras mains pieds body parts anatomy butterfly">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
             <button type="button" class="activity-bookmark-btn" data-activity="body" title="Ajouter aux favoris" aria-label="Bookmark activity">
                 <span class="bookmark-star">☆</span>
             </button>
@@ -388,7 +471,47 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <!-- Activity 23: Language & Communication -->
+        <a href="language.html" class="activity-card language" data-activity="language" data-category="language" data-age="3-6" data-keywords="langage communication pecs mini-film phrases bonjour je veux merci au revoir functional requests speech words dialogue conversation">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
+            <button type="button" class="activity-bookmark-btn" data-activity="language" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">💬</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-language-title">Language & Communication</span>
+                <span class="activity-card-desc" id="act-language-desc">Interactive mini-film to practice greetings, requests & gratitude</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="language">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
+
+    <!-- About Us / Our Story Modal -->
+    <div class="alp-modal-overlay" id="alp-about-modal" style="display: none;">
+        <div class="alp-modal-box" style="max-width: 560px; padding: 28px 24px; text-align: left;">
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" width="48" height="48" style="flex-shrink: 0;">
+                <div>
+                    <h2 style="margin: 0; font-size: 1.35rem; color: #1E293B;" id="about-modal-title">Notre Histoire : L'Harmonie est un voyage ! 💙</h2>
+                    <span style="font-size: 0.88rem; font-weight: 700; color: #64748B;">Autism Learning Platform • 2026</span>
+                </div>
+            </div>
+
+            <div style="font-size: 1rem; line-height: 1.6; color: #334155; margin-bottom: 22px;" id="about-modal-body"></div>
+
+            <div style="display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap;">
+                <button type="button" class="modal-btn save-btn" id="about-suggest-btn" style="background: #3B82F6; display: inline-flex; align-items: center; gap: 6px;">
+                    <span id="about-btn-suggest-text">Proposer une idée de jeu 💬</span>
+                </button>
+                <button type="button" class="modal-btn cancel-btn" id="about-close-btn">
+                    <span id="about-btn-close-text">Fermer</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         const translations = {
@@ -440,11 +563,29 @@
                 actLinesDesc: "Assemble motifs to link points and guide characters",
                 actBodyTitle: "Body Parts",
                 actBodyDesc: "Name and touch body parts with the magic butterfly",
+                actLanguageTitle: "Language & Communication",
+                actLanguageDesc: "Interactive mini-film to practice greetings, requests & gratitude",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
+                btnAboutText: "Our Story",
+                aboutTitle: "Our Story: Harmony is a journey! 💙",
+                aboutSuggestBtn: "Suggest an Activity 💬",
+                aboutCloseBtn: "Close",
+                aboutBodyHtml: `<p style="margin-top: 0;"><strong>I am ML, father of a wonderful 5-year-old autistic boy in 2026.</strong></p><p>While many apps offer great learning games, none truly resonated with my son’s unique sensory and developmental profile. That is why I built this platform: to digitalize the visual routines, sensory adaptations, and therapeutic exercises we practice every day at home and with his therapists.</p><p style="background: #F0FDF4; border-left: 4px solid #22C55E; padding: 12px 14px; border-radius: 0 12px 12px 0; color: #166534; font-size: 0.98rem; margin: 16px 0;"><strong>💡 Co-creation with parents & therapists:</strong> I warmly welcome your input, feedback, and ideas! If there is an activity, visual routine, or sensory mechanic your child needs, let's build it together.</p><p style="margin-bottom: 0; font-weight: 700; color: #1E293B;"><em>Have faith, one step at a time! ✨</em><br>— <strong>ML</strong></p>`,
                 brandTagline: "Sensory-adapted developmental learning",
-                lblFilterAll: "All Activities",
-                lblFilterFav: "My Favorites",
+                searchPlaceholder: "Search an activity (e.g. math, body, colors)...",
+                lblAgeFilter: "Age:",
+                lblAgeAll: "All Ages",
+                lblAge36: "3–6 years",
+                lblAge610: "6–10 years (Coming Soon)",
+                lblFilterAll: "All",
+                lblFilterLang: "Language",
+                lblFilterLogic: "Logic & Sorting",
+                lblFilterMath: "Math & Space",
+                lblFilterSensory: "Creativity & Sounds",
+                lblFilterFav: "Favorites",
+                emptySearchText: "No activity matches your search.",
+                btnResetFilters: "Reset filters",
                 lblEmptyFav: "Tap the star ⭐ on your favorite activities to pin them here for fast access!",
                 lblConnections: "connections"
             },
@@ -496,11 +637,29 @@
                 actLinesDesc: "Assemble les motifs pour relier les points et guider les personnages",
                 actBodyTitle: "Le Corps Humain",
                 actBodyDesc: "Nomme et pointe les parties du corps avec le papillon",
+                actLanguageTitle: "Langage & Communication",
+                actLanguageDesc: "Mini-film interactif pour s'entraîner à saluer, demander et remercier",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
+                btnAboutText: "Notre Histoire",
+                aboutTitle: "Notre Histoire : L'Harmonie est un voyage ! 💙",
+                aboutSuggestBtn: "Proposer une idée de jeu 💬",
+                aboutCloseBtn: "Fermer",
+                aboutBodyHtml: `<p style="margin-top: 0;"><strong>Je suis ML, papa d'un merveilleux petit garçon autiste de 5 ans en 2026.</strong></p><p>Bien qu'il existe de nombreuses applications éducatives, aucune ne correspondait vraiment au profil sensoriel et aux besoins spécifiques de mon fils. J'ai donc créé cette plateforme pour digitaliser ce que nous travaillons au quotidien à la maison et lors de ses séances de thérapie avec des professionnels.</p><p style="background: #F0FDF4; border-left: 4px solid #22C55E; padding: 12px 14px; border-radius: 0 12px 12px 0; color: #166534; font-size: 0.98rem; margin: 16px 0;"><strong>💡 Co-création avec les parents & thérapeutes :</strong> J'accueille avec grand plaisir vos retours, suggestions et idées ! Si vous avez besoin d'une activité spécifique ou d'une adaptation pour votre enfant, construisons-la ensemble.</p><p style="margin-bottom: 0; font-weight: 700; color: #1E293B;"><em>Gardez foi et confiance, un pas après l'autre ! ✨</em><br>— <strong>ML</strong></p>`,
                 brandTagline: "Activités d'apprentissage adaptées & sensorielles",
-                lblFilterAll: "Toutes les activités",
+                searchPlaceholder: "Rechercher une activité (ex. maths, corps, couleurs)...",
+                lblAgeFilter: "Âge :",
+                lblAgeAll: "Tous les âges",
+                lblAge36: "3–6 ans",
+                lblAge610: "6–10 ans (Bientôt)",
+                lblFilterAll: "Toutes",
+                lblFilterLang: "Langage",
+                lblFilterLogic: "Logique",
+                lblFilterMath: "Maths & Espace",
+                lblFilterSensory: "Éveil & Sons",
                 lblFilterFav: "Mes Favoris",
+                emptySearchText: "Aucune activité ne correspond à votre recherche.",
+                btnResetFilters: "Réinitialiser les filtres",
                 lblEmptyFav: "Touche l'étoile ⭐ sur tes jeux préférés pour les retrouver ici en accès rapide !",
                 lblConnections: "connexions"
             }
@@ -534,6 +693,39 @@
 
             const connLabelEl = document.getElementById('connections-label');
             if (connLabelEl) connLabelEl.innerText = t.lblConnections;
+
+            const searchInput = document.getElementById('hub-search-input');
+            if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+
+            const ageFilterLabel = document.getElementById('lbl-age-filter');
+            if (ageFilterLabel) ageFilterLabel.innerText = t.lblAgeFilter;
+
+            const ageAllLabel = document.getElementById('lbl-age-all');
+            if (ageAllLabel) ageAllLabel.innerText = t.lblAgeAll;
+
+            const age36Label = document.getElementById('lbl-age-36');
+            if (age36Label) age36Label.innerText = t.lblAge36;
+
+            const age610Label = document.getElementById('lbl-age-610');
+            if (age610Label) age610Label.innerText = t.lblAge610;
+
+            const filterLangLabel = document.getElementById('lbl-filter-lang');
+            if (filterLangLabel) filterLangLabel.innerText = t.lblFilterLang;
+
+            const filterLogicLabel = document.getElementById('lbl-filter-logic');
+            if (filterLogicLabel) filterLogicLabel.innerText = t.lblFilterLogic;
+
+            const filterMathLabel = document.getElementById('lbl-filter-math');
+            if (filterMathLabel) filterMathLabel.innerText = t.lblFilterMath;
+
+            const filterSensoryLabel = document.getElementById('lbl-filter-sensory');
+            if (filterSensoryLabel) filterSensoryLabel.innerText = t.lblFilterSensory;
+
+            const emptySearchLabel = document.getElementById('lbl-empty-search');
+            if (emptySearchLabel) emptySearchLabel.innerText = t.emptySearchText;
+
+            const resetBtn = document.getElementById('hub-reset-btn');
+            if (resetBtn) resetBtn.innerText = t.btnResetFilters;
             document.getElementById('dashboard-title').innerText = t.title;
             document.getElementById('dashboard-subtitle').innerText = t.subtitle;
             document.getElementById('sec-logic-title').innerText = t.secLogic;
@@ -630,9 +822,33 @@
             const bodyDesc = document.getElementById('act-body-desc');
             if (bodyDesc) bodyDesc.innerText = t.actBodyDesc;
 
+            const langTitle = document.getElementById('act-language-title');
+            if (langTitle) langTitle.innerText = t.actLanguageTitle;
+            const langDesc = document.getElementById('act-language-desc');
+            if (langDesc) langDesc.innerText = t.actLanguageDesc;
+
+            const btnAbout = document.getElementById('btn-about-text');
+            if (btnAbout) btnAbout.innerText = t.btnAboutText;
+
+            const aboutTitle = document.getElementById('about-modal-title');
+            if (aboutTitle) aboutTitle.innerText = t.aboutTitle;
+
+            const aboutBody = document.getElementById('about-modal-body');
+            if (aboutBody) aboutBody.innerHTML = t.aboutBodyHtml;
+
+            const aboutSuggest = document.getElementById('about-btn-suggest-text');
+            if (aboutSuggest) aboutSuggest.innerText = t.aboutSuggestBtn;
+
+            const aboutClose = document.getElementById('about-btn-close-text');
+            if (aboutClose) aboutClose.innerText = t.aboutCloseBtn;
+
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
+
+            if (window.alpTracker && window.alpTracker.applyHubFilters) {
+                window.alpTracker.applyHubFilters();
+            }
         }
 
         document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -640,6 +856,43 @@
                 updateLanguage(btn.getAttribute('data-lang'));
             };
         });
+
+        // About Us / Our Story Modal Handlers
+        const aboutModal = document.getElementById('alp-about-modal');
+        const openAboutBtn = document.getElementById('open-about-btn');
+        const closeAboutBtn = document.getElementById('about-close-btn');
+        const suggestAboutBtn = document.getElementById('about-suggest-btn');
+
+        if (openAboutBtn && aboutModal) {
+            openAboutBtn.onclick = () => {
+                aboutModal.style.display = 'flex';
+            };
+        }
+
+        if (closeAboutBtn && aboutModal) {
+            closeAboutBtn.onclick = () => {
+                aboutModal.style.display = 'none';
+            };
+        }
+
+        if (suggestAboutBtn && aboutModal) {
+            suggestAboutBtn.onclick = () => {
+                aboutModal.style.display = 'none';
+                const feedbackBtn = document.getElementById('open-contact-feedback-btn');
+                if (feedbackBtn) feedbackBtn.click();
+            };
+        }
+
+        if (aboutModal) {
+            aboutModal.onclick = (e) => {
+                if (e.target === aboutModal) aboutModal.style.display = 'none';
+            };
+            window.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && aboutModal.style.display === 'flex') {
+                    aboutModal.style.display = 'none';
+                }
+            });
+        }
 
         updateLanguage(currentLang);
     </script>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Autism Platform">
+    <meta name="theme-color" content="#F8FAFC">
+    <title>Langage & Communication - Learning Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .lang-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+            padding-bottom: 24px;
+        }
+
+        /* Scene Progress Steps (1. Bonjour -> 2. Je veux -> 3. Merci -> 4. Au revoir) */
+        .story-steps-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .story-step-chip {
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 0.92rem;
+            font-weight: 800;
+            background: #EDF2F7;
+            color: #64748B;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+        .story-step-chip.active {
+            background: #3B82F6;
+            color: #FFFFFF;
+            transform: scale(1.06);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+        }
+        .story-step-chip.done {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        /* Visual Sentence Strip (PECS-style communication bar) */
+        .sentence-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 56px;
+            background: #FFFFFF;
+            border: 3px solid #93C5FD;
+            border-radius: 22px;
+            padding: 8px 22px;
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.12);
+            max-width: 640px;
+            width: 92%;
+            box-sizing: border-box;
+            transition: max-width 0.25s ease;
+        }
+        .sentence-token {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #EFF6FF;
+            border: 2px solid #60A5FA;
+            border-radius: 14px;
+            padding: 6px 14px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #1D4ED8;
+            animation: popToken 0.25s ease;
+        }
+        @keyframes popToken {
+            from { transform: scale(0.7); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        /* Animated Film Theatre Frame */
+        .film-frame {
+            width: 94%;
+            max-width: 580px;
+            background: #FFFDF9;
+            border: 4px solid #CBD5E1;
+            border-radius: 26px;
+            padding: 8px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+            box-sizing: border-box;
+            transition: max-width 0.25s ease;
+        }
+        .film-svg {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 18px;
+            user-select: none;
+        }
+
+        /* Communication Phrase Cards & Object Demand Cards */
+        .comm-cards-grid {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 780px;
+            width: 95%;
+            margin-top: 4px;
+        }
+        .comm-card {
+            min-width: 155px;
+            padding: 14px 18px;
+            background: #FFFFFF;
+            border: 4px solid #E2E8F0;
+            border-radius: 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            transition: transform 0.13s ease, border-color 0.2s ease, background-color 0.2s ease, opacity 0.25s ease;
+            user-select: none;
+        }
+        .comm-card:active {
+            transform: scale(0.94);
+        }
+        .comm-card.card-bonjour  { border-color: #60A5FA; background: #EFF6FF; }
+        .comm-card.card-jeveux   { border-color: #FBBF24; background: #FFFBEB; }
+        .comm-card.card-merci    { border-color: #34D399; background: #ECFDF5; }
+        .comm-card.card-aurevoir { border-color: #C084FC; background: #FAF5FF; }
+        .comm-card.card-object   { min-width: 185px; padding: 16px 22px; border-color: #CBD5E1; background: #FFFFFF; }
+        .comm-card.soft-dim      { opacity: 0.42; transform: scale(0.95); }
+        .comm-card.chosen-flash  { border-color: #10B981; background: #D1FAE5; transform: scale(1.06); box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25); }
+
+        .comm-icon {
+            font-size: 2.8rem;
+            line-height: 1.1;
+        }
+        .comm-text {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1E293B;
+            text-align: center;
+        }
+
+        /* Responsive Visual Sizing */
+        body[data-size="normal"] .film-frame { max-width: 580px; }
+        body[data-size="large"] .film-frame { max-width: 740px; }
+        body[data-size="xlarge"] .film-frame { max-width: 900px; }
+
+        body[data-size="normal"] .comm-card { min-width: 155px; padding: 14px 18px; }
+        body[data-size="large"] .comm-card { min-width: 195px; padding: 18px 24px; }
+        body[data-size="xlarge"] .comm-card { min-width: 240px; padding: 24px 30px; }
+
+        body[data-size="normal"] .comm-icon { font-size: 2.8rem; }
+        body[data-size="large"] .comm-icon { font-size: 3.8rem; }
+        body[data-size="xlarge"] .comm-icon { font-size: 4.8rem; }
+
+        body[data-size="normal"] .comm-text { font-size: 1.2rem; }
+        body[data-size="large"] .comm-text { font-size: 1.45rem; }
+        body[data-size="xlarge"] .comm-text { font-size: 1.8rem; }
+    </style>
+</head>
+<body>
+    <header class="game-header">
+        <div class="header-left">
+            <a href="index.html" class="header-logo-link" title="Autism Learning Platform">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" class="header-infinity-logo" width="42" height="42">
+            </a>
+            <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        </div>
+        <h2 id="activity-title" class="category-badge">💬 Langage & Communication</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">0</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="lang-stage">
+        <!-- Animal Friend Selection Pills -->
+        <nav class="routine-pills" id="animal-pills" aria-label="Select animal friend"></nav>
+
+        <!-- 4-Act Story Progress Bar -->
+        <div class="story-steps-bar" id="story-steps-bar"></div>
+
+        <!-- Prompt Banner -->
+        <div class="prompt-container" style="margin: 2px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.2rem, 3.2vw, 1.85rem); margin: 0;">« Bonjour ! » 👋</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat voice prompt" aria-label="Repeat voice prompt">🗣️</button>
+        </div>
+
+        <!-- PECS Visual Sentence Strip -->
+        <div class="sentence-strip" id="sentence-strip" aria-label="Visual sentence strip"></div>
+
+        <!-- Animated Mini-Film Theater Stage -->
+        <div class="film-frame">
+            <svg class="film-svg" id="film-svg" viewBox="0 0 540 300" aria-label="Interactive language story"></svg>
+        </div>
+
+        <!-- Communication Phrase Cards / Demand Choices -->
+        <section class="comm-cards-grid" id="comm-cards" aria-label="Communication choices"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/language-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

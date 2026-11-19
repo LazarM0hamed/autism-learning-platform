@@ -64,6 +64,7 @@
         if (path.includes('hide-and-seek') || path.includes('hide_and_seek')) return 'hide_and_seek';
         if (path.includes('lines')) return 'lines';
         if (path.includes('body')) return 'body';
+        if (path.includes('language')) return 'language';
         return null;
     }
 
@@ -420,7 +421,8 @@
             'classification': { likes: 0, dislikes: 0 },
             'hide_and_seek': { likes: 0, dislikes: 0 },
             'lines': { likes: 0, dislikes: 0 },
-            'body': { likes: 0, dislikes: 0 }
+            'body': { likes: 0, dislikes: 0 },
+            'language': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -768,7 +770,8 @@
             'classification': '.activity-card.classification',
             'hide_and_seek': '.activity-card.hide_and_seek',
             'lines': '.activity-card.lines',
-            'body': '.activity-card.body'
+            'body': '.activity-card.body',
+            'language': '.activity-card.language'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -821,7 +824,8 @@
             'classification': { likes: 0, dislikes: 0 },
             'hide_and_seek': { likes: 0, dislikes: 0 },
             'lines': { likes: 0, dislikes: 0 },
-            'body': { likes: 0, dislikes: 0 }
+            'body': { likes: 0, dislikes: 0 },
+            'language': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -867,16 +871,18 @@
     function updateConnectionsUI(count) {
         const el = document.getElementById('connections-count');
         const lbl = document.getElementById('connections-label');
+        const activeLang = localStorage.getItem('alp_lang') || document.documentElement.lang || 'fr';
         if (!el) return;
         if (typeof count === 'number' && count > 0) {
-            el.innerText = Number(count).toLocaleString(currentLang === 'fr' ? 'fr-FR' : 'en-US');
+            el.innerText = Number(count).toLocaleString(activeLang === 'fr' ? 'fr-FR' : 'en-US');
         }
         if (lbl) {
-            lbl.innerText = currentLang === 'fr' ? 'connexions' : 'connections';
+            lbl.innerText = activeLang === 'fr' ? 'connexions' : 'connections';
         }
     }
 
     function renderDashboardLikes(summary) {
+        const activeLang = localStorage.getItem('alp_lang') || document.documentElement.lang || 'fr';
         const idMap = {
             'find_and_match': '.activity-card.find',
             'letters_puzzle': '.activity-card.letters',
@@ -899,7 +905,8 @@
             'classification': '.activity-card.classification',
             'hide_and_seek': '.activity-card.hide_and_seek',
             'lines': '.activity-card.lines',
-            'body': '.activity-card.body'
+            'body': '.activity-card.body',
+            'language': '.activity-card.language'
         };
 
         Object.keys(idMap).forEach(actId => {
@@ -916,7 +923,7 @@
 
             const likes = summary[actId] ? (summary[actId].likes || 0) : 0;
             badge.innerHTML = `<span class="like-thumb">👍</span> <span class="like-number">${likes}</span>`;
-            badge.title = `${likes} ${currentLang === 'fr' ? 'J\'aimes' : 'Likes'}`;
+            badge.title = `${likes} ${activeLang === 'fr' ? 'J\'aimes' : 'Likes'}`;
         });
     }
 
@@ -1078,74 +1085,183 @@
         return !exists;
     }
 
-    function updateBookmarksUI() {
+    function normalizeSearchText(str) {
+        if (!str) return '';
+        return str.toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .trim();
+    }
+
+    function applyHubFilters() {
+        if (!isHubPage()) return;
+
         const bookmarks = getBookmarkedActivities();
-        const activeFilter = localStorage.getItem('alp_hub_active_filter') || 'all';
+        const activeCategory = localStorage.getItem('alp_hub_active_category') || 'all';
+        const activeLang = localStorage.getItem('alp_lang') || document.documentElement.lang || 'fr';
+        let activeAge = localStorage.getItem('alp_hub_active_age') || 'all';
+        if (activeAge !== 'all' && activeAge !== '3-6' && activeAge !== '6-10') {
+            activeAge = 'all';
+            localStorage.setItem('alp_hub_active_age', 'all');
+        }
+        const searchInput = document.getElementById('hub-search-input');
+        const clearBtn = document.getElementById('hub-search-clear');
+        const rawQuery = (searchInput && searchInput.value) || '';
+        const query = normalizeSearchText(rawQuery);
+
+        if (clearBtn) {
+            clearBtn.style.display = rawQuery.length > 0 ? 'flex' : 'none';
+        }
 
         const favCountBadge = document.getElementById('count-fav');
         if (favCountBadge) favCountBadge.innerText = bookmarks.length;
 
+        // Update bookmark buttons state
         document.querySelectorAll('.activity-bookmark-btn').forEach(btn => {
             const actId = btn.getAttribute('data-activity');
             const isFav = bookmarks.includes(actId);
             btn.classList.toggle('is-bookmarked', isFav);
-            btn.title = isFav ? (currentLang === 'fr' ? 'Retirer des favoris' : 'Remove from favorites') : (currentLang === 'fr' ? 'Ajouter aux favoris' : 'Add to favorites');
+            btn.title = isFav ? (activeLang === 'fr' ? 'Retirer des favoris' : 'Remove from favorites') : (activeLang === 'fr' ? 'Ajouter aux favoris' : 'Add to favorites');
             const star = btn.querySelector('.bookmark-star');
             if (star) star.innerText = isFav ? '⭐' : '☆';
         });
 
-        // Filter cards if on hub page
-        if (isHubPage()) {
-            const cards = document.querySelectorAll('.activities-grid .activity-card');
-            let visibleCount = 0;
-            cards.forEach(card => {
-                const actId = card.getAttribute('data-activity');
-                if (activeFilter === 'fav') {
-                    const isVisible = bookmarks.includes(actId);
-                    card.style.display = isVisible ? 'flex' : 'none';
-                    if (isVisible) visibleCount++;
-                } else {
-                    card.style.display = 'flex';
-                    visibleCount++;
-                }
-            });
+        const cards = document.querySelectorAll('.activities-grid .activity-card');
+        let visibleCount = 0;
 
-            const emptyHint = document.getElementById('empty-favorites-hint');
-            if (emptyHint) {
-                emptyHint.style.display = (activeFilter === 'fav' && visibleCount === 0) ? 'flex' : 'none';
+        cards.forEach(card => {
+            const actId = card.getAttribute('data-activity') || '';
+            const cat = card.getAttribute('data-category') || 'all';
+            const cardAge = card.getAttribute('data-age') || '3-6';
+            const keywords = normalizeSearchText(card.getAttribute('data-keywords') || '');
+            const titleEl = card.querySelector('.activity-card-title');
+            const descEl = card.querySelector('.activity-card-desc');
+            const titleText = normalizeSearchText(titleEl ? titleEl.innerText : '');
+            const descText = normalizeSearchText(descEl ? descEl.innerText : '');
+
+            // 1. Favorite check
+            const matchesFav = (activeCategory !== 'fav') || bookmarks.includes(actId);
+
+            // 2. Category check
+            const matchesCat = (activeCategory === 'all' || activeCategory === 'fav') || (cat === activeCategory);
+
+            // 3. Age check (3-6 years category matches all current platform games)
+            const matchesAge = (activeAge === 'all') || (activeAge === '3-6' && cardAge === '3-6') || (cardAge === activeAge);
+
+            // 4. Search query check
+            let matchesSearch = true;
+            if (query) {
+                matchesSearch = titleText.includes(query) || descText.includes(query) || keywords.includes(query) || cat.includes(query);
             }
 
-            const allBtn = document.getElementById('filter-all-btn');
-            const favBtn = document.getElementById('filter-fav-btn');
-            if (allBtn) {
-                allBtn.classList.toggle('active', activeFilter === 'all');
-                allBtn.setAttribute('aria-selected', String(activeFilter === 'all'));
-            }
-            if (favBtn) {
-                favBtn.classList.toggle('active', activeFilter === 'fav');
-                favBtn.setAttribute('aria-selected', String(activeFilter === 'fav'));
-            }
+            const isVisible = matchesFav && matchesCat && matchesAge && matchesSearch;
+            card.style.display = isVisible ? 'flex' : 'none';
+            if (isVisible) visibleCount++;
+        });
+
+        // Results counter chip
+        const countBadge = document.getElementById('hub-results-count');
+        if (countBadge) {
+            countBadge.innerText = `${visibleCount} ${activeLang === 'fr' ? (visibleCount <= 1 ? 'activité' : 'activités') : (visibleCount <= 1 ? 'activity' : 'activities')}`;
         }
+
+        // Empty state banners
+        const emptyFavHint = document.getElementById('empty-favorites-hint');
+        if (emptyFavHint) {
+            emptyFavHint.style.display = (activeCategory === 'fav' && visibleCount === 0 && !query) ? 'flex' : 'none';
+        }
+
+        const emptySearchHint = document.getElementById('empty-search-hint');
+        if (emptySearchHint) {
+            emptySearchHint.style.display = (visibleCount === 0 && (query.length > 0 || activeCategory !== 'fav')) ? 'flex' : 'none';
+        }
+
+        // Category pills UI sync
+        document.querySelectorAll('.hub-filter-pill').forEach(pill => {
+            const pillCat = pill.getAttribute('data-category') || 'all';
+            const isActive = pillCat === activeCategory;
+            pill.classList.toggle('active', isActive);
+            pill.setAttribute('aria-selected', String(isActive));
+        });
+
+        // Age chips UI sync
+        document.querySelectorAll('.hub-age-chip').forEach(chip => {
+            const chipAge = chip.getAttribute('data-age') || 'all';
+            const isActive = chipAge === activeAge;
+            chip.classList.toggle('active', isActive);
+        });
+    }
+
+    function updateBookmarksUI() {
+        applyHubFilters();
     }
 
     function setupFilterBar() {
-        const allBtn = document.getElementById('filter-all-btn');
-        const favBtn = document.getElementById('filter-fav-btn');
+        if (!isHubPage()) return;
 
-        if (allBtn && !allBtn.dataset.bound) {
-            allBtn.dataset.bound = 'true';
-            allBtn.onclick = () => {
-                localStorage.setItem('alp_hub_active_filter', 'all');
-                updateBookmarksUI();
+        // Category pills
+        document.querySelectorAll('.hub-filter-pill').forEach(pill => {
+            if (!pill.dataset.bound) {
+                pill.dataset.bound = 'true';
+                pill.onclick = () => {
+                    const cat = pill.getAttribute('data-category') || 'all';
+                    localStorage.setItem('alp_hub_active_category', cat);
+                    applyHubFilters();
+                };
+            }
+        });
+
+        // Age filter chips
+        document.querySelectorAll('.hub-age-chip').forEach(chip => {
+            if (!chip.dataset.bound) {
+                chip.dataset.bound = 'true';
+                chip.onclick = () => {
+                    const age = chip.getAttribute('data-age') || 'all';
+                    localStorage.setItem('alp_hub_active_age', age);
+                    applyHubFilters();
+                };
+            }
+        });
+
+        // Search Input
+        const searchInput = document.getElementById('hub-search-input');
+        if (searchInput && !searchInput.dataset.bound) {
+            searchInput.dataset.bound = 'true';
+            searchInput.addEventListener('input', () => {
+                applyHubFilters();
+            });
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    searchInput.value = '';
+                    applyHubFilters();
+                }
+            });
+        }
+
+        // Search Clear Button
+        const clearBtn = document.getElementById('hub-search-clear');
+        if (clearBtn && !clearBtn.dataset.bound) {
+            clearBtn.dataset.bound = 'true';
+            clearBtn.onclick = () => {
+                if (searchInput) searchInput.value = '';
+                applyHubFilters();
+                if (searchInput) searchInput.focus();
             };
         }
-        if (favBtn && !favBtn.dataset.bound) {
-            favBtn.dataset.bound = 'true';
-            favBtn.onclick = () => {
-                localStorage.setItem('alp_hub_active_filter', 'fav');
-                updateBookmarksUI();
+
+        // Reset Filters Button
+        const resetBtn = document.getElementById('hub-reset-btn');
+        if (resetBtn && !resetBtn.dataset.bound) {
+            resetBtn.dataset.bound = 'true';
+            resetBtn.onclick = () => {
+                if (searchInput) searchInput.value = '';
+                localStorage.setItem('alp_hub_active_category', 'all');
+                localStorage.setItem('alp_hub_active_age', 'all');
+                applyHubFilters();
             };
         }
+
+        applyHubFilters();
     }
 
     // Global Event Delegation for Activity Bookmark Stars
@@ -1178,7 +1294,8 @@
         getSessionId: () => activeSessionId,
         refreshRecommendations: loadDashboardRecommendations,
         refreshLikes: loadDashboardLikes,
-        refreshConnections: loadConnectionsCount
+        refreshConnections: loadConnectionsCount,
+        applyHubFilters: applyHubFilters
     };
 
     // Auto-initialize on load

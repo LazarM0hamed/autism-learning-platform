@@ -308,6 +308,33 @@ main {
     font-weight: 600;
 }
 
+/* Story / About Us Button in Top Bar */
+.header-story-btn {
+    background: #EFF6FF;
+    border: 1.5px solid #BFDBFE;
+    color: #1D4ED8;
+    border-radius: 18px;
+    padding: 6px 14px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.header-story-btn:hover {
+    background: #DBEAFE;
+    border-color: #3B82F6;
+    transform: translateY(-1px);
+}
+
+.header-story-btn:active {
+    transform: scale(0.95);
+}
+
 /* Feedback / Contact Us Button in Top Bar or Footer */
 .feedback-contact-btn {
     background: #EFF6FF;
@@ -3382,6 +3409,193 @@ body[data-size="xlarge"] .choice-emoji {
 }
 body[data-size="xlarge"] .choice-label {
     font-size: 1.65rem;
+}
+
+/* ==========================================================================
+   Hub Search Bar, Category Filter Navigation & Age Badges
+   ========================================================================== */
+
+.hub-search-container {
+    width: 100%;
+    max-width: 860px;
+    margin: 8px auto 12px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.hub-search-box {
+    width: 100%;
+    max-width: 580px;
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border: 2.5px solid #CBD5E1;
+    border-radius: 24px;
+    padding: 8px 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.hub-search-box:focus-within {
+    border-color: #3B82F6;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.18);
+}
+
+.hub-search-icon {
+    font-size: 1.25rem;
+    margin-right: 10px;
+    color: #64748B;
+    user-select: none;
+}
+
+.hub-search-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1E293B;
+    background: transparent;
+    font-family: inherit;
+}
+
+.hub-search-input::placeholder {
+    color: #94A3B8;
+    font-weight: 600;
+}
+
+.hub-search-clear-btn {
+    background: #E2E8F0;
+    color: #475569;
+    border: none;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, transform 0.1s ease;
+    margin-left: 8px;
+}
+
+.hub-search-clear-btn:hover {
+    background: #CBD5E1;
+    transform: scale(1.08);
+}
+
+.hub-results-count {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #64748B;
+    background: #F1F5F9;
+    padding: 3px 12px;
+    border-radius: 12px;
+}
+
+/* Age Filter Bar */
+.hub-age-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 2px auto 14px auto;
+    max-width: 860px;
+    padding: 0 12px;
+}
+
+.hub-age-label {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #475569;
+}
+
+.hub-age-chips {
+    display: inline-flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hub-age-chip {
+    background: #FFFFFF;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 16px;
+    padding: 5px 13px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: #334155;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+    user-select: none;
+}
+
+.hub-age-chip:hover {
+    border-color: #3B82F6;
+    background: #F8FAFC;
+}
+
+.hub-age-chip.active {
+    background: #1E293B;
+    border-color: #1E293B;
+    color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Age Badge */
+.activity-age-badge {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    background: #F1F5F9;
+    color: #475569;
+    border: 1px solid #E2E8F0;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 10px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Empty Search Hint */
+.empty-search-hint {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: #F8FAFC;
+    border: 2.5px dashed #CBD5E1;
+    border-radius: 24px;
+    padding: 36px 20px;
+    max-width: 580px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.hub-reset-btn {
+    background: #3B82F6;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 18px;
+    padding: 10px 22px;
+    font-size: 0.98rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+    transition: transform 0.12s ease, background 0.15s ease;
+}
+
+.hub-reset-btn:hover {
+    background: #2563EB;
+    transform: translateY(-1px);
 }
 
 

@@ -6,7 +6,7 @@ const DEFAULT_ACTIVITIES = [
     'coloring', 'spelling', 'spatial', 'math', 'comparisons',
     'time', 'sequence', 'labyrinth', 'sounds', 'circuit',
     'causality', 'builder', 'basket', 'music', 'classification',
-    'hide_and_seek', 'lines', 'body'
+    'hide_and_seek', 'lines', 'body', 'language'
 ];
 
 function initDefaultSummary() {

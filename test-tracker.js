@@ -235,19 +235,21 @@ assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent
 assert(indexHtml.includes('apple-touch-icon.png'), 'index.html must include apple-touch-icon.png');
 assert(indexHtml.includes('manifest.json'), 'index.html must include manifest.json');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
-assert(likeBadgeCount === 22, `All 22 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+assert(likeBadgeCount === 23, `All 23 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
-assert(bookmarkBtnCount === 22, `All 22 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(bookmarkBtnCount === 23, `All 23 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
-console.log('✓ Parent Hub, PWA icons, 22 like badges, and 22 bookmark star buttons verified in index.html');
+assert(indexHtml.includes('id="open-about-btn"'), 'index.html must include open-about-btn');
+assert(indexHtml.includes('id="alp-about-modal"'), 'index.html must include alp-about-modal');
+console.log('✓ Parent Hub, Our Story modal, PWA icons, 23 like badges, and 23 bookmark star buttons verified in index.html');
 
-// Verify In-Activity Feedback Widget embedded across all 22 activity pages
+// Verify In-Activity Feedback Widget embedded across all 23 activity pages
 const activityPages = [
     'game.html', 'colors.html', 'pattern.html', 'letters.html',
     'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
     'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
     'sounds.html', 'circuit.html', 'causality.html', 'builder.html', 'basket.html',
-    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html'
+    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html', 'language.html'
 ];
 activityPages.forEach(p => {
     const html = fs.readFileSync(`public/${p}`, 'utf8');
@@ -257,7 +259,7 @@ activityPages.forEach(p => {
     assert(html.includes('apple-touch-icon.png'), `${p} must include apple-touch-icon.png`);
     assert(html.includes('manifest.json'), `${p} must include manifest.json`);
 });
-console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 22 activity pages');
+console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 23 activity pages');
 
 // Verify Body Parts Dataset & Engine
 const bodyJson = JSON.parse(fs.readFileSync('public/data/body.json', 'utf8'));
@@ -274,6 +276,15 @@ const bodyEngineJs = fs.readFileSync('public/js/body-engine.js', 'utf8');
 assert(bodyEngineJs.includes('flyButterflyTo'), 'body-engine.js must include flyButterflyTo physics');
 assert(bodyEngineJs.includes('triggerMilestoneCelebration'), 'body-engine.js must include triggerMilestoneCelebration reward');
 console.log('✓ Body Parts dataset, dual mode HTML, and butterfly engine verified');
+
+// Verify Language Mini-Film HTML & Engine
+const langHtml = fs.readFileSync('public/language.html', 'utf8');
+assert(langHtml.includes('id="film-svg"'), 'language.html must include film-svg');
+assert(langHtml.includes('id="sentence-strip"'), 'language.html must include sentence-strip');
+assert(langHtml.includes('id="comm-cards"'), 'language.html must include comm-cards');
+const langEngineJs = fs.readFileSync('public/js/language-engine.js', 'utf8');
+assert(langEngineJs.includes('ANIMAL_FRIENDS') && langEngineJs.includes('DEMAND_SCENARIOS'), 'language-engine.js must include ANIMAL_FRIENDS and DEMAND_SCENARIOS');
+console.log('✓ Language mini-film HTML and narrative engine verified');
 
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');
@@ -358,13 +369,37 @@ console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, C
     assert(indexHtml.includes('id="connections-count"'), 'index.html must include connections-count');
     assert(indexHtml.includes('id="connections-label"'), 'index.html must include connections-label');
 
+    // 10. Verify Hub Live Search, Category Domain Pills & Age Badges
+    assert(indexHtml.includes('id="hub-search-input"'), 'index.html must include hub-search-input');
+    assert(indexHtml.includes('id="hub-search-clear"'), 'index.html must include hub-search-clear');
+    assert(indexHtml.includes('id="hub-results-count"'), 'index.html must include hub-results-count');
+    assert(indexHtml.includes('id="filter-lang-btn"'), 'index.html must include language filter pill');
+    assert(indexHtml.includes('id="filter-logic-btn"'), 'index.html must include logic filter pill');
+    assert(indexHtml.includes('id="filter-math-btn"'), 'index.html must include math filter pill');
+    assert(indexHtml.includes('id="filter-sensory-btn"'), 'index.html must include sensory filter pill');
+    assert(indexHtml.includes('id="age-all-btn"'), 'index.html must include age-all-btn');
+    assert(indexHtml.includes('id="age-36-btn"'), 'index.html must include age-36-btn');
+    assert(indexHtml.includes('id="empty-search-hint"'), 'index.html must include empty-search-hint');
+
+    const ageBadgesCount = (indexHtml.match(/class="activity-age-badge"/g) || []).length;
+    assert.strictEqual(ageBadgesCount, 23, `All 23 cards must have an activity-age-badge, found ${ageBadgesCount}`);
+
+    const cardCategories = (indexHtml.match(/data-category="[^"]+"/g) || []).map(m => m.split('"')[1]);
+    const validDomains = ['language', 'logic', 'math', 'sensory', 'all', 'fav'];
+    cardCategories.forEach(cat => assert(validDomains.includes(cat), `Invalid category: ${cat}`));
+
     const styleCss = fs.readFileSync('public/css/style.css', 'utf8');
     assert(styleCss.includes('.connections-tag'), 'style.css must include .connections-tag');
+    assert(styleCss.includes('.hub-search-box'), 'style.css must include .hub-search-box');
+    assert(styleCss.includes('.hub-age-bar'), 'style.css must include .hub-age-bar');
+    assert(styleCss.includes('.activity-age-badge'), 'style.css must include .activity-age-badge');
 
     const trackerJs = fs.readFileSync('public/js/tracker.js', 'utf8');
     assert(trackerJs.includes('loadConnectionsCount'), 'tracker.js must include loadConnectionsCount');
     assert(trackerJs.includes('refreshConnections'), 'tracker.js must include refreshConnections');
-    console.log('✓ Hub total connections UI, CSS styling, and client tracker verified');
+    assert(trackerJs.includes('applyHubFilters'), 'tracker.js must include applyHubFilters');
+    assert(trackerJs.includes('normalizeSearchText'), 'tracker.js must include normalizeSearchText');
+    console.log('✓ Hub live search, 5 category domain pills, age badges (3-6y), and tracker filter engine verified');
 
     // Clean teardown: preserve clean vierge storage state for deployment
     fs.writeFileSync('storage/feedback.json', JSON.stringify({ feedback: [] }, null, 2) + '\n');

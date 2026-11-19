@@ -147,6 +147,10 @@
         return window.location.pathname.toLowerCase().includes('body');
     }
 
+    function isLanguagePage() {
+        return window.location.pathname.toLowerCase().includes('language');
+    }
+
     // Size Profile Management
     function applySizeProfile(size) {
         sizeProfile = size;
@@ -280,6 +284,9 @@
             if (!items.length) {
                 items = Array.from(document.querySelectorAll('.body-hotspot'));
             }
+        } else if (isLanguagePage()) {
+            // In language mini-film, communication phrase and object cards
+            items = Array.from(document.querySelectorAll('#comm-cards .comm-card, .comm-card'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
