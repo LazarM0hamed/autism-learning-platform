@@ -56,7 +56,18 @@ app.post('/api/session/start', (req, res) => {
             userAgent
         });
 
-        res.json({ success: true, session });
+        const totalConnections = storage.getTotalConnections();
+
+        res.json({ success: true, session, totalConnections });
+    } catch (e) {
+        res.status(500).json({ success: false, error: e.message });
+    }
+});
+
+app.get('/api/session/connections', (req, res) => {
+    try {
+        const totalConnections = storage.getTotalConnections();
+        res.json({ success: true, totalConnections });
     } catch (e) {
         res.status(500).json({ success: false, error: e.message });
     }
@@ -93,10 +104,11 @@ app.post('/api/session/end', (req, res) => {
 // 3. User Feedback API (Likes, Unlikes, Comments)
 app.post('/api/feedback', (req, res) => {
     try {
-        const { sessionId, nickname, activityId, categoryId, reaction, comment } = req.body;
+        const { sessionId, nickname, deviceId, activityId, categoryId, reaction, comment } = req.body;
         const result = storage.recordFeedback({
             sessionId,
             nickname,
+            deviceId,
             activityId,
             categoryId,
             reaction,
@@ -112,7 +124,8 @@ app.post('/api/feedback', (req, res) => {
 app.get('/api/feedback/summary', (req, res) => {
     try {
         const nickname = req.query.nickname || null;
-        const result = storage.getFeedbackSummary(nickname);
+        const deviceId = req.query.deviceId || null;
+        const result = storage.getFeedbackSummary(nickname, deviceId);
         res.json({ success: true, summary: result.summary, userVotes: result.userVotes });
     } catch (e) {
         res.status(500).json({ success: false, error: e.message });

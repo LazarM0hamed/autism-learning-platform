@@ -529,6 +529,17 @@ Parents, educators, and therapists can submit feedback, game suggestions, and ac
      - Variable Name: `WEB3FORMS_ACCESS_KEY` (free instant key from [web3forms.com](https://web3forms.com)) or `RESEND_API_KEY` + `FEEDBACK_RECIPIENT_EMAIL`.
   3. Every suggestion submitted by users arrives directly in your personal email inbox, while your identity and address remain completely hidden from the public repo and website!
 
+### Cross-Device Likes & Global Total Connections Counter (Cloudflare Pages)
+Activity likes, reactions, and total connection counters synchronize seamlessly across all user devices (tablets, phones, computers) when hosted on Cloudflare Pages:
+- **Global Like Synchronization (`functions/api/feedback/`):** When a child or parent taps 👍 on any device, the reaction is aggregated globally and reflected on the Hub activity card badges across all other connected devices.
+- **Anonymous Multi-Device Voter Isolation:** Devices without a designated child profile are identified by unique anonymous device keys (`deviceId`), preventing two unnamed tablets from overwriting each other's votes.
+- **Total Connections Counter (`functions/api/session/`):** Displays real-time total visits / connections in the Hub footer (`🌐 1 420 connexions`), automatically localized in French and English.
+- **1-Minute Cloudflare KV Activation:**
+  1. In **Cloudflare Dashboard** -> **Workers & Pages** -> **KV**, click **Create namespace** named `ALP_KV`.
+  2. Go to **Workers & Pages** -> **autism-learning-platform** -> **Settings** -> **Functions** -> **KV namespace bindings**.
+  3. Click **Add binding** -> Variable name: `ALP_KV` -> Select KV namespace: `ALP_KV`.
+  4. Save and re-deploy! *(If KV is not yet bound, resilient edge memory and device-local fallback keep the app functional without errors).*
+
 ### Adaptive Activity Selection & Progressive Difficulty
 Based on performance and feedback, the engine dynamically calculates learning recommendations and tags dashboard cards:
 - **💚 Favori / Confidence Booster:** Activities with high mastery (≥80%) and positive feedback. Recommended for beginning sessions on a positive, empowering note.

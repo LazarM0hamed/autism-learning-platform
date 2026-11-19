@@ -428,7 +428,8 @@
                 brandTagline: "Sensory-adapted developmental learning",
                 lblFilterAll: "All Activities",
                 lblFilterFav: "My Favorites",
-                lblEmptyFav: "Tap the star ⭐ on your favorite activities to pin them here for fast access!"
+                lblEmptyFav: "Tap the star ⭐ on your favorite activities to pin them here for fast access!",
+                lblConnections: "connections"
             },
             fr: {
                 title: "À quoi joue-t-on aujourd'hui ?",
@@ -481,7 +482,8 @@
                 brandTagline: "Activités d'apprentissage adaptées & sensorielles",
                 lblFilterAll: "Toutes les activités",
                 lblFilterFav: "Mes Favoris",
-                lblEmptyFav: "Touche l'étoile ⭐ sur tes jeux préférés pour les retrouver ici en accès rapide !"
+                lblEmptyFav: "Touche l'étoile ⭐ sur tes jeux préférés pour les retrouver ici en accès rapide !",
+                lblConnections: "connexions"
             }
         };
 
@@ -510,6 +512,9 @@
 
             const emptyFavEl = document.getElementById('lbl-empty-fav');
             if (emptyFavEl) emptyFavEl.innerText = t.lblEmptyFav;
+
+            const connLabelEl = document.getElementById('connections-label');
+            if (connLabelEl) connLabelEl.innerText = t.lblConnections;
             document.getElementById('dashboard-title').innerText = t.title;
             document.getElementById('dashboard-subtitle').innerText = t.subtitle;
             document.getElementById('sec-logic-title').innerText = t.secLogic;
@@ -618,6 +623,9 @@
     <!-- Version & Build Date Footer -->
     <footer class="app-version-footer">
         <span class="version-tag" id="app-version-tag">🚀 v1.9.0 • Build: 2026-11-18 11:30 UTC</span>
+        <span class="connections-tag" id="app-connections-tag" title="Nombre total de connexions">
+            🌐 <span id="connections-count">--</span> <span id="connections-label">connexions</span>
+        </span>
     </footer>
 
     <script src="js/tracker.js?v=1.9.0"></script>

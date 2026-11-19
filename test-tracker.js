@@ -122,7 +122,34 @@ assert(summaryResult.summary['find_and_match'], 'Feedback summary should have fi
 assert.strictEqual(summaryResult.userVotes['find_and_match'], 'like', 'Active user vote should be like');
 assert(summaryResult.summary['find_and_match'].likes >= 1, 'Likes should count unique users');
 assert(summaryResult.summary['find_and_match'].comments.length >= 1, 'Comments should be recorded');
-console.log('✓ Unique 1-vote per user and toggle-off behavior verified');
+
+// Test anonymous multi-device isolation (distinct deviceId without nickname)
+const devA = `dev_ipad_${Date.now()}`;
+const devB = `dev_phone_${Date.now()}`;
+storage.recordFeedback({
+    sessionId: session.id,
+    nickname: 'Champion',
+    deviceId: devA,
+    activityId: 'colors',
+    reaction: 'like'
+});
+storage.recordFeedback({
+    sessionId: session.id,
+    nickname: 'Champion',
+    deviceId: devB,
+    activityId: 'colors',
+    reaction: 'like'
+});
+const devSummary = storage.getFeedbackSummary(null, devA);
+assert.strictEqual(devSummary.summary['colors'].likes, 2, 'Distinct anonymous devices must each register 1 like');
+assert.strictEqual(devSummary.userVotes['colors'], 'like', 'Device A vote must be preserved');
+const devBSummary = storage.getFeedbackSummary(null, devB);
+assert.strictEqual(devBSummary.userVotes['colors'], 'like', 'Device B vote must be preserved');
+
+// Total connections count
+const totalConn = storage.getTotalConnections();
+assert(typeof totalConn === 'number' && totalConn >= 1, 'Total connections count should be >= 1');
+console.log('✓ Unique 1-vote per user, multi-device isolation, and connection count verified');
 
 // 5. Parent Analytics & Recommendations
 const analytics = storage.getParentAnalytics(testNick);
@@ -242,10 +269,87 @@ console.log('✓ Sounds & Causality Mix All, Fireworks celebration, and Builder 
 
 console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, Circuit, Causality, Builder, Basket, Music, Classification, and Hide-and-Seek verified');
 
-// Clean teardown: preserve clean vierge storage state for deployment
-fs.writeFileSync('storage/feedback.json', JSON.stringify({ feedback: [] }, null, 2) + '\n');
-fs.writeFileSync('storage/sessions.json', JSON.stringify({ sessions: [] }, null, 2) + '\n');
-fs.writeFileSync('storage/profiles.json', JSON.stringify({ profiles: [] }, null, 2) + '\n');
-console.log('✓ Clean vierge stats preserved in storage/');
+// 8. Verify Cloudflare Pages Functions & Endpoints
+(async () => {
+    const fbMod = await import('./functions/api/feedback/index.js');
+    const summaryMod = await import('./functions/api/feedback/summary.js');
+    const startMod = await import('./functions/api/session/start.js');
+    const connMod = await import('./functions/api/session/connections.js');
 
-console.log('ALL STORAGE, SESSION & PARENT ANALYTICS TESTS PASSED!');
+    assert(typeof fbMod.onRequestPost === 'function', 'feedback/index.js must export onRequestPost');
+    assert(typeof summaryMod.onRequestGet === 'function', 'feedback/summary.js must export onRequestGet');
+    assert(typeof startMod.onRequestPost === 'function', 'session/start.js must export onRequestPost');
+    assert(typeof connMod.onRequestGet === 'function', 'session/connections.js must export onRequestGet');
+
+    const mockKv = new Map();
+    const mockEnv = {
+        ALP_KV: {
+            get: async (k, t) => {
+                const val = mockKv.get(k);
+                if (!val) return null;
+                return t === 'json' ? JSON.parse(val) : val;
+            },
+            put: async (k, v) => mockKv.set(k, v)
+        }
+    };
+
+    // Test Cloudflare session start increment
+    const startRes = await startMod.onRequestPost({
+        request: { json: async () => ({ nickname: 'Champion', deviceId: 'dev_cloud1' }) },
+        env: mockEnv
+    });
+    const startData = await startRes.json();
+    assert.strictEqual(startData.success, true);
+    assert.strictEqual(startData.totalConnections, 1);
+
+    // Test Cloudflare connection get
+    const connRes = await connMod.onRequestGet({ env: mockEnv });
+    const connData = await connRes.json();
+    assert.strictEqual(connData.totalConnections, 1);
+
+    // Test Cloudflare multi-device feedback
+    const fbRes1 = await fbMod.onRequestPost({
+        request: { json: async () => ({ nickname: 'Champion', deviceId: 'dev_cloud1', activityId: 'basket', reaction: 'like' }) },
+        env: mockEnv
+    });
+    const fbData1 = await fbRes1.json();
+    assert.strictEqual(fbData1.summary.basket.likes, 1);
+
+    const fbRes2 = await fbMod.onRequestPost({
+        request: { json: async () => ({ nickname: 'Champion', deviceId: 'dev_cloud2', activityId: 'basket', reaction: 'like' }) },
+        env: mockEnv
+    });
+    const fbData2 = await fbRes2.json();
+    assert.strictEqual(fbData2.summary.basket.likes, 2);
+
+    const summaryRes = await summaryMod.onRequestGet({
+        request: { url: 'https://example.com/api/feedback/summary?deviceId=dev_cloud1' },
+        env: mockEnv
+    });
+    const summaryData = await summaryRes.json();
+    assert.strictEqual(summaryData.summary.basket.likes, 2);
+    assert.strictEqual(summaryData.userVotes.basket, 'like');
+
+    console.log('✓ Cloudflare Pages Functions for likes and total connections verified');
+
+    // 9. Verify Hub Total Connections Tag & Styling
+    assert(indexHtml.includes('id="app-connections-tag"'), 'index.html must include app-connections-tag');
+    assert(indexHtml.includes('id="connections-count"'), 'index.html must include connections-count');
+    assert(indexHtml.includes('id="connections-label"'), 'index.html must include connections-label');
+
+    const styleCss = fs.readFileSync('public/css/style.css', 'utf8');
+    assert(styleCss.includes('.connections-tag'), 'style.css must include .connections-tag');
+
+    const trackerJs = fs.readFileSync('public/js/tracker.js', 'utf8');
+    assert(trackerJs.includes('loadConnectionsCount'), 'tracker.js must include loadConnectionsCount');
+    assert(trackerJs.includes('refreshConnections'), 'tracker.js must include refreshConnections');
+    console.log('✓ Hub total connections UI, CSS styling, and client tracker verified');
+
+    // Clean teardown: preserve clean vierge storage state for deployment
+    fs.writeFileSync('storage/feedback.json', JSON.stringify({ feedback: [] }, null, 2) + '\n');
+    fs.writeFileSync('storage/sessions.json', JSON.stringify({ sessions: [] }, null, 2) + '\n');
+    fs.writeFileSync('storage/profiles.json', JSON.stringify({ profiles: [] }, null, 2) + '\n');
+    console.log('✓ Clean vierge stats preserved in storage/');
+
+    console.log('ALL STORAGE, SESSION, CLOUDFLARE & PARENT ANALYTICS TESTS PASSED!');
+})();

@@ -87,6 +87,7 @@
         if (isHubPage()) {
             loadDashboardRecommendations();
             loadDashboardLikes();
+            loadConnectionsCount();
             updateBookmarksUI();
             setupFilterBar();
 
@@ -120,6 +121,10 @@
                 if (data.success && data.session) {
                     activeSessionId = data.session.id;
                     sessionStorage.setItem(KEY_SESSION_ID, activeSessionId);
+                    if (typeof data.totalConnections === 'number') {
+                        localStorage.setItem('alp_total_connections', data.totalConnections);
+                        updateConnectionsUI(data.totalConnections);
+                    }
                 }
             }
         } catch (e) {
@@ -239,6 +244,7 @@
         const payload = {
             sessionId: activeSessionId,
             nickname: currentNickname || 'Champion',
+            deviceId: currentDeviceId,
             activityId: currentActivityId,
             categoryId: currentCategoryId,
             reaction,
@@ -374,8 +380,11 @@
 
     async function updateFeedbackCounters() {
         try {
-            const url = currentNickname ? `/api/feedback/summary?nickname=${encodeURIComponent(currentNickname)}` : '/api/feedback/summary';
-            const res = await fetch(url);
+            const params = new URLSearchParams();
+            if (currentNickname) params.set('nickname', currentNickname);
+            if (currentDeviceId) params.set('deviceId', currentDeviceId);
+            const query = params.toString() ? `?${params.toString()}` : '';
+            const res = await fetch(`/api/feedback/summary${query}`);
             const contentType = res.headers.get('content-type') || '';
             if (res.ok && contentType.includes('application/json')) {
                 const data = await res.json();
@@ -817,6 +826,7 @@
             if (res.ok && contentType.includes('application/json')) {
                 const data = await res.json();
                 if (data.success && data.summary) {
+                    localStorage.setItem('alp_local_summary', JSON.stringify(data.summary));
                     renderDashboardLikes(data.summary);
                     return;
                 }
@@ -825,6 +835,41 @@
 
         const localSummary = JSON.parse(localStorage.getItem('alp_local_summary') || '{}');
         renderDashboardLikes({ ...defaultLikes, ...localSummary });
+    }
+
+    // Total Connections Counter Display on Hub
+    async function loadConnectionsCount() {
+        if (!isHubPage()) return;
+
+        try {
+            const res = await fetch('/api/session/connections');
+            const contentType = res.headers.get('content-type') || '';
+            if (res.ok && contentType.includes('application/json')) {
+                const data = await res.json();
+                if (data.success && typeof data.totalConnections === 'number') {
+                    localStorage.setItem('alp_total_connections', data.totalConnections);
+                    updateConnectionsUI(data.totalConnections);
+                    return;
+                }
+            }
+        } catch (e) {}
+
+        const localCount = parseInt(localStorage.getItem('alp_total_connections') || '0', 10);
+        if (localCount > 0) {
+            updateConnectionsUI(localCount);
+        }
+    }
+
+    function updateConnectionsUI(count) {
+        const el = document.getElementById('connections-count');
+        const lbl = document.getElementById('connections-label');
+        if (!el) return;
+        if (typeof count === 'number' && count > 0) {
+            el.innerText = Number(count).toLocaleString(currentLang === 'fr' ? 'fr-FR' : 'en-US');
+        }
+        if (lbl) {
+            lbl.innerText = currentLang === 'fr' ? 'connexions' : 'connections';
+        }
     }
 
     function renderDashboardLikes(summary) {
@@ -1127,7 +1172,8 @@
         getNickname: () => currentNickname || (currentLang === 'fr' ? 'Joueur' : 'Player'),
         getSessionId: () => activeSessionId,
         refreshRecommendations: loadDashboardRecommendations,
-        refreshLikes: loadDashboardLikes
+        refreshLikes: loadDashboardLikes,
+        refreshConnections: loadConnectionsCount
     };
 
     // Auto-initialize on load

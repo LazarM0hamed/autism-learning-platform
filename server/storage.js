@@ -133,15 +133,21 @@ function endSession(sessionId) {
 
 // Feedback Management (Likes, Dislikes, Parent/Therapist Comments)
 // Enforces 1 vote (like / unlike) per user per activity with toggle support.
-function recordFeedback({ sessionId, nickname, activityId, categoryId, reaction, comment }) {
+function recordFeedback({ sessionId, nickname, deviceId, activityId, categoryId, reaction, comment }) {
     ensureStorage();
     const feedbackData = readJson(FEEDBACK_FILE);
     feedbackData.feedback = feedbackData.feedback || [];
 
     const cleanNick = (nickname || 'Champion').trim();
+    const cleanDev = (deviceId || '').trim();
     const cleanAct = activityId || 'general';
     const cleanCat = categoryId || 'all';
     const cleanComment = (comment || '').trim();
+
+    // Voter identity: use deviceId if nickname is default 'Champion' or empty to prevent cross-device collisions
+    const voterKey = (cleanDev && (!nickname || cleanNick.toLowerCase() === 'champion'))
+        ? `dev_${cleanDev.toLowerCase()}`
+        : cleanNick.toLowerCase();
 
     // 1. If this is a comment/observation note, record it as a distinct note entry
     let noteItem = null;
@@ -150,6 +156,8 @@ function recordFeedback({ sessionId, nickname, activityId, categoryId, reaction,
             id: 'note_' + Date.now(),
             sessionId: sessionId || null,
             nickname: cleanNick,
+            deviceId: cleanDev || null,
+            voterKey: voterKey,
             activityId: cleanAct,
             categoryId: cleanCat,
             reaction: reaction || 'neutral',
@@ -163,7 +171,7 @@ function recordFeedback({ sessionId, nickname, activityId, categoryId, reaction,
     let finalUserReaction = null;
     if (reaction && reaction !== 'neutral') {
         const matches = feedbackData.feedback.filter(f => 
-            f.nickname.toLowerCase() === cleanNick.toLowerCase() &&
+            (f.voterKey ? f.voterKey === voterKey : f.nickname.toLowerCase() === cleanNick.toLowerCase()) &&
             f.activityId === cleanAct &&
             !f.comment
         );
@@ -172,7 +180,7 @@ function recordFeedback({ sessionId, nickname, activityId, categoryId, reaction,
 
         // Clean out any existing vote records for this user and activity
         feedbackData.feedback = feedbackData.feedback.filter(f => 
-            !(f.nickname.toLowerCase() === cleanNick.toLowerCase() &&
+            !((f.voterKey ? f.voterKey === voterKey : f.nickname.toLowerCase() === cleanNick.toLowerCase()) &&
               f.activityId === cleanAct &&
               !f.comment)
         );
@@ -186,6 +194,8 @@ function recordFeedback({ sessionId, nickname, activityId, categoryId, reaction,
                 id: 'vote_' + Date.now(),
                 sessionId: sessionId || null,
                 nickname: cleanNick,
+                deviceId: cleanDev || null,
+                voterKey: voterKey,
                 activityId: cleanAct,
                 categoryId: cleanCat,
                 reaction: reaction,
@@ -204,14 +214,18 @@ function recordFeedback({ sessionId, nickname, activityId, categoryId, reaction,
     };
 }
 
-function getFeedbackSummary(userNickname = null) {
+function getFeedbackSummary(userNickname = null, userDeviceId = null) {
     ensureStorage();
     const feedbackData = readJson(FEEDBACK_FILE);
     const items = feedbackData.feedback || [];
 
     const summary = {};
     const userVotes = {};
-    const cleanUser = (userNickname || '').trim().toLowerCase();
+    const cleanNick = (userNickname || '').trim();
+    const cleanDev = (userDeviceId || '').trim();
+    const targetVoter = (cleanDev && (!userNickname || cleanNick.toLowerCase() === 'champion'))
+        ? `dev_${cleanDev.toLowerCase()}`
+        : cleanNick.toLowerCase();
     const activeVotes = {};
 
     items.forEach(item => {
@@ -229,7 +243,8 @@ function getFeedbackSummary(userNickname = null) {
         }
 
         if (item.reaction === 'like' || item.reaction === 'unlike') {
-            const voteKey = `${actId}___${item.nickname.toLowerCase()}`;
+            const vKey = item.voterKey || item.nickname.toLowerCase();
+            const voteKey = `${actId}___${vKey}`;
             activeVotes[voteKey] = item.reaction;
         }
     });
@@ -243,7 +258,7 @@ function getFeedbackSummary(userNickname = null) {
             else if (reaction === 'unlike') summary[actId].dislikes++;
         }
 
-        if (cleanUser && voter === cleanUser) {
+        if (targetVoter && voter === targetVoter) {
             userVotes[actId] = reaction;
         }
     });
@@ -252,6 +267,13 @@ function getFeedbackSummary(userNickname = null) {
         summary,
         userVotes
     };
+}
+
+function getTotalConnections() {
+    ensureStorage();
+    const sessionData = readJson(SESSIONS_FILE);
+    const sessions = sessionData.sessions || [];
+    return sessions.length;
 }
 
 // Parent Analytics & Aggregation
@@ -435,5 +457,6 @@ module.exports = {
     endSession,
     recordFeedback,
     getFeedbackSummary,
+    getTotalConnections,
     getParentAnalytics
 };
