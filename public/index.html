@@ -63,14 +63,14 @@
                    placeholder="Rechercher une activité..." aria-label="Rechercher une activité" autocomplete="off">
             <button type="button" id="hub-search-clear" class="hub-search-clear-btn" aria-label="Effacer la recherche" style="display: none;">✕</button>
         </div>
-        <span class="hub-results-count" id="hub-results-count">26 activités</span>
+        <span class="hub-results-count" id="hub-results-count">27 activités</span>
     </div>
 
     <!-- Activity Filter Bar (Categories & Bookmarked Favorites) -->
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filtrer par catégorie">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" data-category="all" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">26</span>
+                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">27</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-lang-btn" data-category="language" role="tab" aria-selected="false">
                 🗣️ <span id="lbl-filter-lang">Langage</span> <span class="filter-count">8</span>
@@ -79,7 +79,7 @@
                 🧩 <span id="lbl-filter-logic">Logique</span> <span class="filter-count">4</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-math-btn" data-category="math" role="tab" aria-selected="false">
-                🔢 <span id="lbl-filter-math">Maths & Espace</span> <span class="filter-count">5</span>
+                🔢 <span id="lbl-filter-math">Maths & Espace</span> <span class="filter-count">6</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-sensory-btn" data-category="sensory" role="tab" aria-selected="false">
                 🎨 <span id="lbl-filter-sensory">Éveil & Sons</span> <span class="filter-count">9</span>
@@ -94,8 +94,8 @@
     <div class="hub-age-bar">
         <span class="hub-age-label" id="lbl-age-filter">Âge :</span>
         <div class="hub-age-chips" role="radiogroup" aria-label="Filtrer par tranche d'âge">
-            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(26)</span></button>
-            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(26)</span></button>
+            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(27)</span></button>
+            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(27)</span></button>
             <button type="button" class="hub-age-chip disabled" data-age="6-10" id="age-610-btn" title="Nouveaux jeux 6-10 ans à venir !" style="opacity: 0.65; cursor: not-allowed;">🎒 <span id="lbl-age-610">6–10 ans</span> <span class="age-count" style="font-size: 0.75rem; opacity: 0.85;">(Bientôt)</span></button>
         </div>
     </div>
@@ -535,6 +535,22 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <!-- Activity 27: Spatial Prepositions -->
+        <a href="prepositions.html" class="activity-card prepositions" data-activity="prepositions" data-category="math" data-age="3-6" data-keywords="prepositions espace positions sur sous dans devant derriere a cote spatial orientation on under in behind next to table boite">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
+            <button type="button" class="activity-bookmark-btn" data-activity="prepositions" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">📦</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-prepositions-title">Spatial Prepositions</span>
+                <span class="activity-card-desc" id="act-prepositions-desc">Learn On, Under, In, Behind & Next to with depth</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="prepositions">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <!-- About Us / Our Story Modal -->
@@ -619,6 +635,8 @@
                 actEmotionsDesc: "Recognize feelings, social context & calming responses",
                 actCountingTitle: "Counting & Quantities",
                 actCountingDesc: "Touch to count, fill the basket & match numbers",
+                actPrepositionsTitle: "Spatial Prepositions",
+                actPrepositionsDesc: "Learn On, Under, In, Behind & Next to with depth",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 btnAboutText: "Our Story",
@@ -699,6 +717,8 @@
                 actEmotionsDesc: "Reconnaître les émotions, comprendre les situations et aider à se calmer",
                 actCountingTitle: "Compter & Quantités",
                 actCountingDesc: "Touche pour compter, remplis le panier et associe les nombres",
+                actPrepositionsTitle: "Positions dans l'espace",
+                actPrepositionsDesc: "Apprends Sur, Sous, Dans, Devant, Derrière et À côté en relief",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 btnAboutText: "Notre Histoire",
@@ -901,6 +921,11 @@
             if (cntTitle) cntTitle.innerText = t.actCountingTitle;
             const cntDesc = document.getElementById('act-counting-desc');
             if (cntDesc) cntDesc.innerText = t.actCountingDesc;
+
+            const prepTitle = document.getElementById('act-prepositions-title');
+            if (prepTitle) prepTitle.innerText = t.actPrepositionsTitle;
+            const prepDesc = document.getElementById('act-prepositions-desc');
+            if (prepDesc) prepDesc.innerText = t.actPrepositionsDesc;
 
             const btnAbout = document.getElementById('btn-about-text');
             if (btnAbout) btnAbout.innerText = t.btnAboutText;

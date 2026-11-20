@@ -213,7 +213,10 @@ if (!inputManagerSrc.includes('isEmotionsPage') || !inputManagerSrc.includes('em
 if (!inputManagerSrc.includes('isCountingPage') || !inputManagerSrc.includes('num-choice-card')) {
     throw new Error('input-manager.js must support counting.html (.num-choice-card, .add-item-btn)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card) & Counting (.num-choice-card, .add-item-btn)');
+if (!inputManagerSrc.includes('isPrepositionsPage') || !inputManagerSrc.includes('prep-card')) {
+    throw new Error('input-manager.js must support prepositions.html (.prep-card)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn) & Prepositions (.prep-card)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');
@@ -356,5 +359,49 @@ if (clickedNumCard !== 2) {
     throw new Error(`Enter key should have triggered card 2 click, got ${clickedNumCard}`);
 }
 console.log('✓ Arrow key & D-Pad navigation verified for Counting cards (.num-choice-card)');
+
+// Test Arrow button & D-Pad navigation for Prepositions (.prep-card)
+const mockPrepGrid = new MockElement('section', 'choices-grid', 'prep-choices-grid');
+const mockPrepCards = [
+    new MockElement('button', 'prep-sur', 'prep-card'),
+    new MockElement('button', 'prep-sous', 'prep-card'),
+    new MockElement('button', 'prep-dans', 'prep-card')
+];
+let clickedPrepCard = null;
+mockPrepCards.forEach((c, idx) => {
+    c.onclick = () => { clickedPrepCard = idx; };
+    mockPrepGrid.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.prep-card')) return mockPrepCards;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/prepositions.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Prepositions initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+if (!mockPrepCards[0].classList.contains('is-controller-focused')) {
+    throw new Error('Initial preposition card must have is-controller-focused class');
+}
+
+// Move to card 1 via ArrowRight
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 1) {
+    throw new Error(`ArrowRight should move focus to card 1, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+if (!mockPrepCards[1].classList.contains('is-controller-focused')) {
+    throw new Error('Card 1 must have is-controller-focused after ArrowRight');
+}
+
+// Press Enter / Validate
+window.AlpInputManager.validate();
+if (clickedPrepCard !== 1) {
+    throw new Error(`Enter key should have triggered card 1 click, got ${clickedPrepCard}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Prepositions cards (.prep-card)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');

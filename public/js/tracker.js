@@ -68,6 +68,7 @@
         if (path.includes('syllables')) return 'syllables';
         if (path.includes('emotions')) return 'emotions';
         if (path.includes('counting')) return 'counting';
+        if (path.includes('prepositions')) return 'prepositions';
         return null;
     }
 
@@ -428,7 +429,8 @@
             'language': { likes: 0, dislikes: 0 },
             'syllables': { likes: 0, dislikes: 0 },
             'emotions': { likes: 0, dislikes: 0 },
-            'counting': { likes: 0, dislikes: 0 }
+            'counting': { likes: 0, dislikes: 0 },
+            'prepositions': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -780,7 +782,8 @@
             'language': '.activity-card.language',
             'syllables': '.activity-card.syllables',
             'emotions': '.activity-card.emotions',
-            'counting': '.activity-card.counting'
+            'counting': '.activity-card.counting',
+            'prepositions': '.activity-card.prepositions'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -837,7 +840,8 @@
             'language': { likes: 0, dislikes: 0 },
             'syllables': { likes: 0, dislikes: 0 },
             'emotions': { likes: 0, dislikes: 0 },
-            'counting': { likes: 0, dislikes: 0 }
+            'counting': { likes: 0, dislikes: 0 },
+            'prepositions': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -921,7 +925,8 @@
             'language': '.activity-card.language',
             'syllables': '.activity-card.syllables',
             'emotions': '.activity-card.emotions',
-            'counting': '.activity-card.counting'
+            'counting': '.activity-card.counting',
+            'prepositions': '.activity-card.prepositions'
         };
 
         Object.keys(idMap).forEach(actId => {

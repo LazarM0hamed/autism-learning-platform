@@ -163,6 +163,10 @@
         return window.location.pathname.toLowerCase().includes('counting');
     }
 
+    function isPrepositionsPage() {
+        return window.location.pathname.toLowerCase().includes('prepositions');
+    }
+
     // Size Profile Management
     function applySizeProfile(size) {
         sizeProfile = size;
@@ -313,6 +317,12 @@
             items = Array.from(document.querySelectorAll('#interaction-area .num-choice-card, #interaction-area .add-item-btn, #interaction-area .clear-basket-btn, .num-choice-card, .add-item-btn, .clear-basket-btn'));
             if (!items.length) {
                 items = Array.from(document.querySelectorAll('#counting-board .countable-item, .countable-item'));
+            }
+        } else if (isPrepositionsPage()) {
+            // In spatial prepositions, preposition choice cards or character selector buttons
+            items = Array.from(document.querySelectorAll('#choices-grid .prep-card, .prep-card'));
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('#char-bar .char-btn, .char-btn'));
             }
         } else {
             // Other activities: option cards or step cards
@@ -846,7 +856,7 @@
     function setupDomObserver() {
         if (observer) observer.disconnect();
 
-        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card, .num-choice-card, .add-item-btn, .clear-basket-btn, .countable-item';
+        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card, .num-choice-card, .add-item-btn, .clear-basket-btn, .countable-item, .prep-card, .char-btn';
 
         observer = new MutationObserver((mutations) => {
             let shouldRefresh = false;
@@ -860,7 +870,7 @@
                     // Direct container match
                     const targetId = m.target?.id || '';
                     const targetClass = m.target?.className || '';
-                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetId === 'interaction-area' || targetId === 'counting-board' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid') || targetClass.includes('number-choices-grid') || targetClass.includes('basket-controls-row')) {
+                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetId === 'interaction-area' || targetId === 'counting-board' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid') || targetClass.includes('number-choices-grid') || targetClass.includes('basket-controls-row') || targetClass.includes('prep-choices-grid')) {
                         shouldRefresh = true;
                         break;
                     }
