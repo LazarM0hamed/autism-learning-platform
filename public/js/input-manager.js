@@ -159,6 +159,10 @@
         return window.location.pathname.toLowerCase().includes('emotions');
     }
 
+    function isCountingPage() {
+        return window.location.pathname.toLowerCase().includes('counting');
+    }
+
     // Size Profile Management
     function applySizeProfile(size) {
         sizeProfile = size;
@@ -304,6 +308,12 @@
         } else if (isEmotionsPage()) {
             // In emotions & social context, emotion face or comforting action cards
             items = Array.from(document.querySelectorAll('#choices-grid .emotion-card, .emotion-card'));
+        } else if (isCountingPage()) {
+            // In counting & quantities, number choice cards or basket dispenser buttons
+            items = Array.from(document.querySelectorAll('#interaction-area .num-choice-card, #interaction-area .add-item-btn, #interaction-area .clear-basket-btn, .num-choice-card, .add-item-btn, .clear-basket-btn'));
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('#counting-board .countable-item, .countable-item'));
+            }
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -836,7 +846,7 @@
     function setupDomObserver() {
         if (observer) observer.disconnect();
 
-        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card';
+        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card, .num-choice-card, .add-item-btn, .clear-basket-btn, .countable-item';
 
         observer = new MutationObserver((mutations) => {
             let shouldRefresh = false;
@@ -850,7 +860,7 @@
                     // Direct container match
                     const targetId = m.target?.id || '';
                     const targetClass = m.target?.className || '';
-                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid')) {
+                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetId === 'interaction-area' || targetId === 'counting-board' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid') || targetClass.includes('number-choices-grid') || targetClass.includes('basket-controls-row')) {
                         shouldRefresh = true;
                         break;
                     }

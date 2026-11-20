@@ -67,6 +67,7 @@
         if (path.includes('language')) return 'language';
         if (path.includes('syllables')) return 'syllables';
         if (path.includes('emotions')) return 'emotions';
+        if (path.includes('counting')) return 'counting';
         return null;
     }
 
@@ -426,7 +427,8 @@
             'body': { likes: 0, dislikes: 0 },
             'language': { likes: 0, dislikes: 0 },
             'syllables': { likes: 0, dislikes: 0 },
-            'emotions': { likes: 0, dislikes: 0 }
+            'emotions': { likes: 0, dislikes: 0 },
+            'counting': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -777,7 +779,8 @@
             'body': '.activity-card.body',
             'language': '.activity-card.language',
             'syllables': '.activity-card.syllables',
-            'emotions': '.activity-card.emotions'
+            'emotions': '.activity-card.emotions',
+            'counting': '.activity-card.counting'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -833,7 +836,8 @@
             'body': { likes: 0, dislikes: 0 },
             'language': { likes: 0, dislikes: 0 },
             'syllables': { likes: 0, dislikes: 0 },
-            'emotions': { likes: 0, dislikes: 0 }
+            'emotions': { likes: 0, dislikes: 0 },
+            'counting': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -916,7 +920,8 @@
             'body': '.activity-card.body',
             'language': '.activity-card.language',
             'syllables': '.activity-card.syllables',
-            'emotions': '.activity-card.emotions'
+            'emotions': '.activity-card.emotions',
+            'counting': '.activity-card.counting'
         };
 
         Object.keys(idMap).forEach(actId => {

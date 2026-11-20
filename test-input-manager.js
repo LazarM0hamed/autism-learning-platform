@@ -210,7 +210,10 @@ if (!inputManagerSrc.includes('isSyllablesPage') || !inputManagerSrc.includes('v
 if (!inputManagerSrc.includes('isEmotionsPage') || !inputManagerSrc.includes('emotion-card')) {
     throw new Error('input-manager.js must support emotions.html (.emotion-card)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card) & Emotions (.emotion-card)');
+if (!inputManagerSrc.includes('isCountingPage') || !inputManagerSrc.includes('num-choice-card')) {
+    throw new Error('input-manager.js must support counting.html (.num-choice-card, .add-item-btn)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card) & Counting (.num-choice-card, .add-item-btn)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');
@@ -308,5 +311,50 @@ if (clickedEmotCard !== 0) {
     throw new Error(`Enter key should have triggered card 0 click, got ${clickedEmotCard}`);
 }
 console.log('✓ Arrow key & D-Pad navigation verified for Emotions cards (.emotion-card)');
+
+// Test Arrow button & D-Pad navigation for Counting & Quantities (.num-choice-card & .add-item-btn)
+const mockCountingGrid = new MockElement('div', 'interaction-area', 'number-choices-grid');
+const mockNumCards = [
+    new MockElement('button', 'num-1', 'num-choice-card'),
+    new MockElement('button', 'num-2', 'num-choice-card'),
+    new MockElement('button', 'num-3', 'num-choice-card')
+];
+let clickedNumCard = null;
+mockNumCards.forEach((c, idx) => {
+    c.onclick = () => { clickedNumCard = idx; };
+    mockCountingGrid.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.num-choice-card')) return mockNumCards;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/counting.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Counting initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+if (!mockNumCards[0].classList.contains('is-controller-focused')) {
+    throw new Error('Initial number card must have is-controller-focused class');
+}
+
+// Move to card 2 via ArrowRight
+window.AlpInputManager.moveFocus(1);
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 2) {
+    throw new Error(`ArrowRight twice should move focus to card 2, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+if (!mockNumCards[2].classList.contains('is-controller-focused')) {
+    throw new Error('Card 2 must have is-controller-focused after ArrowRight');
+}
+
+// Press Enter / Validate
+window.AlpInputManager.validate();
+if (clickedNumCard !== 2) {
+    throw new Error(`Enter key should have triggered card 2 click, got ${clickedNumCard}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Counting cards (.num-choice-card)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');
