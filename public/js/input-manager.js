@@ -74,6 +74,7 @@
     function detectActivityFromPath(path) {
         if (path.includes('letters')) return 'letters_puzzle';
         if (path.includes('game')) return 'find_and_match';
+        if (path.includes('patterns')) return 'patterns';
         if (path.includes('pattern')) return 'pattern';
         if (path.includes('spelling')) return 'spelling';
         if (path.includes('sequence')) return 'sequence';
@@ -87,6 +88,7 @@
         if (path.includes('sounds')) return 'sounds';
         if (path.includes('circuit')) return 'circuit';
         if (path.includes('causality')) return 'causality';
+        if (path.includes('word-builder') || path.includes('word_builder')) return 'word_builder';
         if (path.includes('builder')) return 'builder';
         if (path.includes('basket')) return 'basket';
         if (path.includes('music')) return 'music';
@@ -120,7 +122,8 @@
     }
 
     function isBuilderPage() {
-        return window.location.pathname.toLowerCase().includes('builder');
+        const path = window.location.pathname.toLowerCase();
+        return path.includes('builder') && !path.includes('word');
     }
 
     function isBasketPage() {
@@ -165,6 +168,14 @@
 
     function isPrepositionsPage() {
         return window.location.pathname.toLowerCase().includes('prepositions');
+    }
+
+    function isWordBuilderPage() {
+        return window.location.pathname.toLowerCase().includes('word-builder');
+    }
+
+    function isPatternsPage() {
+        return window.location.pathname.toLowerCase().includes('patterns');
     }
 
     // Size Profile Management
@@ -324,6 +335,12 @@
             if (!items.length) {
                 items = Array.from(document.querySelectorAll('#char-bar .char-btn, .char-btn'));
             }
+        } else if (isWordBuilderPage()) {
+            // In two-syllable word assembly, syllable choice block cards
+            items = Array.from(document.querySelectorAll('#wb-choices .wb-syl-card, .wb-syl-card'));
+        } else if (isPatternsPage()) {
+            // In visual patterns & sequences, wagon symbol choice cards
+            items = Array.from(document.querySelectorAll('#pattern-choices .pat-choice-card, .pat-choice-card'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -856,7 +873,7 @@
     function setupDomObserver() {
         if (observer) observer.disconnect();
 
-        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card, .num-choice-card, .add-item-btn, .clear-basket-btn, .countable-item, .prep-card, .char-btn';
+        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card, .num-choice-card, .add-item-btn, .clear-basket-btn, .countable-item, .prep-card, .char-btn, .wb-syl-card, .pat-choice-card';
 
         observer = new MutationObserver((mutations) => {
             let shouldRefresh = false;
@@ -870,7 +887,7 @@
                     // Direct container match
                     const targetId = m.target?.id || '';
                     const targetClass = m.target?.className || '';
-                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetId === 'interaction-area' || targetId === 'counting-board' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid') || targetClass.includes('number-choices-grid') || targetClass.includes('basket-controls-row') || targetClass.includes('prep-choices-grid')) {
+                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetId === 'interaction-area' || targetId === 'counting-board' || targetId === 'wb-choices' || targetId === 'pattern-choices' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid') || targetClass.includes('number-choices-grid') || targetClass.includes('basket-controls-row') || targetClass.includes('prep-choices-grid') || targetClass.includes('wb-choices-row') || targetClass.includes('pattern-choices-row')) {
                         shouldRefresh = true;
                         break;
                     }

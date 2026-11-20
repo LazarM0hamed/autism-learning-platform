@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Autism Platform">
+    <meta name="theme-color" content="#F8FAFC">
+    <title>Suites & Rythmes - Learning Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .patterns-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+            padding-bottom: 24px;
+        }
+
+        /* Train Track Stage */
+        .train-track-frame {
+            width: 95%;
+            max-width: 760px;
+            background: #FFFDF9;
+            border: 4px solid #CBD5E1;
+            border-radius: 26px;
+            padding: 16px 12px 10px 12px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            box-sizing: border-box;
+            transition: max-width 0.25s ease;
+        }
+        .train-convoy {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .train-convoy.departing {
+            transform: translateX(120%);
+        }
+        .locomotive-box {
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-right: 4px;
+            user-select: none;
+        }
+        .wagon-card {
+            position: relative;
+            width: 78px;
+            height: 82px;
+            background: #FFFFFF;
+            border: 3px solid #93C5FD;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.06);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.2s ease;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        .wagon-card::after {
+            content: '';
+            position: absolute;
+            bottom: -9px;
+            left: 14px;
+            right: 14px;
+            height: 8px;
+            background: radial-gradient(circle at 8px 4px, #1E293B 5px, transparent 6px),
+                        radial-gradient(circle at calc(100% - 8px) 4px, #1E293B 5px, transparent 6px);
+        }
+        .wagon-card.pulse-beat {
+            transform: scale(1.16) translateY(-6px);
+            border-color: #F97316;
+            box-shadow: 0 0 0 5px #FEF08A, 0 8px 18px rgba(0, 0, 0, 0.14);
+        }
+        .wagon-card.missing-slot {
+            background: #EFF6FF;
+            border: 3px dashed #3B82F6;
+            color: #2563EB;
+            font-weight: 800;
+        }
+        .wagon-card.solved-slot {
+            border-color: #10B981;
+            background: #ECFDF5;
+            transform: scale(1.08);
+        }
+        .rail-line {
+            height: 8px;
+            background: repeating-linear-gradient(
+                to right,
+                #94A3B8 0px,
+                #94A3B8 18px,
+                #CBD5E1 18px,
+                #CBD5E1 28px
+            );
+            border-radius: 4px;
+            margin-top: 12px;
+        }
+
+        .rhythm-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2563EB;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 16px;
+            padding: 8px 20px;
+            font-size: 1.02rem;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #1D4ED8;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            user-select: none;
+        }
+        .rhythm-btn:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* Choice Cards */
+        .pattern-choices-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 720px;
+            width: 94%;
+            margin-top: 6px;
+        }
+        .pat-choice-card {
+            width: 155px;
+            padding: 16px 12px;
+            background: #FFFFFF;
+            border: 4px solid #E2E8F0;
+            border-radius: 22px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            transition: transform 0.13s ease, opacity 0.25s ease, border-color 0.2s ease, background-color 0.2s ease;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        .pat-choice-card:active {
+            transform: scale(0.94);
+        }
+        .pat-choice-card.soft-dim {
+            opacity: 0.36;
+            transform: scale(0.94);
+        }
+        .pat-choice-card.winner {
+            border-color: #10B981 !important;
+            background: #ECFDF5 !important;
+            transform: scale(1.06);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+        }
+        .pat-icon {
+            font-size: 3.4rem;
+            line-height: 1.1;
+        }
+        .pat-label {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #1E293B;
+        }
+
+        /* Responsive Visual Sizing */
+        body[data-size="normal"] .train-track-frame { max-width: 760px; }
+        body[data-size="large"] .train-track-frame { max-width: 880px; }
+        body[data-size="xlarge"] .train-track-frame { max-width: 1020px; }
+
+        body[data-size="normal"] .wagon-card { width: 78px; height: 82px; font-size: 2.8rem; }
+        body[data-size="large"] .wagon-card { width: 96px; height: 100px; font-size: 3.5rem; }
+        body[data-size="xlarge"] .wagon-card { width: 116px; height: 122px; font-size: 4.2rem; }
+
+        body[data-size="normal"] .pat-choice-card { width: 155px; }
+        body[data-size="large"] .pat-choice-card { width: 195px; padding: 20px 14px; }
+        body[data-size="xlarge"] .pat-choice-card { width: 240px; padding: 24px 18px; }
+
+        @media (max-width: 560px) {
+            .wagon-card { width: 58px; height: 64px; font-size: 2.1rem; }
+            .locomotive-box { font-size: 2.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="game-header">
+        <div class="header-left">
+            <a href="index.html" class="header-logo-link" title="Autism Learning Platform">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" class="header-infinity-logo" width="42" height="42">
+            </a>
+            <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        </div>
+        <h2 id="activity-title" class="category-badge">🚂 Suites & Rythmes</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">0</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="patterns-stage">
+        <!-- 3 Pattern Complexity Modes -->
+        <nav class="routine-pills" aria-label="Select pattern type">
+            <button class="routine-pill active" id="mode-ab-btn">🔴🔵 Rythme AB</button>
+            <button class="routine-pill" id="mode-aab-btn">🟡🟡🟢 Rythme AAB</button>
+            <button class="routine-pill" id="mode-abc-btn">🔺⬜🔵 Rythme ABC</button>
+        </nav>
+
+        <!-- Prompt Banner -->
+        <div class="prompt-container" style="margin: 2px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.2rem, 3.2vw, 1.85rem); margin: 0;">Quelle image complète le train ?</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat voice prompt" aria-label="Repeat voice prompt">🗣️</button>
+        </div>
+
+        <!-- Rhythmic Audio Scan Button -->
+        <button class="rhythm-btn" id="play-rhythm-btn">
+            <span>🎵</span>
+            <span id="play-rhythm-text">Écouter le rythme</span>
+        </button>
+
+        <!-- Animated Train Convoy Track -->
+        <div class="train-track-frame">
+            <div class="train-convoy" id="train-convoy"></div>
+            <div class="rail-line"></div>
+        </div>
+
+        <!-- Candidate Pieces -->
+        <section class="pattern-choices-row" id="pattern-choices" aria-label="Pattern choices"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/patterns-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

@@ -216,7 +216,13 @@ if (!inputManagerSrc.includes('isCountingPage') || !inputManagerSrc.includes('nu
 if (!inputManagerSrc.includes('isPrepositionsPage') || !inputManagerSrc.includes('prep-card')) {
     throw new Error('input-manager.js must support prepositions.html (.prep-card)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn) & Prepositions (.prep-card)');
+if (!inputManagerSrc.includes('isWordBuilderPage') || !inputManagerSrc.includes('wb-syl-card')) {
+    throw new Error('input-manager.js must support word-builder.html (.wb-syl-card)');
+}
+if (!inputManagerSrc.includes('isPatternsPage') || !inputManagerSrc.includes('pat-choice-card')) {
+    throw new Error('input-manager.js must support patterns.html (.pat-choice-card)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn), Prepositions (.prep-card), Word Assembly (.wb-syl-card) & Visual Patterns (.pat-choice-card)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');
@@ -403,5 +409,71 @@ if (clickedPrepCard !== 1) {
     throw new Error(`Enter key should have triggered card 1 click, got ${clickedPrepCard}`);
 }
 console.log('✓ Arrow key & D-Pad navigation verified for Prepositions cards (.prep-card)');
+
+// Test Arrow button & D-Pad navigation for Word Builder (.wb-syl-card)
+const mockWbGrid = new MockElement('section', 'wb-choices', 'wb-choices-row');
+const mockWbCards = [
+    new MockElement('button', 'wb-1', 'wb-syl-card'),
+    new MockElement('button', 'wb-2', 'wb-syl-card')
+];
+let clickedWbCard = null;
+mockWbCards.forEach((c, idx) => {
+    c.onclick = () => { clickedWbCard = idx; };
+    mockWbGrid.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.wb-syl-card')) return mockWbCards;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/word-builder.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Word Builder initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 1) {
+    throw new Error(`Word Builder ArrowRight should move focus to card 1, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.validate();
+if (clickedWbCard !== 1) {
+    throw new Error(`Enter key should have triggered card 1 click in Word Builder, got ${clickedWbCard}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Word Builder cards (.wb-syl-card)');
+
+// Test Arrow button & D-Pad navigation for Visual Patterns (.pat-choice-card)
+const mockPatGrid = new MockElement('section', 'pattern-choices', 'pattern-choices-row');
+const mockPatCards = [
+    new MockElement('button', 'pat-1', 'pat-choice-card'),
+    new MockElement('button', 'pat-2', 'pat-choice-card')
+];
+let clickedPatCard = null;
+mockPatCards.forEach((c, idx) => {
+    c.onclick = () => { clickedPatCard = idx; };
+    mockPatGrid.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.pat-choice-card')) return mockPatCards;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/patterns.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Patterns initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 1) {
+    throw new Error(`Patterns ArrowRight should move focus to card 1, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.validate();
+if (clickedPatCard !== 1) {
+    throw new Error(`Enter key should have triggered card 1 click in Patterns, got ${clickedPatCard}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Visual Patterns cards (.pat-choice-card)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');

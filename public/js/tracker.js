@@ -44,6 +44,7 @@
     function detectActivityFromPath(path) {
         if (path.includes('letters')) return 'letters_puzzle';
         if (path.includes('game')) return 'find_and_match';
+        if (path.includes('patterns')) return 'patterns';
         if (path.includes('pattern')) return 'pattern';
         if (path.includes('spelling')) return 'spelling';
         if (path.includes('sequence')) return 'sequence';
@@ -57,6 +58,7 @@
         if (path.includes('sounds')) return 'sounds';
         if (path.includes('circuit')) return 'circuit';
         if (path.includes('causality')) return 'causality';
+        if (path.includes('word-builder') || path.includes('word_builder')) return 'word_builder';
         if (path.includes('builder')) return 'builder';
         if (path.includes('basket')) return 'basket';
         if (path.includes('music')) return 'music';
@@ -69,6 +71,7 @@
         if (path.includes('emotions')) return 'emotions';
         if (path.includes('counting')) return 'counting';
         if (path.includes('prepositions')) return 'prepositions';
+        if (path.includes('word-builder') || path.includes('word_builder')) return 'word_builder';
         return null;
     }
 
@@ -430,7 +433,9 @@
             'syllables': { likes: 0, dislikes: 0 },
             'emotions': { likes: 0, dislikes: 0 },
             'counting': { likes: 0, dislikes: 0 },
-            'prepositions': { likes: 0, dislikes: 0 }
+            'prepositions': { likes: 0, dislikes: 0 },
+            'word_builder': { likes: 0, dislikes: 0 },
+            'patterns': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -783,7 +788,9 @@
             'syllables': '.activity-card.syllables',
             'emotions': '.activity-card.emotions',
             'counting': '.activity-card.counting',
-            'prepositions': '.activity-card.prepositions'
+            'prepositions': '.activity-card.prepositions',
+            'word_builder': '.activity-card.word_builder',
+            'patterns': '.activity-card.patterns'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -841,7 +848,9 @@
             'syllables': { likes: 0, dislikes: 0 },
             'emotions': { likes: 0, dislikes: 0 },
             'counting': { likes: 0, dislikes: 0 },
-            'prepositions': { likes: 0, dislikes: 0 }
+            'prepositions': { likes: 0, dislikes: 0 },
+            'word_builder': { likes: 0, dislikes: 0 },
+            'patterns': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -926,7 +935,9 @@
             'syllables': '.activity-card.syllables',
             'emotions': '.activity-card.emotions',
             'counting': '.activity-card.counting',
-            'prepositions': '.activity-card.prepositions'
+            'prepositions': '.activity-card.prepositions',
+            'word_builder': '.activity-card.word_builder',
+            'patterns': '.activity-card.patterns'
         };
 
         Object.keys(idMap).forEach(actId => {

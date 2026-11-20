@@ -63,20 +63,20 @@
                    placeholder="Rechercher une activité..." aria-label="Rechercher une activité" autocomplete="off">
             <button type="button" id="hub-search-clear" class="hub-search-clear-btn" aria-label="Effacer la recherche" style="display: none;">✕</button>
         </div>
-        <span class="hub-results-count" id="hub-results-count">27 activités</span>
+        <span class="hub-results-count" id="hub-results-count">29 activités</span>
     </div>
 
     <!-- Activity Filter Bar (Categories & Bookmarked Favorites) -->
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filtrer par catégorie">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" data-category="all" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">27</span>
+                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">29</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-lang-btn" data-category="language" role="tab" aria-selected="false">
-                🗣️ <span id="lbl-filter-lang">Langage</span> <span class="filter-count">8</span>
+                🗣️ <span id="lbl-filter-lang">Langage</span> <span class="filter-count">9</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-logic-btn" data-category="logic" role="tab" aria-selected="false">
-                🧩 <span id="lbl-filter-logic">Logique</span> <span class="filter-count">4</span>
+                🧩 <span id="lbl-filter-logic">Logique</span> <span class="filter-count">5</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-math-btn" data-category="math" role="tab" aria-selected="false">
                 🔢 <span id="lbl-filter-math">Maths & Espace</span> <span class="filter-count">6</span>
@@ -94,8 +94,8 @@
     <div class="hub-age-bar">
         <span class="hub-age-label" id="lbl-age-filter">Âge :</span>
         <div class="hub-age-chips" role="radiogroup" aria-label="Filtrer par tranche d'âge">
-            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(27)</span></button>
-            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(27)</span></button>
+            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(29)</span></button>
+            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(29)</span></button>
             <button type="button" class="hub-age-chip disabled" data-age="6-10" id="age-610-btn" title="Nouveaux jeux 6-10 ans à venir !" style="opacity: 0.65; cursor: not-allowed;">🎒 <span id="lbl-age-610">6–10 ans</span> <span class="age-count" style="font-size: 0.75rem; opacity: 0.85;">(Bientôt)</span></button>
         </div>
     </div>
@@ -551,6 +551,38 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <!-- Activity 28: Word Assembly -->
+        <a href="word-builder.html" class="activity-card word_builder" data-activity="word_builder" data-category="language" data-age="3-6" data-keywords="mots syllabes assembler lecture phonetique moto velo papa bobo fusion syllables words blend reading">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
+            <button type="button" class="activity-bookmark-btn" data-activity="word_builder" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">🧩</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-word_builder-title">Word Assembly</span>
+                <span class="activity-card-desc" id="act-word_builder-desc">Blend syllables into complete words with magnetic blocks</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="word_builder">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
+
+        <!-- Activity 29: Visual Patterns & Sequences -->
+        <a href="patterns.html" class="activity-card patterns" data-activity="patterns" data-category="logic" data-age="3-6" data-keywords="suites rythmes train wagons algorithmes ab aab abc musique sequences patterns logic">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
+            <button type="button" class="activity-bookmark-btn" data-activity="patterns" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">🚂</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-patterns-title">Visual Patterns</span>
+                <span class="activity-card-desc" id="act-patterns-desc">Complete repeating wagon rhythms with melodic scans</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="patterns">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <!-- About Us / Our Story Modal -->
@@ -637,6 +669,10 @@
                 actCountingDesc: "Touch to count, fill the basket & match numbers",
                 actPrepositionsTitle: "Spatial Prepositions",
                 actPrepositionsDesc: "Learn On, Under, In, Behind & Next to with depth",
+                actWordBuilderTitle: "Word Assembly",
+                actWordBuilderDesc: "Blend syllables into complete words with magnetic blocks",
+                actPatternsTitle: "Visual Patterns",
+                actPatternsDesc: "Complete repeating wagon rhythms with melodic scans",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 btnAboutText: "Our Story",
@@ -719,6 +755,10 @@
                 actCountingDesc: "Touche pour compter, remplis le panier et associe les nombres",
                 actPrepositionsTitle: "Positions dans l'espace",
                 actPrepositionsDesc: "Apprends Sur, Sous, Dans, Devant, Derrière et À côté en relief",
+                actWordBuilderTitle: "Assembler des Mots",
+                actWordBuilderDesc: "Fusionne deux syllabes pour former des mots entiers",
+                actPatternsTitle: "Suites & Rythmes",
+                actPatternsDesc: "Complète les rythmes des wagons avec écoute mélodique",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 btnAboutText: "Notre Histoire",
@@ -926,6 +966,16 @@
             if (prepTitle) prepTitle.innerText = t.actPrepositionsTitle;
             const prepDesc = document.getElementById('act-prepositions-desc');
             if (prepDesc) prepDesc.innerText = t.actPrepositionsDesc;
+
+            const wbTitle = document.getElementById('act-word_builder-title');
+            if (wbTitle) wbTitle.innerText = t.actWordBuilderTitle;
+            const wbDesc = document.getElementById('act-word_builder-desc');
+            if (wbDesc) wbDesc.innerText = t.actWordBuilderDesc;
+
+            const patTitle = document.getElementById('act-patterns-title');
+            if (patTitle) patTitle.innerText = t.actPatternsTitle;
+            const patDesc = document.getElementById('act-patterns-desc');
+            if (patDesc) patDesc.innerText = t.actPatternsDesc;
 
             const btnAbout = document.getElementById('btn-about-text');
             if (btnAbout) btnAbout.innerText = t.btnAboutText;

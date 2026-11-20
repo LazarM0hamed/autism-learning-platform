@@ -564,6 +564,34 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 28: 🧩 Two-Syllable Word Assembly ("Assembler des Mots")
+* **Route:** `/word-builder.html`
+* **Target Skills:** Two-syllable word blending, reading phonics, musical vowel pitch reinforcement (`DO = O, RÉ = É, MI = I, FA = A, SOL = U`), vocabulary acquisition (`MOTO`, `VÉLO`, `PAPA`, `BOBO`, `SOFA`, `DODO`, `KIWI`, `PUMA`, `LAMA`, `MIDI`).
+* **Consistent Musical Vowel Colors:** Carries over the exact color and pitch cues from `syllables.html` to ease word decoding.
+* **Animated Magnetic Word Fusion:** Syllables slide along the track and snap into a single unified green word banner accompanied by a victory chime.
+* **Syllable Breakdown Audio Helper (`🎵 Écouter les 2 syllabes`):** Plays each syllable's musical tone and pronunciation sequentially before speaking the full word.
+* **3 Progressive Learning Modes:**
+  1. 🧩 *Finir le mot (2e syllabe)*: First syllable is pre-placed; child selects the missing ending.
+  2. 🏗️ *Construire (2 syllabes)*: Both slots start empty; child selects Syllable 1, then Syllable 2.
+  3. 👂 *Sans indice*: Slots hide previews, training direct auditory decoding.
+* **Controller Support:** Native keyboard/gamepad navigation (`1`–`3` keys, Arrow keys, or D-Pad navigation on `.wb-syl-card`).
+
+---
+
+### Activity 29: 🚂 Visual Patterns & Sequences ("Suites & Rythmes")
+* **Route:** `/patterns.html`
+* **Target Skills:** Pattern recognition, algorithms, visual sequencing, auditory rhythm matching, working memory.
+* **Locomotive & Colored Wagon Convoy:** A train chugs onto the screen pulling alternating symbol wagons with a missing wagon slot (`?`).
+* **Multi-Pitch Rhythmic Audio Scan (`🎵 Écouter le rythme`):** Pulses wagons left-to-right with distinct musical pitches for each symbol so children can hear the rhythm before choosing the missing piece.
+* **Train Departure Animation:** When the correct wagon piece is chosen, it locks into place with a celebratory two-tone train whistle, and the entire train chugs off the screen.
+* **3 Pattern Complexity Modes:**
+  1. 🔴🔵 *Rythme AB*: Two-symbol alternation (`A - B - A - B - [ ? ]`).
+  2. 🟡🟡🟢 *Rythme AAB*: Grouped patterns (`A - A - B - A - A - [ ? ]`).
+  3. 🔺⬜🔵 *Rythme ABC*: Three-symbol cycles (`A - B - C - A - B - [ ? ]`).
+* **Controller Support:** Native keyboard/gamepad navigation (`1`–`3` keys, Arrow keys, or D-Pad navigation on `.pat-choice-card`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.
@@ -580,9 +608,9 @@ Every activity includes an unobtrusive feedback widget docked at the top right:
 - **Strictly 1 Vote per User per Activity:** Reactions are idempotent. Tapping 👍 records 1 like for the current identified child profile and illuminates the button in soft green (`.active`). Tapping it again toggles the vote off. Tapping 👎 switches the vote from like to unlike. A user cannot artificially inflate counters by repeatedly tapping.
 - **YouTube-Style Like Counters on Hub (`/index.html`):** Each activity card on the home dashboard features an aggregate like counter badge (`👍 14`) docked at the bottom right, celebrating the family's most appreciated games.
 - **Instant Live Search on Hub (`/index.html`):** A real-time, accent-insensitive search bar filtering cards across bilingual titles, descriptions, category labels, and rich keywords with an instant clear button (`✕`) and matching count chip.
-- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 27 activities:
-  1. 🗣️ *Langage & Vocabulaire* (8 activities: *Find & Match, Letters Puzzle, Spelling, Body Parts, Sounds, Opposites, Language Mini-Film, Musical Syllables*)
-  2. 🧩 *Logique & Tri* (4 activities: *Pattern, Classification, Sequence, Basket Shape*)
+- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 29 activities:
+  1. 🗣️ *Langage & Vocabulaire* (9 activities: *Find & Match, Letters Puzzle, Spelling, Body Parts, Sounds, Opposites, Language Mini-Film, Musical Syllables, Word Assembly*)
+  2. 🧩 *Logique & Tri* (5 activities: *Pattern, Classification, Sequence, Basket Shape, Visual Patterns & Sequences*)
   3. 🔢 *Maths & Espace* (6 activities: *Counting & Math, Spatial Pre-coding, Ball Labyrinth, Magic Lines, Counting & Quantities, Spatial Prepositions*)
   4. 🎨 *Éveil & Sons* (9 activities: *Colors, Match & Colour, Music Partition, Cause & Effect, Ball Circuit, Building Logic, Hide & Seek, Time & Calendar, Emotions & Situations*)
   5. ⭐ *Mes Favoris* (dynamically updated bookmark shelf)
