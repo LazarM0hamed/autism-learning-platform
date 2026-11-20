@@ -228,7 +228,10 @@ if (!inputManagerSrc.includes('isMathCpPage') || !inputManagerSrc.includes('math
 if (!inputManagerSrc.includes('isCalmPage') || !inputManagerSrc.includes('calm-action-btn')) {
     throw new Error('input-manager.js must support calm.html (.calm-action-btn, .ambient-btn)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn), Prepositions (.prep-card), Word Assembly (.wb-syl-card), Visual Patterns (.pat-choice-card), Math CP (.math-choice-btn) & Calm Corner (.calm-action-btn, .ambient-btn)');
+if (!inputManagerSrc.includes('isIntruderPage') || !inputManagerSrc.includes('intruder-card')) {
+    throw new Error('input-manager.js must support intruder.html (.intruder-card)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn), Prepositions (.prep-card), Word Assembly (.wb-syl-card), Visual Patterns (.pat-choice-card), Math CP (.math-choice-btn), Calm Corner (.calm-action-btn, .ambient-btn) & Odd One Out (.intruder-card)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');
@@ -547,5 +550,39 @@ if (clickedCalmBtn !== 1) {
     throw new Error(`Enter key should have triggered button 1 click in Calm Corner, got ${clickedCalmBtn}`);
 }
 console.log('✓ Arrow key & D-Pad navigation verified for Calm Corner buttons (.ambient-btn)');
+
+// Test Arrow button & D-Pad navigation for Odd One Out (.intruder-card)
+const mockIntruderGrid = new MockElement('section', 'intruder-grid', 'intruder-grid');
+const mockIntruderCards = [
+    new MockElement('button', 'intr-1', 'intruder-card'),
+    new MockElement('button', 'intr-2', 'intruder-card'),
+    new MockElement('button', 'intr-3', 'intruder-card')
+];
+let clickedIntruderCard = null;
+mockIntruderCards.forEach((c, idx) => {
+    c.onclick = () => { clickedIntruderCard = idx; };
+    mockIntruderGrid.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.intruder-card')) return mockIntruderCards;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/intruder.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Intruder initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 1) {
+    throw new Error(`Intruder ArrowRight should move focus to card 1, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.validate();
+if (clickedIntruderCard !== 1) {
+    throw new Error(`Enter key should have triggered card 1 click in Intruder, got ${clickedIntruderCard}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Odd One Out cards (.intruder-card)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');

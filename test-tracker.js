@@ -235,21 +235,21 @@ assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent
 assert(indexHtml.includes('apple-touch-icon.png'), 'index.html must include apple-touch-icon.png');
 assert(indexHtml.includes('manifest.json'), 'index.html must include manifest.json');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
-assert(likeBadgeCount === 31, `All 31 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+assert(likeBadgeCount === 32, `All 32 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
-assert(bookmarkBtnCount === 31, `All 31 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(bookmarkBtnCount === 32, `All 32 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
 assert(indexHtml.includes('id="open-about-btn"'), 'index.html must include open-about-btn');
 assert(indexHtml.includes('id="alp-about-modal"'), 'index.html must include alp-about-modal');
-console.log('✓ Parent Hub, Our Story modal, PWA icons, 31 like badges, and 31 bookmark star buttons verified in index.html');
+console.log('✓ Parent Hub, Our Story modal, PWA icons, 32 like badges, and 32 bookmark star buttons verified in index.html');
 
-// Verify In-Activity Feedback Widget embedded across all 31 activity pages
+// Verify In-Activity Feedback Widget embedded across all 32 activity pages
 const activityPages = [
     'game.html', 'colors.html', 'pattern.html', 'letters.html',
     'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
     'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
     'sounds.html', 'circuit.html', 'causality.html', 'builder.html', 'basket.html',
-    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html', 'language.html', 'syllables.html', 'emotions.html', 'counting.html', 'prepositions.html', 'word-builder.html', 'patterns.html', 'math-cp.html', 'calm.html'
+    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html', 'language.html', 'syllables.html', 'emotions.html', 'counting.html', 'prepositions.html', 'word-builder.html', 'patterns.html', 'math-cp.html', 'calm.html', 'intruder.html'
 ];
 activityPages.forEach(p => {
     const html = fs.readFileSync(`public/${p}`, 'utf8');
@@ -259,7 +259,7 @@ activityPages.forEach(p => {
     assert(html.includes('apple-touch-icon.png'), `${p} must include apple-touch-icon.png`);
     assert(html.includes('manifest.json'), `${p} must include manifest.json`);
 });
-console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 31 activity pages');
+console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 32 activity pages');
 
 // Verify Body Parts Dataset & Engine
 const bodyJson = JSON.parse(fs.readFileSync('public/data/body.json', 'utf8'));
@@ -350,6 +350,14 @@ assert(calmHtml.includes('tool-breath-btn'), 'calm.html must include tool-breath
 const calmEngineJs = fs.readFileSync('public/js/calm-engine.js', 'utf8');
 assert(calmEngineJs.includes('POPIT_ROW_COLORS'), 'calm-engine.js must include POPIT_ROW_COLORS');
 console.log('✓ Calm Corner HTML and engine verified');
+
+// Verify Odd One Out (L'Intrus) HTML & Engine
+const intruderHtml = fs.readFileSync('public/intruder.html', 'utf8');
+assert(intruderHtml.includes('id="intruder-grid"'), 'intruder.html must include intruder-grid');
+assert(intruderHtml.includes('id="rule-banner"'), 'intruder.html must include rule-banner');
+const intruderEngineJs = fs.readFileSync('public/js/intruder-engine.js', 'utf8');
+assert(intruderEngineJs.includes('CLASSIC_FAMILIES') && intruderEngineJs.includes('PROPERTY_FAMILIES'), 'intruder-engine.js must include CLASSIC_FAMILIES and PROPERTY_FAMILIES');
+console.log("✓ Odd One Out (L'Intrus) HTML and engine verified");
 
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');
@@ -447,7 +455,7 @@ console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, C
     assert(indexHtml.includes('id="empty-search-hint"'), 'index.html must include empty-search-hint');
 
     const ageBadgesCount = (indexHtml.match(/class="activity-age-badge"/g) || []).length;
-    assert.strictEqual(ageBadgesCount, 31, `All 31 cards must have an activity-age-badge, found ${ageBadgesCount}`);
+    assert.strictEqual(ageBadgesCount, 32, `All 32 cards must have an activity-age-badge, found ${ageBadgesCount}`);
 
     const cardCategories = (indexHtml.match(/data-category="[^"]+"/g) || []).map(m => m.split('"')[1]);
     const validDomains = ['language', 'logic', 'math', 'sensory', 'all', 'fav'];

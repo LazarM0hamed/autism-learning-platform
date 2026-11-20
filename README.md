@@ -617,6 +617,18 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 32: 🕵️ L'Intrus ("Odd One Out")
+* **Route:** `/intruder.html`
+* **Target Skills:** Categorization, visual discrimination, rule-checking, inhibitory control.
+* **Supportive Visual Coaching (No Harsh Buzzers):** Tapping a valid family member displays a gentle category confirmation badge (*"C'est un fruit 🍎"*) reminding the child to find the one that doesn't belong. When the intruder is tapped, the matching family items group together in soft green while the intruder pops forward with a golden star and full spoken explanation.
+* **3 Progressive Learning Modes:**
+  1. ⭐ *3 Images (2 + 1)*: Two items from the same family plus one intruder for fast concept grasping.
+  2. ⭐⭐ *4 Images (3 + 1)*: Classic odd one out with three family members and one intruder.
+  3. ⭐⭐⭐ *Couleurs & Règles*: Hidden property rules (colors, flying vs. swimming, letters vs. numbers).
+* **Controller Support:** Native keyboard/gamepad navigation (`1`–`4` keys, Arrow keys, or D-Pad navigation on `.intruder-card`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.
@@ -633,9 +645,9 @@ Every activity includes an unobtrusive feedback widget docked at the top right:
 - **Strictly 1 Vote per User per Activity:** Reactions are idempotent. Tapping 👍 records 1 like for the current identified child profile and illuminates the button in soft green (`.active`). Tapping it again toggles the vote off. Tapping 👎 switches the vote from like to unlike. A user cannot artificially inflate counters by repeatedly tapping.
 - **YouTube-Style Like Counters on Hub (`/index.html`):** Each activity card on the home dashboard features an aggregate like counter badge (`👍 14`) docked at the bottom right, celebrating the family's most appreciated games.
 - **Instant Live Search on Hub (`/index.html`):** A real-time, accent-insensitive search bar filtering cards across bilingual titles, descriptions, category labels, and rich keywords with an instant clear button (`✕`) and matching count chip.
-- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 31 activities:
+- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 32 activities:
   1. 🗣️ *Langage & Vocabulaire* (9 activities: *Find & Match, Letters Puzzle, Spelling, Body Parts, Sounds, Opposites, Language Mini-Film, Musical Syllables, Word Assembly*)
-  2. 🧩 *Logique & Tri* (5 activities: *Pattern, Classification, Sequence, Basket Shape, Visual Patterns & Sequences*)
+  2. 🧩 *Logique & Tri* (6 activities: *Pattern, Classification, Sequence, Basket Shape, Visual Patterns & Sequences, Odd One Out*)
   3. 🔢 *Maths & Espace* (7 activities: *Counting & Math, Spatial Pre-coding, Ball Labyrinth, Magic Lines, Counting & Quantities, Spatial Prepositions, Ten-Frame Math CP*)
   4. 🎨 *Éveil & Sons* (10 activities: *Colors, Match & Colour, Music Partition, Cause & Effect, Ball Circuit, Building Logic, Hide & Seek, Time & Calendar, Emotions & Situations, Calm Corner*)
   5. ⭐ *Mes Favoris* (dynamically updated bookmark shelf)

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Autism Platform">
+    <meta name="theme-color" content="#F8FAFC">
+    <title>L'Intrus - Learning Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .intruder-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 14px;
+            padding-bottom: 24px;
+        }
+
+        /* Rule Explanation Banner */
+        .rule-banner {
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #FFFFFF;
+            border: 3px solid #E2E8F0;
+            border-radius: 18px;
+            padding: 8px 22px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #475569;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            transition: all 0.25s ease;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        .rule-banner.solved-rule {
+            background: #ECFDF5;
+            border-color: #10B981;
+            color: #047857;
+        }
+
+        /* Cards Board */
+        .intruder-board-frame {
+            width: 94%;
+            max-width: 760px;
+            background: #FFFDF9;
+            border: 4px solid #CBD5E1;
+            border-radius: 26px;
+            padding: 20px 16px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
+            box-sizing: border-box;
+            transition: max-width 0.25s ease;
+        }
+        .intruder-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            justify-content: center;
+            align-items: center;
+        }
+        .intruder-card {
+            position: relative;
+            width: 162px;
+            height: 172px;
+            background: #FFFFFF;
+            border: 4px solid #E2E8F0;
+            border-radius: 22px;
+            padding: 12px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            transition: transform 0.16s ease, border-color 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        .intruder-card:active {
+            transform: scale(0.94);
+        }
+
+        /* Soft coaching tag when child taps a valid group member */
+        .intruder-card.checked-member {
+            border-color: #93C5FD;
+            background: #EFF6FF;
+        }
+        .family-tag {
+            position: absolute;
+            top: -12px;
+            background: #3B82F6;
+            color: #FFFFFF;
+            font-size: 0.82rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14);
+            animation: popBadge 0.22s ease;
+        }
+
+        /* Solved state: family cards get green border, intruder pops out with golden ring */
+        .intruder-card.family-confirmed {
+            border-color: #10B981;
+            background: #ECFDF5;
+        }
+        .intruder-card.intruder-found {
+            border-color: #F59E0B;
+            background: #FEFCE8;
+            transform: scale(1.1) translateY(-8px);
+            box-shadow: 0 0 0 6px rgba(245, 158, 11, 0.35), 0 12px 24px rgba(0, 0, 0, 0.14);
+            z-index: 4;
+        }
+        .intruder-star-badge {
+            position: absolute;
+            top: -14px;
+            right: -10px;
+            font-size: 1.8rem;
+            animation: popBadge 0.25s ease;
+        }
+        @keyframes popBadge {
+            from { transform: scale(0.4); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        .card-emoji {
+            font-size: 4.1rem;
+            line-height: 1.05;
+        }
+        .card-text-symbol {
+            font-size: 4.3rem;
+            font-weight: 800;
+            color: #2563EB;
+            line-height: 1.05;
+        }
+        .card-title {
+            font-size: 1.12rem;
+            font-weight: 800;
+            color: #1E293B;
+            text-align: center;
+        }
+
+        /* Responsive Visual Sizing */
+        body[data-size="normal"] .intruder-board-frame { max-width: 760px; }
+        body[data-size="large"] .intruder-board-frame { max-width: 880px; }
+        body[data-size="xlarge"] .intruder-board-frame { max-width: 1040px; }
+
+        body[data-size="normal"] .intruder-card { width: 162px; height: 172px; }
+        body[data-size="large"] .intruder-card { width: 200px; height: 210px; }
+        body[data-size="xlarge"] .intruder-card { width: 245px; height: 255px; }
+
+        body[data-size="normal"] .card-emoji,
+        body[data-size="normal"] .card-text-symbol { font-size: 4.1rem; }
+        body[data-size="large"] .card-emoji,
+        body[data-size="large"] .card-text-symbol { font-size: 5.2rem; }
+        body[data-size="xlarge"] .card-emoji,
+        body[data-size="xlarge"] .card-text-symbol { font-size: 6.4rem; }
+
+        @media (max-width: 560px) {
+            .intruder-card { width: 136px; height: 150px; }
+            .card-emoji, .card-text-symbol { font-size: 3.3rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="game-header">
+        <div class="header-left">
+            <a href="index.html" class="header-logo-link" title="Autism Learning Platform">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" class="header-infinity-logo" width="42" height="42">
+            </a>
+            <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        </div>
+        <h2 id="activity-title" class="category-badge">🕵️ L'Intrus</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">0</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="intruder-stage">
+        <!-- 3 Difficulty Modes -->
+        <nav class="routine-pills" aria-label="Select difficulty">
+            <button class="routine-pill active" id="mode-3-btn">⭐ 3 Images</button>
+            <button class="routine-pill" id="mode-4-btn">⭐⭐ 4 Images</button>
+            <button class="routine-pill" id="mode-props-btn">⭐⭐⭐ Couleurs & Règles</button>
+        </nav>
+
+        <!-- Prompt Banner -->
+        <div class="prompt-container" style="margin: 2px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.2rem, 3.2vw, 1.85rem); margin: 0;">Trouve l'intrus !</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat voice prompt" aria-label="Repeat voice prompt">🗣️</button>
+        </div>
+
+        <!-- Category Rule Feedback Banner -->
+        <div class="rule-banner" id="rule-banner">
+            <span>🔍</span>
+            <span id="rule-text">Trois images vont ensemble, une est différente</span>
+        </div>
+
+        <!-- Cards Grid -->
+        <section class="intruder-board-frame">
+            <div class="intruder-grid" id="intruder-grid" aria-label="Odd one out choices"></div>
+        </section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/intruder-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

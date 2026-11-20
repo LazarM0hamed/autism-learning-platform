@@ -1164,7 +1164,8 @@ main {
 }
 
 .math-choice-btn.is-controller-focused,
-.ambient-btn.is-controller-focused {
+.ambient-btn.is-controller-focused,
+.intruder-card.is-controller-focused {
     outline: none !important;
     border-color: #2563EB !important;
     box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.55), 0 12px 28px rgba(37, 99, 235, 0.22) !important;

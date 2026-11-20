@@ -63,20 +63,20 @@
                    placeholder="Rechercher une activité..." aria-label="Rechercher une activité" autocomplete="off">
             <button type="button" id="hub-search-clear" class="hub-search-clear-btn" aria-label="Effacer la recherche" style="display: none;">✕</button>
         </div>
-        <span class="hub-results-count" id="hub-results-count">31 activités</span>
+        <span class="hub-results-count" id="hub-results-count">32 activités</span>
     </div>
 
     <!-- Activity Filter Bar (Categories & Bookmarked Favorites) -->
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filtrer par catégorie">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" data-category="all" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">31</span>
+                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">32</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-lang-btn" data-category="language" role="tab" aria-selected="false">
                 🗣️ <span id="lbl-filter-lang">Langage</span> <span class="filter-count">9</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-logic-btn" data-category="logic" role="tab" aria-selected="false">
-                🧩 <span id="lbl-filter-logic">Logique</span> <span class="filter-count">5</span>
+                🧩 <span id="lbl-filter-logic">Logique</span> <span class="filter-count">6</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-math-btn" data-category="math" role="tab" aria-selected="false">
                 🔢 <span id="lbl-filter-math">Maths & Espace</span> <span class="filter-count">7</span>
@@ -94,8 +94,8 @@
     <div class="hub-age-bar">
         <span class="hub-age-label" id="lbl-age-filter">Âge :</span>
         <div class="hub-age-chips" role="radiogroup" aria-label="Filtrer par tranche d'âge">
-            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(31)</span></button>
-            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(31)</span></button>
+            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(32)</span></button>
+            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(32)</span></button>
             <button type="button" class="hub-age-chip disabled" data-age="6-10" id="age-610-btn" title="Nouveaux jeux 6-10 ans à venir !" style="opacity: 0.65; cursor: not-allowed;">🎒 <span id="lbl-age-610">6–10 ans</span> <span class="age-count" style="font-size: 0.75rem; opacity: 0.85;">(Bientôt)</span></button>
         </div>
     </div>
@@ -615,6 +615,22 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <!-- Activity 32: Odd One Out -->
+        <a href="intruder.html" class="activity-card intruder" data-activity="intruder" data-category="logic" data-age="3-6" data-keywords="intrus odd one out tri categorie famille logique regles discrimination difference">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
+            <button type="button" class="activity-bookmark-btn" data-activity="intruder" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">🕵️</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-intruder-title">Odd One Out</span>
+                <span class="activity-card-desc" id="act-intruder-desc">Spot the item that does not belong with supportive coaching</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="intruder">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <!-- About Us / Our Story Modal -->
@@ -709,6 +725,8 @@
                 actMathCpDesc: "Number bonds to 5 & 10 and first additions in 10-frames",
                 actCalmTitle: "Calm Corner",
                 actCalmDesc: "Breathing bubble, sensory pop-it & soothing soundscapes",
+                actIntruderTitle: "Odd One Out",
+                actIntruderDesc: "Spot the item that does not belong with supportive coaching",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 btnAboutText: "Our Story",
@@ -799,6 +817,8 @@
                 actMathCpDesc: "Compléments à 5, à 10 et premières additions concrètes",
                 actCalmTitle: "Coin Calme",
                 actCalmDesc: "Bulle de respiration, pop-it sensoriel et sons apaisants",
+                actIntruderTitle: "L'Intrus",
+                actIntruderDesc: "Trouve l'élément qui ne va pas avec les autres sans piège",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 btnAboutText: "Notre Histoire",
@@ -1026,6 +1046,11 @@
             if (clmTitle) clmTitle.innerText = t.actCalmTitle;
             const clmDesc = document.getElementById('act-calm-desc');
             if (clmDesc) clmDesc.innerText = t.actCalmDesc;
+
+            const intrTitle = document.getElementById('act-intruder-title');
+            if (intrTitle) intrTitle.innerText = t.actIntruderTitle;
+            const intrDesc = document.getElementById('act-intruder-desc');
+            if (intrDesc) intrDesc.innerText = t.actIntruderDesc;
 
             const btnAbout = document.getElementById('btn-about-text');
             if (btnAbout) btnAbout.innerText = t.btnAboutText;
