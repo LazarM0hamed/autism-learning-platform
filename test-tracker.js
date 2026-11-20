@@ -235,21 +235,21 @@ assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent
 assert(indexHtml.includes('apple-touch-icon.png'), 'index.html must include apple-touch-icon.png');
 assert(indexHtml.includes('manifest.json'), 'index.html must include manifest.json');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
-assert(likeBadgeCount === 32, `All 32 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+assert(likeBadgeCount === 33, `All 33 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
-assert(bookmarkBtnCount === 32, `All 32 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(bookmarkBtnCount === 33, `All 33 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
 assert(indexHtml.includes('id="open-about-btn"'), 'index.html must include open-about-btn');
 assert(indexHtml.includes('id="alp-about-modal"'), 'index.html must include alp-about-modal');
-console.log('✓ Parent Hub, Our Story modal, PWA icons, 32 like badges, and 32 bookmark star buttons verified in index.html');
+console.log('✓ Parent Hub, Our Story modal, PWA icons, 33 like badges, and 33 bookmark star buttons verified in index.html');
 
-// Verify In-Activity Feedback Widget embedded across all 32 activity pages
+// Verify In-Activity Feedback Widget embedded across all 33 activity pages
 const activityPages = [
     'game.html', 'colors.html', 'pattern.html', 'letters.html',
     'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
     'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
     'sounds.html', 'circuit.html', 'causality.html', 'builder.html', 'basket.html',
-    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html', 'language.html', 'syllables.html', 'emotions.html', 'counting.html', 'prepositions.html', 'word-builder.html', 'patterns.html', 'math-cp.html', 'calm.html', 'intruder.html'
+    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html', 'language.html', 'syllables.html', 'emotions.html', 'counting.html', 'prepositions.html', 'word-builder.html', 'patterns.html', 'math-cp.html', 'calm.html', 'intruder.html', 'phonics-ear.html'
 ];
 activityPages.forEach(p => {
     const html = fs.readFileSync(`public/${p}`, 'utf8');
@@ -259,7 +259,7 @@ activityPages.forEach(p => {
     assert(html.includes('apple-touch-icon.png'), `${p} must include apple-touch-icon.png`);
     assert(html.includes('manifest.json'), `${p} must include manifest.json`);
 });
-console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 32 activity pages');
+console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 33 activity pages');
 
 // Verify Body Parts Dataset & Engine
 const bodyJson = JSON.parse(fs.readFileSync('public/data/body.json', 'utf8'));
@@ -359,6 +359,14 @@ const intruderEngineJs = fs.readFileSync('public/js/intruder-engine.js', 'utf8')
 assert(intruderEngineJs.includes('CLASSIC_FAMILIES') && intruderEngineJs.includes('PROPERTY_FAMILIES'), 'intruder-engine.js must include CLASSIC_FAMILIES and PROPERTY_FAMILIES');
 console.log("✓ Odd One Out (L'Intrus) HTML and engine verified");
 
+// Verify Phonemic Ear CP (J'entends le son) HTML & Engine
+const earHtml = fs.readFileSync('public/phonics-ear.html', 'utf8');
+assert(earHtml.includes('id="phoneme-hero-btn"'), 'phonics-ear.html must include phoneme-hero-btn');
+assert(earHtml.includes('id="phonics-board"'), 'phonics-ear.html must include phonics-board');
+const earEngineJs = fs.readFileSync('public/js/phonics-ear-engine.js', 'utf8');
+assert(earEngineJs.includes('PHONEME_BANK') && earEngineJs.includes('formatHighlightedWord'), 'phonics-ear-engine.js must include PHONEME_BANK and formatHighlightedWord');
+console.log("✓ Phonemic Ear CP (J'entends le son) HTML and engine verified");
+
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');
 assert(soundsEngineJs.includes("id: 'all'") && soundsEngineJs.includes('Tout mélanger'), 'sounds-engine.js must include Mix All (Tout mélanger) category');
@@ -452,10 +460,18 @@ console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, C
     assert(indexHtml.includes('id="filter-sensory-btn"'), 'index.html must include sensory filter pill');
     assert(indexHtml.includes('id="age-all-btn"'), 'index.html must include age-all-btn');
     assert(indexHtml.includes('id="age-36-btn"'), 'index.html must include age-36-btn');
+    assert(indexHtml.includes('id="age-610-btn"'), 'index.html must include age-610-btn');
+    assert(!indexHtml.includes('disabled" data-age="6-10"'), 'age-610-btn must no longer be disabled');
+    assert(!indexHtml.includes('(Bientôt)'), 'age-610-btn must no longer have (Bientôt)');
     assert(indexHtml.includes('id="empty-search-hint"'), 'index.html must include empty-search-hint');
 
     const ageBadgesCount = (indexHtml.match(/class="activity-age-badge"/g) || []).length;
-    assert.strictEqual(ageBadgesCount, 32, `All 32 cards must have an activity-age-badge, found ${ageBadgesCount}`);
+    assert.strictEqual(ageBadgesCount, 33, `All 33 cards must have an activity-age-badge, found ${ageBadgesCount}`);
+
+    const age36Cards = (indexHtml.match(/class="activity-card[^>]*data-age="3-6"/g) || []).length;
+    assert.strictEqual(age36Cards, 31, `31 cards must have data-age="3-6", found ${age36Cards}`);
+    const age610Cards = (indexHtml.match(/class="activity-card[^>]*data-age="6-10"/g) || []).length;
+    assert.strictEqual(age610Cards, 2, `2 cards must have data-age="6-10", found ${age610Cards}`);
 
     const cardCategories = (indexHtml.match(/data-category="[^"]+"/g) || []).map(m => m.split('"')[1]);
     const validDomains = ['language', 'logic', 'math', 'sensory', 'all', 'fav'];

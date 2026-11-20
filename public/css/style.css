@@ -1165,11 +1165,20 @@ main {
 
 .math-choice-btn.is-controller-focused,
 .ambient-btn.is-controller-focused,
-.intruder-card.is-controller-focused {
+.intruder-card.is-controller-focused,
+.word-option-card.is-controller-focused,
+.pos-wagon-btn.is-controller-focused {
     outline: none !important;
     border-color: #2563EB !important;
     box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.55), 0 12px 28px rgba(37, 99, 235, 0.22) !important;
     transform: translateY(-6px) scale(1.08) !important;
+    z-index: 10;
+}
+
+.yesno-btn.is-controller-focused {
+    outline: none !important;
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.55), 0 12px 28px rgba(37, 99, 235, 0.28) !important;
+    transform: translateY(-4px) scale(1.06) !important;
     z-index: 10;
 }
 

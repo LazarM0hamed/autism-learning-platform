@@ -629,6 +629,18 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 33: 👂 J'entends le son ("Phonemic Ear — CP Bridge")
+* **Route:** `/phonics-ear.html`
+* **Target Skills:** Phonemic awareness (*conscience phonologique*), target sound detection, letter sound positioning (*au début* vs. *à la fin*), auditory-visual binding.
+* **Musical Vowel Color Code Continuity:** Keeps the exact same musical vowel colors established in Activity #24 and #28 (`O` = Red / `DO`, `A` = Green / `FA`, `I` = Yellow / `MI`, `U` = Blue / `SOL`, `L` = Purple, `M` = Orange).
+* **3 Progressive Learning Modes:**
+  1. ✅ *Oui ou Non ? (J'entends le son ?)*: Illustrated card with on-tap pronunciation, choose `👍 Oui` or `👎 Non`, revealing letter highlighting upon solve.
+  2. 🔍 *Trouve le mot (3 Images)*: Three picture cards with auditory comparison on tap to locate the word with the target phoneme.
+  3. 🚂 *Début ou Fin ? (Où est le son ?)*: 2-wagon train (`1. Au Début` vs. `2. À la Fin`) to place sound position inside words.
+* **Controller Support:** Native keyboard/gamepad navigation (Arrow keys or D-Pad navigation on `.yesno-btn`, `.word-option-card`, and `.pos-wagon-btn`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.
@@ -645,13 +657,13 @@ Every activity includes an unobtrusive feedback widget docked at the top right:
 - **Strictly 1 Vote per User per Activity:** Reactions are idempotent. Tapping 👍 records 1 like for the current identified child profile and illuminates the button in soft green (`.active`). Tapping it again toggles the vote off. Tapping 👎 switches the vote from like to unlike. A user cannot artificially inflate counters by repeatedly tapping.
 - **YouTube-Style Like Counters on Hub (`/index.html`):** Each activity card on the home dashboard features an aggregate like counter badge (`👍 14`) docked at the bottom right, celebrating the family's most appreciated games.
 - **Instant Live Search on Hub (`/index.html`):** A real-time, accent-insensitive search bar filtering cards across bilingual titles, descriptions, category labels, and rich keywords with an instant clear button (`✕`) and matching count chip.
-- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 32 activities:
-  1. 🗣️ *Langage & Vocabulaire* (9 activities: *Find & Match, Letters Puzzle, Spelling, Body Parts, Sounds, Opposites, Language Mini-Film, Musical Syllables, Word Assembly*)
+- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 33 activities:
+  1. 🗣️ *Langage & Vocabulaire* (10 activities: *Find & Match, Letters Puzzle, Spelling, Body Parts, Sounds, Opposites, Language Mini-Film, Musical Syllables, Word Assembly, Phonemic Ear CP*)
   2. 🧩 *Logique & Tri* (6 activities: *Pattern, Classification, Sequence, Basket Shape, Visual Patterns & Sequences, Odd One Out*)
   3. 🔢 *Maths & Espace* (7 activities: *Counting & Math, Spatial Pre-coding, Ball Labyrinth, Magic Lines, Counting & Quantities, Spatial Prepositions, Ten-Frame Math CP*)
   4. 🎨 *Éveil & Sons* (10 activities: *Colors, Match & Colour, Music Partition, Cause & Effect, Ball Circuit, Building Logic, Hide & Seek, Time & Calendar, Emotions & Situations, Calm Corner*)
   5. ⭐ *Mes Favoris* (dynamically updated bookmark shelf)
-- **Age Badging & Future Expansion (3 to 6 Years):** Every activity card features a distinct `🎂 3–6 ans` age badge, complemented by age filter chips (`Tous les âges`, `🎂 3–6 ans`, and coming-soon placeholder `🎒 6–10 ans`) for future catalog expansion.
+- **Dual Age-Group Filtering (3–6 Years & 6–10 Years CP):** Activity cards feature targeted age badges (`🎂 3–6 ans` for the 31 early childhood / maternelle games, and `🎒 6–10 ans` for Primary School CP bridge activities), with active Hub age filter chips (`🌟 Tous les âges (33)`, `🎂 3–6 ans (31)`, and `🎒 6–10 ans (2)`).
 - **Live Reaction Counters:** Shows deduplicated positive and negative feedback counts on both the activity widget and parent dashboard.
 - **Therapist / Parent Observation Note (💬):** A dedicated dialog to record qualitative notes during sessions (e.g., *"Very engaged today, recognized animals without verbal prompts"* or *"Tired after 10 minutes"*). Notes can be logged across sessions without overwriting past observations.
 

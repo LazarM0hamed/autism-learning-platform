@@ -231,7 +231,10 @@ if (!inputManagerSrc.includes('isCalmPage') || !inputManagerSrc.includes('calm-a
 if (!inputManagerSrc.includes('isIntruderPage') || !inputManagerSrc.includes('intruder-card')) {
     throw new Error('input-manager.js must support intruder.html (.intruder-card)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn), Prepositions (.prep-card), Word Assembly (.wb-syl-card), Visual Patterns (.pat-choice-card), Math CP (.math-choice-btn), Calm Corner (.calm-action-btn, .ambient-btn) & Odd One Out (.intruder-card)');
+if (!inputManagerSrc.includes('isPhonicsEarPage') || !inputManagerSrc.includes('yesno-btn')) {
+    throw new Error('input-manager.js must support phonics-ear.html (.yesno-btn, .word-option-card, .pos-wagon-btn)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn), Prepositions (.prep-card), Word Assembly (.wb-syl-card), Visual Patterns (.pat-choice-card), Math CP (.math-choice-btn), Calm Corner (.calm-action-btn, .ambient-btn), Odd One Out (.intruder-card) & Phonemic Ear CP (.yesno-btn, .pos-wagon-btn)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');
@@ -584,5 +587,38 @@ if (clickedIntruderCard !== 1) {
     throw new Error(`Enter key should have triggered card 1 click in Intruder, got ${clickedIntruderCard}`);
 }
 console.log('✓ Arrow key & D-Pad navigation verified for Odd One Out cards (.intruder-card)');
+
+// Test Arrow button & D-Pad navigation for Phonemic Ear CP (.yesno-btn & .pos-wagon-btn)
+const mockPhonicsArea = new MockElement('section', 'phonics-choices', 'phonics-choices-row');
+const mockYesNoBtns = [
+    new MockElement('button', 'yn-yes', 'yesno-btn btn-yes'),
+    new MockElement('button', 'yn-no', 'yesno-btn btn-no')
+];
+let clickedYesNoBtn = null;
+mockYesNoBtns.forEach((c, idx) => {
+    c.onclick = () => { clickedYesNoBtn = idx; };
+    mockPhonicsArea.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.yesno-btn')) return mockYesNoBtns;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/phonics-ear.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Phonics Ear initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 1) {
+    throw new Error(`Phonics Ear ArrowRight should move focus to button 1, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.validate();
+if (clickedYesNoBtn !== 1) {
+    throw new Error(`Enter key should have triggered button 1 click in Phonics Ear, got ${clickedYesNoBtn}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Phonemic Ear CP buttons (.yesno-btn)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');
