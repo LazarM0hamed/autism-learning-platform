@@ -48,6 +48,7 @@
         if (path.includes('pattern')) return 'pattern';
         if (path.includes('spelling')) return 'spelling';
         if (path.includes('sequence')) return 'sequence';
+        if (path.includes('math-cp') || path.includes('math_cp')) return 'math_cp';
         if (path.includes('math')) return 'math';
         if (path.includes('spatial')) return 'spatial';
         if (path.includes('colors')) return 'colors';
@@ -71,7 +72,7 @@
         if (path.includes('emotions')) return 'emotions';
         if (path.includes('counting')) return 'counting';
         if (path.includes('prepositions')) return 'prepositions';
-        if (path.includes('word-builder') || path.includes('word_builder')) return 'word_builder';
+        if (path.includes('calm')) return 'calm';
         return null;
     }
 
@@ -435,7 +436,9 @@
             'counting': { likes: 0, dislikes: 0 },
             'prepositions': { likes: 0, dislikes: 0 },
             'word_builder': { likes: 0, dislikes: 0 },
-            'patterns': { likes: 0, dislikes: 0 }
+            'patterns': { likes: 0, dislikes: 0 },
+            'math_cp': { likes: 0, dislikes: 0 },
+            'calm': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -790,7 +793,9 @@
             'counting': '.activity-card.counting',
             'prepositions': '.activity-card.prepositions',
             'word_builder': '.activity-card.word_builder',
-            'patterns': '.activity-card.patterns'
+            'patterns': '.activity-card.patterns',
+            'math_cp': '.activity-card.math_cp',
+            'calm': '.activity-card.calm'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -850,7 +855,9 @@
             'counting': { likes: 0, dislikes: 0 },
             'prepositions': { likes: 0, dislikes: 0 },
             'word_builder': { likes: 0, dislikes: 0 },
-            'patterns': { likes: 0, dislikes: 0 }
+            'patterns': { likes: 0, dislikes: 0 },
+            'math_cp': { likes: 0, dislikes: 0 },
+            'calm': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -937,7 +944,9 @@
             'counting': '.activity-card.counting',
             'prepositions': '.activity-card.prepositions',
             'word_builder': '.activity-card.word_builder',
-            'patterns': '.activity-card.patterns'
+            'patterns': '.activity-card.patterns',
+            'math_cp': '.activity-card.math_cp',
+            'calm': '.activity-card.calm'
         };
 
         Object.keys(idMap).forEach(actId => {

@@ -235,21 +235,21 @@ assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent
 assert(indexHtml.includes('apple-touch-icon.png'), 'index.html must include apple-touch-icon.png');
 assert(indexHtml.includes('manifest.json'), 'index.html must include manifest.json');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
-assert(likeBadgeCount === 29, `All 29 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+assert(likeBadgeCount === 31, `All 31 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
-assert(bookmarkBtnCount === 29, `All 29 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(bookmarkBtnCount === 31, `All 31 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
 assert(indexHtml.includes('id="open-about-btn"'), 'index.html must include open-about-btn');
 assert(indexHtml.includes('id="alp-about-modal"'), 'index.html must include alp-about-modal');
-console.log('✓ Parent Hub, Our Story modal, PWA icons, 29 like badges, and 29 bookmark star buttons verified in index.html');
+console.log('✓ Parent Hub, Our Story modal, PWA icons, 31 like badges, and 31 bookmark star buttons verified in index.html');
 
-// Verify In-Activity Feedback Widget embedded across all 29 activity pages
+// Verify In-Activity Feedback Widget embedded across all 31 activity pages
 const activityPages = [
     'game.html', 'colors.html', 'pattern.html', 'letters.html',
     'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
     'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
     'sounds.html', 'circuit.html', 'causality.html', 'builder.html', 'basket.html',
-    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html', 'language.html', 'syllables.html', 'emotions.html', 'counting.html', 'prepositions.html', 'word-builder.html', 'patterns.html'
+    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html', 'language.html', 'syllables.html', 'emotions.html', 'counting.html', 'prepositions.html', 'word-builder.html', 'patterns.html', 'math-cp.html', 'calm.html'
 ];
 activityPages.forEach(p => {
     const html = fs.readFileSync(`public/${p}`, 'utf8');
@@ -259,7 +259,7 @@ activityPages.forEach(p => {
     assert(html.includes('apple-touch-icon.png'), `${p} must include apple-touch-icon.png`);
     assert(html.includes('manifest.json'), `${p} must include manifest.json`);
 });
-console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 29 activity pages');
+console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 31 activity pages');
 
 // Verify Body Parts Dataset & Engine
 const bodyJson = JSON.parse(fs.readFileSync('public/data/body.json', 'utf8'));
@@ -334,6 +334,22 @@ assert(patHtml.includes('id="play-rhythm-btn"'), 'patterns.html must include pla
 const patEngineJs = fs.readFileSync('public/js/patterns-engine.js', 'utf8');
 assert(patEngineJs.includes('PATTERN_SETS'), 'patterns-engine.js must include PATTERN_SETS');
 console.log('✓ Visual Patterns HTML and engine verified');
+
+// Verify Ten-Frame Math CP HTML & Engine
+const mcpHtml = fs.readFileSync('public/math-cp.html', 'utf8');
+assert(mcpHtml.includes('id="ten-frame-grid"'), 'math-cp.html must include ten-frame-grid');
+assert(mcpHtml.includes('id="equation-banner"'), 'math-cp.html must include equation-banner');
+const mcpEngineJs = fs.readFileSync('public/js/math-cp-engine.js', 'utf8');
+assert(mcpEngineJs.includes('NUM_WORDS_FR'), 'math-cp-engine.js must include NUM_WORDS_FR');
+console.log('✓ Ten-Frame Math CP HTML and engine verified');
+
+// Verify Calm Corner HTML & Engine
+const calmHtml = fs.readFileSync('public/calm.html', 'utf8');
+assert(calmHtml.includes('id="calm-workspace"'), 'calm.html must include calm-workspace');
+assert(calmHtml.includes('tool-breath-btn'), 'calm.html must include tool-breath-btn');
+const calmEngineJs = fs.readFileSync('public/js/calm-engine.js', 'utf8');
+assert(calmEngineJs.includes('POPIT_ROW_COLORS'), 'calm-engine.js must include POPIT_ROW_COLORS');
+console.log('✓ Calm Corner HTML and engine verified');
 
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');
@@ -431,7 +447,7 @@ console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, C
     assert(indexHtml.includes('id="empty-search-hint"'), 'index.html must include empty-search-hint');
 
     const ageBadgesCount = (indexHtml.match(/class="activity-age-badge"/g) || []).length;
-    assert.strictEqual(ageBadgesCount, 29, `All 29 cards must have an activity-age-badge, found ${ageBadgesCount}`);
+    assert.strictEqual(ageBadgesCount, 31, `All 31 cards must have an activity-age-badge, found ${ageBadgesCount}`);
 
     const cardCategories = (indexHtml.match(/data-category="[^"]+"/g) || []).map(m => m.split('"')[1]);
     const validDomains = ['language', 'logic', 'math', 'sensory', 'all', 'fav'];

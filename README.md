@@ -592,6 +592,31 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 30: 🔟 Ten-Frame Math & First Additions ("Boîtes de 10 — Maths CP")
+* **Route:** `/math-cp.html`
+* **Target Skills:** Ten-frame spatial representation (*boîte de 10*), number bonds to 5 & 10 (*compléments à 5 et à 10*), early addition, visual-tactile token counting.
+* **Structured 2×5 Ten-Frame Grid:** Arranged in clean 5-token rows mirroring French CP pedagogy, with dual-color tokens (blue and orange).
+* **Interactive Touch-to-Count:** Tapping any token inside the grid announces its count aloud with a gentle musical pitch.
+* **3 Progressive Learning Modes:**
+  1. 🖐️ *Compléments à 5*: Given a partial frame of blue tokens, find how many are missing to make 5.
+  2. 🔟 *Compléments à 10*: Expand to the full 10-frame to find complements to 10.
+  3. ➕ *Premières additions*: Combine two colored groups of tokens (e.g. 3 blue + 2 orange = 5) and count the total sum.
+* **Controller Support:** Native keyboard/gamepad navigation (`1`–`3` keys, Arrow keys, or D-Pad navigation on `.math-choice-btn`).
+
+---
+
+### Activity 31: 🌿 Calm-Down & Sensory Regulation Corner ("Coin Calme & Sensoriel")
+* **Route:** `/calm.html`
+* **Target Skills:** Emotional self-regulation, deep breathing pacing, sensory decompression, auditory calming.
+* **Zero-Pressure Sensory Sanctuary:** No timers, no scores, no correct/wrong answers.
+* **3 Soothing Sensory Tools:**
+  1. 🫧 *Bulle de Respiration*: 4-second inhale, 1-second gentle hold, 4-second exhale breathing flower with harmonic tone swell.
+  2. 🔘 *Pop-It Sensoriel*: 5×4 pastel silicone bubbles with soft water-drop pop sounds and a flip reset button.
+  3. 🌧️ *Sons Apaisants*: Continuous soft rain, ocean waves with gentle swell LFO, and randomized wind chimes with animated SVG particle effects.
+* **Controller Support:** Native keyboard/gamepad navigation (Arrow keys or D-Pad navigation on `.ambient-btn`, `.calm-action-btn`, and `.pop-bubble`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.
@@ -608,11 +633,11 @@ Every activity includes an unobtrusive feedback widget docked at the top right:
 - **Strictly 1 Vote per User per Activity:** Reactions are idempotent. Tapping 👍 records 1 like for the current identified child profile and illuminates the button in soft green (`.active`). Tapping it again toggles the vote off. Tapping 👎 switches the vote from like to unlike. A user cannot artificially inflate counters by repeatedly tapping.
 - **YouTube-Style Like Counters on Hub (`/index.html`):** Each activity card on the home dashboard features an aggregate like counter badge (`👍 14`) docked at the bottom right, celebrating the family's most appreciated games.
 - **Instant Live Search on Hub (`/index.html`):** A real-time, accent-insensitive search bar filtering cards across bilingual titles, descriptions, category labels, and rich keywords with an instant clear button (`✕`) and matching count chip.
-- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 29 activities:
+- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 31 activities:
   1. 🗣️ *Langage & Vocabulaire* (9 activities: *Find & Match, Letters Puzzle, Spelling, Body Parts, Sounds, Opposites, Language Mini-Film, Musical Syllables, Word Assembly*)
   2. 🧩 *Logique & Tri* (5 activities: *Pattern, Classification, Sequence, Basket Shape, Visual Patterns & Sequences*)
-  3. 🔢 *Maths & Espace* (6 activities: *Counting & Math, Spatial Pre-coding, Ball Labyrinth, Magic Lines, Counting & Quantities, Spatial Prepositions*)
-  4. 🎨 *Éveil & Sons* (9 activities: *Colors, Match & Colour, Music Partition, Cause & Effect, Ball Circuit, Building Logic, Hide & Seek, Time & Calendar, Emotions & Situations*)
+  3. 🔢 *Maths & Espace* (7 activities: *Counting & Math, Spatial Pre-coding, Ball Labyrinth, Magic Lines, Counting & Quantities, Spatial Prepositions, Ten-Frame Math CP*)
+  4. 🎨 *Éveil & Sons* (10 activities: *Colors, Match & Colour, Music Partition, Cause & Effect, Ball Circuit, Building Logic, Hide & Seek, Time & Calendar, Emotions & Situations, Calm Corner*)
   5. ⭐ *Mes Favoris* (dynamically updated bookmark shelf)
 - **Age Badging & Future Expansion (3 to 6 Years):** Every activity card features a distinct `🎂 3–6 ans` age badge, complemented by age filter chips (`Tous les âges`, `🎂 3–6 ans`, and coming-soon placeholder `🎒 6–10 ans`) for future catalog expansion.
 - **Live Reaction Counters:** Shows deduplicated positive and negative feedback counts on both the activity widget and parent dashboard.

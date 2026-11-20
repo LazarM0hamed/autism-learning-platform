@@ -222,7 +222,13 @@ if (!inputManagerSrc.includes('isWordBuilderPage') || !inputManagerSrc.includes(
 if (!inputManagerSrc.includes('isPatternsPage') || !inputManagerSrc.includes('pat-choice-card')) {
     throw new Error('input-manager.js must support patterns.html (.pat-choice-card)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn), Prepositions (.prep-card), Word Assembly (.wb-syl-card) & Visual Patterns (.pat-choice-card)');
+if (!inputManagerSrc.includes('isMathCpPage') || !inputManagerSrc.includes('math-choice-btn')) {
+    throw new Error('input-manager.js must support math-cp.html (.math-choice-btn)');
+}
+if (!inputManagerSrc.includes('isCalmPage') || !inputManagerSrc.includes('calm-action-btn')) {
+    throw new Error('input-manager.js must support calm.html (.calm-action-btn, .ambient-btn)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn), Prepositions (.prep-card), Word Assembly (.wb-syl-card), Visual Patterns (.pat-choice-card), Math CP (.math-choice-btn) & Calm Corner (.calm-action-btn, .ambient-btn)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');
@@ -475,5 +481,71 @@ if (clickedPatCard !== 1) {
     throw new Error(`Enter key should have triggered card 1 click in Patterns, got ${clickedPatCard}`);
 }
 console.log('✓ Arrow key & D-Pad navigation verified for Visual Patterns cards (.pat-choice-card)');
+
+// Test Arrow button & D-Pad navigation for Math CP (.math-choice-btn)
+const mockMathCpGrid = new MockElement('section', 'math-choices', 'math-choices-row');
+const mockMathBtns = [
+    new MockElement('button', 'math-1', 'math-choice-btn'),
+    new MockElement('button', 'math-2', 'math-choice-btn')
+];
+let clickedMathBtn = null;
+mockMathBtns.forEach((c, idx) => {
+    c.onclick = () => { clickedMathBtn = idx; };
+    mockMathCpGrid.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.math-choice-btn')) return mockMathBtns;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/math-cp.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Math CP initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 1) {
+    throw new Error(`Math CP ArrowRight should move focus to card 1, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.validate();
+if (clickedMathBtn !== 1) {
+    throw new Error(`Enter key should have triggered card 1 click in Math CP, got ${clickedMathBtn}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Math CP buttons (.math-choice-btn)');
+
+// Test Arrow button & D-Pad navigation for Calm Corner (.ambient-btn)
+const mockCalmWs = new MockElement('section', 'calm-workspace', 'calm-workspace');
+const mockCalmBtns = [
+    new MockElement('button', 'amb-1', 'ambient-btn'),
+    new MockElement('button', 'amb-2', 'ambient-btn')
+];
+let clickedCalmBtn = null;
+mockCalmBtns.forEach((c, idx) => {
+    c.onclick = () => { clickedCalmBtn = idx; };
+    mockCalmWs.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.ambient-btn')) return mockCalmBtns;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/calm.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Calm initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 1) {
+    throw new Error(`Calm ArrowRight should move focus to button 1, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.validate();
+if (clickedCalmBtn !== 1) {
+    throw new Error(`Enter key should have triggered button 1 click in Calm Corner, got ${clickedCalmBtn}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Calm Corner buttons (.ambient-btn)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');

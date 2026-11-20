@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Autism Platform">
+    <meta name="theme-color" content="#F8FAFC">
+    <title>Boîtes de 10 & Additions - Learning Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .math-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+            padding-bottom: 24px;
+        }
+
+        /* Visual Equation Pill */
+        .equation-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #FFFFFF;
+            border: 3px solid #93C5FD;
+            border-radius: 22px;
+            padding: 10px 28px;
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.12);
+            font-size: clamp(1.8rem, 4.5vw, 2.5rem);
+            font-weight: 800;
+            color: #1E293B;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        .eq-num-blue   { color: #2563EB; }
+        .eq-num-orange { color: #EA580C; }
+        .eq-num-green  { color: #16A34A; }
+        .eq-mystery {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 48px;
+            height: 48px;
+            padding: 0 10px;
+            border-radius: 14px;
+            background: #EFF6FF;
+            border: 3px dashed #3B82F6;
+            color: #2563EB;
+        }
+        .eq-mystery.solved {
+            background: #ECFDF5;
+            border: 3px solid #10B981;
+            color: #047857;
+        }
+
+        /* Ten-Frame Board ("Boîte de 10") */
+        .ten-frame-box {
+            background: #F3E5D8;
+            border: 4px solid #DDB892;
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 10px 28px rgba(127, 85, 57, 0.14);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            box-sizing: border-box;
+            transition: max-width 0.25s ease;
+        }
+        .ten-frame-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 68px);
+            gap: 10px;
+            background: #E6CCB2;
+            padding: 10px;
+            border-radius: 18px;
+        }
+        .tf-cell {
+            width: 68px;
+            height: 68px;
+            background: #FFFDF9;
+            border-radius: 14px;
+            border: 2px dashed #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.15s ease, border-color 0.2s ease;
+            box-sizing: border-box;
+        }
+        .tf-cell.has-token {
+            border-style: solid;
+            border-color: #E2E8F0;
+        }
+        .tf-cell:active {
+            transform: scale(0.93);
+        }
+        .token-marble {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(0, 0, 0, 0.2), inset 4px 4px 8px rgba(255, 255, 255, 0.45);
+            animation: popMarble 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .token-blue   { background: #2563EB; }
+        .token-orange { background: #EA580C; }
+
+        @keyframes popMarble {
+            from { transform: scale(0.3); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        .tf-hint {
+            font-size: 0.94rem;
+            font-weight: 800;
+            color: #78350F;
+            text-align: center;
+        }
+
+        /* Number Answer Cards */
+        .math-choices-row {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 720px;
+            width: 94%;
+            margin-top: 4px;
+        }
+        .math-choice-btn {
+            width: 135px;
+            height: 98px;
+            background: #FFFFFF;
+            border: 4px solid #E2E8F0;
+            border-radius: 22px;
+            font-size: 2.7rem;
+            font-weight: 800;
+            color: #2563EB;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+            transition: transform 0.13s ease, opacity 0.25s ease, border-color 0.2s ease, background-color 0.2s ease;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        .math-choice-btn:active {
+            transform: scale(0.94);
+        }
+        .math-choice-btn.soft-dim {
+            opacity: 0.35;
+            transform: scale(0.94);
+        }
+        .math-choice-btn.winner {
+            border-color: #10B981 !important;
+            background: #ECFDF5 !important;
+            color: #047857 !important;
+            transform: scale(1.07);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+        }
+
+        /* Responsive Visual Sizing */
+        body[data-size="normal"] .ten-frame-grid { grid-template-columns: repeat(5, 68px); gap: 10px; }
+        body[data-size="large"] .ten-frame-grid { grid-template-columns: repeat(5, 84px); gap: 12px; }
+        body[data-size="xlarge"] .ten-frame-grid { grid-template-columns: repeat(5, 102px); gap: 14px; }
+
+        body[data-size="normal"] .tf-cell { width: 68px; height: 68px; }
+        body[data-size="large"] .tf-cell { width: 84px; height: 84px; }
+        body[data-size="xlarge"] .tf-cell { width: 102px; height: 102px; }
+
+        body[data-size="normal"] .token-marble { width: 48px; height: 48px; font-size: 1.15rem; }
+        body[data-size="large"] .token-marble { width: 60px; height: 60px; font-size: 1.45rem; }
+        body[data-size="xlarge"] .token-marble { width: 74px; height: 74px; font-size: 1.8rem; }
+
+        body[data-size="normal"] .math-choice-btn { width: 135px; height: 98px; font-size: 2.7rem; }
+        body[data-size="large"] .math-choice-btn { width: 165px; height: 118px; font-size: 3.4rem; }
+        body[data-size="xlarge"] .math-choice-btn { width: 200px; height: 140px; font-size: 4.2rem; }
+
+        @media (max-width: 520px) {
+            .ten-frame-grid { grid-template-columns: repeat(5, 52px); gap: 7px; }
+            .tf-cell { width: 52px; height: 52px; }
+            .token-marble { width: 38px; height: 38px; font-size: 0.95rem; }
+            .math-choice-btn { width: 105px; height: 82px; font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="game-header">
+        <div class="header-left">
+            <a href="index.html" class="header-logo-link" title="Autism Learning Platform">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" class="header-infinity-logo" width="42" height="42">
+            </a>
+            <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        </div>
+        <h2 id="activity-title" class="category-badge">🔟 Boîtes de 10 (Maths CP)</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">0</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="math-stage">
+        <!-- 3 CP Math Progression Modes -->
+        <nav class="routine-pills" aria-label="Select math mode">
+            <button class="routine-pill active" id="mode-comp5-btn">🖐️ Compléments à 5</button>
+            <button class="routine-pill" id="mode-comp10-btn">🔟 Compléments à 10</button>
+            <button class="routine-pill" id="mode-add-btn">➕ Premières additions</button>
+        </nav>
+
+        <!-- Prompt Banner -->
+        <div class="prompt-container" style="margin: 2px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.2rem, 3.2vw, 1.85rem); margin: 0;">Combien manque-t-il pour faire 5 ?</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat voice prompt" aria-label="Repeat voice prompt">🗣️</button>
+        </div>
+
+        <!-- Visual Equation Strip -->
+        <div class="equation-banner" id="equation-banner"></div>
+
+        <!-- Boîte de 5 / Boîte de 10 Grid -->
+        <div class="ten-frame-box">
+            <div class="ten-frame-grid" id="ten-frame-grid"></div>
+            <div class="tf-hint" id="tf-hint">👆 Touche les jetons pour compter</div>
+        </div>
+
+        <!-- Number Answer Cards -->
+        <section class="math-choices-row" id="math-choices" aria-label="Number choices"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/math-cp-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

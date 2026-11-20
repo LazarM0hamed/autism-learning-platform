@@ -78,6 +78,7 @@
         if (path.includes('pattern')) return 'pattern';
         if (path.includes('spelling')) return 'spelling';
         if (path.includes('sequence')) return 'sequence';
+        if (path.includes('math-cp') || path.includes('math_cp')) return 'math_cp';
         if (path.includes('math')) return 'math';
         if (path.includes('spatial')) return 'spatial';
         if (path.includes('colors')) return 'colors';
@@ -95,6 +96,7 @@
         if (path.includes('classification')) return 'classification';
         if (path.includes('hide-and-seek') || path.includes('hide_and_seek')) return 'hide_and_seek';
         if (path.includes('lines')) return 'lines';
+        if (path.includes('calm')) return 'calm';
         return null;
     }
 
@@ -176,6 +178,14 @@
 
     function isPatternsPage() {
         return window.location.pathname.toLowerCase().includes('patterns');
+    }
+
+    function isMathCpPage() {
+        return window.location.pathname.toLowerCase().includes('math-cp');
+    }
+
+    function isCalmPage() {
+        return window.location.pathname.toLowerCase().includes('calm');
     }
 
     // Size Profile Management
@@ -341,6 +351,15 @@
         } else if (isPatternsPage()) {
             // In visual patterns & sequences, wagon symbol choice cards
             items = Array.from(document.querySelectorAll('#pattern-choices .pat-choice-card, .pat-choice-card'));
+        } else if (isMathCpPage()) {
+            // In math cp ten-frame, number choice cards or ten-frame cells
+            items = Array.from(document.querySelectorAll('#math-choices .math-choice-btn, .math-choice-btn'));
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('#ten-frame-grid .tf-cell'));
+            }
+        } else if (isCalmPage()) {
+            // In calm corner, action toggle buttons, pop-it bubbles or ambient sound buttons
+            items = Array.from(document.querySelectorAll('#calm-workspace .calm-action-btn, #calm-workspace .ambient-btn, #calm-workspace .pop-bubble, .calm-action-btn, .ambient-btn'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -873,7 +892,7 @@
     function setupDomObserver() {
         if (observer) observer.disconnect();
 
-        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card, .num-choice-card, .add-item-btn, .clear-basket-btn, .countable-item, .prep-card, .char-btn, .wb-syl-card, .pat-choice-card';
+        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card, .num-choice-card, .add-item-btn, .clear-basket-btn, .countable-item, .prep-card, .char-btn, .wb-syl-card, .pat-choice-card, .math-choice-btn, .calm-action-btn, .ambient-btn, .pop-bubble';
 
         observer = new MutationObserver((mutations) => {
             let shouldRefresh = false;
@@ -887,7 +906,7 @@
                     // Direct container match
                     const targetId = m.target?.id || '';
                     const targetClass = m.target?.className || '';
-                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetId === 'interaction-area' || targetId === 'counting-board' || targetId === 'wb-choices' || targetId === 'pattern-choices' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid') || targetClass.includes('number-choices-grid') || targetClass.includes('basket-controls-row') || targetClass.includes('prep-choices-grid') || targetClass.includes('wb-choices-row') || targetClass.includes('pattern-choices-row')) {
+                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetId === 'interaction-area' || targetId === 'counting-board' || targetId === 'wb-choices' || targetId === 'pattern-choices' || targetId === 'math-choices' || targetId === 'ten-frame-grid' || targetId === 'calm-workspace' || targetId === 'popit-grid' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid') || targetClass.includes('number-choices-grid') || targetClass.includes('basket-controls-row') || targetClass.includes('prep-choices-grid') || targetClass.includes('wb-choices-row') || targetClass.includes('pattern-choices-row') || targetClass.includes('math-choices-row') || targetClass.includes('ambient-buttons-row')) {
                         shouldRefresh = true;
                         break;
                     }
