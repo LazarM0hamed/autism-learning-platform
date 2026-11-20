@@ -75,6 +75,7 @@
         if (path.includes('calm')) return 'calm';
         if (path.includes('intruder')) return 'intruder';
         if (path.includes('phonics-ear') || path.includes('phonics_ear')) return 'phonics_ear';
+        if (path.includes('sentences')) return 'sentences';
         return null;
     }
 
@@ -442,7 +443,8 @@
             'math_cp': { likes: 0, dislikes: 0 },
             'calm': { likes: 0, dislikes: 0 },
             'intruder': { likes: 0, dislikes: 0 },
-            'phonics_ear': { likes: 0, dislikes: 0 }
+            'phonics_ear': { likes: 0, dislikes: 0 },
+            'sentences': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -801,7 +803,8 @@
             'math_cp': '.activity-card.math_cp',
             'calm': '.activity-card.calm',
             'intruder': '.activity-card.intruder',
-            'phonics_ear': '.activity-card.phonics_ear'
+            'phonics_ear': '.activity-card.phonics_ear',
+            'sentences': '.activity-card.sentences'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -865,7 +868,8 @@
             'math_cp': { likes: 0, dislikes: 0 },
             'calm': { likes: 0, dislikes: 0 },
             'intruder': { likes: 0, dislikes: 0 },
-            'phonics_ear': { likes: 0, dislikes: 0 }
+            'phonics_ear': { likes: 0, dislikes: 0 },
+            'sentences': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -956,7 +960,8 @@
             'math_cp': '.activity-card.math_cp',
             'calm': '.activity-card.calm',
             'intruder': '.activity-card.intruder',
-            'phonics_ear': '.activity-card.phonics_ear'
+            'phonics_ear': '.activity-card.phonics_ear',
+            'sentences': '.activity-card.sentences'
         };
 
         Object.keys(idMap).forEach(actId => {
@@ -1207,6 +1212,12 @@
             const isVisible = matchesFav && matchesCat && matchesAge && matchesSearch;
             card.style.display = isVisible ? 'flex' : 'none';
             if (isVisible) visibleCount++;
+        });
+
+        // Hide or show category sections based on whether they contain visible cards
+        document.querySelectorAll('.hub-category-section').forEach(section => {
+            const hasVisible = Array.from(section.querySelectorAll('.activity-card')).some(c => c.style.display !== 'none');
+            section.style.display = hasVisible ? 'block' : 'none';
         });
 
         // Results counter chip

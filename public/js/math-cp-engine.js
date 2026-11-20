@@ -310,7 +310,7 @@
                 if (homeBtn) homeBtn.innerText = lang === 'fr' ? '⬅️ Accueil' : '⬅️ Home';
 
                 const title = document.getElementById('activity-title');
-                if (title) title.innerText = lang === 'fr' ? '🔟 Boîtes de 10 (Maths CP)' : '🔟 Ten-Frame Math';
+                if (title) title.innerText = lang === 'fr' ? '🔟 Boîtes de 10 & Additions' : '🔟 Ten-Frame Math';
 
                 if (comp5Btn) comp5Btn.innerText = lang === 'fr' ? '🖐️ Compléments à 5' : '🖐️ Make 5';
                 if (comp10Btn) comp10Btn.innerText = lang === 'fr' ? '🔟 Compléments à 10' : '🔟 Make 10';

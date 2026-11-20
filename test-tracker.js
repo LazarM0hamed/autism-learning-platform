@@ -235,21 +235,21 @@ assert(indexHtml.includes('href="parent.html"'), 'index.html must include parent
 assert(indexHtml.includes('apple-touch-icon.png'), 'index.html must include apple-touch-icon.png');
 assert(indexHtml.includes('manifest.json'), 'index.html must include manifest.json');
 const likeBadgeCount = (indexHtml.match(/class="activity-likes-badge"/g) || []).length;
-assert(likeBadgeCount === 33, `All 33 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
+assert(likeBadgeCount === 34, `All 34 cards must have an activity-likes-badge, found ${likeBadgeCount}`);
 const bookmarkBtnCount = (indexHtml.match(/class="activity-bookmark-btn"/g) || []).length;
-assert(bookmarkBtnCount === 33, `All 33 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
+assert(bookmarkBtnCount === 34, `All 34 cards must have an activity-bookmark-btn, found ${bookmarkBtnCount}`);
 assert(indexHtml.includes('id="filter-all-btn"') && indexHtml.includes('id="filter-fav-btn"'), 'index.html must include filter-all-btn and filter-fav-btn');
 assert(indexHtml.includes('id="open-about-btn"'), 'index.html must include open-about-btn');
 assert(indexHtml.includes('id="alp-about-modal"'), 'index.html must include alp-about-modal');
-console.log('✓ Parent Hub, Our Story modal, PWA icons, 33 like badges, and 33 bookmark star buttons verified in index.html');
+console.log('✓ Parent Hub, Our Story modal, PWA icons, 34 like badges, and 34 bookmark star buttons verified in index.html');
 
-// Verify In-Activity Feedback Widget embedded across all 33 activity pages
+// Verify In-Activity Feedback Widget embedded across all 34 activity pages
 const activityPages = [
     'game.html', 'colors.html', 'pattern.html', 'letters.html',
     'coloring.html', 'spelling.html', 'spatial.html', 'math.html',
     'comparisons.html', 'time.html', 'sequence.html', 'labyrinth.html',
     'sounds.html', 'circuit.html', 'causality.html', 'builder.html', 'basket.html',
-    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html', 'language.html', 'syllables.html', 'emotions.html', 'counting.html', 'prepositions.html', 'word-builder.html', 'patterns.html', 'math-cp.html', 'calm.html', 'intruder.html', 'phonics-ear.html'
+    'music.html', 'classification.html', 'hide-and-seek.html', 'lines.html', 'body.html', 'language.html', 'syllables.html', 'emotions.html', 'counting.html', 'prepositions.html', 'word-builder.html', 'patterns.html', 'math-cp.html', 'calm.html', 'intruder.html', 'phonics-ear.html', 'sentences.html'
 ];
 activityPages.forEach(p => {
     const html = fs.readFileSync(`public/${p}`, 'utf8');
@@ -259,7 +259,7 @@ activityPages.forEach(p => {
     assert(html.includes('apple-touch-icon.png'), `${p} must include apple-touch-icon.png`);
     assert(html.includes('manifest.json'), `${p} must include manifest.json`);
 });
-console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 33 activity pages');
+console.log('✓ In-activity feedback widget, favicon, Infinity Harmony logo, and PWA meta tags verified across all 34 activity pages');
 
 // Verify Body Parts Dataset & Engine
 const bodyJson = JSON.parse(fs.readFileSync('public/data/body.json', 'utf8'));
@@ -365,7 +365,15 @@ assert(earHtml.includes('id="phoneme-hero-btn"'), 'phonics-ear.html must include
 assert(earHtml.includes('id="phonics-board"'), 'phonics-ear.html must include phonics-board');
 const earEngineJs = fs.readFileSync('public/js/phonics-ear-engine.js', 'utf8');
 assert(earEngineJs.includes('PHONEME_BANK') && earEngineJs.includes('formatHighlightedWord'), 'phonics-ear-engine.js must include PHONEME_BANK and formatHighlightedWord');
-console.log("✓ Phonemic Ear CP (J'entends le son) HTML and engine verified");
+console.log("✓ Phonemic Ear (J'entends le son) HTML and engine verified");
+
+// Verify Sentence Builder (Construire une phrase) HTML & Engine
+const sentHtml = fs.readFileSync('public/sentences.html', 'utf8');
+assert(sentHtml.includes('id="sentence-svg"'), 'sentences.html must include sentence-svg');
+assert(sentHtml.includes('id="grammar-track"'), 'sentences.html must include grammar-track');
+const sentEngineJs = fs.readFileSync('public/js/sentences-engine.js', 'utf8');
+assert(sentEngineJs.includes('SUBJECTS') && sentEngineJs.includes('GUIDED_SENTENCES'), 'sentences-engine.js must include SUBJECTS and GUIDED_SENTENCES');
+console.log('✓ Sentence Builder (Construire une phrase) HTML and engine verified');
 
 // Verify Sounds Mix All Mode & Causality Mix All / Fireworks
 const soundsEngineJs = fs.readFileSync('public/js/sounds-engine.js', 'utf8');
@@ -466,12 +474,25 @@ console.log('✓ Colour Matching, Comparison Concepts, Ball Labyrinth, Sounds, C
     assert(indexHtml.includes('id="empty-search-hint"'), 'index.html must include empty-search-hint');
 
     const ageBadgesCount = (indexHtml.match(/class="activity-age-badge"/g) || []).length;
-    assert.strictEqual(ageBadgesCount, 33, `All 33 cards must have an activity-age-badge, found ${ageBadgesCount}`);
+    assert.strictEqual(ageBadgesCount, 34, `All 34 cards must have an activity-age-badge, found ${ageBadgesCount}`);
 
     const age36Cards = (indexHtml.match(/class="activity-card[^>]*data-age="3-6"/g) || []).length;
     assert.strictEqual(age36Cards, 31, `31 cards must have data-age="3-6", found ${age36Cards}`);
     const age610Cards = (indexHtml.match(/class="activity-card[^>]*data-age="6-10"/g) || []).length;
-    assert.strictEqual(age610Cards, 2, `2 cards must have data-age="6-10", found ${age610Cards}`);
+    assert.strictEqual(age610Cards, 3, `3 cards must have data-age="6-10", found ${age610Cards}`);
+
+    const cpInTitles = (indexHtml.match(/class="activity-card-title"[^>]*>[^<]*\(CP\)/gi) || []).length;
+    assert.strictEqual(cpInTitles, 0, `No activity card title should contain '(CP)', found ${cpInTitles}`);
+    const cpInBadges = (indexHtml.match(/class="activity-age-badge"[^>]*>[^<]*\(CP\)/gi) || []).length;
+    assert.strictEqual(cpInBadges, 0, `No activity age badge should contain '(CP)', found ${cpInBadges}`);
+    console.log('✓ Verified zero pressure: all (CP) references removed from Hub titles and badges');
+
+    assert(indexHtml.includes('data-hub-category="language"'), 'index.html must include Langage category section');
+    assert(indexHtml.includes('data-hub-category="logic"'), 'index.html must include Logique category section');
+    assert(indexHtml.includes('data-hub-category="math"'), 'index.html must include Maths category section');
+    assert(indexHtml.includes('data-hub-category="sensory"'), 'index.html must include Éveil category section');
+    assert(indexHtml.includes('id="sec-lang-title"') && indexHtml.includes('id="sec-sensory-title"'), 'index.html must include category section titles');
+    console.log('✓ 4 categorized Hub domain sections (Langage, Logique, Maths, Éveil) verified in index.html');
 
     const cardCategories = (indexHtml.match(/data-category="[^"]+"/g) || []).map(m => m.split('"')[1]);
     const validDomains = ['language', 'logic', 'math', 'sensory', 'all', 'fav'];

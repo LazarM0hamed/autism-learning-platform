@@ -617,6 +617,38 @@ main {
 }
 
 /* Activity Mode Hub on Dashboard */
+.hub-category-section {
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 28px;
+}
+
+.hub-category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 28px 0 16px 0;
+    border-bottom: 2px solid #E2E8F0;
+    padding-bottom: 8px;
+}
+
+.hub-category-header .hub-section-title {
+    margin: 0;
+    font-size: 1.35rem;
+    color: var(--text-muted);
+    font-weight: 800;
+}
+
+.hub-category-count {
+    background: #E2E8F0;
+    color: #475569;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 12px;
+}
+
 .hub-section-title {
     font-size: 1.35rem;
     color: var(--text-muted);
@@ -1167,7 +1199,8 @@ main {
 .ambient-btn.is-controller-focused,
 .intruder-card.is-controller-focused,
 .word-option-card.is-controller-focused,
-.pos-wagon-btn.is-controller-focused {
+.pos-wagon-btn.is-controller-focused,
+.grammar-card.is-controller-focused {
     outline: none !important;
     border-color: #2563EB !important;
     box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.55), 0 12px 28px rgba(37, 99, 235, 0.22) !important;

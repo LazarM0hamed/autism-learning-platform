@@ -585,7 +585,7 @@
                 if (homeBtn) homeBtn.innerText = lang === 'fr' ? '⬅️ Accueil' : '⬅️ Home';
 
                 const title = document.getElementById('activity-title');
-                if (title) title.innerText = lang === 'fr' ? "👂 J'entends le son (CP)" : '👂 Phonemic Ear (CP)';
+                if (title) title.innerText = lang === 'fr' ? "👂 J'entends le son" : '👂 Phonemic Ear';
 
                 if (mYesnoBtn) mYesnoBtn.innerText = lang === 'fr' ? '✅ Oui ou Non ?' : '✅ Yes or No?';
                 if (mFindwordBtn) mFindwordBtn.innerText = lang === 'fr' ? '🔍 Trouve le mot' : '🔍 Find the Word';
