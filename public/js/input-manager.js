@@ -151,6 +151,10 @@
         return window.location.pathname.toLowerCase().includes('language');
     }
 
+    function isSyllablesPage() {
+        return window.location.pathname.toLowerCase().includes('syllables');
+    }
+
     // Size Profile Management
     function applySizeProfile(size) {
         sizeProfile = size;
@@ -287,6 +291,12 @@
         } else if (isLanguagePage()) {
             // In language mini-film, communication phrase and object cards
             items = Array.from(document.querySelectorAll('#comm-cards .comm-card, .comm-card'));
+        } else if (isSyllablesPage()) {
+            // In musical syllables, vowel keys, challenge choice cards or consonants
+            items = Array.from(document.querySelectorAll('#controls-area .vowel-key-btn, #controls-area .syl-choice-card, .vowel-key-btn, .syl-choice-card'));
+            if (!items.length) {
+                items = Array.from(document.querySelectorAll('#consonant-bar .cons-btn, .cons-btn'));
+            }
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));

@@ -203,7 +203,10 @@ if (!inputManagerSrc.includes('isBodyPage') || !inputManagerSrc.includes('body-c
 if (!inputManagerSrc.includes('isLanguagePage') || !inputManagerSrc.includes('comm-card')) {
     throw new Error('input-manager.js must support language.html (.comm-card)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn) & Language Mini-Film (.comm-card)');
+if (!inputManagerSrc.includes('isSyllablesPage') || !inputManagerSrc.includes('vowel-key-btn')) {
+    throw new Error('input-manager.js must support syllables.html (.vowel-key-btn, .syl-choice-card)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card) & Musical Syllables (.vowel-key-btn, .syl-choice-card)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');

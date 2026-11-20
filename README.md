@@ -511,6 +511,19 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 24: 🎶 Musical Syllables ("Syllabes & Voyelles")
+* **Route:** `/syllables.html`
+* **Target Skills:** Consonant + vowel phonics blending, auditory vowel anchor associations, musical pitch discrimination, early reading mechanics.
+* **Musical Vowel Anchors (`DO – RÉ – MI – FA – SOL`):** Vowels (`O`, `É`, `I`, `A`, `U`) are color-coded and pitched to notes (`DO`, `RÉ`, `MI`, `FA`, `SOL`).
+* **Magnetic Fusion Machine:** When a consonant (`B`) and a vowel (`O`) combine, animated magnetic blocks slide together, fuse into **`BO`**, speak **`"B... O... BO !"`**, and reveal a concrete anchor word (**`🥣 Bol`**).
+* **3 Progressive Learning Modes:**
+  1. 🎹 *Explorer (Fusion)*: Combine any consonant (`D, B, M, F, L, P, T, R`) with the 5 musical vowels, with instant pitch comparison (`DO ➔ BO`).
+  2. 🎯 *Défi : Voyelles*: Keep the consonant constant and distinguish between vowel transformations (`BO` vs `BA` vs `BI`).
+  3. 🎶 *Défi : Comme la note*: Musical anchor prompt where the reference note is heard first (*"Comme DO... trouve BO !"*).
+* **Controller Support:** Native keyboard/gamepad navigation (`1`–`5` keys or D-Pad navigation on `.vowel-key-btn` and `.syl-choice-card`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.
@@ -527,8 +540,8 @@ Every activity includes an unobtrusive feedback widget docked at the top right:
 - **Strictly 1 Vote per User per Activity:** Reactions are idempotent. Tapping 👍 records 1 like for the current identified child profile and illuminates the button in soft green (`.active`). Tapping it again toggles the vote off. Tapping 👎 switches the vote from like to unlike. A user cannot artificially inflate counters by repeatedly tapping.
 - **YouTube-Style Like Counters on Hub (`/index.html`):** Each activity card on the home dashboard features an aggregate like counter badge (`👍 14`) docked at the bottom right, celebrating the family's most appreciated games.
 - **Instant Live Search on Hub (`/index.html`):** A real-time, accent-insensitive search bar filtering cards across bilingual titles, descriptions, category labels, and rich keywords with an instant clear button (`✕`) and matching count chip.
-- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 23 activities:
-  1. 🗣️ *Langage & Vocabulaire* (7 activities: *Find & Match, Letters Puzzle, Spelling, Body Parts, Sounds, Opposites, Language Mini-Film*)
+- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 24 activities:
+  1. 🗣️ *Langage & Vocabulaire* (8 activities: *Find & Match, Letters Puzzle, Spelling, Body Parts, Sounds, Opposites, Language Mini-Film, Musical Syllables*)
   2. 🧩 *Logique & Tri* (4 activities: *Pattern, Classification, Sequence, Basket Shape*)
   3. 🔢 *Maths & Espace* (4 activities: *Counting & Math, Spatial Pre-coding, Ball Labyrinth, Magic Lines*)
   4. 🎨 *Éveil & Sons* (8 activities: *Colors, Match & Colour, Music Partition, Cause & Effect, Ball Circuit, Building Logic, Hide & Seek, Time & Calendar*)
