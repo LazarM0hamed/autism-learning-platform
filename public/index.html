@@ -63,14 +63,14 @@
                    placeholder="Rechercher une activité..." aria-label="Rechercher une activité" autocomplete="off">
             <button type="button" id="hub-search-clear" class="hub-search-clear-btn" aria-label="Effacer la recherche" style="display: none;">✕</button>
         </div>
-        <span class="hub-results-count" id="hub-results-count">24 activités</span>
+        <span class="hub-results-count" id="hub-results-count">25 activités</span>
     </div>
 
     <!-- Activity Filter Bar (Categories & Bookmarked Favorites) -->
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filtrer par catégorie">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" data-category="all" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">24</span>
+                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">25</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-lang-btn" data-category="language" role="tab" aria-selected="false">
                 🗣️ <span id="lbl-filter-lang">Langage</span> <span class="filter-count">8</span>
@@ -82,7 +82,7 @@
                 🔢 <span id="lbl-filter-math">Maths & Espace</span> <span class="filter-count">4</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-sensory-btn" data-category="sensory" role="tab" aria-selected="false">
-                🎨 <span id="lbl-filter-sensory">Éveil & Sons</span> <span class="filter-count">8</span>
+                🎨 <span id="lbl-filter-sensory">Éveil & Sons</span> <span class="filter-count">9</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-fav-btn" data-category="fav" role="tab" aria-selected="false">
                 ⭐ <span id="lbl-filter-fav">Mes Favoris</span> <span class="filter-count" id="count-fav">0</span>
@@ -94,8 +94,8 @@
     <div class="hub-age-bar">
         <span class="hub-age-label" id="lbl-age-filter">Âge :</span>
         <div class="hub-age-chips" role="radiogroup" aria-label="Filtrer par tranche d'âge">
-            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(24)</span></button>
-            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(24)</span></button>
+            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(25)</span></button>
+            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(25)</span></button>
             <button type="button" class="hub-age-chip disabled" data-age="6-10" id="age-610-btn" title="Nouveaux jeux 6-10 ans à venir !" style="opacity: 0.65; cursor: not-allowed;">🎒 <span id="lbl-age-610">6–10 ans</span> <span class="age-count" style="font-size: 0.75rem; opacity: 0.85;">(Bientôt)</span></button>
         </div>
     </div>
@@ -503,6 +503,22 @@
                 <span class="like-thumb">👍</span> <span class="like-number">0</span>
             </div>
         </a>
+
+        <!-- Activity 25: Emotions & Social Context -->
+        <a href="emotions.html" class="activity-card emotions" data-activity="emotions" data-category="sensory" data-age="3-6" data-keywords="emotions sentiments joie tristesse colere peur surprise fatigue social situations empathy calmer aider faces feelings calm help eveil">
+            <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
+            <button type="button" class="activity-bookmark-btn" data-activity="emotions" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                <span class="bookmark-star">☆</span>
+            </button>
+            <span class="activity-card-icon" aria-hidden="true">😊</span>
+            <div class="activity-card-text">
+                <span class="activity-card-title" id="act-emotions-title">Emotions & Situations</span>
+                <span class="activity-card-desc" id="act-emotions-desc">Recognize feelings, social context & calming responses</span>
+            </div>
+            <div class="activity-likes-badge" data-activity="emotions">
+                <span class="like-thumb">👍</span> <span class="like-number">0</span>
+            </div>
+        </a>
     </main>
 
     <!-- About Us / Our Story Modal -->
@@ -583,6 +599,8 @@
                 actLanguageDesc: "Interactive mini-film to practice greetings, requests & gratitude",
                 actSyllablesTitle: "Musical Syllables",
                 actSyllablesDesc: "Blend consonants and musical vowels with magnetic blocks",
+                actEmotionsTitle: "Emotions & Situations",
+                actEmotionsDesc: "Recognize feelings, social context & calming responses",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 btnAboutText: "Our Story",
@@ -659,6 +677,8 @@
                 actLanguageDesc: "Mini-film interactif pour s'entraîner à saluer, demander et remercier",
                 actSyllablesTitle: "Syllabes & Voyelles",
                 actSyllablesDesc: "Fusionne les consonnes et voyelles musicales en blocs magnétiques",
+                actEmotionsTitle: "Émotions & Situations",
+                actEmotionsDesc: "Reconnaître les émotions, comprendre les situations et aider à se calmer",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 btnAboutText: "Notre Histoire",
@@ -851,6 +871,11 @@
             if (sylTitle) sylTitle.innerText = t.actSyllablesTitle;
             const sylDesc = document.getElementById('act-syllables-desc');
             if (sylDesc) sylDesc.innerText = t.actSyllablesDesc;
+
+            const emotTitle = document.getElementById('act-emotions-title');
+            if (emotTitle) emotTitle.innerText = t.actEmotionsTitle;
+            const emotDesc = document.getElementById('act-emotions-desc');
+            if (emotDesc) emotDesc.innerText = t.actEmotionsDesc;
 
             const btnAbout = document.getElementById('btn-about-text');
             if (btnAbout) btnAbout.innerText = t.btnAboutText;

@@ -524,6 +524,19 @@ The on-screen **Controller HUD Bar** at the bottom of the screen offers real-tim
 
 ---
 
+### Activity 25: 😊 Emotions & Social Context ("Émotions & Situations")
+* **Route:** `/emotions.html`
+* **Target Skills:** Facial emotion recognition, social-causal comprehension, empathy, self-regulation, comforting action strategies.
+* **Expressive SVG Facial Model:** Features animated, warm expressions for 6 core feelings: *Joyeux (Happy)*, *Triste (Sad)*, *En colère (Angry)*, *Peur (Scared)*, *Surpris (Surprised)*, and *Fatigué (Tired)*.
+* **Visual Story Stage:** Illustrated vignettes depicting real-life childhood situations (e.g. *receiving a gift*, *a balloon flying away*, *a block tower falling*, *a thunderstorm in the dark*, *a jack-in-the-box*, *bedtime after a long day*).
+* **3 Progressive Learning Modes:**
+  1. 😊 *Les Visages (Reconnaître)*: Match spoken emotion to expressive animated SVG faces.
+  2. 🎬 *Situations (Comprendre pourquoi)*: Observe the event on stage and identify how the character feels.
+  3. 💛 *Aider & Calmer (Empathie & Régulation)*: Choose the comforting or self-regulating response when the character is upset (e.g., deep slow breathing, offering a teddy bear, sleeping warmly) and watch the character calm down and smile.
+* **Controller Support:** Native keyboard/gamepad navigation (`1`–`3` keys or D-Pad navigation on `.emotion-card`).
+
+---
+
 ## 5. User Feedback, Session Tracking & Child Progress Monitoring
 
 To continuously evaluate activity effectiveness and help parents/therapists understand learning patterns, strengths, and engagement, the platform provides an integrated, privacy-conscious tracking and analytics architecture.
@@ -540,11 +553,11 @@ Every activity includes an unobtrusive feedback widget docked at the top right:
 - **Strictly 1 Vote per User per Activity:** Reactions are idempotent. Tapping 👍 records 1 like for the current identified child profile and illuminates the button in soft green (`.active`). Tapping it again toggles the vote off. Tapping 👎 switches the vote from like to unlike. A user cannot artificially inflate counters by repeatedly tapping.
 - **YouTube-Style Like Counters on Hub (`/index.html`):** Each activity card on the home dashboard features an aggregate like counter badge (`👍 14`) docked at the bottom right, celebrating the family's most appreciated games.
 - **Instant Live Search on Hub (`/index.html`):** A real-time, accent-insensitive search bar filtering cards across bilingual titles, descriptions, category labels, and rich keywords with an instant clear button (`✕`) and matching count chip.
-- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 24 activities:
+- **4 Core Developmental Categories:** Horizontal touch-friendly filter pills organizing all 25 activities:
   1. 🗣️ *Langage & Vocabulaire* (8 activities: *Find & Match, Letters Puzzle, Spelling, Body Parts, Sounds, Opposites, Language Mini-Film, Musical Syllables*)
   2. 🧩 *Logique & Tri* (4 activities: *Pattern, Classification, Sequence, Basket Shape*)
   3. 🔢 *Maths & Espace* (4 activities: *Counting & Math, Spatial Pre-coding, Ball Labyrinth, Magic Lines*)
-  4. 🎨 *Éveil & Sons* (8 activities: *Colors, Match & Colour, Music Partition, Cause & Effect, Ball Circuit, Building Logic, Hide & Seek, Time & Calendar*)
+  4. 🎨 *Éveil & Sons* (9 activities: *Colors, Match & Colour, Music Partition, Cause & Effect, Ball Circuit, Building Logic, Hide & Seek, Time & Calendar, Emotions & Situations*)
   5. ⭐ *Mes Favoris* (dynamically updated bookmark shelf)
 - **Age Badging & Future Expansion (3 to 6 Years):** Every activity card features a distinct `🎂 3–6 ans` age badge, complemented by age filter chips (`Tous les âges`, `🎂 3–6 ans`, and coming-soon placeholder `🎒 6–10 ans`) for future catalog expansion.
 - **Live Reaction Counters:** Shows deduplicated positive and negative feedback counts on both the activity widget and parent dashboard.

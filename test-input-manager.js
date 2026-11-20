@@ -51,6 +51,7 @@ class MockElement {
     addEventListener(evt, fn) { this['on' + evt] = fn; }
     click() { if (this.onclick) this.onclick(); }
     scrollIntoView() {}
+    querySelector(sel) { return null; }
 }
 
 const mockBody = new MockElement('body');
@@ -206,7 +207,10 @@ if (!inputManagerSrc.includes('isLanguagePage') || !inputManagerSrc.includes('co
 if (!inputManagerSrc.includes('isSyllablesPage') || !inputManagerSrc.includes('vowel-key-btn')) {
     throw new Error('input-manager.js must support syllables.html (.vowel-key-btn, .syl-choice-card)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card) & Musical Syllables (.vowel-key-btn, .syl-choice-card)');
+if (!inputManagerSrc.includes('isEmotionsPage') || !inputManagerSrc.includes('emotion-card')) {
+    throw new Error('input-manager.js must support emotions.html (.emotion-card)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card) & Emotions (.emotion-card)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');
@@ -254,5 +258,55 @@ if (window.AlpInputManager.getFocusedIndex() !== 4) {
     throw new Error(`Down arrow from cell 1 in 3x3 grid should go to cell 4, got ${window.AlpInputManager.getFocusedIndex()}`);
 }
 console.log('✓ 2D Grid Down Arrow & Up Arrow spatial navigation verified for 3x3/4x4/5x4 grids in Hide & Seek');
+
+// Test Arrow button & D-Pad navigation for Emotions (.emotion-card)
+const mockEmotionGrid = new MockElement('section', 'choices-grid', 'emotion-choices-grid');
+const mockEmotCards = [
+    new MockElement('button', 'emot-happy', 'emotion-card'),
+    new MockElement('button', 'emot-sad', 'emotion-card'),
+    new MockElement('button', 'emot-angry', 'emotion-card')
+];
+let clickedEmotCard = null;
+mockEmotCards.forEach((c, idx) => {
+    c.onclick = () => { clickedEmotCard = idx; };
+    mockEmotionGrid.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.emotion-card')) return mockEmotCards;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/emotions.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Emotions initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+if (!mockEmotCards[0].classList.contains('is-controller-focused')) {
+    throw new Error('Initial emotion card must have is-controller-focused class');
+}
+
+// Press ArrowRight / Button 4
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 1) {
+    throw new Error(`ArrowRight should move focus to card 1, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+if (!mockEmotCards[1].classList.contains('is-controller-focused')) {
+    throw new Error('Card 1 must have is-controller-focused after ArrowRight');
+}
+
+// Press ArrowLeft / Button 1
+window.AlpInputManager.moveFocus(-1);
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`ArrowLeft should move focus back to card 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+
+// Press Enter / Validate
+window.AlpInputManager.validate();
+if (clickedEmotCard !== 0) {
+    throw new Error(`Enter key should have triggered card 0 click, got ${clickedEmotCard}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Emotions cards (.emotion-card)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');

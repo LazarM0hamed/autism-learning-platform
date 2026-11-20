@@ -155,6 +155,10 @@
         return window.location.pathname.toLowerCase().includes('syllables');
     }
 
+    function isEmotionsPage() {
+        return window.location.pathname.toLowerCase().includes('emotions');
+    }
+
     // Size Profile Management
     function applySizeProfile(size) {
         sizeProfile = size;
@@ -297,6 +301,9 @@
             if (!items.length) {
                 items = Array.from(document.querySelectorAll('#consonant-bar .cons-btn, .cons-btn'));
             }
+        } else if (isEmotionsPage()) {
+            // In emotions & social context, emotion face or comforting action cards
+            items = Array.from(document.querySelectorAll('#choices-grid .emotion-card, .emotion-card'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -344,7 +351,7 @@
                 const badgeData = config[index];
                 if (!badgeData) return;
 
-                let badge = el.querySelector(':scope > .alp-card-badge');
+                let badge = typeof el.querySelector === 'function' ? el.querySelector(':scope > .alp-card-badge') : null;
                 if (!badge) {
                     badge = document.createElement('span');
                     badge.className = `alp-card-badge ${badgeData.bgClass}`;
@@ -829,39 +836,29 @@
     function setupDomObserver() {
         if (observer) observer.disconnect();
 
+        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card';
+
         observer = new MutationObserver((mutations) => {
             let shouldRefresh = false;
             for (const m of mutations) {
                 if (m.type === 'childList') {
-                    // Ignore mutations happening inside cards, letters, HUD, or settings bar
-                    if (m.target?.classList?.contains('option-card') ||
-                        m.target?.classList?.contains('letter-btn') ||
-                        m.target?.classList?.contains('sound-card') ||
-                        m.target?.classList?.contains('ball-choice-btn') ||
-                        m.target?.classList?.contains('cause-btn') ||
-                        m.target?.classList?.contains('piece-card') ||
-                        m.target?.classList?.contains('ball-launch-btn') ||
-                        m.target?.classList?.contains('key-block-btn') ||
-                        m.target?.classList?.contains('sort-basket') ||
-                        m.target?.classList?.contains('search-cell') ||
-                        m.target?.classList?.contains('settings-bar') ||
-                        m.target?.id === 'alp-controller-hud') {
+                    // Ignore internal mutations inside HUD or settings bar
+                    if (m.target?.classList?.contains('settings-bar') || m.target?.id === 'alp-controller-hud') {
                         continue;
+                    }
+
+                    // Direct container match
+                    const targetId = m.target?.id || '';
+                    const targetClass = m.target?.className || '';
+                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid')) {
+                        shouldRefresh = true;
+                        break;
                     }
 
                     for (const node of m.addedNodes) {
                         if (node.nodeType === 1 && (
-                            node.classList?.contains('option-card') ||
-                            node.classList?.contains('letter-btn') ||
-                            node.classList?.contains('sound-card') ||
-                            node.classList?.contains('ball-choice-btn') ||
-                            node.classList?.contains('cause-btn') ||
-                            node.classList?.contains('piece-card') ||
-                            node.classList?.contains('ball-launch-btn') ||
-                            node.classList?.contains('key-block-btn') ||
-                            node.classList?.contains('sort-basket') ||
-                            node.classList?.contains('search-cell') ||
-                            node.classList?.contains('motif-card')
+                            node.matches?.(INTERACTIVE_SELECTOR) ||
+                            node.querySelector?.(INTERACTIVE_SELECTOR)
                         )) {
                             shouldRefresh = true;
                             break;
@@ -871,17 +868,8 @@
 
                     for (const node of m.removedNodes) {
                         if (node.nodeType === 1 && (
-                            node.classList?.contains('option-card') ||
-                            node.classList?.contains('letter-btn') ||
-                            node.classList?.contains('sound-card') ||
-                            node.classList?.contains('ball-choice-btn') ||
-                            node.classList?.contains('cause-btn') ||
-                            node.classList?.contains('piece-card') ||
-                            node.classList?.contains('ball-launch-btn') ||
-                            node.classList?.contains('key-block-btn') ||
-                            node.classList?.contains('sort-basket') ||
-                            node.classList?.contains('search-cell') ||
-                            node.classList?.contains('motif-card')
+                            node.matches?.(INTERACTIVE_SELECTOR) ||
+                            node.querySelector?.(INTERACTIVE_SELECTOR)
                         )) {
                             shouldRefresh = true;
                             break;

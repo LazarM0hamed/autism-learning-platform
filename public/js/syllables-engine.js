@@ -354,6 +354,9 @@
 
         area.innerHTML = '';
         area.appendChild(tray);
+        if (window.AlpInputManager && typeof window.AlpInputManager.refresh === 'function') {
+            window.AlpInputManager.refresh();
+        }
     }
 
     function startChallengeRound() {
@@ -429,6 +432,9 @@
 
         area.innerHTML = '';
         area.appendChild(row);
+        if (window.AlpInputManager && typeof window.AlpInputManager.refresh === 'function') {
+            window.AlpInputManager.refresh();
+        }
     }
 
     function setMode(mode, btnId) {
@@ -444,6 +450,9 @@
             updatePrompt(true);
         } else {
             startChallengeRound();
+        }
+        if (window.AlpInputManager && typeof window.AlpInputManager.refresh === 'function') {
+            window.AlpInputManager.refresh();
         }
     }
 
