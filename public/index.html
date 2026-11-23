@@ -63,20 +63,20 @@
                    placeholder="Rechercher une activité..." aria-label="Rechercher une activité" autocomplete="off">
             <button type="button" id="hub-search-clear" class="hub-search-clear-btn" aria-label="Effacer la recherche" style="display: none;">✕</button>
         </div>
-        <span class="hub-results-count" id="hub-results-count">34 activités</span>
+        <span class="hub-results-count" id="hub-results-count">35 activités</span>
     </div>
 
     <!-- Activity Filter Bar (Categories & Bookmarked Favorites) -->
     <div class="hub-filter-bar">
         <div class="hub-filter-pills" role="tablist" aria-label="Filtrer par catégorie">
             <button type="button" class="hub-filter-pill active" id="filter-all-btn" data-category="all" role="tab" aria-selected="true">
-                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">34</span>
+                🌟 <span id="lbl-filter-all">Toutes</span> <span class="filter-count" id="count-all">35</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-lang-btn" data-category="language" role="tab" aria-selected="false">
                 🗣️ <span id="lbl-filter-lang">Langage</span> <span class="filter-count">11</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-logic-btn" data-category="logic" role="tab" aria-selected="false">
-                🧩 <span id="lbl-filter-logic">Logique</span> <span class="filter-count">6</span>
+                🧩 <span id="lbl-filter-logic">Logique</span> <span class="filter-count">7</span>
             </button>
             <button type="button" class="hub-filter-pill" id="filter-math-btn" data-category="math" role="tab" aria-selected="false">
                 🔢 <span id="lbl-filter-math">Maths & Espace</span> <span class="filter-count">7</span>
@@ -94,8 +94,8 @@
     <div class="hub-age-bar">
         <span class="hub-age-label" id="lbl-age-filter">Âge :</span>
         <div class="hub-age-chips" role="radiogroup" aria-label="Filtrer par tranche d'âge">
-            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(34)</span></button>
-            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(31)</span></button>
+            <button type="button" class="hub-age-chip active" data-age="all" id="age-all-btn">🌟 <span id="lbl-age-all">Tous les âges</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(35)</span></button>
+            <button type="button" class="hub-age-chip" data-age="3-6" id="age-36-btn">🎂 <span id="lbl-age-36">3–6 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(32)</span></button>
             <button type="button" class="hub-age-chip" data-age="6-10" id="age-610-btn">🎒 <span id="lbl-age-610">6–10 ans</span> <span class="age-count" style="font-size: 0.8rem; opacity: 0.85;">(3)</span></button>
         </div>
     </div>
@@ -304,11 +304,11 @@
             </div>
         </section>
 
-        <!-- Category 2: Logique & Tri (6 activities) -->
+        <!-- Category 2: Logique & Tri (7 activities) -->
         <section class="hub-category-section" data-hub-category="logic">
             <div class="hub-category-header">
                 <h2 class="hub-section-title" id="sec-logic-title">🧩 Logique & Tri</h2>
-                <span class="hub-category-count" id="sec-logic-count">6 jeux</span>
+                <span class="hub-category-count" id="sec-logic-count">7 jeux</span>
             </div>
             <div class="activities-grid">
                 <!-- Activity 3: Pattern -->
@@ -403,6 +403,22 @@
                         <span class="activity-card-desc" id="act-intruder-desc">Spot the item that does not belong with supportive coaching</span>
                     </div>
                     <div class="activity-likes-badge" data-activity="intruder">
+                        <span class="like-thumb">👍</span> <span class="like-number">0</span>
+                    </div>
+                </a>
+
+                <!-- Activity 35: Shape Packing -->
+                <a href="packing.html" class="activity-card packing" data-activity="packing" data-category="logic" data-age="3-6" data-keywords="puzzle spatial valise formes geometriques encastrement tetris packing shapes logic organisation rangement">
+                    <span class="activity-age-badge" title="Âge recommandé : 3 à 6 ans">🎂 3–6 ans</span>
+                    <button type="button" class="activity-bookmark-btn" data-activity="packing" title="Ajouter aux favoris" aria-label="Bookmark activity">
+                        <span class="bookmark-star">☆</span>
+                    </button>
+                    <span class="activity-card-icon" aria-hidden="true">🧳</span>
+                    <div class="activity-card-text">
+                        <span class="activity-card-title" id="act-packing-title">Shape Packing</span>
+                        <span class="activity-card-desc" id="act-packing-desc">Pack all the geometric shapes into the suitcase</span>
+                    </div>
+                    <div class="activity-likes-badge" data-activity="packing">
                         <span class="like-thumb">👍</span> <span class="like-number">0</span>
                     </div>
                 </a>
@@ -734,7 +750,7 @@
                 secMath: "🔢 Math & Space",
                 secSensory: "🎨 Creativity & Sounds",
                 cntLang: "11 games",
-                cntLogic: "6 games",
+                cntLogic: "7 games",
                 cntMath: "7 games",
                 cntSensory: "10 games",
                 actFindTitle: "Find & Match",
@@ -805,6 +821,8 @@
                 actPhonicsEarDesc: "Hear target vowel and consonant sounds inside words",
                 actSentencesTitle: "Sentence Builder",
                 actSentencesDesc: "Build 3-part sentences with color grammar blocks and animated theatre",
+                actPackingTitle: "Shape Packing",
+                actPackingDesc: "Pack all the geometric shapes into the suitcase",
                 parentBtn: "Parent Dashboard",
                 btnFeedback: "Feedback & Ideas",
                 btnAboutText: "Our Story",
@@ -837,7 +855,7 @@
                 secMath: "🔢 Maths & Espace",
                 secSensory: "🎨 Éveil & Sons",
                 cntLang: "11 jeux",
-                cntLogic: "6 jeux",
+                cntLogic: "7 jeux",
                 cntMath: "7 jeux",
                 cntSensory: "10 jeux",
                 actFindTitle: "Trouve l'image",
@@ -908,6 +926,8 @@
                 actPhonicsEarDesc: "Repère les voyelles et consonnes au début ou à la fin des mots",
                 actSentencesTitle: "Construire une phrase",
                 actSentencesDesc: "Assemble le sujet, le verbe et l'objet avec le mini-théâtre animé",
+                actPackingTitle: "Puzzle Spatial",
+                actPackingDesc: "Range toutes les formes géométriques dans la valise",
                 parentBtn: "Espace Parents",
                 btnFeedback: "Donner mon avis",
                 btnAboutText: "Notre Histoire",
@@ -1167,6 +1187,11 @@
             if (sentTitle) sentTitle.innerText = t.actSentencesTitle;
             const sentDesc = document.getElementById('act-sentences-desc');
             if (sentDesc) sentDesc.innerText = t.actSentencesDesc;
+
+            const packTitle = document.getElementById('act-packing-title');
+            if (packTitle) packTitle.innerText = t.actPackingTitle;
+            const packDesc = document.getElementById('act-packing-desc');
+            if (packDesc) packDesc.innerText = t.actPackingDesc;
 
             const btnAbout = document.getElementById('btn-about-text');
             if (btnAbout) btnAbout.innerText = t.btnAboutText;

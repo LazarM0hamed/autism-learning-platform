@@ -92,6 +92,10 @@
             icon: '〰️',
             name: { en: 'Magic Lines', fr: 'Lignes Magiques' }
         },
+        'packing': {
+            icon: '🧳',
+            name: { en: 'Shape Packing', fr: 'Puzzle Spatial' }
+        },
         'general': {
             icon: '🌟',
             name: { en: 'General Learning', fr: 'Apprentissages généraux' }

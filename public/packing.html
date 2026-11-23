@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Autism Platform">
+    <meta name="theme-color" content="#F8FAFC">
+    <title>Puzzle Spatial - Autism Learning Platform</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .packing-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 14px;
+            padding: 8px 12px 24px 12px;
+        }
+
+        /* Wooden Suitcase / Puzzle Board */
+        .puzzle-board-frame {
+            background: #DDB892;
+            border: 4px solid #B7791F;
+            border-radius: 20px;
+            padding: 16px;
+            box-shadow: 0 10px 24px rgba(116, 66, 16, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.1s ease;
+        }
+        .board-svg {
+            background: #FFFDF9;
+            border-radius: 12px;
+            box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.08);
+            display: block;
+            touch-action: manipulation;
+        }
+        .grid-cell {
+            fill: transparent;
+            stroke: #CBD5E1;
+            stroke-width: 2;
+            stroke-dasharray: 4,4;
+            cursor: pointer;
+            transition: fill 0.15s ease;
+        }
+        .grid-cell:hover {
+            fill: rgba(66, 153, 225, 0.12);
+        }
+
+        /* Placed Piece Blocks */
+        .placed-block {
+            stroke: rgba(0, 0, 0, 0.18);
+            stroke-width: 3;
+            rx: 6;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.15s ease;
+        }
+        .placed-block:active {
+            opacity: 0.7;
+        }
+
+        /* Tray Area for Available Pieces */
+        .tray-area {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 94%;
+            max-width: 720px;
+            background: #F8FAFC;
+            border: 3px solid #CBD5E1;
+            border-radius: 24px;
+            padding: 16px;
+            min-height: 120px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+        }
+        .tray-piece-btn {
+            background: transparent;
+            border: 4px solid transparent;
+            border-radius: 16px;
+            padding: 8px;
+            cursor: pointer;
+            transition: transform 0.15s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+        .tray-piece-btn:active {
+            transform: scale(0.92);
+        }
+        .tray-piece-btn.selected {
+            background: #EBF8FF;
+            border-color: #3B82F6;
+            transform: scale(1.08);
+            box-shadow: 0 8px 18px rgba(59, 130, 246, 0.25);
+        }
+        .mini-piece-svg {
+            display: block;
+            pointer-events: none;
+        }
+        .mini-block {
+            stroke: rgba(0, 0, 0, 0.18);
+            stroke-width: 2;
+            rx: 4;
+        }
+
+        /* Responsive size scaling */
+        body[data-size="large"] .puzzle-board-frame {
+            padding: 20px;
+        }
+        body[data-size="xlarge"] .puzzle-board-frame {
+            padding: 24px;
+        }
+    </style>
+</head>
+<body>
+    <header class="game-header">
+        <div class="header-left">
+            <a href="index.html" class="header-logo-link" title="Autism Learning Platform">
+                <img src="assets/icons/logo.svg" alt="Infinity Harmony Logo" class="header-infinity-logo" width="42" height="42">
+            </a>
+            <a href="index.html" class="nav-btn" id="home-btn">⬅️ Accueil</a>
+        </div>
+        <h2 id="activity-title" class="category-badge">🧩 Puzzle Spatial</h2>
+        <div class="header-controls">
+            <div class="lang-switcher" role="radiogroup" aria-label="Select Language">
+                <button class="lang-btn" data-lang="en" aria-label="English">🇬🇧 EN</button>
+                <button class="lang-btn active" data-lang="fr" aria-label="Français">🇫🇷 FR</button>
+            </div>
+            <button id="sound-toggle-btn" class="sound-toggle-btn" title="Toggle Sound">🔊</button>
+        </div>
+    </header>
+
+    <!-- In-Activity Feedback Widget -->
+    <div class="alp-feedback-widget" id="alp-feedback-widget">
+        <div class="feedback-card">
+            <span class="feedback-prompt" id="fb-prompt-text">Tu aimes ce jeu ?</span>
+            <div class="feedback-actions">
+                <button class="feedback-btn like-btn" id="fb-like-btn" title="J'aime ce jeu !">
+                    <span class="fb-icon">👍</span>
+                    <span class="fb-count" id="fb-likes-count">0</span>
+                </button>
+                <button class="feedback-btn unlike-btn" id="fb-unlike-btn" title="Pas mon préféré">
+                    <span class="fb-icon">👎</span>
+                    <span class="fb-count" id="fb-unlikes-count">0</span>
+                </button>
+                <button class="feedback-btn comment-btn" id="fb-comment-btn" title="Note parent / thérapeute">
+                    <span class="fb-icon">💬</span>
+                    <span class="fb-text">Note</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="packing-stage">
+        <!-- 3 Progressive Puzzle Levels -->
+        <nav class="routine-pills" aria-label="Select puzzle level">
+            <button class="routine-pill active" id="mode-lvl1-btn">⭐ Valise 3x3</button>
+            <button class="routine-pill" id="mode-lvl2-btn">⭐⭐ Valise 4x3</button>
+            <button class="routine-pill" id="mode-lvl3-btn">⭐⭐⭐ Valise 4x4</button>
+        </nav>
+
+        <!-- Prompt Banner -->
+        <div class="prompt-container" style="margin: 2px 0;">
+            <h1 class="prompt-text" id="prompt-label" style="font-size: clamp(1.2rem, 3.2vw, 1.85rem); margin: 0;">Range toutes les formes dans la valise !</h1>
+            <button id="speak-prompt-btn" class="speak-prompt-btn" title="Repeat voice prompt" aria-label="Repeat voice prompt">🗣️</button>
+        </div>
+
+        <!-- Main Puzzle Board -->
+        <div class="puzzle-board-frame" id="puzzle-frame">
+            <svg class="board-svg" id="board-svg" aria-label="Puzzle board"></svg>
+        </div>
+
+        <!-- Tray with unplaced pieces -->
+        <section class="tray-area" id="tray-area" aria-label="Available pieces"></section>
+    </main>
+
+    <footer class="settings-bar"></footer>
+
+    <script src="js/tracker.js"></script>
+    <script src="js/packing-engine.js"></script>
+    <script src="js/input-manager.js"></script>
+</body>
+</html>

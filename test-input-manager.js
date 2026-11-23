@@ -237,7 +237,10 @@ if (!inputManagerSrc.includes('isPhonicsEarPage') || !inputManagerSrc.includes('
 if (!inputManagerSrc.includes('isSentencesPage') || !inputManagerSrc.includes('grammar-card')) {
     throw new Error('input-manager.js must support sentences.html (.grammar-card)');
 }
-console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn), Prepositions (.prep-card), Word Assembly (.wb-syl-card), Visual Patterns (.pat-choice-card), Math CP (.math-choice-btn), Calm Corner (.calm-action-btn, .ambient-btn), Odd One Out (.intruder-card), Phonemic Ear (.yesno-btn, .pos-wagon-btn) & Sentence Builder (.grammar-card)');
+if (!inputManagerSrc.includes('isPackingPage') || !inputManagerSrc.includes('tray-piece-btn')) {
+    throw new Error('input-manager.js must support packing.html (.tray-piece-btn)');
+}
+console.log('✓ Button Controller support verified for Sound Identification (.sound-card), Ball Circuit (.ball-choice-btn), Cause & Effect (.cause-btn), Building Logic (.piece-card), Basket Shape (.ball-launch-btn), Music Partition (.key-block-btn), Classification (.sort-basket), Hide and Seek (.search-cell), Magic Lines (.motif-card), Body Parts (.body-choice-btn), Language Mini-Film (.comm-card), Musical Syllables (.vowel-key-btn, .syl-choice-card), Emotions (.emotion-card), Counting (.num-choice-card, .add-item-btn), Prepositions (.prep-card), Word Assembly (.wb-syl-card), Visual Patterns (.pat-choice-card), Math CP (.math-choice-btn), Calm Corner (.calm-action-btn, .ambient-btn), Odd One Out (.intruder-card), Phonemic Ear (.yesno-btn, .pos-wagon-btn), Sentence Builder (.grammar-card) & Shape Packing (.tray-piece-btn)');
 
 // Test 2D Grid Down / Up Arrow navigation logic
 const mockGrid = new MockElement('div', 'search-grid');
@@ -657,5 +660,39 @@ if (clickedGrammarCard !== 1) {
     throw new Error(`Enter key should have triggered card 1 click in Sentence Builder, got ${clickedGrammarCard}`);
 }
 console.log('✓ Arrow key & D-Pad navigation verified for Sentence Builder cards (.grammar-card)');
+
+// Test Arrow button & D-Pad navigation for Shape Packing (.tray-piece-btn)
+const mockPackingArea = new MockElement('section', 'tray-area', 'tray-area');
+const mockTrayBtns = [
+    new MockElement('button', 'tp-1', 'tray-piece-btn'),
+    new MockElement('button', 'tp-2', 'tray-piece-btn'),
+    new MockElement('button', 'tp-3', 'tray-piece-btn')
+];
+let clickedTrayBtn = null;
+mockTrayBtns.forEach((c, idx) => {
+    c.onclick = () => { clickedTrayBtn = idx; };
+    mockPackingArea.appendChild(c);
+});
+
+global.document.querySelectorAll = (sel) => {
+    if (sel.includes('.tray-piece-btn')) return mockTrayBtns;
+    return origQSA(sel);
+};
+global.window.location.pathname = '/packing.html';
+window.AlpInputManager.refresh();
+window.AlpInputManager.jumpFocus(0);
+
+if (window.AlpInputManager.getFocusedIndex() !== 0) {
+    throw new Error(`Shape Packing initial focus should be 0, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.moveFocus(1);
+if (window.AlpInputManager.getFocusedIndex() !== 1) {
+    throw new Error(`Shape Packing ArrowRight should move focus to piece 1, got ${window.AlpInputManager.getFocusedIndex()}`);
+}
+window.AlpInputManager.validate();
+if (clickedTrayBtn !== 1) {
+    throw new Error(`Enter key should have triggered piece 1 click in Shape Packing, got ${clickedTrayBtn}`);
+}
+console.log('✓ Arrow key & D-Pad navigation verified for Shape Packing buttons (.tray-piece-btn)');
 
 console.log('ALL INPUT MANAGER & SPELLING SELECTION TESTS PASSED!');

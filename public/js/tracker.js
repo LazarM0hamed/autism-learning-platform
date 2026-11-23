@@ -76,6 +76,7 @@
         if (path.includes('intruder')) return 'intruder';
         if (path.includes('phonics-ear') || path.includes('phonics_ear')) return 'phonics_ear';
         if (path.includes('sentences')) return 'sentences';
+        if (path.includes('packing')) return 'packing';
         return null;
     }
 
@@ -444,7 +445,8 @@
             'calm': { likes: 0, dislikes: 0 },
             'intruder': { likes: 0, dislikes: 0 },
             'phonics_ear': { likes: 0, dislikes: 0 },
-            'sentences': { likes: 0, dislikes: 0 }
+            'sentences': { likes: 0, dislikes: 0 },
+            'packing': { likes: 0, dislikes: 0 }
         };
         const s = localSummary[currentActivityId] || defaultLikes[currentActivityId] || { likes: 0, dislikes: 0 };
         renderWidgetCounters(s, localVotes[currentActivityId]);
@@ -804,7 +806,8 @@
             'calm': '.activity-card.calm',
             'intruder': '.activity-card.intruder',
             'phonics_ear': '.activity-card.phonics_ear',
-            'sentences': '.activity-card.sentences'
+            'sentences': '.activity-card.sentences',
+            'packing': '.activity-card.packing'
         };
 
         document.querySelectorAll('.alp-rec-badge').forEach(b => b.remove());
@@ -869,7 +872,8 @@
             'calm': { likes: 0, dislikes: 0 },
             'intruder': { likes: 0, dislikes: 0 },
             'phonics_ear': { likes: 0, dislikes: 0 },
-            'sentences': { likes: 0, dislikes: 0 }
+            'sentences': { likes: 0, dislikes: 0 },
+            'packing': { likes: 0, dislikes: 0 }
         };
 
         try {
@@ -961,7 +965,8 @@
             'calm': '.activity-card.calm',
             'intruder': '.activity-card.intruder',
             'phonics_ear': '.activity-card.phonics_ear',
-            'sentences': '.activity-card.sentences'
+            'sentences': '.activity-card.sentences',
+            'packing': '.activity-card.packing'
         };
 
         Object.keys(idMap).forEach(actId => {

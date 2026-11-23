@@ -100,6 +100,7 @@
         if (path.includes('intruder')) return 'intruder';
         if (path.includes('phonics-ear') || path.includes('phonics_ear')) return 'phonics_ear';
         if (path.includes('sentences')) return 'sentences';
+        if (path.includes('packing')) return 'packing';
         return null;
     }
 
@@ -201,6 +202,10 @@
 
     function isSentencesPage() {
         return window.location.pathname.toLowerCase().includes('sentences');
+    }
+
+    function isPackingPage() {
+        return window.location.pathname.toLowerCase().includes('packing');
     }
 
     // Size Profile Management
@@ -392,6 +397,9 @@
         } else if (isSentencesPage()) {
             // In sentence builder (construire une phrase), grammar card choices
             items = Array.from(document.querySelectorAll('#word-choices .grammar-card, .grammar-card'));
+        } else if (isPackingPage()) {
+            // In shape packing (puzzle spatial), tray piece buttons
+            items = Array.from(document.querySelectorAll('#tray-area .tray-piece-btn, .tray-piece-btn'));
         } else {
             // Other activities: option cards or step cards
             items = Array.from(document.querySelectorAll('.options-grid .option-card'));
@@ -924,7 +932,7 @@
     function setupDomObserver() {
         if (observer) observer.disconnect();
 
-        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card, .num-choice-card, .add-item-btn, .clear-basket-btn, .countable-item, .prep-card, .char-btn, .wb-syl-card, .pat-choice-card, .math-choice-btn, .calm-action-btn, .ambient-btn, .pop-bubble, .intruder-card, .yesno-btn, .word-option-card, .pos-wagon-btn, .grammar-card';
+        const INTERACTIVE_SELECTOR = '.option-card, .letter-btn, .sound-card, .ball-choice-btn, .cause-btn, .piece-card, .ball-launch-btn, .key-block-btn, .sort-basket, .search-cell, .motif-card, .body-choice-btn, .comm-card, .vowel-key-btn, .syl-choice-card, .cons-btn, .emotion-card, .num-choice-card, .add-item-btn, .clear-basket-btn, .countable-item, .prep-card, .char-btn, .wb-syl-card, .pat-choice-card, .math-choice-btn, .calm-action-btn, .ambient-btn, .pop-bubble, .intruder-card, .yesno-btn, .word-option-card, .pos-wagon-btn, .grammar-card, .tray-piece-btn';
 
         observer = new MutationObserver((mutations) => {
             let shouldRefresh = false;
@@ -938,7 +946,7 @@
                     // Direct container match
                     const targetId = m.target?.id || '';
                     const targetClass = m.target?.className || '';
-                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetId === 'interaction-area' || targetId === 'counting-board' || targetId === 'wb-choices' || targetId === 'pattern-choices' || targetId === 'math-choices' || targetId === 'ten-frame-grid' || targetId === 'calm-workspace' || targetId === 'popit-grid' || targetId === 'intruder-grid' || targetId === 'phonics-board' || targetId === 'phonics-choices' || targetId === 'word-choices' || targetId === 'grammar-track' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid') || targetClass.includes('number-choices-grid') || targetClass.includes('basket-controls-row') || targetClass.includes('prep-choices-grid') || targetClass.includes('wb-choices-row') || targetClass.includes('pattern-choices-row') || targetClass.includes('math-choices-row') || targetClass.includes('ambient-buttons-row') || targetClass.includes('intruder-grid') || targetClass.includes('phonics-choices-row') || targetClass.includes('position-train-row') || targetClass.includes('word-blocks-row') || targetClass.includes('grammar-track')) {
+                    if (targetId === 'choices-grid' || targetId === 'controls-area' || targetId === 'comm-cards' || targetId === 'body-choices-tray' || targetId === 'interaction-area' || targetId === 'counting-board' || targetId === 'wb-choices' || targetId === 'pattern-choices' || targetId === 'math-choices' || targetId === 'ten-frame-grid' || targetId === 'calm-workspace' || targetId === 'popit-grid' || targetId === 'intruder-grid' || targetId === 'phonics-board' || targetId === 'phonics-choices' || targetId === 'word-choices' || targetId === 'grammar-track' || targetId === 'tray-area' || targetClass.includes('options-grid') || targetClass.includes('emotion-choices-grid') || targetClass.includes('number-choices-grid') || targetClass.includes('basket-controls-row') || targetClass.includes('prep-choices-grid') || targetClass.includes('wb-choices-row') || targetClass.includes('pattern-choices-row') || targetClass.includes('math-choices-row') || targetClass.includes('ambient-buttons-row') || targetClass.includes('intruder-grid') || targetClass.includes('phonics-choices-row') || targetClass.includes('position-train-row') || targetClass.includes('word-blocks-row') || targetClass.includes('grammar-track') || targetClass.includes('tray-area')) {
                         shouldRefresh = true;
                         break;
                     }
